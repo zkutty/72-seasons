@@ -9,6 +9,13 @@ from pathlib import Path
 import resend
 from jinja2 import Environment, FileSystemLoader
 
+ACCENT_COLORS = {
+    "Spring": "#6b8f71",
+    "Summer": "#c9734a",
+    "Autumn": "#d4a853",
+    "Winter": "#4a7fa5",
+}
+
 
 def send_email(season: dict, content: dict) -> None:
     """Render the email template and dispatch to all subscribers.
@@ -34,7 +41,10 @@ def send_email(season: dict, content: dict) -> None:
     template = env.get_template("email.html")
 
     today = date.today()
-    html = template.render(season=season, content=content, today=today)
+    accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
+    archive_url = "https://github.com/zkutty/72-seasons/tree/main/archive"
+    html = template.render(season=season, content=content, today=today,
+                           accent_color=accent_color, archive_url=archive_url)
 
     month_names = [
         "", "January", "February", "March", "April", "May", "June",

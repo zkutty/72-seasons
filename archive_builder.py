@@ -11,6 +11,13 @@ from jinja2 import Environment, FileSystemLoader
 ARCHIVE_DIR = Path(__file__).parent / "archive"
 TEMPLATE_DIR = Path(__file__).parent / "templates"
 
+ACCENT_COLORS = {
+    "Spring": "#6b8f71",
+    "Summer": "#c9734a",
+    "Autumn": "#d4a853",
+    "Winter": "#4a7fa5",
+}
+
 
 def _season_filename(season: dict) -> str:
     return f"{season['id']:02d}-{season['slug']}.html"
@@ -31,7 +38,8 @@ def build_archive(season: dict, content: dict, all_seasons: list) -> None:
     # ── individual season page ──────────────────────────────────────────────
     page_template = env.get_template("archive_page.html")
     today = date.today()
-    html = page_template.render(season=season, content=content, today=today)
+    accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
+    html = page_template.render(season=season, content=content, today=today, accent_color=accent_color)
 
     filename = _season_filename(season)
     (ARCHIVE_DIR / filename).write_text(html, encoding="utf-8")
