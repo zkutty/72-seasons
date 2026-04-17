@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七十二候 — Archive</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  :root {
+    --ink:   #2a2520;
+    --mid:   #3d3530;
+    --soft:  #5a504a;
+    --muted: #8a7e74;
+    --rule:  #d6cfc4;
+    --bg:    #faf8f5;
+    --paper: #f5f2ed;
+    --tint:  #f0ece6;
+    --accent:#7a6e5a;
+  }
+  html { background: var(--paper); }
+  body {
+    margin: 0;
+    padding: 64px 24px;
+    background: var(--paper);
+    font-family: Georgia, 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page { max-width: 700px; margin: 0 auto; }
+
+  /* Header */
+  .site-header { text-align: center; margin-bottom: 64px; }
+  .site-header .brand {
+    font-family: 'Hiragino Mincho ProN','Yu Mincho','MS Mincho',serif;
+    font-size: 36px;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .site-header .tagline {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .site-header .rule {
+    width: 60px;
+    height: 1px;
+    background: var(--rule);
+    margin: 24px auto 0;
+  }
+
+  /* Season grid */
+  .grid { display: flex; flex-direction: column; gap: 0; }
+  .season-row {
+    display: flex;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    gap: 20px;
+  }
+  .season-row:first-child { border-top: 1px solid var(--rule); }
+  .season-num {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    width: 32px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .season-jp {
+    font-family: 'Hiragino Mincho ProN','Yu Mincho','MS Mincho',serif;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    width: 80px;
+    flex-shrink: 0;
+  }
+  .season-en { font-size: 14px; color: var(--mid); flex: 1; }
+  .season-date { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+
+  /* Empty state */
+  .empty {
+    text-align: center;
+    padding: 64px 0;
+    color: var(--muted);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 64px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="site-header">
+    <p class="brand">七十二候</p>
+    <p class="tagline">Japan's 72 micro-seasons, one newsletter at a time</p>
+    <div class="rule"></div>
+  </header>
+
+  {% if published %}
+  {% set months = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] %}
+  <div class="grid">
+    {% for entry in published %}
+    <a href="{{ entry.filename }}" style="display:block;color:inherit;text-decoration:none;">
+      <div class="season-row">
+        <span class="season-num">{{ '%02d'|format(entry.season.id) }}</span>
+        <span class="season-jp">{{ entry.season.name_jp }}</span>
+        <span class="season-en">{{ entry.season.name_en }}</span>
+        <span class="season-date">{{ months[entry.season.start_month] }} {{ entry.season.start_day }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty">
+    <p>No seasons published yet.</p>
+    <p style="font-size:13px;margin-top:8px;">Run <code>python season_mailer.py --force</code> to publish the first one.</p>
+  </div>
+  {% endif %}
+
+  <footer>
+    <p>七十二候 &nbsp;·&nbsp; {{ published|length }} of 72 seasons published</p>
+  </footer>
+
+</div>
+</body>
+</html>
