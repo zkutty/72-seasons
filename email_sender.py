@@ -42,7 +42,7 @@ def send_email(season: dict, content: dict) -> None:
 
     today = date.today()
     accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
-    archive_url = "https://github.com/zkutty/72-seasons/tree/main/archive"
+    archive_url = "https://github.com/zkutty/ko-72/tree/main/archive"
     html = template.render(season=season, content=content, today=today,
                            accent_color=accent_color, archive_url=archive_url)
 
@@ -57,7 +57,7 @@ def send_email(season: dict, content: dict) -> None:
     )
 
     params: resend.Emails.SendParams = {
-        "from": "Kō <onboarding@resend.dev>",
+        "from": "Kō <seasons@ko-72.com>",
         "to": recipients,
         "subject": subject,
         "html": html,
