@@ -34,7 +34,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add archive/ index.html
+          git add archive/ || true
+          test -f index.html && git add index.html || true
           test -f data/content_cache.json && git add data/content_cache.json || true
           git diff --staged --quiet || git commit -m "Season $(date +%Y-%m-%d): archive and cache update"
           git push
