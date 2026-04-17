@@ -48,7 +48,7 @@ def send_email(season: dict, content: dict) -> None:
     )
 
     params: resend.Emails.SendParams = {
-        "from": "72 Seasons <seasons@resend.dev>",
+        "from": "72 Seasons <onboarding@resend.dev>",
         "to": recipients,
         "subject": subject,
         "html": html,
