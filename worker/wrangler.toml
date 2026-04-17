@@ -2,12 +2,5 @@ name = "ko-72-subscribe"
 main = "index.js"
 compatibility_date = "2024-09-23"
 
-# Set RESEND_AUDIENCE_ID here (not secret):
-[vars]
-RESEND_AUDIENCE_ID = "YOUR_AUDIENCE_ID_HERE"
-
-# Set RESEND_API_KEY as a secret (never in this file):
-#   npx wrangler secret put RESEND_API_KEY
-
-# Optional: add a custom domain in the Cloudflare dashboard
-# so the worker is reachable at subscribe.ko-72.com
+# Set BUTTONDOWN_API_KEY as a secret (never in this file):
+#   npx wrangler secret put BUTTONDOWN_API_KEY

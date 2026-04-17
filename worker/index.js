@@ -11,17 +11,16 @@ function json(body, status = 200) {
   });
 }
 
-async function resendRequest(env, path, method = "GET", body = null) {
+function bdRequest(env, path, method = "GET", body = null) {
   const opts = {
     method,
     headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      Authorization: `Token ${env.BUTTONDOWN_API_KEY}`,
       "Content-Type": "application/json",
     },
   };
   if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(`https://api.resend.com${path}`, opts);
-  return res.json();
+  return fetch(`https://api.buttondown.email/v1${path}`, opts);
 }
 
 export default {
@@ -32,7 +31,7 @@ export default {
 
     const url = new URL(request.url);
 
-    // POST /subscribe — add email to Resend audience
+    // POST /subscribe
     if (url.pathname === "/subscribe" && request.method === "POST") {
       let email;
       try {
@@ -43,11 +42,15 @@ export default {
       if (!email || !email.includes("@")) {
         return json({ error: "Invalid email" }, 400);
       }
-      await resendRequest(env, `/audiences/${env.RESEND_AUDIENCE_ID}/contacts`, "POST", { email });
-      return json({ ok: true });
+      const res = await bdRequest(env, "/subscribers", "POST", { email });
+      if (res.ok || res.status === 409) {
+        // 409 = already subscribed, treat as success
+        return json({ ok: true });
+      }
+      return json({ error: "Subscription failed" }, 500);
     }
 
-    // POST /unsubscribe — remove email from Resend audience
+    // POST /unsubscribe
     if (url.pathname === "/unsubscribe" && request.method === "POST") {
       let email;
       try {
@@ -55,15 +58,11 @@ export default {
       } catch {
         return json({ error: "Invalid JSON" }, 400);
       }
-      // Look up contact by listing audience and finding by email
-      const contacts = await resendRequest(env, `/audiences/${env.RESEND_AUDIENCE_ID}/contacts`);
-      const contact = (contacts.data ?? []).find((c) => c.email === email);
-      if (contact) {
-        await resendRequest(
-          env,
-          `/audiences/${env.RESEND_AUDIENCE_ID}/contacts/${contact.id}`,
-          "DELETE"
-        );
+      const listRes = await bdRequest(env, `/subscribers?email=${encodeURIComponent(email)}`);
+      const data = await listRes.json();
+      const subscriber = data.results?.[0];
+      if (subscriber) {
+        await bdRequest(env, `/subscribers/${subscriber.id}`, "DELETE");
       }
       return json({ ok: true });
     }

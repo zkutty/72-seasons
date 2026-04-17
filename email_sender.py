@@ -20,27 +20,26 @@ ACCENT_COLORS = {
 }
 
 
-def _get_subscribers(api_key: str) -> list[str]:
-    """Merge Resend audience contacts with SUBSCRIBER_EMAILS env var."""
+def _get_subscribers() -> list[str]:
+    """Fetch subscribers from Buttondown, falling back to SUBSCRIBER_EMAILS."""
     subscribers: set[str] = set()
 
-    audience_id = os.environ.get("RESEND_AUDIENCE_ID", "").strip()
-    if audience_id:
+    bd_key = os.environ.get("BUTTONDOWN_API_KEY", "").strip()
+    if bd_key:
         req = urllib.request.Request(
-            f"https://api.resend.com/audiences/{audience_id}/contacts",
-            headers={"Authorization": f"Bearer {api_key}"},
+            "https://api.buttondown.email/v1/subscribers?status=regular",
+            headers={"Authorization": f"Token {bd_key}"},
         )
         try:
             with urllib.request.urlopen(req) as resp:
                 data = json.loads(resp.read())
-                for contact in data.get("data", []):
-                    if not contact.get("unsubscribed", False):
-                        subscribers.add(contact["email"].strip())
+                for sub in data.get("results", []):
+                    subscribers.add(sub["email"].strip())
         except urllib.error.URLError as e:
-            print(f"Warning: could not fetch Resend audience contacts: {e}")
+            print(f"Warning: could not fetch Buttondown subscribers: {e}")
 
-    subscriber_str = os.environ.get("SUBSCRIBER_EMAILS", "").strip()
-    for addr in subscriber_str.split(","):
+    # Always include hardcoded fallback addresses
+    for addr in os.environ.get("SUBSCRIBER_EMAILS", "").split(","):
         addr = addr.strip()
         if addr:
             subscribers.add(addr)
@@ -51,9 +50,9 @@ def _get_subscribers(api_key: str) -> list[str]:
 def send_email(season: dict, content: dict, worker_url: str = "https://subscribe.ko-72.com") -> None:
     resend.api_key = os.environ["RESEND_API_KEY"]
 
-    recipients = _get_subscribers(resend.api_key)
+    recipients = _get_subscribers()
     if not recipients:
-        raise ValueError("No subscribers found. Set SUBSCRIBER_EMAILS or RESEND_AUDIENCE_ID.")
+        raise ValueError("No subscribers found. Set SUBSCRIBER_EMAILS or BUTTONDOWN_API_KEY.")
 
     template_dir = Path(__file__).parent / "templates"
     env = Environment(loader=FileSystemLoader(str(template_dir)), autoescape=True)
@@ -62,8 +61,6 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
     today = date.today()
     accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
     archive_url = f"https://ko-72.com/archive/{season['id']:02d}-{season['slug']}.html"
-    signup_url = f"{worker_url}/subscribe"
-    unsubscribe_url = f"https://ko-72.com/unsubscribe.html"
 
     html = template.render(
         season=season,
@@ -71,16 +68,13 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
         today=today,
         accent_color=accent_color,
         archive_url=archive_url,
-        signup_url=signup_url,
-        unsubscribe_url=unsubscribe_url,
+        unsubscribe_url="https://ko-72.com/unsubscribe.html",
     )
-
-    subject = f"Kō · {season['name_en']} ({season['name_romaji']})"
 
     params: resend.Emails.SendParams = {
         "from": "Kō <seasons@ko-72.com>",
         "to": recipients,
-        "subject": subject,
+        "subject": f"Kō · {season['name_en']} ({season['name_romaji']})",
         "html": html,
     }
 
