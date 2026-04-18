@@ -204,6 +204,28 @@ async function sendWelcomeEmail(env, email) {
   }
 }
 
+async function reactivateSubscriber(env, email) {
+  try {
+    const listRes = await bdRequest(env, `/subscribers?email=${encodeURIComponent(email)}`);
+    if (!listRes.ok) {
+      console.error(`Reactivate lookup failed (${listRes.status}) for ${email}`);
+      return;
+    }
+    const listData = await listRes.json();
+    const subscriber = listData.results?.[0];
+    if (!subscriber || subscriber.type === "regular") return;
+    const patchRes = await bdRequest(env, `/subscribers/${subscriber.id}`, "PATCH", { type: "regular" });
+    if (!patchRes.ok) {
+      const body = await patchRes.text();
+      console.error(`Reactivate PATCH failed (${patchRes.status}) for ${email}: ${body}`);
+      return;
+    }
+    await sendWelcomeEmail(env, email);
+  } catch (err) {
+    console.error(`Reactivation failed for ${email}: ${err.message}`);
+  }
+}
+
 export default {
   async fetch(request, env, ctx) {
     if (request.method === "OPTIONS") {
@@ -226,18 +248,22 @@ export default {
       let res, data;
       try {
         res = await bdRequest(env, "/subscribers", "POST", { email_address: email, type: "regular" });
-        data = await res.json();
+        data = await res.json().catch(() => ({}));
       } catch (err) {
-        return json({ error: `Request failed: ${err.message}` }, 500);
+        console.error(`Subscribe request failed for ${email}: ${err.message}`);
+        return json({ error: "Subscription service unreachable" }, 502);
       }
       if (res.ok) {
         ctx.waitUntil(sendWelcomeEmail(env, email));
         return json({ ok: true });
       }
       if (data.code === "email_already_exists") {
+        ctx.waitUntil(reactivateSubscriber(env, email));
         return json({ ok: true });
       }
-      return json({ error: data.detail ?? "Subscription failed" }, 500);
+      console.error(`Buttondown subscribe failed (${res.status}) for ${email}:`, JSON.stringify(data));
+      const status = res.status >= 500 ? 502 : 400;
+      return json({ error: data.detail ?? "Subscription failed" }, status);
     }
 
     // POST /unsubscribe
