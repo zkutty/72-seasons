@@ -61,12 +61,6 @@
         <!-- ── TLDR SUMMARY CARD ── -->
         <tr>
           <td style="background-color:#edeae3;border-top:2px solid {{ accent_color }};padding:16px 36px;">
-            {% set days_in_month = [0,31,28,31,30,31,30,31,31,30,31,30,31] %}
-            {% set ns = namespace(end_day=season.start_day + 4, end_month=season.start_month) %}
-            {% if ns.end_day > days_in_month[season.start_month] %}
-              {% set ns.end_day = ns.end_day - days_in_month[season.start_month] %}
-              {% set ns.end_month = ns.end_month + 1 %}
-            {% endif %}
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
                 <td width="64" valign="top" style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;padding:3px 0;white-space:nowrap;">Sekki</td>
@@ -74,7 +68,7 @@
               </tr>
               <tr>
                 <td width="64" valign="top" style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;padding:3px 0;white-space:nowrap;">Dates</td>
-                <td valign="top" style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;padding:3px 0 3px 16px;line-height:1.5;">{{ months_short[season.start_month] }} {{ season.start_day }} → {{ months_short[ns.end_month] }} {{ ns.end_day }}</td>
+                <td valign="top" style="font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;padding:3px 0 3px 16px;line-height:1.5;">{{ date_range }} · {{ duration_days }} days</td>
               </tr>
               <tr>
                 <td width="64" valign="top" style="font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;padding:3px 0;white-space:nowrap;">Right now</td>

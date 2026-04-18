@@ -33,6 +33,12 @@ def generate_content(season: dict) -> dict:
     """
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
+    from datetime import date as _date
+    def _fmt(m, d): return _date(2000, m, d).strftime("%-d %b")
+    start_str = _fmt(season["start_month"], season["start_day"])
+    end_str = _fmt(season["end_month"], season["end_day"]) if "end_month" in season else "unknown"
+    duration = season.get("duration_days", 5)
+
     user_prompt = f"""Generate newsletter content for this Japanese micro-season (七十二候):
 
 Season #{season['id']} of 72
@@ -40,7 +46,7 @@ Major solar term: {season['sekki']} ({season['sekki_jp']})
 Micro-season name: {season['name_jp']} ({season['name_romaji']})
 English meaning: {season['name_en']}
 Major season: {season['major_season']}
-Date: {season['start_month']}/{season['start_day']}
+Dates: {start_str} – {end_str} ({duration} days)
 
 Return a JSON object with exactly these fields:
 

@@ -319,18 +319,12 @@
   </header>
 
   <!-- ── TLDR SUMMARY CARD ── -->
-  {% set days_in_month = [0,31,28,31,30,31,30,31,31,30,31,30,31] %}
-  {% set ns = namespace(end_day=season.start_day + 4, end_month=season.start_month) %}
-  {% if ns.end_day > days_in_month[season.start_month] %}
-    {% set ns.end_day = ns.end_day - days_in_month[season.start_month] %}
-    {% set ns.end_month = ns.end_month + 1 %}
-  {% endif %}
   <div class="tldr">
     <div class="tldr-grid">
       <span class="tldr-label">Sekki</span>
       <span class="tldr-value">{{ season.sekki }}</span>
       <span class="tldr-label">Dates</span>
-      <span class="tldr-value">{{ months_short[season.start_month] }} {{ season.start_day }} → {{ months_short[ns.end_month] }} {{ ns.end_day }}</span>
+      <span class="tldr-value">{{ date_range }} · {{ duration_days }} days</span>
       <span class="tldr-label">Right now</span>
       <span class="tldr-value">{{ content.summary }}</span>
     </div>

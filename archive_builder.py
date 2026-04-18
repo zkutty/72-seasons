@@ -5,6 +5,10 @@ Build static HTML archive pages and website homepage for published micro-seasons
 from datetime import date
 from pathlib import Path
 
+
+def _fmt(month: int, day: int) -> str:
+    return date(2000, month, day).strftime("%-d %b")
+
 from jinja2 import Environment, FileSystemLoader
 
 
@@ -32,7 +36,13 @@ def build_archive(season: dict, content: dict, all_seasons: list) -> None:
     page_template = env.get_template("archive_page.html")
     today = date.today()
     accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
-    html = page_template.render(season=season, content=content, today=today, accent_color=accent_color)
+    date_range = f"{_fmt(season['start_month'], season['start_day'])} – {_fmt(season['end_month'], season['end_day'])}"
+    html = page_template.render(
+        season=season, content=content, today=today,
+        accent_color=accent_color,
+        date_range=date_range,
+        duration_days=season["duration_days"],
+    )
 
     filename = _season_filename(season)
     (ARCHIVE_DIR / filename).write_text(html, encoding="utf-8")
@@ -61,12 +71,15 @@ def build_website(season: dict, content: dict, worker_url: str = "https://subscr
     accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
     archive_page_url = f"/archive/{_season_filename(season)}"
 
+    date_range = f"{_fmt(season['start_month'], season['start_day'])} – {_fmt(season['end_month'], season['end_day'])}"
     html = template.render(
         season=season,
         content=content,
         accent_color=accent_color,
         archive_page_url=archive_page_url,
         worker_url=worker_url,
+        date_range=date_range,
+        duration_days=season["duration_days"],
     )
     (ROOT_DIR / "index.html").write_text(html, encoding="utf-8")
     print("Website homepage rebuilt: index.html")

@@ -7,6 +7,10 @@ import os
 import urllib.request
 import urllib.error
 from datetime import date
+
+
+def _fmt(month: int, day: int) -> str:
+    return date(2000, month, day).strftime("%-d %b")
 from pathlib import Path
 
 import resend
@@ -64,6 +68,7 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
     accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
     archive_url = f"https://ko-72.com/archive/{season['id']:02d}-{season['slug']}.html"
 
+    date_range = f"{_fmt(season['start_month'], season['start_day'])} – {_fmt(season['end_month'], season['end_day'])}"
     html = template.render(
         season=season,
         content=content,
@@ -71,6 +76,8 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
         accent_color=accent_color,
         archive_url=archive_url,
         unsubscribe_url="https://ko-72.com/unsubscribe.html",
+        date_range=date_range,
+        duration_days=season["duration_days"],
     )
 
     params: resend.Emails.SendParams = {

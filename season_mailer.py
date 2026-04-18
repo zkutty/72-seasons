@@ -14,7 +14,7 @@ import json
 import logging
 import os
 import sys
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -32,6 +32,22 @@ CACHE_PATH = Path(__file__).parent / "data" / "content_cache.json"
 
 
 # ── data helpers ───────────────────────────────────────────────────────────────
+
+def enrich_seasons_with_end_dates(seasons: list, year: int = None) -> list:
+    year = year or date.today().year
+    enriched = []
+    for i, season in enumerate(seasons):
+        s = season.copy()
+        next_s = seasons[i + 1] if i < len(seasons) - 1 else seasons[0]
+        next_year = year if i < len(seasons) - 1 else year + 1
+        next_start = date(next_year, next_s["start_month"], next_s["start_day"])
+        end = next_start - timedelta(days=1)
+        s["end_month"] = end.month
+        s["end_day"] = end.day
+        s["duration_days"] = (end - date(year, s["start_month"], s["start_day"])).days + 1
+        enriched.append(s)
+    return enriched
+
 
 def load_seasons() -> list:
     path = Path(__file__).parent / "data" / "seasons.json"
@@ -106,6 +122,7 @@ def main() -> None:
     args = parser.parse_args()
 
     seasons = load_seasons()
+    seasons = enrich_seasons_with_end_dates(seasons)
     today = date.today()
 
     if args.force:
