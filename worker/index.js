@@ -217,7 +217,7 @@ export default {
       }
       let res, data;
       try {
-        res = await bdRequest(env, "/subscribers", "POST", { email_address: email });
+        res = await bdRequest(env, "/subscribers", "POST", { email_address: email, type: "regular" });
         data = await res.json();
       } catch (err) {
         return json({ error: `Request failed: ${err.message}` }, 500);
