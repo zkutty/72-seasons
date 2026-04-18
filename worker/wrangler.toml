@@ -2,5 +2,6 @@ name = "ko-72-subscribe"
 main = "index.js"
 compatibility_date = "2024-09-23"
 
-# Set BUTTONDOWN_API_KEY as a secret (never in this file):
+# Set secrets via wrangler (never commit them to this file):
 #   npx wrangler secret put BUTTONDOWN_API_KEY
+#   npx wrangler secret put RESEND_API_KEY   # used for welcome emails on /subscribe
