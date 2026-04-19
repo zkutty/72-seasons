@@ -3,7 +3,9 @@ name: Kō Newsletter
 on:
   schedule:
     - cron: '0 1 * * *'  # 1am UTC daily — season transitions happen at midnight Japan time
-  workflow_dispatch:      # allow manual trigger from GitHub UI
+  push:
+    branches: [main]
+  workflow_dispatch:      # manual trigger — rebuilds static files only, no email
 
 jobs:
   send:
@@ -28,7 +30,12 @@ jobs:
           SUBSCRIBER_EMAILS: ${{ secrets.SUBSCRIBER_EMAILS }}
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
           WORKER_URL: ${{ secrets.WORKER_URL }}
-        run: python season_mailer.py
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python season_mailer.py
+          else
+            python season_mailer.py --force --build-only
+          fi
 
       - name: Commit archive, cache, and homepage updates
         run: |
@@ -36,6 +43,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add archive/ || true
           test -f index.html && git add index.html || true
+          test -f sitemap.xml && git add sitemap.xml || true
           test -f data/content_cache.json && git add data/content_cache.json || true
-          git diff --staged --quiet || git commit -m "Season $(date +%Y-%m-%d): archive and cache update"
+          git diff --staged --quiet || git commit -m "Build $(date +%Y-%m-%d): static rebuild"
           git push

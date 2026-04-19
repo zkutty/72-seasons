@@ -119,6 +119,11 @@ def main() -> None:
         action="store_true",
         help="Run regardless of today's date, using the currently active micro-season.",
     )
+    parser.add_argument(
+        "--build-only",
+        action="store_true",
+        help="Rebuild static files (archive, sitemap, homepage) without sending email.",
+    )
     args = parser.parse_args()
 
     seasons = load_seasons()
@@ -163,8 +168,11 @@ def main() -> None:
         save_cache(cache)
         log.info("Content generated and cached.")
 
-    log.info("Step 2/4 · Sending email …")
-    send_email(season, content, worker_url=worker_url)
+    if args.build_only:
+        log.info("Step 2/4 · Skipping email (--build-only).")
+    else:
+        log.info("Step 2/4 · Sending email …")
+        send_email(season, content, worker_url=worker_url)
 
     log.info("Step 3/4 · Building archive page …")
     build_archive(season, content, seasons)
