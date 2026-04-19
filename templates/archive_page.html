@@ -4,6 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kō — {{ season.name_en }}</title>
+{% set _desc = content.summary if content.summary else content.opening[:160] ~ '…' %}
+<meta name="description" content="{{ _desc | striptags }}">
+<link rel="canonical" href="https://ko-72.com/archive/{{ '%02d' | format(season.id) }}-{{ season.slug }}.html">
+<meta name="robots" content="index, follow">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Kō">
+<meta property="og:title" content="Kō — {{ season.name_en }}">
+<meta property="og:description" content="{{ _desc | striptags }}">
+<meta property="og:url" content="https://ko-72.com/archive/{{ '%02d' | format(season.id) }}-{{ season.slug }}.html">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kō — {{ season.name_en }} ({{ season.name_romaji }})">
+<meta name="twitter:description" content="{{ _desc | striptags }}">
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ season.name_en }}",
+  "alternativeHeadline": "{{ season.name_jp }} · {{ season.name_romaji }}",
+  "description": "{{ _desc | striptags }}",
+  "datePublished": "{{ published_date }}",
+  "url": "https://ko-72.com/archive/{{ '%02d' | format(season.id) }}-{{ season.slug }}.html",
+  "isPartOf": { "@type": "WebSite", "name": "Kō", "url": "https://ko-72.com" },
+  "publisher": { "@type": "Organization", "name": "Kō", "url": "https://ko-72.com" },
+  "about": {
+    "@type": "Thing",
+    "name": "{{ season.name_en }}",
+    "description": "One of Japan's 72 micro-seasons (shichijūni-kō), number {{ season.id }} of 72."
+  }
+}
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
 

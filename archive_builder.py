@@ -54,12 +54,16 @@ def build_archive(season: dict, content: dict, all_seasons: list) -> None:
     prev   = lower[-1]  if lower  else None
     next_s = higher[0]  if higher else None
 
+    today = date.today()
+    published_date = date(today.year, season["start_month"], season["start_day"]).isoformat()
+
     html = env.get_template("archive_page.html").render(
         season=season,
         content=content,
         accent_color=_accent(season),
         date_range=_date_range(season),
         duration_days=season["duration_days"],
+        published_date=published_date,
         prev=prev,
         next=next_s,
         all_seasons=all_seasons,
@@ -70,6 +74,7 @@ def build_archive(season: dict, content: dict, all_seasons: list) -> None:
     print(f"Archive page written: archive/{filename}")
 
     _build_index(env, all_seasons)
+    _build_sitemap(all_seasons)
 
 
 # ── Archive index ──────────────────────────────────────────────────────────────
@@ -84,6 +89,42 @@ def _build_index(env: Environment, all_seasons: list) -> None:
     )
     (ARCHIVE_DIR / "index.html").write_text(html, encoding="utf-8")
     print(f"Archive index updated — {published_count} season(s) published.")
+
+
+# ── Sitemap ────────────────────────────────────────────────────────────────────
+
+def _build_sitemap(all_seasons: list) -> None:
+    today = date.today().isoformat()
+
+    def url(loc: str, changefreq: str, priority: str) -> str:
+        return (
+            f"  <url>\n"
+            f"    <loc>{loc}</loc>\n"
+            f"    <lastmod>{today}</lastmod>\n"
+            f"    <changefreq>{changefreq}</changefreq>\n"
+            f"    <priority>{priority}</priority>\n"
+            f"  </url>"
+        )
+
+    entries = [
+        url("https://ko-72.com/", "weekly", "1.0"),
+        url("https://ko-72.com/archive/", "monthly", "0.8"),
+    ]
+    for s in all_seasons:
+        if (ARCHIVE_DIR / _season_filename(s)).exists():
+            entries.append(url(
+                f"https://ko-72.com/archive/{_season_filename(s)}",
+                "yearly", "0.6",
+            ))
+
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(entries)
+        + "\n</urlset>\n"
+    )
+    (ROOT_DIR / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    print("Sitemap rebuilt: sitemap.xml")
 
 
 # ── Website homepage ───────────────────────────────────────────────────────────

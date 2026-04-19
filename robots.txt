@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ko-72.com/sitemap.xml
