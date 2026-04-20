@@ -101,7 +101,9 @@
                     font-style: italic; }
 
   /* ── Wheel ── */
-  .wheel-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .wheel-col { display: flex; flex-direction: column; align-items: center; gap: 12px;
+               width: 100%; min-width: 0; }
+  .wheel-svg { display: block; width: 100%; max-width: 440px; height: auto; }
   .wheel-kicker { font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
                   color: var(--accent); margin: 0 0 8px; }
   .legend { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
@@ -128,14 +130,23 @@
   .spread-col p + p { margin-top: 12px; }
   .spread-divider { background: var(--rule); width: 1px; }
 
-  /* ── Ticker (Ink band) ── */
-  .ticker { background: var(--ink); padding: 20px 56px; }
-  .ticker-row { display: flex; align-items: center; gap: 32px; }
-  .ticker-label { font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-                  color: var(--accent); flex-shrink: 0; }
-  .ticker-text { font-family: var(--mono); font-size: 13px; color: var(--washi);
-                 letter-spacing: 0.05em; white-space: nowrap; overflow: hidden;
-                 text-overflow: ellipsis; }
+  /* ── At Market (in-season 3-column) ── */
+  .market { background: var(--shell); padding: 56px 56px;
+            border-bottom: 1px solid var(--rule); }
+  .market-label { font-family: var(--sans); font-size: 11px; font-weight: 500;
+                  letter-spacing: 0.18em; text-transform: uppercase;
+                  color: var(--stone); text-align: center; margin: 0 0 28px; }
+  .market-grid { display: grid; grid-template-columns: repeat(3, 1fr);
+                 max-width: 820px; margin: 0 auto; }
+  .market-col { padding: 0 24px; border-right: 1px solid var(--rule);
+                text-align: center; }
+  .market-col:last-child { border-right: none; }
+  .market-col-head { font-family: var(--sans); font-size: 11px; font-weight: 500;
+                     letter-spacing: 0.14em; text-transform: uppercase;
+                     color: var(--accent); margin: 0 0 14px;
+                     padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  .market-item { font-family: var(--serif); font-size: 14px; color: var(--deep);
+                 margin: 0 0 6px; line-height: 1.5; }
 
   /* ── Haiku ── */
   .haiku-band { padding: 88px 56px; text-align: center;
@@ -205,7 +216,8 @@
   @media (max-width: 860px) {
     .topbar { padding: 14px 24px; flex-wrap: wrap; gap: 12px; }
     .topbar-right { gap: 18px; }
-    .hero { grid-template-columns: 1fr; padding: 48px 24px; gap: 40px; }
+    .hero { grid-template-columns: 1fr; padding: 40px 24px 48px; gap: 32px; }
+    .wheel-col { max-width: 360px; margin: 0 auto; }
     .display-en { font-size: 52px; }
     .opening-band { padding: 48px 24px; }
     .opening-inner { grid-template-columns: 1fr; gap: 0; }
@@ -214,9 +226,13 @@
     .spread { grid-template-columns: 1fr; padding: 32px 24px; gap: 32px; }
     .spread-col { padding: 0; }
     .spread-divider { height: 1px; width: 100%; }
-    .ticker { padding: 16px 24px; }
-    .ticker-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .ticker-text { white-space: normal; }
+    .market { padding: 40px 24px; }
+    .market-grid { grid-template-columns: 1fr; max-width: 320px; }
+    .market-col { padding: 18px 0; border-right: none;
+                  border-bottom: 1px solid var(--rule); }
+    .market-col:last-child { border-bottom: none; padding-bottom: 0; }
+    .market-col:first-child { padding-top: 0; }
+    .market-col-head { padding-bottom: 10px; margin-bottom: 12px; }
     .haiku-band { padding: 56px 24px; }
     .haiku-jp { font-size: 26px; }
     .haiku-en { font-size: 18px; }
@@ -279,7 +295,7 @@
       {% set CTR   = WHEEL_SIZE / 2 %}
       {% set SEASON_COLORS = {'spring':'#6b8f71','summer':'#c9734a','autumn':'#d4a853','winter':'#4a7fa5'} %}
 
-      <svg width="{{ WHEEL_SIZE }}" height="{{ WHEEL_SIZE }}" viewBox="0 0 {{ WHEEL_SIZE }} {{ WHEEL_SIZE }}">
+      <svg class="wheel-svg" width="{{ WHEEL_SIZE }}" height="{{ WHEEL_SIZE }}" viewBox="0 0 {{ WHEEL_SIZE }} {{ WHEEL_SIZE }}">
         <circle cx="{{ CTR }}" cy="{{ CTR }}" r="{{ R_OUT + 10 }}" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <circle cx="{{ CTR }}" cy="{{ CTR }}" r="{{ R_IN - 10 }}" fill="none" stroke="var(--rule)" stroke-width="1"/>
 
@@ -349,16 +365,28 @@
     </div>
   </section>
 
-  <!-- ── At-market ticker (Ink band) ── -->
-  <section class="ticker">
-    <div class="ticker-row">
-      <span class="ticker-label">AT MARKET</span>
-      <span class="ticker-text">
-        {%- set items = content.seasonal_produce.fruits + content.seasonal_produce.vegetables + content.seasonal_produce.fish -%}
-        {%- for item in items -%}
-          {{ item | lower }}{% if not loop.last %} &nbsp; · &nbsp; {% endif %}
-        {%- endfor -%}
-      </span>
+  <!-- ── At Market (in-season 3-column) ── -->
+  <section class="market">
+    <p class="market-label">At Market</p>
+    <div class="market-grid">
+      <div class="market-col">
+        <p class="market-col-head">Fruits</p>
+        {% for item in content.seasonal_produce.fruits %}
+          <p class="market-item">{{ item }}</p>
+        {% endfor %}
+      </div>
+      <div class="market-col">
+        <p class="market-col-head">Vegetables</p>
+        {% for item in content.seasonal_produce.vegetables %}
+          <p class="market-item">{{ item }}</p>
+        {% endfor %}
+      </div>
+      <div class="market-col">
+        <p class="market-col-head">Fish</p>
+        {% for item in content.seasonal_produce.fish %}
+          <p class="market-item">{{ item }}</p>
+        {% endfor %}
+      </div>
     </div>
   </section>
 
