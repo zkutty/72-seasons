@@ -272,38 +272,63 @@
     <div class="wheel-col">
       <p class="wheel-kicker">THE YEAR · 七十二候</p>
 
-      {# 72-arc calendar wheel. Arcs/labels rendered server-side. #}
-      {% set WHEEL_SIZE = 440 %}
-      {% set R_OUT = 200 %}
-      {% set R_IN  = 148 %}
-      {% set CTR   = WHEEL_SIZE / 2 %}
+      {# Three-tier calendar wheel — see wheel.py for geometry.
+         Outer ring (24 sekki · 二十四節気) · Inner ring (72 kō · 七十二候) · Color bands = 4 major seasons. #}
+      {% set WHEEL_SIZE   = 480 %}
+      {% set CTR          = WHEEL_SIZE / 2 %}
+      {% set R_KO_OUT     = 172 %}
+      {% set R_KO_IN      = 130 %}
+      {% set R_SEKKI_OUT  = 208 %}
+      {% set R_SEKKI_IN   = 180 %}
       {% set SEASON_COLORS = {'spring':'#6b8f71','summer':'#c9734a','autumn':'#d4a853','winter':'#4a7fa5'} %}
 
       <svg width="{{ WHEEL_SIZE }}" height="{{ WHEEL_SIZE }}" viewBox="0 0 {{ WHEEL_SIZE }} {{ WHEEL_SIZE }}">
-        <circle cx="{{ CTR }}" cy="{{ CTR }}" r="{{ R_OUT + 10 }}" fill="none" stroke="var(--rule)" stroke-width="1"/>
-        <circle cx="{{ CTR }}" cy="{{ CTR }}" r="{{ R_IN - 10 }}" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <!-- Hairline guide circles -->
+        <circle cx="{{ CTR }}" cy="{{ CTR }}" r="{{ R_SEKKI_OUT + 4 }}" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <circle cx="{{ CTR }}" cy="{{ CTR }}" r="{{ R_KO_IN - 8 }}" fill="none" stroke="var(--rule)" stroke-width="1"/>
 
+        <!-- ── Sekki ring (24 arcs · 二十四節気) ── -->
+        {% for k in sekki_ring %}
+          {% set sc = SEASON_COLORS[k.major_season] %}
+          {% set is_current_sekki = (k.sekki == season.sekki) %}
+          <path d="{{ k.arc_d }}"
+                fill="{{ sc if is_current_sekki else sc + '55' }}"
+                {% if is_current_sekki %}stroke="{{ sc }}" stroke-width="1.5"{% endif %} />
+        {% endfor %}
+
+        <!-- Sekki kanji labels (upright, around the rim) -->
+        {% for k in sekki_ring %}
+          {% set is_current_sekki = (k.sekki == season.sekki) %}
+          <text x="{{ k.label_x }}" y="{{ k.label_y }}" text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="'Hiragino Mincho ProN','Yu Mincho','MS Mincho',serif"
+                font-size="10"
+                fill="{% if is_current_sekki %}var(--deep){% else %}var(--stone){% endif %}"
+                letter-spacing="0.5"
+                font-weight="{% if is_current_sekki %}600{% else %}400{% endif %}">{{ k.sekki_jp }}</text>
+        {% endfor %}
+
+        <!-- ── Kō ring (72 arcs · 七十二候) ── -->
         {% for s in all_seasons %}
-          {% set i = loop.index0 %}
           {% set sc = SEASON_COLORS[s.major_season] %}
           {% set is_current = (s.id == season.id) %}
-          {# Pre-compute arc path in Python and pass as s.arc_d; fall back placeholder below. #}
           <path d="{{ s.arc_d }}"
                 fill="{{ sc if is_current else sc + '28' }}"
                 {% if is_current %}stroke="{{ sc }}" stroke-width="1.5"{% endif %} />
         {% endfor %}
 
-        {# Cardinal season labels — x/y pre-computed by wheel.cardinal_labels() #}
+        <!-- Cardinal season labels (SPR / SUM / AUT / WIN) -->
         {% for c in cardinals %}
           <text x="{{ c.x }}" y="{{ c.y }}" text-anchor="middle"
-                font-family="system-ui, sans-serif" font-size="10"
-                fill="var(--stone)" letter-spacing="2" font-weight="500">{{ c.label }}</text>
-          <text x="{{ c.x }}" y="{{ c.y + 12 }}" text-anchor="middle"
+                font-family="system-ui, sans-serif" font-size="11"
+                fill="var(--stone)" letter-spacing="2" font-weight="600">{{ c.label }}</text>
+          <text x="{{ c.x }}" y="{{ c.y + 13 }}" text-anchor="middle"
                 font-family="ui-monospace, Menlo, monospace" font-size="9"
                 fill="var(--stone)">{{ c.sub }}</text>
         {% endfor %}
 
-        <text x="{{ CTR }}" y="{{ CTR - 20 }}" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="var(--stone)" letter-spacing="2.2" font-weight="500">NOW</text>
+        <!-- Center label -->
+        <text x="{{ CTR }}" y="{{ CTR - 22 }}" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="var(--stone)" letter-spacing="2.2" font-weight="500">NOW</text>
         <text x="{{ CTR }}" y="{{ CTR + 8 }}"  text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', serif" font-size="32" fill="var(--deep)" letter-spacing="5">{{ season.name_jp }}</text>
         <text x="{{ CTR }}" y="{{ CTR + 28 }}" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" fill="var(--stone)" letter-spacing="1">{{ '%02d' | format(season.id) }} / 72 · {{ months_short[season.start_month] | upper }} {{ season.start_day }}</text>
       </svg>

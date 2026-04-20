@@ -304,11 +304,21 @@
     <p class="rail-season">{{ season.major_season }}</p>
     <div class="rail-kanji">{{ season.name_jp }}</div>
 
-    <!-- Year ring (72 arcs). Arc paths are pre-computed Python-side as season.ring_d; see wheel.py. -->
+    <!-- Year ring — outer: 24 sekki · inner: 72 kō. Paths pre-computed in wheel.py. -->
     <div class="ring">
       {% set RING = 140 %}
       {% set RC = RING / 2 %}
       <svg width="{{ RING }}" height="{{ RING }}" viewBox="0 0 {{ RING }} {{ RING }}">
+        {# Outer sekki ring #}
+        {% for k in sekki_ring_sm %}
+          {% set sc = season_accents[k.major_season] %}
+          {% set is_current_sekki = k.sekki == season.sekki %}
+          {% set is_same_season   = k.major_season == season.major_season and not is_current_sekki %}
+          <path d="{{ k.arc_d }}"
+                fill="{% if is_current_sekki %}{{ sc }}{% else %}#d8d5ce{% endif %}"
+                opacity="{% if is_current_sekki %}1{% elif is_same_season %}0.6{% else %}0.32{% endif %}"/>
+        {% endfor %}
+        {# Inner kō ring #}
         {% for s in all_seasons %}
           {% set sc = season_accents[s.major_season] %}
           {% set is_current = s.id == season.id %}

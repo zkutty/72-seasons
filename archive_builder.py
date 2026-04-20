@@ -7,7 +7,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from wheel import cardinal_labels
+from wheel import cardinal_labels, sekki_ring, sekki_ring_small
 
 ARCHIVE_DIR = Path(__file__).parent / "archive"
 TEMPLATE_DIR = Path(__file__).parent / "templates"
@@ -67,6 +67,7 @@ def build_archive(season: dict, content: dict, all_seasons: list) -> None:
         prev=prev,
         next=next_s,
         all_seasons=all_seasons,
+        sekki_ring_sm=sekki_ring_small(all_seasons),
     )
 
     filename = _season_filename(season)
@@ -154,6 +155,7 @@ def build_website(
         recent=recent,
         worker_url=worker_url,
         cardinals=cardinal_labels(),
+        sekki_ring=sekki_ring(all_seasons),
     )
     (ROOT_DIR / "index.html").write_text(html, encoding="utf-8")
     print("Website homepage rebuilt: index.html")
