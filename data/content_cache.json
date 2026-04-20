@@ -39,5 +39,46 @@
       "english": "After the rain — at the rainbow's foot, a cow's low call"
     },
     "closing": "The arc fades as you watch, its colors thinning to a suggestion, then to memory — and already the next clouds gather on the western ridge."
+  },
+  "22": {
+    "summary": "Along riverbanks and wetlands, the first pale green shoots of reeds pierce through muddy water, signaling the wetland's awakening.",
+    "opening": "The grain rains have softened the earth, and now from the dark water of marshes and river deltas, slender reed tips emerge like green brushstrokes on brown silk. The air carries the mineral scent of wet soil and the faint sweetness of new growth. In the early morning stillness, you can almost hear the land breathing as these ancient plants begin their annual reach toward the pale spring sky.",
+    "nature_notes": "Young reed shoots, tender and chartreuse, push through the waterlogged margins of ponds and estuaries, their tips catching the low-angled morning light. Herons have returned to their rookeries in the reed beds, their guttural calls echoing across the water at dawn and dusk. The surface of slow rivers carries pollen dust, creating golden films that swirl with each passage of carp stirring in the shallows below.",
+    "seasonal_produce": {
+      "fruits": [
+        "Ichigo (strawberries)",
+        "Natsu mikan (summer citrus)",
+        "Biwa (loquat, early)",
+        "Amanatsu (sweet citrus)"
+      ],
+      "vegetables": [
+        "Takenoko (bamboo shoots)",
+        "Sansai (mountain vegetables)",
+        "Wakame (young seaweed)",
+        "Fuki (butterbur)"
+      ],
+      "fish": [
+        "Sayori (halfbeak)",
+        "Shirauo (icefish)",
+        "Sawara (Spanish mackerel)"
+      ]
+    },
+    "seasonal_dishes": [
+      {
+        "name": "Takenoko gohan",
+        "description": "Rice cooked with freshly dug bamboo shoots, their sweetness peaking during these grain rains when the soil is perfectly moist."
+      },
+      {
+        "name": "Sawara no saikyo-yaki",
+        "description": "Spanish mackerel marinated in sweet white miso and grilled until caramelized, celebrating the fish's spring migration through the Seto Inland Sea."
+      }
+    ],
+    "cultural_note": "This period falls within the traditional rice seedling preparation season, when farmers flood their nursery beds to germinate seeds. The appearance of reed shoots was historically watched as an indicator that waters had warmed sufficiently for rice cultivation to begin. In some regions, young reed leaves were woven into simple protective charms for the paddies, connecting the wild wetland to the cultivated field.",
+    "haiku": {
+      "japanese": "葦の芽や水面に映る朝の雲",
+      "romaji": "ashi no me ya / minamo ni utsuru / asa no kumo",
+      "english": "reed shoots rising— / morning clouds reflected / on the water's face"
+    },
+    "closing": "In the reed marsh, a single egret stands motionless among the new shoots, both waiting for what the warming water will bring."
   }
 }
