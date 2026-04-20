@@ -124,6 +124,31 @@
     font-size: 11px; color: var(--stone); margin: 0 0 22px; letter-spacing: 0.04em;
   }
 
+  /* ── Sekki subgroup (within season column) ── */
+  .sekki-group { margin-top: 22px; }
+  .sekki-group:first-of-type { margin-top: 0; }
+  .sekki-head {
+    padding: 10px 0 8px;
+    border-top: 2px solid var(--accent);
+    margin-bottom: 2px;
+  }
+  .sekki-head-row {
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .sekki-name {
+    font-family: var(--serif); font-size: 14px; color: var(--deep);
+    letter-spacing: 0.01em; font-weight: 500;
+  }
+  .sekki-kanji {
+    font-family: var(--mincho); font-size: 12px; color: var(--stone);
+    letter-spacing: 0.06em;
+  }
+  .sekki-en {
+    font-family: var(--serif); font-style: italic;
+    font-size: 11px; color: var(--stone); margin: 2px 0 0;
+    letter-spacing: 0.02em;
+  }
+
   .entry {
     padding: 10px 0;
     border-top: 1px solid var(--rule);
@@ -176,6 +201,39 @@
   .year-meta-cell:last-child { border-right: none; }
   .year-meta-cell span:last-child { font-variant-numeric: tabular-nums; }
 
+  /* ── About the sekki (explanatory band) ── */
+  .about-sekki {
+    padding: 36px 48px 40px;
+    background: var(--tint);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .about-sekki-inner {
+    display: grid; grid-template-columns: 240px 1fr; gap: 48px;
+    max-width: 1100px; margin: 0 auto;
+    align-items: start;
+  }
+  .about-sekki-kicker {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--stone); margin: 0 0 10px;
+  }
+  .about-sekki-title {
+    font-family: var(--serif); font-weight: 400; font-size: 28px;
+    letter-spacing: -0.01em; color: var(--deep);
+    margin: 0 0 6px; line-height: 1.1;
+  }
+  .about-sekki-title .jp {
+    font-family: var(--mincho); font-size: 16px; color: var(--stone);
+    letter-spacing: 0.1em; margin-left: 10px;
+  }
+  .about-sekki-body {
+    font-family: var(--serif); font-size: 15px; line-height: 1.75;
+    color: var(--deep); margin: 0;
+  }
+  .about-sekki-body p { margin: 0 0 12px; }
+  .about-sekki-body p:last-child { margin-bottom: 0; }
+  .about-sekki-body em { color: var(--stone); }
+
   /* ── Footer / editor's note ── */
   .note {
     padding: 36px 48px 56px;
@@ -199,6 +257,10 @@
     .season-col:nth-child(2) { border-right: none; }
     .year-meta-cell:nth-child(2) { border-right: none; }
     .masthead-title { font-size: 64px; }
+  }
+  @media (max-width: 960px) {
+    .about-sekki { padding: 32px 24px 36px; }
+    .about-sekki-inner { grid-template-columns: 1fr; gap: 20px; }
   }
   @media (max-width: 640px) {
     .topbar { padding: 10px 20px; gap: 8px; flex-wrap: wrap; }
@@ -244,10 +306,74 @@
   </p>
 </header>
 
-<!-- ── Four-column year ── -->
+<!-- ── About the sekki ── -->
+<section class="about-sekki" id="about-sekki">
+  <div class="about-sekki-inner">
+    <div>
+      <p class="about-sekki-kicker">A note on structure</p>
+      <h2 class="about-sekki-title">The sekki<span class="jp">二十四節気</span></h2>
+    </div>
+    <div class="about-sekki-body">
+      <p>
+        The Japanese year is first divided into twenty-four <em>sekki</em> (節気) —
+        roughly fortnightly "solar terms" that mark the sun's progress around the
+        ecliptic. Each bears a name drawn from weather or agriculture:
+        <em>Risshun</em> (立春, Beginning of Spring), <em>Taisho</em> (大暑, Greater
+        Heat), <em>Sōkō</em> (霜降, Frost Descent).
+      </p>
+      <p>
+        Every sekki is further split into three <em>kō</em> (候) — the five-day
+        micro-seasons this archive collects. Twenty-four sekki × three kō gives
+        the <em>shichijūni-kō</em>, seventy-two. Below, each sekki groups its
+        three kō together, so you can read the year at either scale.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Four-column year (subdivided by sekki) ── -->
 <section class="year">
   <div class="year-grid">
     
+      
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
       
       <div class="season-col" style="--accent: var(--spring);">
         <h2>Spring</h2>
@@ -256,255 +382,333 @@
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">07</span>
-                <span class="entry-jp">東風解凍</span>
-                <span class="entry-date">Feb 4</span>
-              </span>
-              <p class="entry-en">East wind melts the ice</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Risshun</span>
+                <span class="sekki-kanji">立春</span>
+              </div>
+              <p class="sekki-en">Beginning of Spring</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">07</span>
+                    <span class="entry-jp">東風解凍</span>
+                    <span class="entry-date">Feb 4</span>
+                  </span>
+                  <p class="entry-en">East wind melts the ice</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">08</span>
+                    <span class="entry-jp">黄鶯睍睆</span>
+                    <span class="entry-date">Feb 9</span>
+                  </span>
+                  <p class="entry-en">Bush warblers start singing in the mountains</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">09</span>
+                    <span class="entry-jp">魚上氷</span>
+                    <span class="entry-date">Feb 14</span>
+                  </span>
+                  <p class="entry-en">Fish emerge from the ice</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">08</span>
-                <span class="entry-jp">黄鶯睍睆</span>
-                <span class="entry-date">Feb 9</span>
-              </span>
-              <p class="entry-en">Bush warblers start singing in the mountains</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Usui</span>
+                <span class="sekki-kanji">雨水</span>
+              </div>
+              <p class="sekki-en">Rainwater</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">10</span>
+                    <span class="entry-jp">土脈潤起</span>
+                    <span class="entry-date">Feb 19</span>
+                  </span>
+                  <p class="entry-en">Rain moistens the soil</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">11</span>
+                    <span class="entry-jp">霞始靆</span>
+                    <span class="entry-date">Feb 24</span>
+                  </span>
+                  <p class="entry-en">Mist starts to linger</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">12</span>
+                    <span class="entry-jp">草木萌動</span>
+                    <span class="entry-date">Mar 1</span>
+                  </span>
+                  <p class="entry-en">Plants sprout, trees bud</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">09</span>
-                <span class="entry-jp">魚上氷</span>
-                <span class="entry-date">Feb 14</span>
-              </span>
-              <p class="entry-en">Fish emerge from the ice</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Keichitsu</span>
+                <span class="sekki-kanji">啓蟄</span>
+              </div>
+              <p class="sekki-en">Awakening of Insects</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">13</span>
+                    <span class="entry-jp">蟄虫啓戸</span>
+                    <span class="entry-date">Mar 6</span>
+                  </span>
+                  <p class="entry-en">Hibernating insects emerge</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">14</span>
+                    <span class="entry-jp">桃始笑</span>
+                    <span class="entry-date">Mar 11</span>
+                  </span>
+                  <p class="entry-en">First peach blossoms open</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">15</span>
+                    <span class="entry-jp">菜虫化蝶</span>
+                    <span class="entry-date">Mar 16</span>
+                  </span>
+                  <p class="entry-en">Caterpillars become butterflies</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">10</span>
-                <span class="entry-jp">土脈潤起</span>
-                <span class="entry-date">Feb 19</span>
-              </span>
-              <p class="entry-en">Rain moistens the soil</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Shunbun</span>
+                <span class="sekki-kanji">春分</span>
+              </div>
+              <p class="sekki-en">Spring Equinox</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">16</span>
+                    <span class="entry-jp">雀始巣</span>
+                    <span class="entry-date">Mar 21</span>
+                  </span>
+                  <p class="entry-en">Sparrows start nesting</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">17</span>
+                    <span class="entry-jp">桜始開</span>
+                    <span class="entry-date">Mar 26</span>
+                  </span>
+                  <p class="entry-en">First cherry blossoms</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">18</span>
+                    <span class="entry-jp">雷乃発声</span>
+                    <span class="entry-date">Mar 31</span>
+                  </span>
+                  <p class="entry-en">Distant thunder</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">11</span>
-                <span class="entry-jp">霞始靆</span>
-                <span class="entry-date">Feb 24</span>
-              </span>
-              <p class="entry-en">Mist starts to linger</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Seimei</span>
+                <span class="sekki-kanji">清明</span>
+              </div>
+              <p class="sekki-en">Clear and Bright</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">19</span>
+                    <span class="entry-jp">玄鳥至</span>
+                    <span class="entry-date">Apr 5</span>
+                  </span>
+                  <p class="entry-en">Swallows arrive</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">20</span>
+                    <span class="entry-jp">鴻雁北</span>
+                    <span class="entry-date">Apr 10</span>
+                  </span>
+                  <p class="entry-en">Wild geese fly north</p>
+              
+                </span>
+              
+            
+              
+              
+                <a class="entry" href="/archive/21-niji-hajimete-arawaru.html">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">21</span>
+                    <span class="entry-jp">虹始見</span>
+                    <span class="entry-date">Apr 15</span>
+                  </span>
+                  <p class="entry-en">First rainbows appear</p>
+              
+                </a>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">12</span>
-                <span class="entry-jp">草木萌動</span>
-                <span class="entry-date">Mar 1</span>
-              </span>
-              <p class="entry-en">Plants sprout, trees bud</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">13</span>
-                <span class="entry-jp">蟄虫啓戸</span>
-                <span class="entry-date">Mar 6</span>
-              </span>
-              <p class="entry-en">Hibernating insects emerge</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">14</span>
-                <span class="entry-jp">桃始笑</span>
-                <span class="entry-date">Mar 11</span>
-              </span>
-              <p class="entry-en">First peach blossoms open</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">15</span>
-                <span class="entry-jp">菜虫化蝶</span>
-                <span class="entry-date">Mar 16</span>
-              </span>
-              <p class="entry-en">Caterpillars become butterflies</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">16</span>
-                <span class="entry-jp">雀始巣</span>
-                <span class="entry-date">Mar 21</span>
-              </span>
-              <p class="entry-en">Sparrows start nesting</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">17</span>
-                <span class="entry-jp">桜始開</span>
-                <span class="entry-date">Mar 26</span>
-              </span>
-              <p class="entry-en">First cherry blossoms</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">18</span>
-                <span class="entry-jp">雷乃発声</span>
-                <span class="entry-date">Mar 31</span>
-              </span>
-              <p class="entry-en">Distant thunder</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">19</span>
-                <span class="entry-jp">玄鳥至</span>
-                <span class="entry-date">Apr 5</span>
-              </span>
-              <p class="entry-en">Swallows arrive</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">20</span>
-                <span class="entry-jp">鴻雁北</span>
-                <span class="entry-date">Apr 10</span>
-              </span>
-              <p class="entry-en">Wild geese fly north</p>
-          
-            </span>
-          
-        
-          
-          
-            <a class="entry" href="/archive/21-niji-hajimete-arawaru.html">
-          
-              <span class="entry-row">
-                <span class="entry-num">21</span>
-                <span class="entry-jp">虹始見</span>
-                <span class="entry-date">Apr 15</span>
-              </span>
-              <p class="entry-en">First rainbows appear</p>
-          
-            </a>
-          
-        
-          
-          
-            <a class="entry" href="/archive/22-ashi-hajimete-shozu.html">
-          
-              <span class="entry-row">
-                <span class="entry-num">22</span>
-                <span class="entry-jp">葭始生</span>
-                <span class="entry-date">Apr 20</span>
-              </span>
-              <p class="entry-en">First reeds sprout</p>
-          
-            </a>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">23</span>
-                <span class="entry-jp">霜止出苗</span>
-                <span class="entry-date">Apr 25</span>
-              </span>
-              <p class="entry-en">Last frost, rice shoots sprout</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">24</span>
-                <span class="entry-jp">牡丹華</span>
-                <span class="entry-date">Apr 30</span>
-              </span>
-              <p class="entry-en">Peonies bloom</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Kokuu</span>
+                <span class="sekki-kanji">穀雨</span>
+              </div>
+              <p class="sekki-en">Grain Rain</p>
+            </div>
+            
+              
+              
+                <a class="entry" href="/archive/22-ashi-hajimete-shozu.html">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">22</span>
+                    <span class="entry-jp">葭始生</span>
+                    <span class="entry-date">Apr 20</span>
+                  </span>
+                  <p class="entry-en">First reeds sprout</p>
+              
+                </a>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">23</span>
+                    <span class="entry-jp">霜止出苗</span>
+                    <span class="entry-date">Apr 25</span>
+                  </span>
+                  <p class="entry-en">Last frost, rice shoots sprout</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">24</span>
+                    <span class="entry-jp">牡丹華</span>
+                    <span class="entry-date">Apr 30</span>
+                  </span>
+                  <p class="entry-en">Peonies bloom</p>
+              
+                </span>
+              
+            
+          </div>
         
 
         <div class="season-ornament">
@@ -513,6 +717,45 @@
       </div>
     
       
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
       <div class="season-col" style="--accent: var(--summer);">
         <h2>Summer</h2>
         <p class="season-sekki">Rikka → Taisho</p>
@@ -520,255 +763,333 @@
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">25</span>
-                <span class="entry-jp">蛙始鳴</span>
-                <span class="entry-date">May 6</span>
-              </span>
-              <p class="entry-en">Frogs start calling</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Rikka</span>
+                <span class="sekki-kanji">立夏</span>
+              </div>
+              <p class="sekki-en">Beginning of Summer</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">25</span>
+                    <span class="entry-jp">蛙始鳴</span>
+                    <span class="entry-date">May 6</span>
+                  </span>
+                  <p class="entry-en">Frogs start calling</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">26</span>
+                    <span class="entry-jp">蚯蚓出</span>
+                    <span class="entry-date">May 11</span>
+                  </span>
+                  <p class="entry-en">Earthworms emerge</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">27</span>
+                    <span class="entry-jp">竹笋生</span>
+                    <span class="entry-date">May 16</span>
+                  </span>
+                  <p class="entry-en">Bamboo shoots appear</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">26</span>
-                <span class="entry-jp">蚯蚓出</span>
-                <span class="entry-date">May 11</span>
-              </span>
-              <p class="entry-en">Earthworms emerge</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Shōman</span>
+                <span class="sekki-kanji">小満</span>
+              </div>
+              <p class="sekki-en">Lesser Ripening</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">28</span>
+                    <span class="entry-jp">蚕起食桑</span>
+                    <span class="entry-date">May 21</span>
+                  </span>
+                  <p class="entry-en">Silkworms feast on mulberry leaves</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">29</span>
+                    <span class="entry-jp">紅花栄</span>
+                    <span class="entry-date">May 26</span>
+                  </span>
+                  <p class="entry-en">Safflowers bloom</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">30</span>
+                    <span class="entry-jp">麦秋至</span>
+                    <span class="entry-date">May 31</span>
+                  </span>
+                  <p class="entry-en">Wheat ripens and harvest begins</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">27</span>
-                <span class="entry-jp">竹笋生</span>
-                <span class="entry-date">May 16</span>
-              </span>
-              <p class="entry-en">Bamboo shoots appear</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Bōshu</span>
+                <span class="sekki-kanji">芒種</span>
+              </div>
+              <p class="sekki-en">Grain Beards</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">31</span>
+                    <span class="entry-jp">螳螂生</span>
+                    <span class="entry-date">Jun 6</span>
+                  </span>
+                  <p class="entry-en">Praying mantises hatch</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">32</span>
+                    <span class="entry-jp">腐草為蛍</span>
+                    <span class="entry-date">Jun 11</span>
+                  </span>
+                  <p class="entry-en">Decaying grass becomes fireflies</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">33</span>
+                    <span class="entry-jp">梅子黄</span>
+                    <span class="entry-date">Jun 16</span>
+                  </span>
+                  <p class="entry-en">Plums turn yellow</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">28</span>
-                <span class="entry-jp">蚕起食桑</span>
-                <span class="entry-date">May 21</span>
-              </span>
-              <p class="entry-en">Silkworms feast on mulberry leaves</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Geshi</span>
+                <span class="sekki-kanji">夏至</span>
+              </div>
+              <p class="sekki-en">Summer Solstice</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">34</span>
+                    <span class="entry-jp">乃東枯</span>
+                    <span class="entry-date">Jun 21</span>
+                  </span>
+                  <p class="entry-en">Self-heal withers</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">35</span>
+                    <span class="entry-jp">菖蒲華</span>
+                    <span class="entry-date">Jun 26</span>
+                  </span>
+                  <p class="entry-en">Irises bloom</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">36</span>
+                    <span class="entry-jp">半夏生</span>
+                    <span class="entry-date">Jul 2</span>
+                  </span>
+                  <p class="entry-en">Crow-dipper sprouts</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">29</span>
-                <span class="entry-jp">紅花栄</span>
-                <span class="entry-date">May 26</span>
-              </span>
-              <p class="entry-en">Safflowers bloom</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Shōsho</span>
+                <span class="sekki-kanji">小暑</span>
+              </div>
+              <p class="sekki-en">Lesser Heat</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">37</span>
+                    <span class="entry-jp">温風至</span>
+                    <span class="entry-date">Jul 7</span>
+                  </span>
+                  <p class="entry-en">Warm winds arrive</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">38</span>
+                    <span class="entry-jp">蓮始開</span>
+                    <span class="entry-date">Jul 12</span>
+                  </span>
+                  <p class="entry-en">Lotus blossoms open</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">39</span>
+                    <span class="entry-jp">鷹乃学習</span>
+                    <span class="entry-date">Jul 17</span>
+                  </span>
+                  <p class="entry-en">Young hawks learn to fly</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">30</span>
-                <span class="entry-jp">麦秋至</span>
-                <span class="entry-date">May 31</span>
-              </span>
-              <p class="entry-en">Wheat ripens and harvest begins</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">31</span>
-                <span class="entry-jp">螳螂生</span>
-                <span class="entry-date">Jun 6</span>
-              </span>
-              <p class="entry-en">Praying mantises hatch</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">32</span>
-                <span class="entry-jp">腐草為蛍</span>
-                <span class="entry-date">Jun 11</span>
-              </span>
-              <p class="entry-en">Decaying grass becomes fireflies</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">33</span>
-                <span class="entry-jp">梅子黄</span>
-                <span class="entry-date">Jun 16</span>
-              </span>
-              <p class="entry-en">Plums turn yellow</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">34</span>
-                <span class="entry-jp">乃東枯</span>
-                <span class="entry-date">Jun 21</span>
-              </span>
-              <p class="entry-en">Self-heal withers</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">35</span>
-                <span class="entry-jp">菖蒲華</span>
-                <span class="entry-date">Jun 26</span>
-              </span>
-              <p class="entry-en">Irises bloom</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">36</span>
-                <span class="entry-jp">半夏生</span>
-                <span class="entry-date">Jul 2</span>
-              </span>
-              <p class="entry-en">Crow-dipper sprouts</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">37</span>
-                <span class="entry-jp">温風至</span>
-                <span class="entry-date">Jul 7</span>
-              </span>
-              <p class="entry-en">Warm winds arrive</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">38</span>
-                <span class="entry-jp">蓮始開</span>
-                <span class="entry-date">Jul 12</span>
-              </span>
-              <p class="entry-en">Lotus blossoms open</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">39</span>
-                <span class="entry-jp">鷹乃学習</span>
-                <span class="entry-date">Jul 17</span>
-              </span>
-              <p class="entry-en">Young hawks learn to fly</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">40</span>
-                <span class="entry-jp">桐始結花</span>
-                <span class="entry-date">Jul 23</span>
-              </span>
-              <p class="entry-en">Paulownia trees bear first seeds</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">41</span>
-                <span class="entry-jp">土潤溽暑</span>
-                <span class="entry-date">Jul 28</span>
-              </span>
-              <p class="entry-en">Humid heat soaks the earth</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">42</span>
-                <span class="entry-jp">大雨時行</span>
-                <span class="entry-date">Aug 2</span>
-              </span>
-              <p class="entry-en">Heavy rains sometimes fall</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Taisho</span>
+                <span class="sekki-kanji">大暑</span>
+              </div>
+              <p class="sekki-en">Greater Heat</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">40</span>
+                    <span class="entry-jp">桐始結花</span>
+                    <span class="entry-date">Jul 23</span>
+                  </span>
+                  <p class="entry-en">Paulownia trees bear first seeds</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">41</span>
+                    <span class="entry-jp">土潤溽暑</span>
+                    <span class="entry-date">Jul 28</span>
+                  </span>
+                  <p class="entry-en">Humid heat soaks the earth</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">42</span>
+                    <span class="entry-jp">大雨時行</span>
+                    <span class="entry-date">Aug 2</span>
+                  </span>
+                  <p class="entry-en">Heavy rains sometimes fall</p>
+              
+                </span>
+              
+            
+          </div>
         
 
         <div class="season-ornament">
@@ -777,6 +1098,45 @@
       </div>
     
       
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
       <div class="season-col" style="--accent: var(--autumn);">
         <h2>Autumn</h2>
         <p class="season-sekki">Risshū → Sōkō</p>
@@ -784,255 +1144,333 @@
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">43</span>
-                <span class="entry-jp">涼風至</span>
-                <span class="entry-date">Aug 7</span>
-              </span>
-              <p class="entry-en">Cool winds arrive</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Risshū</span>
+                <span class="sekki-kanji">立秋</span>
+              </div>
+              <p class="sekki-en">Beginning of Autumn</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">43</span>
+                    <span class="entry-jp">涼風至</span>
+                    <span class="entry-date">Aug 7</span>
+                  </span>
+                  <p class="entry-en">Cool winds arrive</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">44</span>
+                    <span class="entry-jp">寒蝉鳴</span>
+                    <span class="entry-date">Aug 12</span>
+                  </span>
+                  <p class="entry-en">Evening cicadas sing</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">45</span>
+                    <span class="entry-jp">蒙霧升降</span>
+                    <span class="entry-date">Aug 17</span>
+                  </span>
+                  <p class="entry-en">Thick fog descends</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">44</span>
-                <span class="entry-jp">寒蝉鳴</span>
-                <span class="entry-date">Aug 12</span>
-              </span>
-              <p class="entry-en">Evening cicadas sing</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Shosho</span>
+                <span class="sekki-kanji">処暑</span>
+              </div>
+              <p class="sekki-en">Heat Subsides</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">46</span>
+                    <span class="entry-jp">綿柎開</span>
+                    <span class="entry-date">Aug 23</span>
+                  </span>
+                  <p class="entry-en">Cotton flowers open</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">47</span>
+                    <span class="entry-jp">天地始粛</span>
+                    <span class="entry-date">Aug 28</span>
+                  </span>
+                  <p class="entry-en">Heaven and earth begin to cool</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">48</span>
+                    <span class="entry-jp">禾乃登</span>
+                    <span class="entry-date">Sep 2</span>
+                  </span>
+                  <p class="entry-en">Rice ripens in the fields</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">45</span>
-                <span class="entry-jp">蒙霧升降</span>
-                <span class="entry-date">Aug 17</span>
-              </span>
-              <p class="entry-en">Thick fog descends</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Hakuro</span>
+                <span class="sekki-kanji">白露</span>
+              </div>
+              <p class="sekki-en">White Dew</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">49</span>
+                    <span class="entry-jp">草露白</span>
+                    <span class="entry-date">Sep 8</span>
+                  </span>
+                  <p class="entry-en">Dew glistens white on grass</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">50</span>
+                    <span class="entry-jp">鶺鴒鳴</span>
+                    <span class="entry-date">Sep 13</span>
+                  </span>
+                  <p class="entry-en">Wagtails start to sing</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">51</span>
+                    <span class="entry-jp">玄鳥去</span>
+                    <span class="entry-date">Sep 18</span>
+                  </span>
+                  <p class="entry-en">Swallows depart</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">46</span>
-                <span class="entry-jp">綿柎開</span>
-                <span class="entry-date">Aug 23</span>
-              </span>
-              <p class="entry-en">Cotton flowers open</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Shūbun</span>
+                <span class="sekki-kanji">秋分</span>
+              </div>
+              <p class="sekki-en">Autumn Equinox</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">52</span>
+                    <span class="entry-jp">雷乃収声</span>
+                    <span class="entry-date">Sep 23</span>
+                  </span>
+                  <p class="entry-en">Thunder falls silent</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">53</span>
+                    <span class="entry-jp">蟄虫坏戸</span>
+                    <span class="entry-date">Sep 28</span>
+                  </span>
+                  <p class="entry-en">Insects seal their dens</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">54</span>
+                    <span class="entry-jp">水始涸</span>
+                    <span class="entry-date">Oct 3</span>
+                  </span>
+                  <p class="entry-en">Water begins to dry up</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">47</span>
-                <span class="entry-jp">天地始粛</span>
-                <span class="entry-date">Aug 28</span>
-              </span>
-              <p class="entry-en">Heaven and earth begin to cool</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Kanro</span>
+                <span class="sekki-kanji">寒露</span>
+              </div>
+              <p class="sekki-en">Cold Dew</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">55</span>
+                    <span class="entry-jp">鴻雁来</span>
+                    <span class="entry-date">Oct 8</span>
+                  </span>
+                  <p class="entry-en">Wild geese arrive from the north</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">56</span>
+                    <span class="entry-jp">菊花開</span>
+                    <span class="entry-date">Oct 13</span>
+                  </span>
+                  <p class="entry-en">Chrysanthemums bloom</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">57</span>
+                    <span class="entry-jp">蟋蟀在戸</span>
+                    <span class="entry-date">Oct 18</span>
+                  </span>
+                  <p class="entry-en">Crickets chirp around the door</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">48</span>
-                <span class="entry-jp">禾乃登</span>
-                <span class="entry-date">Sep 2</span>
-              </span>
-              <p class="entry-en">Rice ripens in the fields</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">49</span>
-                <span class="entry-jp">草露白</span>
-                <span class="entry-date">Sep 8</span>
-              </span>
-              <p class="entry-en">Dew glistens white on grass</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">50</span>
-                <span class="entry-jp">鶺鴒鳴</span>
-                <span class="entry-date">Sep 13</span>
-              </span>
-              <p class="entry-en">Wagtails start to sing</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">51</span>
-                <span class="entry-jp">玄鳥去</span>
-                <span class="entry-date">Sep 18</span>
-              </span>
-              <p class="entry-en">Swallows depart</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">52</span>
-                <span class="entry-jp">雷乃収声</span>
-                <span class="entry-date">Sep 23</span>
-              </span>
-              <p class="entry-en">Thunder falls silent</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">53</span>
-                <span class="entry-jp">蟄虫坏戸</span>
-                <span class="entry-date">Sep 28</span>
-              </span>
-              <p class="entry-en">Insects seal their dens</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">54</span>
-                <span class="entry-jp">水始涸</span>
-                <span class="entry-date">Oct 3</span>
-              </span>
-              <p class="entry-en">Water begins to dry up</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">55</span>
-                <span class="entry-jp">鴻雁来</span>
-                <span class="entry-date">Oct 8</span>
-              </span>
-              <p class="entry-en">Wild geese arrive from the north</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">56</span>
-                <span class="entry-jp">菊花開</span>
-                <span class="entry-date">Oct 13</span>
-              </span>
-              <p class="entry-en">Chrysanthemums bloom</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">57</span>
-                <span class="entry-jp">蟋蟀在戸</span>
-                <span class="entry-date">Oct 18</span>
-              </span>
-              <p class="entry-en">Crickets chirp around the door</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">58</span>
-                <span class="entry-jp">霜始降</span>
-                <span class="entry-date">Oct 23</span>
-              </span>
-              <p class="entry-en">First frost falls</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">59</span>
-                <span class="entry-jp">霎時施</span>
-                <span class="entry-date">Oct 28</span>
-              </span>
-              <p class="entry-en">Light rains sometimes fall</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">60</span>
-                <span class="entry-jp">楓蔦黄</span>
-                <span class="entry-date">Nov 2</span>
-              </span>
-              <p class="entry-en">Maple and ivy turn yellow</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Sōkō</span>
+                <span class="sekki-kanji">霜降</span>
+              </div>
+              <p class="sekki-en">Frost Descent</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">58</span>
+                    <span class="entry-jp">霜始降</span>
+                    <span class="entry-date">Oct 23</span>
+                  </span>
+                  <p class="entry-en">First frost falls</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">59</span>
+                    <span class="entry-jp">霎時施</span>
+                    <span class="entry-date">Oct 28</span>
+                  </span>
+                  <p class="entry-en">Light rains sometimes fall</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">60</span>
+                    <span class="entry-jp">楓蔦黄</span>
+                    <span class="entry-date">Nov 2</span>
+                  </span>
+                  <p class="entry-en">Maple and ivy turn yellow</p>
+              
+                </span>
+              
+            
+          </div>
         
 
         <div class="season-ornament">
@@ -1041,6 +1479,45 @@
       </div>
     
       
+      
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
       <div class="season-col" style="--accent: var(--winter);">
         <h2>Winter</h2>
         <p class="season-sekki">Rittō → Daikan</p>
@@ -1048,255 +1525,333 @@
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">01</span>
-                <span class="entry-jp">芹乃栄</span>
-                <span class="entry-date">Jan 5</span>
-              </span>
-              <p class="entry-en">Water parsley flourishes</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Shōkan</span>
+                <span class="sekki-kanji">小寒</span>
+              </div>
+              <p class="sekki-en">Minor Cold</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">01</span>
+                    <span class="entry-jp">芹乃栄</span>
+                    <span class="entry-date">Jan 5</span>
+                  </span>
+                  <p class="entry-en">Water parsley flourishes</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">02</span>
+                    <span class="entry-jp">水泉動</span>
+                    <span class="entry-date">Jan 10</span>
+                  </span>
+                  <p class="entry-en">Springs thaw beneath the ice</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">03</span>
+                    <span class="entry-jp">雉始雊</span>
+                    <span class="entry-date">Jan 15</span>
+                  </span>
+                  <p class="entry-en">Pheasants start to call</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">02</span>
-                <span class="entry-jp">水泉動</span>
-                <span class="entry-date">Jan 10</span>
-              </span>
-              <p class="entry-en">Springs thaw beneath the ice</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Daikan</span>
+                <span class="sekki-kanji">大寒</span>
+              </div>
+              <p class="sekki-en">Major Cold</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">04</span>
+                    <span class="entry-jp">款冬華</span>
+                    <span class="entry-date">Jan 20</span>
+                  </span>
+                  <p class="entry-en">Butterburs bud</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">05</span>
+                    <span class="entry-jp">水沢腹堅</span>
+                    <span class="entry-date">Jan 25</span>
+                  </span>
+                  <p class="entry-en">Ice thickens on streams</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">06</span>
+                    <span class="entry-jp">鶏始乳</span>
+                    <span class="entry-date">Jan 30</span>
+                  </span>
+                  <p class="entry-en">Hens start laying eggs</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">03</span>
-                <span class="entry-jp">雉始雊</span>
-                <span class="entry-date">Jan 15</span>
-              </span>
-              <p class="entry-en">Pheasants start to call</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Rittō</span>
+                <span class="sekki-kanji">立冬</span>
+              </div>
+              <p class="sekki-en">Beginning of Winter</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">61</span>
+                    <span class="entry-jp">山茶始開</span>
+                    <span class="entry-date">Nov 7</span>
+                  </span>
+                  <p class="entry-en">Camellias start to bloom</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">62</span>
+                    <span class="entry-jp">地始凍</span>
+                    <span class="entry-date">Nov 12</span>
+                  </span>
+                  <p class="entry-en">Earth begins to freeze</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">63</span>
+                    <span class="entry-jp">金盞香</span>
+                    <span class="entry-date">Nov 17</span>
+                  </span>
+                  <p class="entry-en">Daffodils bloom and perfume the air</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">04</span>
-                <span class="entry-jp">款冬華</span>
-                <span class="entry-date">Jan 20</span>
-              </span>
-              <p class="entry-en">Butterburs bud</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Shōsetsu</span>
+                <span class="sekki-kanji">小雪</span>
+              </div>
+              <p class="sekki-en">Minor Snow</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">64</span>
+                    <span class="entry-jp">虹蔵不見</span>
+                    <span class="entry-date">Nov 22</span>
+                  </span>
+                  <p class="entry-en">Rainbows hide</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">65</span>
+                    <span class="entry-jp">朔風払葉</span>
+                    <span class="entry-date">Nov 27</span>
+                  </span>
+                  <p class="entry-en">North winds blow away the leaves</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">66</span>
+                    <span class="entry-jp">橘始黄</span>
+                    <span class="entry-date">Dec 2</span>
+                  </span>
+                  <p class="entry-en">Tachibana citrus starts to ripen</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">05</span>
-                <span class="entry-jp">水沢腹堅</span>
-                <span class="entry-date">Jan 25</span>
-              </span>
-              <p class="entry-en">Ice thickens on streams</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Taisetsu</span>
+                <span class="sekki-kanji">大雪</span>
+              </div>
+              <p class="sekki-en">Major Snow</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">67</span>
+                    <span class="entry-jp">閉塞成冬</span>
+                    <span class="entry-date">Dec 7</span>
+                  </span>
+                  <p class="entry-en">Skies close and winter sets in</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">68</span>
+                    <span class="entry-jp">熊蟄穴</span>
+                    <span class="entry-date">Dec 12</span>
+                  </span>
+                  <p class="entry-en">Bears retreat to their dens</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">69</span>
+                    <span class="entry-jp">鱖魚群</span>
+                    <span class="entry-date">Dec 17</span>
+                  </span>
+                  <p class="entry-en">Salmon gather and swim upstream</p>
+              
+                </span>
+              
+            
+          </div>
         
           
           
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">06</span>
-                <span class="entry-jp">鶏始乳</span>
-                <span class="entry-date">Jan 30</span>
-              </span>
-              <p class="entry-en">Hens start laying eggs</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">61</span>
-                <span class="entry-jp">山茶始開</span>
-                <span class="entry-date">Nov 7</span>
-              </span>
-              <p class="entry-en">Camellias start to bloom</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">62</span>
-                <span class="entry-jp">地始凍</span>
-                <span class="entry-date">Nov 12</span>
-              </span>
-              <p class="entry-en">Earth begins to freeze</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">63</span>
-                <span class="entry-jp">金盞香</span>
-                <span class="entry-date">Nov 17</span>
-              </span>
-              <p class="entry-en">Daffodils bloom and perfume the air</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">64</span>
-                <span class="entry-jp">虹蔵不見</span>
-                <span class="entry-date">Nov 22</span>
-              </span>
-              <p class="entry-en">Rainbows hide</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">65</span>
-                <span class="entry-jp">朔風払葉</span>
-                <span class="entry-date">Nov 27</span>
-              </span>
-              <p class="entry-en">North winds blow away the leaves</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">66</span>
-                <span class="entry-jp">橘始黄</span>
-                <span class="entry-date">Dec 2</span>
-              </span>
-              <p class="entry-en">Tachibana citrus starts to ripen</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">67</span>
-                <span class="entry-jp">閉塞成冬</span>
-                <span class="entry-date">Dec 7</span>
-              </span>
-              <p class="entry-en">Skies close and winter sets in</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">68</span>
-                <span class="entry-jp">熊蟄穴</span>
-                <span class="entry-date">Dec 12</span>
-              </span>
-              <p class="entry-en">Bears retreat to their dens</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">69</span>
-                <span class="entry-jp">鱖魚群</span>
-                <span class="entry-date">Dec 17</span>
-              </span>
-              <p class="entry-en">Salmon gather and swim upstream</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">70</span>
-                <span class="entry-jp">乃東生</span>
-                <span class="entry-date">Dec 22</span>
-              </span>
-              <p class="entry-en">Self-heal sprouts anew</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">71</span>
-                <span class="entry-jp">麋角解</span>
-                <span class="entry-date">Dec 27</span>
-              </span>
-              <p class="entry-en">Deer shed their antlers</p>
-          
-            </span>
-          
-        
-          
-          
-            <span class="entry pending">
-          
-              <span class="entry-row">
-                <span class="entry-num">72</span>
-                <span class="entry-jp">雪下出麦</span>
-                <span class="entry-date">Jan 1</span>
-              </span>
-              <p class="entry-en">Wheat sprouts under the snow</p>
-          
-            </span>
-          
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">Tōji</span>
+                <span class="sekki-kanji">冬至</span>
+              </div>
+              <p class="sekki-en">Winter Solstice</p>
+            </div>
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">70</span>
+                    <span class="entry-jp">乃東生</span>
+                    <span class="entry-date">Dec 22</span>
+                  </span>
+                  <p class="entry-en">Self-heal sprouts anew</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">71</span>
+                    <span class="entry-jp">麋角解</span>
+                    <span class="entry-date">Dec 27</span>
+                  </span>
+                  <p class="entry-en">Deer shed their antlers</p>
+              
+                </span>
+              
+            
+              
+              
+                <span class="entry pending">
+              
+                  <span class="entry-row">
+                    <span class="entry-num">72</span>
+                    <span class="entry-jp">雪下出麦</span>
+                    <span class="entry-date">Jan 1</span>
+                  </span>
+                  <p class="entry-en">Wheat sprouts under the snow</p>
+              
+                </span>
+              
+            
+          </div>
         
 
         <div class="season-ornament">

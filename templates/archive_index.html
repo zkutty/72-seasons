@@ -124,6 +124,31 @@
     font-size: 11px; color: var(--stone); margin: 0 0 22px; letter-spacing: 0.04em;
   }
 
+  /* ── Sekki subgroup (within season column) ── */
+  .sekki-group { margin-top: 22px; }
+  .sekki-group:first-of-type { margin-top: 0; }
+  .sekki-head {
+    padding: 10px 0 8px;
+    border-top: 2px solid var(--accent);
+    margin-bottom: 2px;
+  }
+  .sekki-head-row {
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .sekki-name {
+    font-family: var(--serif); font-size: 14px; color: var(--deep);
+    letter-spacing: 0.01em; font-weight: 500;
+  }
+  .sekki-kanji {
+    font-family: var(--mincho); font-size: 12px; color: var(--stone);
+    letter-spacing: 0.06em;
+  }
+  .sekki-en {
+    font-family: var(--serif); font-style: italic;
+    font-size: 11px; color: var(--stone); margin: 2px 0 0;
+    letter-spacing: 0.02em;
+  }
+
   .entry {
     padding: 10px 0;
     border-top: 1px solid var(--rule);
@@ -176,6 +201,39 @@
   .year-meta-cell:last-child { border-right: none; }
   .year-meta-cell span:last-child { font-variant-numeric: tabular-nums; }
 
+  /* ── About the sekki (explanatory band) ── */
+  .about-sekki {
+    padding: 36px 48px 40px;
+    background: var(--tint);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .about-sekki-inner {
+    display: grid; grid-template-columns: 240px 1fr; gap: 48px;
+    max-width: 1100px; margin: 0 auto;
+    align-items: start;
+  }
+  .about-sekki-kicker {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--stone); margin: 0 0 10px;
+  }
+  .about-sekki-title {
+    font-family: var(--serif); font-weight: 400; font-size: 28px;
+    letter-spacing: -0.01em; color: var(--deep);
+    margin: 0 0 6px; line-height: 1.1;
+  }
+  .about-sekki-title .jp {
+    font-family: var(--mincho); font-size: 16px; color: var(--stone);
+    letter-spacing: 0.1em; margin-left: 10px;
+  }
+  .about-sekki-body {
+    font-family: var(--serif); font-size: 15px; line-height: 1.75;
+    color: var(--deep); margin: 0;
+  }
+  .about-sekki-body p { margin: 0 0 12px; }
+  .about-sekki-body p:last-child { margin-bottom: 0; }
+  .about-sekki-body em { color: var(--stone); }
+
   /* ── Footer / editor's note ── */
   .note {
     padding: 36px 48px 56px;
@@ -199,6 +257,10 @@
     .season-col:nth-child(2) { border-right: none; }
     .year-meta-cell:nth-child(2) { border-right: none; }
     .masthead-title { font-size: 64px; }
+  }
+  @media (max-width: 960px) {
+    .about-sekki { padding: 32px 24px 36px; }
+    .about-sekki-inner { grid-template-columns: 1fr; gap: 20px; }
   }
   @media (max-width: 640px) {
     .topbar { padding: 10px 20px; gap: 8px; flex-wrap: wrap; }
@@ -254,33 +316,76 @@
   </p>
 </header>
 
-<!-- ── Four-column year ── -->
+<!-- ── About the sekki ── -->
+<section class="about-sekki" id="about-sekki">
+  <div class="about-sekki-inner">
+    <div>
+      <p class="about-sekki-kicker">A note on structure</p>
+      <h2 class="about-sekki-title">The sekki<span class="jp">二十四節気</span></h2>
+    </div>
+    <div class="about-sekki-body">
+      <p>
+        The Japanese year is first divided into twenty-four <em>sekki</em> (節気) —
+        roughly fortnightly "solar terms" that mark the sun's progress around the
+        ecliptic. Each bears a name drawn from weather or agriculture:
+        <em>Risshun</em> (立春, Beginning of Spring), <em>Taisho</em> (大暑, Greater
+        Heat), <em>Sōkō</em> (霜降, Frost Descent).
+      </p>
+      <p>
+        Every sekki is further split into three <em>kō</em> (候) — the five-day
+        micro-seasons this archive collects. Twenty-four sekki × three kō gives
+        the <em>shichijūni-kō</em>, seventy-two. Below, each sekki groups its
+        three kō together, so you can read the year at either scale.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Four-column year (subdivided by sekki) ── -->
 <section class="year">
   <div class="year-grid">
     {% for sname in season_order %}
       {% set season_entries = all_seasons | selectattr('major_season', 'equalto', sname) | list %}
+      {# Collect sekki in order of first appearance within this major season #}
+      {% set sekki_names = [] %}
+      {% for e in season_entries %}
+        {% if e.sekki not in sekki_names %}{{ sekki_names.append(e.sekki) or '' }}{% endif %}
+      {% endfor %}
       <div class="season-col" style="--accent: {{ season_accent[sname] }};">
         <h2>{{ sname | capitalize }}</h2>
         <p class="season-sekki">{{ season_sekki_range[sname] }}</p>
 
-        {% for e in season_entries %}
-          {% set is_pub = e.id in published_ids %}
-          {% if is_pub %}
-            <a class="entry" href="{{ e.url }}">
-          {% else %}
-            <span class="entry pending">
-          {% endif %}
-              <span class="entry-row">
-                <span class="entry-num">{{ '%02d' | format(e.id) }}</span>
-                <span class="entry-jp">{{ e.name_jp }}</span>
-                <span class="entry-date">{{ months_short[e.start_month] }} {{ e.start_day }}</span>
-              </span>
-              <p class="entry-en">{{ e.name_en }}</p>
-          {% if is_pub %}
-            </a>
-          {% else %}
-            </span>
-          {% endif %}
+        {% for sekki_name in sekki_names %}
+          {% set sekki_entries = season_entries | selectattr('sekki', 'equalto', sekki_name) | list %}
+          {% set first = sekki_entries[0] %}
+          <div class="sekki-group">
+            <div class="sekki-head">
+              <div class="sekki-head-row">
+                <span class="sekki-name">{{ first.sekki }}</span>
+                <span class="sekki-kanji">{{ first.sekki_jp }}</span>
+              </div>
+              <p class="sekki-en">{{ first.sekki_en }}</p>
+            </div>
+            {% for e in sekki_entries %}
+              {% set is_pub = e.id in published_ids %}
+              {% if is_pub %}
+                <a class="entry" href="{{ e.url }}">
+              {% else %}
+                <span class="entry pending">
+              {% endif %}
+                  <span class="entry-row">
+                    <span class="entry-num">{{ '%02d' | format(e.id) }}</span>
+                    <span class="entry-jp">{{ e.name_jp }}</span>
+                    <span class="entry-date">{{ months_short[e.start_month] }} {{ e.start_day }}</span>
+                  </span>
+                  <p class="entry-en">{{ e.name_en }}</p>
+              {% if is_pub %}
+                </a>
+              {% else %}
+                </span>
+              {% endif %}
+            {% endfor %}
+          </div>
         {% endfor %}
 
         <div class="season-ornament">
