@@ -78,7 +78,7 @@
 
   /* ── HERO ── */
   .hero {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px;
     padding: 72px 56px 64px; align-items: center;
     border-bottom: 1px solid var(--rule);
   }
@@ -101,7 +101,9 @@
                     font-style: italic; }
 
   /* ── Wheel ── */
-  .wheel-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .wheel-col { display: flex; flex-direction: column; align-items: center; gap: 12px;
+               width: 100%; min-width: 0; }
+  .wheel-svg { display: block; width: 100%; max-width: 440px; height: auto; }
   .wheel-kicker { font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
                   color: var(--accent); margin: 0 0 8px; }
   .legend { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
@@ -128,14 +130,23 @@
   .spread-col p + p { margin-top: 12px; }
   .spread-divider { background: var(--rule); width: 1px; }
 
-  /* ── Ticker (Ink band) ── */
-  .ticker { background: var(--ink); padding: 20px 56px; }
-  .ticker-row { display: flex; align-items: center; gap: 32px; }
-  .ticker-label { font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-                  color: var(--accent); flex-shrink: 0; }
-  .ticker-text { font-family: var(--mono); font-size: 13px; color: var(--washi);
-                 letter-spacing: 0.05em; white-space: nowrap; overflow: hidden;
-                 text-overflow: ellipsis; }
+  /* ── At Market (in-season 3-column) ── */
+  .market { background: var(--shell); padding: 56px 56px;
+            border-bottom: 1px solid var(--rule); }
+  .market-label { font-family: var(--sans); font-size: 11px; font-weight: 500;
+                  letter-spacing: 0.18em; text-transform: uppercase;
+                  color: var(--stone); text-align: center; margin: 0 0 28px; }
+  .market-grid { display: grid; grid-template-columns: repeat(3, 1fr);
+                 max-width: 820px; margin: 0 auto; }
+  .market-col { padding: 0 24px; border-right: 1px solid var(--rule);
+                text-align: center; }
+  .market-col:last-child { border-right: none; }
+  .market-col-head { font-family: var(--sans); font-size: 11px; font-weight: 500;
+                     letter-spacing: 0.14em; text-transform: uppercase;
+                     color: var(--accent); margin: 0 0 14px;
+                     padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  .market-item { font-family: var(--serif); font-size: 14px; color: var(--deep);
+                 margin: 0 0 6px; line-height: 1.5; }
 
   /* ── Haiku ── */
   .haiku-band { padding: 88px 56px; text-align: center;
@@ -205,7 +216,9 @@
   @media (max-width: 860px) {
     .topbar { padding: 14px 24px; flex-wrap: wrap; gap: 12px; }
     .topbar-right { gap: 18px; }
-    .hero { grid-template-columns: 1fr; padding: 48px 24px; gap: 40px; }
+    .hero { grid-template-columns: minmax(0, 1fr); padding: 40px 24px 48px; gap: 32px; }
+    .wheel-col { max-width: 320px; margin: 0 auto; }
+    .wheel-svg { max-width: 320px; }
     .display-en { font-size: 52px; }
     .opening-band { padding: 48px 24px; }
     .opening-inner { grid-template-columns: 1fr; gap: 0; }
@@ -214,9 +227,13 @@
     .spread { grid-template-columns: 1fr; padding: 32px 24px; gap: 32px; }
     .spread-col { padding: 0; }
     .spread-divider { height: 1px; width: 100%; }
-    .ticker { padding: 16px 24px; }
-    .ticker-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .ticker-text { white-space: normal; }
+    .market { padding: 40px 24px; }
+    .market-grid { grid-template-columns: 1fr; max-width: 320px; }
+    .market-col { padding: 18px 0; border-right: none;
+                  border-bottom: 1px solid var(--rule); }
+    .market-col:last-child { border-bottom: none; padding-bottom: 0; }
+    .market-col:first-child { padding-top: 0; }
+    .market-col-head { padding-bottom: 10px; margin-bottom: 12px; }
     .haiku-band { padding: 56px 24px; }
     .haiku-jp { font-size: 26px; }
     .haiku-en { font-size: 18px; }
@@ -279,7 +296,7 @@
       
       
 
-      <svg width="440" height="440" viewBox="0 0 440 440">
+      <svg class="wheel-svg" viewBox="0 0 440 440" preserveAspectRatio="xMidYMid meet">
         <circle cx="220.0" cy="220.0" r="210" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <circle cx="220.0" cy="220.0" r="138" fill="none" stroke="var(--rule)" stroke-width="1"/>
 
@@ -955,11 +972,30 @@
     </div>
   </section>
 
-  <!-- ── At-market ticker (Ink band) ── -->
-  <section class="ticker">
-    <div class="ticker-row">
-      <span class="ticker-label">AT MARKET</span>
-      <span class="ticker-text">ichigo (strawberries) &nbsp; · &nbsp; natsu mikan (summer citrus) &nbsp; · &nbsp; biwa (loquat, early) &nbsp; · &nbsp; amanatsu (sweet citrus) &nbsp; · &nbsp; takenoko (bamboo shoots) &nbsp; · &nbsp; sansai (mountain vegetables) &nbsp; · &nbsp; wakame (young seaweed) &nbsp; · &nbsp; fuki (butterbur) &nbsp; · &nbsp; sayori (halfbeak) &nbsp; · &nbsp; shirauo (icefish) &nbsp; · &nbsp; sawara (spanish mackerel)</span>
+  <!-- ── At Market (in-season 3-column) ── -->
+  <section class="market">
+    <p class="market-label">At Market</p>
+    <div class="market-grid">
+      <div class="market-col">
+        <p class="market-col-head">Fruits</p>
+        <p class="market-item">Ichigo (strawberries)</p>
+        <p class="market-item">Natsu mikan (summer citrus)</p>
+        <p class="market-item">Biwa (loquat, early)</p>
+        <p class="market-item">Amanatsu (sweet citrus)</p>
+      </div>
+      <div class="market-col">
+        <p class="market-col-head">Vegetables</p>
+        <p class="market-item">Takenoko (bamboo shoots)</p>
+        <p class="market-item">Sansai (mountain vegetables)</p>
+        <p class="market-item">Wakame (young seaweed)</p>
+        <p class="market-item">Fuki (butterbur)</p>
+      </div>
+      <div class="market-col">
+        <p class="market-col-head">Fish</p>
+        <p class="market-item">Sayori (halfbeak)</p>
+        <p class="market-item">Shirauo (icefish)</p>
+        <p class="market-item">Sawara (Spanish mackerel)</p>
+      </div>
     </div>
   </section>
 
