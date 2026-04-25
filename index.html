@@ -1036,14 +1036,14 @@
       
         <p>
           
-            <strong style="color: var(--deep);">Takenoko gohan.</strong>
+            <strong style="color: var(--deep);"><button class="lookup" type="button" data-kind="dish" data-key="takenoko-gohan">Takenoko gohan</button>.</strong>
           
           Rice cooked with tender bamboo shoots and dashi, celebrating the last of the spring harvest before the shoots grow woody.
         </p>
       
         <p>
           
-            <strong style="color: var(--deep);">Shirauo no odorigui.</strong>
+            <strong style="color: var(--deep);"><button class="lookup" type="button" data-kind="dish" data-key="shirauo-no-odorigui">Shirauo no odorigui</button>.</strong>
           
           Tiny translucent icefish served alive and wriggling, a fleeting delicacy as their spring run comes to its end.
         </p>
@@ -1065,19 +1065,19 @@
           <p class="market-col-head">Fruits</p>
           
             
-              <p class="market-item">Natsu mikan (summer citrus)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="natsu-mikan-summer-citrus">Natsu mikan (summer citrus)</button></p>
             
           
             
-              <p class="market-item">Strawberries</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="strawberries">Strawberries</button></p>
             
           
             
-              <p class="market-item">Biwa (loquat), early</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="biwa-loquat-early">Biwa (loquat), early</button></p>
             
           
             
-              <p class="market-item">Ume (green plums), just appearing</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="ume-green-plums-just-appearing">Ume (green plums), just appearing</button></p>
             
           
         </div>
@@ -1086,19 +1086,19 @@
           <p class="market-col-head">Vegetables</p>
           
             
-              <p class="market-item">Takenoko (bamboo shoots)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="takenoko-bamboo-shoots">Takenoko (bamboo shoots)</button></p>
             
           
             
-              <p class="market-item">Fuki (butterbur)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="fuki-butterbur">Fuki (butterbur)</button></p>
             
           
             
-              <p class="market-item">Sanshō (young pepper leaves)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="sansh-young-pepper-leaves">Sanshō (young pepper leaves)</button></p>
             
           
             
-              <p class="market-item">Soramame (fava beans)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="soramame-fava-beans">Soramame (fava beans)</button></p>
             
           
         </div>
@@ -1107,15 +1107,15 @@
           <p class="market-col-head">Fish</p>
           
             
-              <p class="market-item">Sawara (Spanish mackerel)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="sawara-spanish-mackerel">Sawara (Spanish mackerel)</button></p>
             
           
             
-              <p class="market-item">Shirauo (icefish)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="shirauo-icefish">Shirauo (icefish)</button></p>
             
           
             
-              <p class="market-item">Hotaru ika (firefly squid)</p>
+              <p class="market-item"><button class="lookup" type="button" data-kind="ingredient" data-key="hotaru-ika-firefly-squid">Hotaru ika (firefly squid)</button></p>
             
           
         </div>
@@ -1234,6 +1234,63 @@
   });
 </script>
 
+
+<dialog class="lookup-dialog" id="lookup-dialog" aria-labelledby="lk-title">
+  <button class="lk-close" type="button" value="close" aria-label="Close">×</button>
+  <p class="lk-kicker" id="lk-kicker"></p>
+  <h2 class="lk-title" id="lk-title"></h2>
+  <p class="lk-jp" id="lk-jp"></p>
+  <p class="lk-romaji" id="lk-romaji"></p>
+  <p class="lk-peak" id="lk-peak"></p>
+  <p class="lk-note" id="lk-note"></p>
+</dialog>
+
+<script id="lookup-ingredients" type="application/json">{"biwa-loquat-early": {"category": "fruit", "name_en": "Loquat", "name_jp": "\u6787\u6777", "name_romaji": "biwa", "note": "The earliest loquats arrive with skins still carrying a faint blush of green beneath the apricot gold, their flesh bright with a citrus edge that will soften as the season deepens. In temple gardens and old farmhouse yards, the broad-leafed trees heavy with fruit signal the turn from spring\u0027s cool mornings toward the humid weight of tsuyu.", "peak": "Late spring into early summer, when the first warm rains have passed", "source": "Biwa (loquat, early)"}, "fuki-butterbur": {"category": "vegetable", "name_en": "Butterbur", "name_jp": "\u8557", "name_romaji": "fuki", "note": "The pale green stems have a faint bitterness and celery-like crunch, requiring careful blanching and peeling before they soften into simmered dishes. After the tender flower buds of early spring have passed, these stalks arrive as the season\u0027s quieter second gift \u2014 sliced into nimono or pickled as a side dish that bridges spring\u0027s end and summer\u0027s beginning.", "peak": "Late spring, when the stalks grow tall and hollow in damp mountain shade", "source": "Fuki (butterbur)"}, "hotaru-ika-firefly-squid": {"category": "fish", "name_en": "Firefly squid", "name_jp": "\u86cd\u70cf\u8cca", "name_romaji": "hotaru ika", "note": "Tiny squid, no longer than a thumb, whose photophores glow an ethereal blue when disturbed \u2014 eaten whole, boiled until just firm, the innards rich with the sea\u0027s mineral sweetness. Their arrival marks the true pivot from winter to spring along the Japan Sea coast, when fishing boats set out before dawn to harvest the luminous shoals.", "peak": "Late March through May, when they rise from the deep to spawn in Toyama Bay", "source": "Hotaru ika (firefly squid)"}, "natsu-mikan-summer-citrus": {"category": "fruit", "name_en": "Summer orange", "name_jp": "\u590f\u871c\u67d1", "name_romaji": "natsu mikan", "note": "A thick-skinned citrus whose flesh holds both tartness and a faint honeyed depth, prized for the way its segments pull apart with a satisfying snap. Harvested in winter but left to mellow until the heat arrives, it marks the patient transition from the cold citrus months into summer\u0027s sweeter abundance.", "peak": "Late spring through early summer, when the skin finally yields its bitterness to warmth", "source": "Natsu mikan (summer citrus)"}, "sansh-young-pepper-leaves": {"category": "vegetable", "name_en": "Japanese pepper leaf", "name_jp": "\u5c71\u6912", "name_romaji": "sansh\u014d", "note": "These young leaves of the prickly ash tree release a bright, numbing citrus fragrance when pressed between fingertips \u2014 a spark that cuts through the richness of simmered bamboo shoot or silken tofu. In the old calendar, their appearance marks the transition from cherry blossom season to the verdant abundance of early summer, a green exclamation point on the spring table.", "peak": "Late spring, when kinome unfurl their first tender leaves", "source": "Sansh\u014d (young pepper leaves)"}, "sawara-spanish-mackerel": {"category": "fish", "name_en": "Spanish mackerel", "name_jp": "\u9c06", "name_romaji": "sawara", "note": "A long, blade-shaped fish whose flesh turns from translucent pink to pearly white when seared, releasing a clean sweetness with none of the heaviness of fattier mackerels. The kanji itself contains spring\u2014\u9b5a\u504f\u306b\u6625\u2014marking it as the fish that announces the season\u0027s arrival in western Japan, where it is salt-cured overnight then grilled until the skin just blisters.", "peak": "Late spring through early summer, when waters warm along the Seto Inland Sea", "source": "Sawara (Spanish mackerel)"}, "shirauo-icefish": {"category": "fish", "name_en": "Icefish", "name_jp": "\u767d\u9b5a", "name_romaji": "shirauo", "note": "These slender, translucent fish arrive with the first hints of spring, their glassy bodies barely two inches long, prized for a delicate sweetness that vanishes within hours of the catch. Eaten alive as odorigui or in tempura so light it dissolves on the tongue, shirauo marks the moment when winter\u0027s grip finally loosens on Japan\u0027s estuaries.", "peak": "Early spring, when rivers begin to warm beneath lingering cold", "source": "Shirauo (icefish)"}, "soramame-fava-beans": {"category": "vegetable", "name_en": "Fava bean", "name_jp": "\u7a7a\u8c46", "name_romaji": "soramame", "note": "Named for the way their pods reach toward the sky, these plump beans have a fleeting sweetness when just-picked\u2014their skins still tender enough to eat, the flesh creamy and faintly grassy. Grilled in their fuzzy pods over charcoal or simmered simply with salt, they arrive alongside the first beer gardens and mark the brief window before summer\u0027s humidity settles in.", "peak": "Late spring, as the pods swell skyward in the warming days before rainy season", "source": "Soramame (fava beans)"}, "strawberries": {"category": "fruit", "name_en": "Strawberry", "name_jp": "\u82fa", "name_romaji": "ichigo", "note": "Japanese strawberries are bred for sweetness and fragrance over tartness, their flesh yielding and almost creamy, with varietals like Amaou prized for an intensity that floods the mouth. They mark the bright threshold before summer fruits arrive, appearing in shop displays and wagashi as winter releases its grip.", "peak": "Late spring, as the fields warm between the grain rains and the first summer heat", "source": "Strawberries"}, "takenoko-bamboo-shoots": {"category": "vegetable", "name_en": "Bamboo shoot", "name_jp": "\u7b4d", "name_romaji": "takenoko", "note": "Freshly dug shoots, still cool from the earth, have a faint sweetness and yielding crunch that vanishes within hours of harvest \u2014 hence the character \u7b4d, bamboo within ten days. Their arrival marks the moment when spring\u0027s momentum becomes undeniable, celebrated in wakatake-ni simmered with young wakame, two brief seasons meeting in one bowl.", "peak": "Late spring, from the first thunder through the grain rains", "source": "Takenoko (bamboo shoots)"}, "ume-green-plums-just-appearing": {"category": "fruit", "name_en": "Green plum", "name_jp": "\u9752\u6885", "name_romaji": "aoume", "note": "Hard, verdant, and intensely sour, these unripe plums arrive with a fragrance like green almonds and fresh grass \u2014 too astringent to eat raw, but perfect for steeping into umeshu or packing into salt for umeboshi. Their appearance marks the start of tsuyu, the plum rains, when Japanese kitchens turn to the slow, meditative work of preservation that will flavor the year ahead.", "peak": "Early summer, as the rainy season announces itself", "source": "Ume (green plums), just appearing"}}</script>
+<script id="lookup-dishes" type="application/json">{"shirauo-no-odorigui": {"name_en": "Dancing icefish", "name_jp": "\u767d\u9b5a\u306e\u8e0a\u308a\u98df\u3044", "name_romaji": "shirauo no odorigui", "note": "Live translucent icefish, no longer than a finger joint, are swallowed whole while still wriggling \u2014 sometimes dipped briefly in ponzu or a raw quail egg. The dish belongs to the fleeting weeks when shirauo run upstream to spawn, their glass-clear bodies visible against riverbeds still edged with snow.", "season": "Late winter to early spring, when rivers begin to warm", "source": "Shirauo no odorigui"}, "takenoko-gohan": {"name_en": "Bamboo shoot rice", "name_jp": "\u7b4d\u3054\u98ef", "name_romaji": "takenoko gohan", "note": "Short-grain rice simmered with freshly dug bamboo shoots, seasoned simply with dashi, soy, and sake to let the shoots\u0027 faint sweetness come through. The dish marks the narrow window in April when takenoko are tender enough to slice with a wooden spoon \u2014 left even a day too long in the earth, they turn fibrous and bitter.", "season": "Mid-spring, when young bamboo pushes through warming soil", "source": "Takenoko gohan"}}</script>
+<script>
+(function () {
+  var dialog = document.getElementById('lookup-dialog');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+
+  var ingredients = JSON.parse(document.getElementById('lookup-ingredients').textContent || '{}');
+  var dishes      = JSON.parse(document.getElementById('lookup-dishes').textContent || '{}');
+
+  var kicker = document.getElementById('lk-kicker');
+  var title  = document.getElementById('lk-title');
+  var jp     = document.getElementById('lk-jp');
+  var romaji = document.getElementById('lk-romaji');
+  var peak   = document.getElementById('lk-peak');
+  var note   = document.getElementById('lk-note');
+
+  function open(kind, key) {
+    var store = kind === 'dish' ? dishes : ingredients;
+    var entry = store[key];
+    if (!entry) return;
+
+    kicker.textContent = kind === 'dish' ? 'At the table' : (entry.category || 'In season');
+    title.textContent  = entry.name_en || entry.source || '';
+    jp.textContent     = entry.name_jp || '';
+    romaji.textContent = entry.name_romaji || '';
+    peak.textContent   = kind === 'dish' ? (entry.season || '') : (entry.peak || '');
+    note.textContent   = entry.note || '';
+
+    dialog.showModal();
+  }
+
+  document.querySelectorAll('button.lookup').forEach(function (btn) {
+    btn.addEventListener('click', function () { open(btn.dataset.kind, btn.dataset.key); });
+  });
+
+  dialog.querySelector('.lk-close').addEventListener('click', function () { dialog.close(); });
+
+  dialog.addEventListener('click', function (e) {
+    var r = dialog.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+      dialog.close();
+    }
+  });
+})();
+</script>
 
 
 </body>
