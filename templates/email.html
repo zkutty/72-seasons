@@ -116,13 +116,20 @@
             </p>
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
+                {% macro produce_item(item) -%}
+                  {%- if item.key -%}
+                    <a href="{{ archive_url }}#ingredient={{ item.key }}" style="color:#2c2c2a;text-decoration:none;border-bottom:1px dotted {{ accent_color }};">{{ item.raw }}</a>
+                  {%- else -%}
+                    {{ item.raw }}
+                  {%- endif -%}
+                {%- endmacro %}
                 <!-- Fruits -->
                 <td width="33%" valign="top" style="padding-right:14px;border-right:1px solid #d8d5ce;">
                   <p style="margin:0 0 12px 0;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:{{ accent_color }};text-align:center;padding-bottom:8px;border-bottom:1px solid #d8d5ce;">
                     Fruits
                   </p>
-                  {% for item in content.seasonal_produce.fruits %}
-                  <p style="margin:0 0 6px 0;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;text-align:center;line-height:1.5;">{{ item }}</p>
+                  {% for item in produce.fruits %}
+                  <p style="margin:0 0 6px 0;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;text-align:center;line-height:1.5;">{{ produce_item(item) }}</p>
                   {% endfor %}
                 </td>
                 <!-- Vegetables -->
@@ -130,8 +137,8 @@
                   <p style="margin:0 0 12px 0;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:{{ accent_color }};text-align:center;padding-bottom:8px;border-bottom:1px solid #d8d5ce;">
                     Vegetables
                   </p>
-                  {% for item in content.seasonal_produce.vegetables %}
-                  <p style="margin:0 0 6px 0;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;text-align:center;line-height:1.5;">{{ item }}</p>
+                  {% for item in produce.vegetables %}
+                  <p style="margin:0 0 6px 0;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;text-align:center;line-height:1.5;">{{ produce_item(item) }}</p>
                   {% endfor %}
                 </td>
                 <!-- Fish -->
@@ -139,8 +146,8 @@
                   <p style="margin:0 0 12px 0;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:{{ accent_color }};text-align:center;padding-bottom:8px;border-bottom:1px solid #d8d5ce;">
                     Fish
                   </p>
-                  {% for item in content.seasonal_produce.fish %}
-                  <p style="margin:0 0 6px 0;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;text-align:center;line-height:1.5;">{{ item }}</p>
+                  {% for item in produce.fish %}
+                  <p style="margin:0 0 6px 0;font-family:system-ui,-apple-system,sans-serif;font-size:13px;color:#2c2c2a;text-align:center;line-height:1.5;">{{ produce_item(item) }}</p>
                   {% endfor %}
                 </td>
               </tr>
@@ -163,11 +170,17 @@
             <p style="margin:0 0 16px 0;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#888780;">
               At the Table
             </p>
-            {% for dish in content.seasonal_dishes %}
+            {% for dish in dishes %}
             <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
               <tr>
                 <td style="padding:14px 16px;border-left:3px solid {{ accent_color }};background-color:#eeece7;">
-                  <p style="margin:0 0 5px 0;font-family:system-ui,-apple-system,sans-serif;font-size:14px;font-weight:600;color:#2c2c2a;">{{ dish.name }}</p>
+                  <p style="margin:0 0 5px 0;font-family:system-ui,-apple-system,sans-serif;font-size:14px;font-weight:600;color:#2c2c2a;">
+                    {% if dish.key %}
+                      <a href="{{ archive_url }}#dish={{ dish.key }}" style="color:#2c2c2a;text-decoration:none;border-bottom:1px dotted {{ accent_color }};">{{ dish.name }}</a>
+                    {% else %}
+                      {{ dish.name }}
+                    {% endif %}
+                  </p>
                   <p style="margin:0;font-family:system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.7;color:#888780;">{{ dish.description }}</p>
                 </td>
               </tr>

@@ -16,12 +16,53 @@ from pathlib import Path
 import resend
 from jinja2 import Environment, FileSystemLoader
 
+from ingredient_generator import slugify
+
 ACCENT_COLORS = {
     "Spring": "#6b8f71",
     "Summer": "#c9734a",
     "Autumn": "#d4a853",
     "Winter": "#4a7fa5",
 }
+
+
+def _load_lookup_keys() -> tuple[set[str], set[str]]:
+    """Return the slug sets we have lookup entries for.
+
+    The email only needs to know whether a given item has a popup on the
+    archive page; the popup content itself lives there.
+    """
+    data_dir = Path(__file__).parent / "data"
+
+    def _keys(name: str) -> set[str]:
+        path = data_dir / name
+        if not path.exists():
+            return set()
+        return set(json.loads(path.read_text(encoding="utf-8")).keys())
+
+    return _keys("ingredients.json"), _keys("dishes.json")
+
+
+def _keyed_produce(content: dict, ingredient_keys: set[str]) -> dict:
+    out: dict[str, list] = {}
+    for category, items in content.get("seasonal_produce", {}).items():
+        out[category] = [
+            {"raw": raw, "key": slugify(raw) if slugify(raw) in ingredient_keys else None}
+            for raw in items
+        ]
+    return out
+
+
+def _keyed_dishes(content: dict, dish_keys: set[str]) -> list:
+    out = []
+    for d in content.get("seasonal_dishes", []):
+        key = slugify(d.get("name", ""))
+        out.append({
+            "name": d.get("name", ""),
+            "description": d.get("description", ""),
+            "key": key if key in dish_keys else None,
+        })
+    return out
 
 
 def _get_subscribers() -> list[str]:
@@ -68,6 +109,10 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
     accent_color = ACCENT_COLORS.get(season["major_season"].capitalize(), "#888780")
     archive_url = f"https://ko-72.com/archive/{season['id']:02d}-{season['slug']}.html"
 
+    ingredient_keys, dish_keys = _load_lookup_keys()
+    produce = _keyed_produce(content, ingredient_keys)
+    dishes = _keyed_dishes(content, dish_keys)
+
     date_range = f"{_fmt(season['start_month'], season['start_day'])} – {_fmt(season['end_month'], season['end_day'])}"
     html = template.render(
         season=season,
@@ -78,6 +123,8 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
         unsubscribe_url="https://ko-72.com/unsubscribe.html",
         date_range=date_range,
         duration_days=season["duration_days"],
+        produce=produce,
+        dishes=dishes,
     )
 
     sent = 0
