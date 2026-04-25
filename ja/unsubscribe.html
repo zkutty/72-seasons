@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kō — Unsubscribe</title>
+<title>Kō — 配信停止</title>
 <link rel="alternate" hreflang="en" href="https://ko-72.com/unsubscribe.html">
 <link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/unsubscribe.html">
 <link rel="alternate" hreflang="x-default" href="https://ko-72.com/unsubscribe.html">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: #e8e5de; font-family: system-ui, -apple-system, sans-serif; color: #2c2c2a; }
+  html, body { margin: 0; padding: 0; background: #e8e5de; font-family: 'Hiragino Sans','Yu Gothic',system-ui, -apple-system, sans-serif; color: #2c2c2a; }
   .card { max-width: 480px; margin: 80px auto; background: #f5f3ee; padding: 48px 40px; text-align: center; }
   .logo { font-family: Georgia, serif; font-size: 22px; color: #1a1a18; margin: 0 0 32px 0; }
   .logo .kanji { font-family: system-ui, sans-serif; font-size: 14px; color: #888780; margin-left: 8px; }
-  h1 { font-family: Georgia, serif; font-size: 20px; font-weight: 400; margin: 0 0 10px 0; }
+  h1 { font-family: 'Hiragino Mincho ProN','Yu Mincho',Georgia, serif; font-size: 20px; font-weight: 400; margin: 0 0 10px 0; }
   p { font-size: 14px; color: #888780; line-height: 1.7; margin: 0 0 28px 0; }
   input[type="email"] {
     width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #d8d5ce;
@@ -36,17 +36,17 @@
 <body>
 <div class="card">
   <p class="logo">Kō<span class="kanji">候</span></p>
-  <h1>Unsubscribe</h1>
-  <p>Enter your email address and we&#39;ll remove you from the list.</p>
+  <h1>配信停止</h1>
+  <p>メールアドレスをご入力ください。配信リストから削除いたします。</p>
   <form id="form">
     <input type="email" id="email" placeholder="your@email.com" required>
-    <button type="submit">Unsubscribe</button>
+    <button type="submit">配信停止</button>
   </form>
-  <p class="msg success" id="success">Done — you&#39;ve been removed from the list.</p>
-  <p class="msg error" id="error">Something went wrong. Please try again.</p>
+  <p class="msg success" id="success">完了しました — リストから削除されました。</p>
+  <p class="msg error" id="error">問題が発生しました。もう一度お試しください。</p>
   <br>
-  <a href="https://ko-72.com/">← Back to ko-72.com</a>
-  <a class="lang-switch" href="https://ko-72.com/ja/unsubscribe.html" hreflang="ja" lang="ja">日本語</a>
+  <a href="https://ko-72.com/ja/">← ko-72.com へ戻る</a>
+  <a class="lang-switch" href="https://ko-72.com/unsubscribe.html" hreflang="en" lang="en">English</a>
 </div>
 
 <script>
@@ -73,7 +73,7 @@
       }
     } catch {
       btn.disabled = false;
-      btn.textContent = 'Unsubscribe';
+      btn.textContent = '配信停止';
       document.getElementById('error').style.display = 'block';
     }
   });

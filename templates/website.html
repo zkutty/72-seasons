@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ t.html_lang }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kō — {{ season.name_en }}</title>
-<meta name="description" content="Japan's 72 micro-seasons, one at a time. A letter about {{ season.name_en }} ({{ season.name_romaji }}), {{ date_range }}.">
+<meta name="description" content="{{ t.site_meta_description }} {{ season.name_en }} ({{ season.name_romaji }}), {{ date_range }}.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="canonical" href="https://ko-72.com/">
+<link rel="canonical" href="{{ t.site_url }}/">
+<link rel="alternate" hreflang="en" href="https://ko-72.com/">
+<link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/">
+<link rel="alternate" hreflang="x-default" href="https://ko-72.com/">
 <meta name="robots" content="index, follow">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kō">
+<meta property="og:locale" content="{{ 'ja_JP' if lang == 'ja' else 'en_US' }}">
 <meta property="og:title" content="Kō — {{ season.name_en }}">
-<meta property="og:description" content="Japan's 72 micro-seasons, one at a time. Now: {{ season.name_en }} ({{ season.name_romaji }}), {{ date_range }}.">
-<meta property="og:url" content="https://ko-72.com/">
+<meta property="og:description" content="{{ t.site_meta_description }} {{ season.name_en }} ({{ season.name_romaji }}), {{ date_range }}.">
+<meta property="og:url" content="{{ t.site_url }}/">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kō — {{ season.name_en }}">
-<meta name="twitter:description" content="Japan's 72 micro-seasons, one at a time. Now: {{ season.name_en }} — {{ date_range }}.">
+<meta name="twitter:description" content="{{ t.site_meta_description }} {{ season.name_en }} — {{ date_range }}.">
 <!-- JSON-LD -->
 <script type="application/ld+json">
 {
@@ -25,12 +29,13 @@
   "@type": "WebSite",
   "name": "Kō",
   "alternateName": "Ko-72",
-  "url": "https://ko-72.com",
-  "description": "Japan's 72 micro-seasons, one at a time.",
+  "url": "{{ t.site_url }}",
+  "description": "{{ t.site_meta_description }}",
+  "inLanguage": "{{ t.html_lang }}",
   "publisher": { "@type": "Organization", "name": "Kō", "url": "https://ko-72.com" },
   "potentialAction": {
     "@type": "SubscribeAction",
-    "target": "https://ko-72.com/#subscribe"
+    "target": "{{ t.site_url }}/#subscribe"
   }
 }
 </script>
@@ -75,6 +80,11 @@
     color: var(--deep); text-decoration: underline;
     text-decoration-color: var(--accent); text-underline-offset: 4px;
   }
+  .topbar-right .lang-switch {
+    text-transform: none; letter-spacing: 0; font-size: 12px;
+    color: var(--stone); border-left: 1px solid var(--rule); padding-left: 16px;
+  }
+  .topbar-right .lang-switch:hover { color: var(--deep); }
 
   /* ── HERO ── */
   .hero {
@@ -237,6 +247,10 @@
              font-family: var(--sans); font-weight: 500; cursor: pointer;
              margin-top: 14px; align-self: flex-start; }
   .sub-fine { font-size: 11px; color: #555552; margin: 12px 0 0; letter-spacing: 0.04em; }
+  .sub-lang { display: flex; gap: 24px; margin-top: 4px; }
+  .sub-lang-opt { display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+                  font-family: var(--serif); font-size: 16px; color: var(--washi); }
+  .sub-lang-opt input { accent-color: var(--accent); }
 
   /* ── Recent index ── */
   .recent { padding: 56px 56px 64px; }
@@ -309,43 +323,45 @@
 
 <div class="page">
 
-  {% set months_short = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] %}
+  {% set months_short = t.months_short %}
 
   <!-- ── Top bar ── -->
   <nav class="topbar">
     <div class="topbar-left">
       <span class="topbar-brand">Kō</span>
       <span class="topbar-kanji">候</span>
-      <span class="topbar-tag">— Japan's 72 micro-seasons</span>
+      <span class="topbar-tag">{{ t.tagline }}</span>
     </div>
     <div class="topbar-right">
-      <a href="#letter">Letter</a>
-      <a href="/archive/">Index</a>
-      <a href="#about">Colophon</a>
-      <a href="#subscribe" class="cta">Subscribe</a>
+      <a href="#letter">{{ t.topbar_letter }}</a>
+      <a href="{{ t.site_url }}/archive/">{{ t.topbar_index }}</a>
+      <a href="#about">{{ t.topbar_colophon }}</a>
+      <a href="#subscribe" class="cta">{{ t.topbar_subscribe }}</a>
+      <a href="{{ t.alt_site_url }}/" class="lang-switch" hreflang="{{ 'en' if lang == 'ja' else 'ja' }}" lang="{{ 'en' if lang == 'ja' else 'ja' }}">{{ t.alt_lang_label }}</a>
     </div>
   </nav>
 
   <!-- ── HERO: display type left, wheel right ── -->
   <section class="hero">
     <div class="hero-left">
+      {% set major_season_label = t['index_seasons_' + season.major_season] %}
       <div class="hero-meta">
-        <div class="meta-row"><span class="meta-key">NO.</span><span class="meta-val">{{ '%02d' | format(season.id) }} / 72</span></div>
-        <div class="meta-row"><span class="meta-key">SEKKI</span><span class="meta-val">{{ season.sekki }} · {{ season.sekki_en }}</span></div>
-        <div class="meta-row"><span class="meta-key">DATES</span><span class="meta-val">{{ date_range }}</span></div>
-        <div class="meta-row"><span class="meta-key">SEASON</span><span class="meta-val meta-val--accent">{{ season.major_season | upper }}</span></div>
+        <div class="meta-row"><span class="meta-key">{{ t.meta_no }}</span><span class="meta-val">{{ '%02d' | format(season.id) }} / 72</span></div>
+        <div class="meta-row"><span class="meta-key">{{ t.meta_sekki }}</span><span class="meta-val">{{ season.sekki }} · {{ season.sekki_en }}</span></div>
+        <div class="meta-row"><span class="meta-key">{{ t.meta_dates }}</span><span class="meta-val">{{ date_range }}</span></div>
+        <div class="meta-row"><span class="meta-key">{{ t.meta_season }}</span><span class="meta-val meta-val--accent">{{ major_season_label | upper }}</span></div>
       </div>
 
       <div class="accent-rule"></div>
 
-      <p class="kicker">MICRO-SEASON {{ season.id }} · BEGINS {{ months_short[season.start_month] | upper }} {{ season.start_day }}</p>
-      <h1 class="display-en">{{ season.name_en }}</h1>
-      <p class="display-jp">{{ season.name_jp }}</p>
+      <p class="kicker">{% if lang == 'ja' %}七十二候 第{{ season.id }}番 · {{ season.start_month }}月{{ season.start_day }}日 始まり{% else %}MICRO-SEASON {{ season.id }} · BEGINS {{ months_short[season.start_month] | upper }} {{ season.start_day }}{% endif %}</p>
+      <h1 class="display-en">{% if lang == 'ja' %}{{ season.name_jp }}{% else %}{{ season.name_en }}{% endif %}</h1>
+      <p class="display-jp">{% if lang == 'ja' %}{{ season.name_en }}{% else %}{{ season.name_jp }}{% endif %}</p>
       <p class="display-romaji"><em>{{ season.name_romaji }}</em></p>
     </div>
 
     <div class="wheel-col">
-      <p class="wheel-kicker">THE YEAR · 七十二候</p>
+      <p class="wheel-kicker">{{ t.wheel_label }}</p>
 
       {# 72-arc calendar wheel. Arcs/labels rendered server-side. #}
       {% set WHEEL_SIZE = 440 %}
@@ -378,16 +394,16 @@
                 fill="var(--stone)">{{ c.sub }}</text>
         {% endfor %}
 
-        <text x="{{ CTR }}" y="{{ CTR - 20 }}" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="var(--stone)" letter-spacing="2.2" font-weight="500">NOW</text>
+        <text x="{{ CTR }}" y="{{ CTR - 20 }}" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="var(--stone)" letter-spacing="2.2" font-weight="500">{{ t.wheel_now }}</text>
         <text x="{{ CTR }}" y="{{ CTR + 8 }}"  text-anchor="middle" font-family="'Hiragino Mincho ProN', 'Yu Mincho', serif" font-size="32" fill="var(--deep)" letter-spacing="5">{{ season.name_jp }}</text>
-        <text x="{{ CTR }}" y="{{ CTR + 28 }}" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" fill="var(--stone)" letter-spacing="1">{{ '%02d' | format(season.id) }} / 72 · {{ months_short[season.start_month] | upper }} {{ season.start_day }}</text>
+        <text x="{{ CTR }}" y="{{ CTR + 28 }}" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" fill="var(--stone)" letter-spacing="1">{{ '%02d' | format(season.id) }} / 72 · {% if lang == 'ja' %}{{ season.start_month }}月{{ season.start_day }}日{% else %}{{ months_short[season.start_month] | upper }} {{ season.start_day }}{% endif %}</text>
       </svg>
 
       <div class="legend">
         {% for name, color in SEASON_COLORS.items() %}
           <span class="legend-row">
             <span class="legend-swatch" style="background: {{ color }};"></span>
-            <span class="legend-name">{{ name }}</span>
+            <span class="legend-name">{{ t['index_seasons_' + name] }}</span>
           </span>
         {% endfor %}
       </div>
@@ -407,12 +423,12 @@
   <!-- ── Three-column spread ── -->
   <section class="spread">
     <div class="spread-col">
-      <h3>Nature</h3>
+      <h3>{{ t.spread_nature }}</h3>
       <p>{{ content.nature_notes }}</p>
     </div>
     <div class="spread-divider"></div>
     <div class="spread-col">
-      <h3>Table</h3>
+      <h3>{{ t.spread_table }}</h3>
       {% for dish in dishes %}
         <p>
           {% if dish.key %}
@@ -426,16 +442,16 @@
     </div>
     <div class="spread-divider"></div>
     <div class="spread-col">
-      <h3>Rite</h3>
+      <h3>{{ t.spread_rite }}</h3>
       <p>{{ content.cultural_note }}</p>
     </div>
   </section>
 
   <!-- ── At Market (in-season 3-column) ── -->
   <section class="market">
-    <p class="market-label">At Market</p>
+    <p class="market-label">{{ t.market_label }}</p>
     <div class="market-grid">
-      {% for col_label, col_key in [('Fruits','fruits'), ('Vegetables','vegetables'), ('Fish','fish')] %}
+      {% for col_label, col_key in [(t.market_fruits,'fruits'), (t.market_vegetables,'vegetables'), (t.market_fish,'fish')] %}
         <div class="market-col">
           <p class="market-col-head">{{ col_label }}</p>
           {% for it in produce[col_key] %}
@@ -466,33 +482,34 @@
   <!-- ── Subscribe (Ink) ── -->
   <section class="subscribe" id="subscribe">
     <div>
-      <p class="kicker">THE LETTER</p>
-      <h2 class="sub-heading">Seventy-two<br>letters a year.</h2>
-      <p class="sub-body">
-        Nature, then food, then culture, then a haiku. Always the same order.
-        Always five days. Arrives at 7am local time the day a new season begins —
-        you may unsubscribe with one click.
-      </p>
+      <p class="kicker">{{ t.subscribe_kicker }}</p>
+      <h2 class="sub-heading">{{ t.subscribe_heading_line1 }}<br>{{ t.subscribe_heading_line2 }}</h2>
+      <p class="sub-body">{{ t.subscribe_body }}</p>
     </div>
     <form class="sub-form" id="signupForm">
-      <label class="sub-form-label" for="email">EMAIL</label>
-      <input class="sub-input" id="email" name="email" type="email" placeholder="your@email.com" required>
-      <button class="sub-btn" type="submit">→ Subscribe</button>
-      <p class="sub-fine">No tracking, no affiliates, no auto-renewals.</p>
+      <label class="sub-form-label" for="email">{{ t.subscribe_email_label }}</label>
+      <input class="sub-input" id="email" name="email" type="email" placeholder="{{ t.subscribe_email_placeholder }}" required>
+      <p class="sub-form-label" style="margin-top:18px;">{{ t.subscribe_lang_label }}</p>
+      <div class="sub-lang">
+        <label class="sub-lang-opt"><input type="radio" name="language" value="en"{% if lang != 'ja' %} checked{% endif %}><span>{{ t.subscribe_lang_en }}</span></label>
+        <label class="sub-lang-opt"><input type="radio" name="language" value="ja"{% if lang == 'ja' %} checked{% endif %}><span>{{ t.subscribe_lang_ja }}</span></label>
+      </div>
+      <button class="sub-btn" type="submit">{{ t.subscribe_btn }}</button>
+      <p class="sub-fine">{{ t.subscribe_fine }}</p>
     </form>
   </section>
 
   <!-- ── Recent letters ── -->
   {% if recent %}
   <section class="recent">
-    <p class="recent-label">Recently</p>
+    <p class="recent-label">{{ t.recently_label }}</p>
     {% for r in recent %}
       <a href="{{ r.url }}" class="recent-row">
         <span class="recent-num">{{ '%03d' | format(r.season.id) }}</span>
         <span class="recent-jp">{{ r.season.name_jp }}</span>
         <span class="recent-en">{{ r.season.name_en }}</span>
         <span class="recent-romaji"><em>{{ r.season.name_romaji }}</em></span>
-        <span class="recent-date">{{ months_short[r.season.start_month] }} {{ r.season.start_day }}</span>
+        <span class="recent-date">{% if lang == 'ja' %}{{ r.season.start_month }}月{{ r.season.start_day }}日{% else %}{{ months_short[r.season.start_month] }} {{ r.season.start_day }}{% endif %}</span>
       </a>
     {% endfor %}
   </section>
@@ -503,22 +520,23 @@
     <div class="footer-inner">
       <div>
         <span class="footer-brand">Kō<span class="kanji">候</span></span>
-        <p class="footer-tag">Japan's seventy-two micro-seasons, one at a time.</p>
+        <p class="footer-tag">{{ t.footer_tag }}</p>
       </div>
       <div class="footer-col">
-        <p class="footer-col-label">NAVIGATE</p>
-        <a class="footer-link" href="#letter">This letter</a>
-        <a class="footer-link" href="/archive/">All seventy-two</a>
-        <a class="footer-link" href="#about">About</a>
-        <a class="footer-link" href="/rss.xml">RSS</a>
+        <p class="footer-col-label">{{ t.footer_navigate }}</p>
+        <a class="footer-link" href="#letter">{{ t.footer_this_letter }}</a>
+        <a class="footer-link" href="{{ t.site_url }}/archive/">{{ t.footer_all_seventy_two }}</a>
+        <a class="footer-link" href="#about">{{ t.footer_about }}</a>
+        <a class="footer-link" href="/rss.xml">{{ t.footer_rss }}</a>
+        <a class="footer-link" href="{{ t.alt_site_url }}/" hreflang="{{ 'en' if lang == 'ja' else 'ja' }}" lang="{{ 'en' if lang == 'ja' else 'ja' }}">{{ t.alt_lang_label }}</a>
       </div>
       <div class="footer-col">
-        <p class="footer-col-label">COLOPHON</p>
-        <p class="footer-meta">Est. April 2026<br>MMXXVI</p>
-        <p class="footer-meta">Plain HTML,<br>no cookies, no tracking</p>
+        <p class="footer-col-label">{{ t.footer_colophon_label }}</p>
+        <p class="footer-meta">{{ t.footer_est }}<br>{{ t.footer_mmxxvi }}</p>
+        <p class="footer-meta">{{ t.footer_no_cookies | replace('\n', '<br>') | safe }}</p>
       </div>
     </div>
-    <p class="footer-copy">© 2026 Kō. All rights reserved. · no cookies, no tracking</p>
+    <p class="footer-copy">{{ t.footer_copy }}</p>
   </footer>
 
 </div>
@@ -527,17 +545,19 @@
   document.getElementById('signupForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = this.email.value;
+    const language = (this.querySelector('input[name="language"]:checked') || {}).value || '{{ lang }}';
     const btn = this.querySelector('button');
+    const originalLabel = btn.textContent;
     btn.disabled = true; btn.textContent = '…';
     try {
       const res = await fetch('{{ worker_url }}/subscribe', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({email}),
+        body: JSON.stringify({email, language}),
       });
-      if (res.ok) { this.innerHTML = '<p style="color:var(--accent);font-family:var(--serif);font-size:18px;">You\'re on the list.</p>'; }
-      else { btn.disabled = false; btn.textContent = '→ Subscribe'; alert('Something went wrong.'); }
-    } catch { btn.disabled = false; btn.textContent = '→ Subscribe'; alert('Something went wrong.'); }
+      if (res.ok) { this.innerHTML = '<p style="color:var(--accent);font-family:var(--serif);font-size:18px;">{{ t.subscribe_success }}</p>'; }
+      else { btn.disabled = false; btn.textContent = originalLabel; alert('{{ t.subscribe_error }}'); }
+    } catch { btn.disabled = false; btn.textContent = originalLabel; alert('{{ t.subscribe_error }}'); }
   });
 </script>
 
@@ -574,7 +594,7 @@
     var entry = store[key];
     if (!entry) return;
 
-    kicker.textContent = kind === 'dish' ? 'At the table' : (entry.category || 'In season');
+    kicker.textContent = kind === 'dish' ? '{{ t.lookup_at_table }}' : (entry.category || '{{ t.lookup_in_season }}');
     title.textContent  = entry.name_en || entry.source || '';
     jp.textContent     = entry.name_jp || '';
     romaji.textContent = entry.name_romaji || '';

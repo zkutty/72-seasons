@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ t.html_lang }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kō — The Archive · 72 micro-seasons</title>
-<meta name="description" content="An index of all 72 Japanese micro-seasons (shichijūni-kō) — from the first thaw to the last frost. {{ published_count }} of 72 letters published.">
+<title>Kō — {{ t.index_topbar_volume }}</title>
+<meta name="description" content="{{ t.index_masthead_sub }} {{ published_count }} / 72.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="canonical" href="https://ko-72.com/archive/">
+<link rel="canonical" href="{{ t.site_url }}/archive/">
+<link rel="alternate" hreflang="en" href="https://ko-72.com/archive/">
+<link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/archive/">
+<link rel="alternate" hreflang="x-default" href="https://ko-72.com/archive/">
 <meta name="robots" content="index, follow">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kō">
-<meta property="og:title" content="Kō — The Archive · 72 micro-seasons">
-<meta property="og:description" content="All 72 Japanese micro-seasons (shichijūni-kō), in order — from the first thaw to the last frost.">
-<meta property="og:url" content="https://ko-72.com/archive/">
+<meta property="og:locale" content="{{ 'ja_JP' if lang == 'ja' else 'en_US' }}">
+<meta property="og:title" content="Kō — {{ t.index_topbar_volume }}">
+<meta property="og:description" content="{{ t.index_masthead_sub }}">
+<meta property="og:url" content="{{ t.site_url }}/archive/">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kō — The Archive">
-<meta name="twitter:description" content="All 72 Japanese micro-seasons, in order. {{ published_count }} of 72 published.">
+<meta name="twitter:title" content="Kō — {{ t.index_topbar_volume }}">
+<meta name="twitter:description" content="{{ t.index_masthead_sub }} {{ published_count }} / 72.">
 <!-- JSON-LD -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Kō — The Archive",
-  "description": "An index of all 72 Japanese micro-seasons (shichijūni-kō).",
-  "url": "https://ko-72.com/archive/",
+  "name": "Kō — {{ t.index_topbar_volume }}",
+  "description": "{{ t.index_masthead_sub }}",
+  "inLanguage": "{{ t.html_lang }}",
+  "url": "{{ t.site_url }}/archive/",
   "isPartOf": { "@type": "WebSite", "name": "Kō", "url": "https://ko-72.com" }
 }
 </script>
@@ -68,6 +73,12 @@
                   letter-spacing: 0.02em; text-transform: none; color: var(--stone); }
   .topbar-brand .kanji { font-family: var(--mincho); font-size: 10px;
                          margin-left: 8px; color: var(--stone); }
+  .topbar-right { display: flex; align-items: center; gap: 14px; }
+  .topbar a.lang-switch {
+    font-size: 12px; letter-spacing: 0; text-transform: none;
+    color: var(--stone); border-left: 1px solid #333330; padding-left: 14px;
+  }
+  .topbar a.lang-switch:hover { color: var(--washi); }
 
   /* ── Masthead ── */
   .masthead {
@@ -278,7 +289,7 @@
 </head>
 <body>
 
-{% set months_short = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] %}
+{% set months_short = t.months_short %}
 {% set season_order = ['spring', 'summer', 'autumn', 'winter'] %}
 {% set season_kanji = {'spring':'春', 'summer':'夏', 'autumn':'秋', 'winter':'冬'} %}
 {% set season_accent = {
@@ -296,47 +307,36 @@
 
 <!-- ── Thin top bar ── -->
 <nav class="topbar">
-  <a href="/" class="topbar-brand">Kō<span class="kanji">候</span></a>
-  <span>The Archive · Volume I · 72 Observations</span>
+  <a href="{{ t.site_url }}/" class="topbar-brand">Kō<span class="kanji">候</span></a>
+  <div class="topbar-right">
+    <span>{{ t.index_topbar_volume }}</span>
+    <a class="lang-switch" href="{{ t.alt_site_url }}/archive/" hreflang="{{ 'en' if lang == 'ja' else 'ja' }}" lang="{{ 'en' if lang == 'ja' else 'ja' }}">{{ t.alt_lang_label }}</a>
+  </div>
 </nav>
 
 <!-- ── Masthead ── -->
 <header class="masthead">
   <div>
-    <p class="masthead-kicker">Shichijūni-kō · 七十二候</p>
-    <h1 class="masthead-title">The Year,<br>in seventy-two.</h1>
+    <p class="masthead-kicker">{{ t.index_masthead_kicker }}</p>
+    <h1 class="masthead-title">{{ t.index_masthead_title_line1 }}<br>{{ t.index_masthead_title_line2 }}</h1>
   </div>
   <div class="masthead-count">
-    <p class="masthead-count-label">Published to date</p>
+    <p class="masthead-count-label">{{ t.index_published_to_date }}</p>
     <p class="masthead-count-num">{{ published_count }}<span class="of">/72</span></p>
   </div>
-  <p class="masthead-sub">
-    An index of every letter sent since the first thaw. The year is kept here as it
-    arrives — five days at a time, in four columns, in no particular hurry.
-  </p>
+  <p class="masthead-sub">{{ t.index_masthead_sub }}</p>
 </header>
 
 <!-- ── About the sekki ── -->
 <section class="about-sekki" id="about-sekki">
   <div class="about-sekki-inner">
     <div>
-      <p class="about-sekki-kicker">A note on structure</p>
-      <h2 class="about-sekki-title">The sekki<span class="jp">二十四節気</span></h2>
+      <p class="about-sekki-kicker">{{ t.index_about_kicker }}</p>
+      <h2 class="about-sekki-title">{{ t.index_about_title }}<span class="jp">二十四節気</span></h2>
     </div>
     <div class="about-sekki-body">
-      <p>
-        The Japanese year is first divided into twenty-four <em>sekki</em> (節気) —
-        roughly fortnightly "solar terms" that mark the sun's progress around the
-        ecliptic. Each bears a name drawn from weather or agriculture:
-        <em>Risshun</em> (立春, Beginning of Spring), <em>Taisho</em> (大暑, Greater
-        Heat), <em>Sōkō</em> (霜降, Frost Descent).
-      </p>
-      <p>
-        Every sekki is further split into three <em>kō</em> (候) — the five-day
-        micro-seasons this archive collects. Twenty-four sekki × three kō gives
-        the <em>shichijūni-kō</em>, seventy-two. Below, each sekki groups its
-        three kō together, so you can read the year at either scale.
-      </p>
+      <p>{{ t.index_about_p1 | safe }}</p>
+      <p>{{ t.index_about_p2 | safe }}</p>
     </div>
   </div>
 </section>
@@ -352,7 +352,7 @@
         {% if e.sekki not in sekki_names %}{{ sekki_names.append(e.sekki) or '' }}{% endif %}
       {% endfor %}
       <div class="season-col" style="--accent: {{ season_accent[sname] }};">
-        <h2>{{ sname | capitalize }}</h2>
+        <h2>{{ t['index_seasons_' + sname] }}</h2>
         <p class="season-sekki">{{ season_sekki_range[sname] }}</p>
 
         {% for sekki_name in sekki_names %}
@@ -369,16 +369,16 @@
             {% for e in sekki_entries %}
               {% set is_pub = e.id in published_ids %}
               {% if is_pub %}
-                <a class="entry" href="{{ e.url }}">
+                <a class="entry" href="{{ t.site_url }}/archive/{{ '%02d' | format(e.id) }}-{{ e.slug }}.html">
               {% else %}
                 <span class="entry pending">
               {% endif %}
                   <span class="entry-row">
                     <span class="entry-num">{{ '%02d' | format(e.id) }}</span>
                     <span class="entry-jp">{{ e.name_jp }}</span>
-                    <span class="entry-date">{{ months_short[e.start_month] }} {{ e.start_day }}</span>
+                    <span class="entry-date">{% if lang == 'ja' %}{{ e.start_month }}月{{ e.start_day }}日{% else %}{{ months_short[e.start_month] }} {{ e.start_day }}{% endif %}</span>
                   </span>
-                  <p class="entry-en">{{ e.name_en }}</p>
+                  <p class="entry-en">{% if lang == 'ja' %}{{ e.name_romaji }}{% else %}{{ e.name_en }}{% endif %}</p>
               {% if is_pub %}
                 </a>
               {% else %}
@@ -403,7 +403,7 @@
       {% for e in entries %}{% if e.id in published_ids %}{% set pub_ns.count = pub_ns.count + 1 %}{% endif %}{% endfor %}
       {% set pub = pub_ns.count %}
       <div class="year-meta-cell">
-        <span>{{ sname }}</span>
+        <span>{{ t['index_seasons_' + sname] }}</span>
         <span>{{ pub }} / {{ entries | length }}</span>
       </div>
     {% endfor %}
@@ -412,11 +412,8 @@
 
 <!-- ── Editor's note ── -->
 <footer class="note">
-  <p class="note-body">
-    The seventy-two kō are a Japanese adaptation of the Chinese pentads, adopted in 1685
-    and refined to match the local calendar of wind, bird and petal.
-  </p>
-  <p class="note-est">© 2026 Kō · Est. April 2026 · No cookies, no tracking</p>
+  <p class="note-body">{{ t.index_note_body }}</p>
+  <p class="note-est">{{ t.index_note_est }}</p>
 </footer>
 
 </body>

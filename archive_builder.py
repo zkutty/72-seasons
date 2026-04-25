@@ -1,5 +1,9 @@
 """
-Build static HTML archive pages, index, and website homepage.
+Build static HTML archive pages, index, website homepage and unsubscribe page,
+in both English and Japanese.
+
+Each surface is rendered once per language. English output goes to current
+paths under the repo root; Japanese output goes under /ja/.
 """
 
 import json
@@ -8,13 +12,19 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
+from content_generator import normalize_content
 from ingredient_generator import slugify
 from wheel import cardinal_labels
 
-ARCHIVE_DIR = Path(__file__).parent / "archive"
-TEMPLATE_DIR = Path(__file__).parent / "templates"
 ROOT_DIR     = Path(__file__).parent
+ARCHIVE_DIR  = ROOT_DIR / "archive"
+JA_ROOT_DIR  = ROOT_DIR / "ja"
+JA_ARCHIVE_DIR = JA_ROOT_DIR / "archive"
+TEMPLATE_DIR = ROOT_DIR / "templates"
 DATA_DIR     = ROOT_DIR / "data"
+STRINGS_PATH = DATA_DIR / "strings.json"
+
+LANGS = ("en", "ja")
 
 ACCENT_COLORS = {
     "spring": "#6b8f71",
@@ -28,8 +38,13 @@ def _fmt(month: int, day: int) -> str:
     return date(2000, month, day).strftime("%b %-d")  # "Apr 20"
 
 
-def _date_range(season: dict) -> str:
-    return f"{_fmt(season['start_month'], season['start_day'])} – {_fmt(season['end_month'], season['end_day'])}"
+def _fmt_ja(month: int, day: int) -> str:
+    return f"{month}月{day}日"
+
+
+def _date_range(season: dict, lang: str) -> str:
+    fmt = _fmt_ja if lang == "ja" else _fmt
+    return f"{fmt(season['start_month'], season['start_day'])} – {fmt(season['end_month'], season['end_day'])}"
 
 
 def _season_filename(season: dict) -> str:
@@ -40,7 +55,16 @@ def _accent(season: dict) -> str:
     return ACCENT_COLORS.get(season["major_season"].lower(), "#888780")
 
 
+def _archive_dir(lang: str) -> Path:
+    return JA_ARCHIVE_DIR if lang == "ja" else ARCHIVE_DIR
+
+
+def _root_dir(lang: str) -> Path:
+    return JA_ROOT_DIR if lang == "ja" else ROOT_DIR
+
+
 def _published_ids(all_seasons: list) -> set:
+    """A season is "published" if its EN archive page exists. Both languages share the same set."""
     return {s["id"] for s in all_seasons if (ARCHIVE_DIR / _season_filename(s)).exists()}
 
 
@@ -50,12 +74,12 @@ def _load_lookup() -> tuple[dict, dict]:
     return _read(DATA_DIR / "ingredients.json"), _read(DATA_DIR / "dishes.json")
 
 
-def _slice_lookups(content: dict, ingredients: dict, dishes: dict) -> tuple[dict, dict]:
-    """Return only the lookup entries that appear on this season's page.
+def _load_strings() -> dict:
+    return json.loads(STRINGS_PATH.read_text(encoding="utf-8"))
 
-    Keeps per-page JSON small and annotates each produce / dish item with the
-    slug the template needs to render a clickable lookup button.
-    """
+
+def _slice_lookups(content: dict, ingredients: dict, dishes: dict) -> tuple[dict, dict]:
+    """Return only the lookup entries that appear on this season's page."""
     page_ing: dict[str, dict] = {}
     page_dish: dict[str, dict] = {}
 
@@ -74,7 +98,6 @@ def _slice_lookups(content: dict, ingredients: dict, dishes: dict) -> tuple[dict
 
 
 def _keyed_produce(content: dict, ingredients: dict) -> dict:
-    """Transform content.seasonal_produce into lists of {raw, key} pairs."""
     out: dict[str, list] = {}
     for category, items in content.get("seasonal_produce", {}).items():
         out[category] = [
@@ -85,7 +108,6 @@ def _keyed_produce(content: dict, ingredients: dict) -> dict:
 
 
 def _keyed_dishes(content: dict, dishes: dict) -> list:
-    """Transform content.seasonal_dishes into dicts that carry the lookup key."""
     out = []
     for d in content.get("seasonal_dishes", []):
         key = slugify(d.get("name", ""))
@@ -97,14 +119,29 @@ def _keyed_dishes(content: dict, dishes: dict) -> list:
     return out
 
 
+def _content_for_lang(content: dict, lang: str) -> dict:
+    """Return the per-language slice from a bilingual content payload.
+
+    If the requested language is missing (e.g. legacy entry without JA), fall
+    back to English so the page still renders.
+    """
+    bilingual = normalize_content(content)
+    return bilingual.get(lang) or bilingual["en"]
+
+
+def _make_env() -> Environment:
+    return Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=True)
+
+
 # ── Individual archive page ────────────────────────────────────────────────────
 
 def build_archive(season: dict, content: dict, all_seasons: list) -> None:
-    ARCHIVE_DIR.mkdir(exist_ok=True)
-    env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=True)
+    """Render this season's archive page in every supported language."""
+    env = _make_env()
+    strings = _load_strings()
+    all_ingredients, all_dishes = _load_lookup()
 
     pub_ids = _published_ids(all_seasons)
-    # prev = nearest lower published id; next = nearest higher published id
     lower  = [s for s in all_seasons if s["id"] < season["id"] and s["id"] in pub_ids]
     higher = [s for s in all_seasons if s["id"] > season["id"] and s["id"] in pub_ids]
     prev   = lower[-1]  if lower  else None
@@ -113,45 +150,73 @@ def build_archive(season: dict, content: dict, all_seasons: list) -> None:
     today = date.today()
     published_date = date(today.year, season["start_month"], season["start_day"]).isoformat()
 
-    all_ingredients, all_dishes = _load_lookup()
-    page_ingredients, page_dishes = _slice_lookups(content, all_ingredients, all_dishes)
+    template = env.get_template("archive_page.html")
 
-    html = env.get_template("archive_page.html").render(
-        season=season,
-        content=content,
-        accent_color=_accent(season),
-        date_range=_date_range(season),
-        duration_days=season["duration_days"],
-        published_date=published_date,
-        prev=prev,
-        next=next_s,
-        all_seasons=all_seasons,
-        produce=_keyed_produce(content, all_ingredients),
-        dishes=_keyed_dishes(content, all_dishes),
-        ingredient_lookup=page_ingredients,
-        dish_lookup=page_dishes,
-    )
+    for lang in LANGS:
+        lang_content = _content_for_lang(content, lang)
+        page_ingredients, page_dishes = _slice_lookups(lang_content, all_ingredients, all_dishes)
 
-    filename = _season_filename(season)
-    (ARCHIVE_DIR / filename).write_text(html, encoding="utf-8")
-    print(f"Archive page written: archive/{filename}")
+        out_dir = _archive_dir(lang)
+        out_dir.mkdir(parents=True, exist_ok=True)
 
-    _build_index(env, all_seasons)
+        html = template.render(
+            lang=lang,
+            t=strings[lang],
+            season=season,
+            content=lang_content,
+            accent_color=_accent(season),
+            date_range=_date_range(season, lang),
+            duration_days=season["duration_days"],
+            published_date=published_date,
+            prev=prev,
+            next=next_s,
+            all_seasons=all_seasons,
+            produce=_keyed_produce(lang_content, all_ingredients),
+            dishes=_keyed_dishes(lang_content, all_dishes),
+            ingredient_lookup=page_ingredients,
+            dish_lookup=page_dishes,
+        )
+
+        filename = _season_filename(season)
+        (out_dir / filename).write_text(html, encoding="utf-8")
+        print(f"Archive page written: {out_dir.relative_to(ROOT_DIR)}/{filename}")
+
+    _build_index(env, strings, all_seasons)
+    _build_unsubscribe(env, strings)
     _build_sitemap(all_seasons)
 
 
 # ── Archive index ──────────────────────────────────────────────────────────────
 
-def _build_index(env: Environment, all_seasons: list) -> None:
+def _build_index(env: Environment, strings: dict, all_seasons: list) -> None:
     pub_ids = _published_ids(all_seasons)
     published_count = len(pub_ids)
-    html = env.get_template("archive_index.html").render(
-        all_seasons=all_seasons,
-        published_count=published_count,
-        published_ids=pub_ids,
-    )
-    (ARCHIVE_DIR / "index.html").write_text(html, encoding="utf-8")
-    print(f"Archive index updated — {published_count} season(s) published.")
+    template = env.get_template("archive_index.html")
+
+    for lang in LANGS:
+        out_dir = _archive_dir(lang)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        html = template.render(
+            lang=lang,
+            t=strings[lang],
+            all_seasons=all_seasons,
+            published_count=published_count,
+            published_ids=pub_ids,
+        )
+        (out_dir / "index.html").write_text(html, encoding="utf-8")
+        print(f"Archive index updated: {out_dir.relative_to(ROOT_DIR)}/index.html — {published_count} season(s) published.")
+
+
+# ── Unsubscribe page ───────────────────────────────────────────────────────────
+
+def _build_unsubscribe(env: Environment, strings: dict) -> None:
+    template = env.get_template("unsubscribe.html")
+    for lang in LANGS:
+        out_dir = _root_dir(lang)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        html = template.render(lang=lang, t=strings[lang])
+        (out_dir / "unsubscribe.html").write_text(html, encoding="utf-8")
+        print(f"Unsubscribe page written: {(out_dir / 'unsubscribe.html').relative_to(ROOT_DIR)}")
 
 
 # ── Sitemap ────────────────────────────────────────────────────────────────────
@@ -159,30 +224,35 @@ def _build_index(env: Environment, all_seasons: list) -> None:
 def _build_sitemap(all_seasons: list) -> None:
     today = date.today().isoformat()
 
-    def url(loc: str, changefreq: str, priority: str) -> str:
+    def url(en_loc: str, ja_loc: str, changefreq: str, priority: str) -> str:
         return (
             f"  <url>\n"
-            f"    <loc>{loc}</loc>\n"
+            f"    <loc>{en_loc}</loc>\n"
             f"    <lastmod>{today}</lastmod>\n"
             f"    <changefreq>{changefreq}</changefreq>\n"
             f"    <priority>{priority}</priority>\n"
+            f'    <xhtml:link rel="alternate" hreflang="en" href="{en_loc}"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="ja" href="{ja_loc}"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="x-default" href="{en_loc}"/>\n'
             f"  </url>"
         )
 
     entries = [
-        url("https://ko-72.com/", "weekly", "1.0"),
-        url("https://ko-72.com/archive/", "monthly", "0.8"),
+        url("https://ko-72.com/",         "https://ko-72.com/ja/",         "weekly",  "1.0"),
+        url("https://ko-72.com/archive/", "https://ko-72.com/ja/archive/", "monthly", "0.8"),
     ]
     for s in all_seasons:
         if (ARCHIVE_DIR / _season_filename(s)).exists():
             entries.append(url(
                 f"https://ko-72.com/archive/{_season_filename(s)}",
+                f"https://ko-72.com/ja/archive/{_season_filename(s)}",
                 "yearly", "0.6",
             ))
 
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+        '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
         + "\n".join(entries)
         + "\n</urlset>\n"
     )
@@ -198,32 +268,47 @@ def build_website(
     all_seasons: list,
     worker_url: str = "https://subscribe.ko-72.com",
 ) -> None:
-    env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=True)
+    env = _make_env()
+    strings = _load_strings()
+    all_ingredients, all_dishes = _load_lookup()
+    template = env.get_template("website.html")
 
-    # Recent: last 5 published seasons (for the "Recently" block)
     recent = [
         {"season": s, "url": s["url"]}
         for s in all_seasons
         if (ARCHIVE_DIR / _season_filename(s)).exists()
     ][-5:]
 
-    all_ingredients, all_dishes = _load_lookup()
-    page_ingredients, page_dishes = _slice_lookups(content, all_ingredients, all_dishes)
+    for lang in LANGS:
+        lang_content = _content_for_lang(content, lang)
+        page_ingredients, page_dishes = _slice_lookups(lang_content, all_ingredients, all_dishes)
+        # Rewrite recent URLs for the JA homepage so links land on /ja/archive/...
+        if lang == "ja":
+            recent_lang = [
+                {"season": r["season"], "url": r["url"].replace("/archive/", "/ja/archive/")}
+                for r in recent
+            ]
+        else:
+            recent_lang = recent
 
-    html = env.get_template("website.html").render(
-        season=season,
-        content=content,
-        accent_color=_accent(season),
-        date_range=_date_range(season),
-        duration_days=season["duration_days"],
-        all_seasons=all_seasons,
-        recent=recent,
-        worker_url=worker_url,
-        cardinals=cardinal_labels(),
-        produce=_keyed_produce(content, all_ingredients),
-        dishes=_keyed_dishes(content, all_dishes),
-        ingredient_lookup=page_ingredients,
-        dish_lookup=page_dishes,
-    )
-    (ROOT_DIR / "index.html").write_text(html, encoding="utf-8")
-    print("Website homepage rebuilt: index.html")
+        html = template.render(
+            lang=lang,
+            t=strings[lang],
+            season=season,
+            content=lang_content,
+            accent_color=_accent(season),
+            date_range=_date_range(season, lang),
+            duration_days=season["duration_days"],
+            all_seasons=all_seasons,
+            recent=recent_lang,
+            worker_url=worker_url,
+            cardinals=cardinal_labels(),
+            produce=_keyed_produce(lang_content, all_ingredients),
+            dishes=_keyed_dishes(lang_content, all_dishes),
+            ingredient_lookup=page_ingredients,
+            dish_lookup=page_dishes,
+        )
+        out_dir = _root_dir(lang)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        (out_dir / "index.html").write_text(html, encoding="utf-8")
+        print(f"Website homepage rebuilt: {(out_dir / 'index.html').relative_to(ROOT_DIR)}")

@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ko-72.com/</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ko-72.com/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ko-72.com/"/>
   </url>
   <url>
     <loc>https://ko-72.com/archive/</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ko-72.com/archive/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/archive/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ko-72.com/archive/"/>
   </url>
   <url>
     <loc>https://ko-72.com/archive/21-niji-hajimete-arawaru.html</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ko-72.com/archive/21-niji-hajimete-arawaru.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/archive/21-niji-hajimete-arawaru.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ko-72.com/archive/21-niji-hajimete-arawaru.html"/>
   </url>
   <url>
     <loc>https://ko-72.com/archive/22-ashi-hajimete-shozu.html</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ko-72.com/archive/22-ashi-hajimete-shozu.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/archive/22-ashi-hajimete-shozu.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ko-72.com/archive/22-ashi-hajimete-shozu.html"/>
   </url>
   <url>
     <loc>https://ko-72.com/archive/23-shimo-yamite-nae-izuru.html</loc>
     <lastmod>2026-04-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ko-72.com/archive/23-shimo-yamite-nae-izuru.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/archive/23-shimo-yamite-nae-izuru.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ko-72.com/archive/23-shimo-yamite-nae-izuru.html"/>
   </url>
 </urlset>

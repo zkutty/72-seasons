@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ t.html_lang }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kō — {{ season.name_en }}</title>
 {% set _desc = content.summary if content.summary else content.opening[:160] ~ '…' %}
+{% set _slug = '%02d' | format(season.id) ~ '-' ~ season.slug %}
 <meta name="description" content="{{ _desc | striptags }}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="canonical" href="https://ko-72.com/archive/{{ '%02d' | format(season.id) }}-{{ season.slug }}.html">
+<link rel="canonical" href="{{ t.site_url }}/archive/{{ _slug }}.html">
+<link rel="alternate" hreflang="en" href="https://ko-72.com/archive/{{ _slug }}.html">
+<link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/archive/{{ _slug }}.html">
+<link rel="alternate" hreflang="x-default" href="https://ko-72.com/archive/{{ _slug }}.html">
 <meta name="robots" content="index, follow">
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Kō">
+<meta property="og:locale" content="{{ 'ja_JP' if lang == 'ja' else 'en_US' }}">
 <meta property="og:title" content="Kō — {{ season.name_en }}">
 <meta property="og:description" content="{{ _desc | striptags }}">
-<meta property="og:url" content="https://ko-72.com/archive/{{ '%02d' | format(season.id) }}-{{ season.slug }}.html">
+<meta property="og:url" content="{{ t.site_url }}/archive/{{ _slug }}.html">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kō — {{ season.name_en }} ({{ season.name_romaji }})">
@@ -28,7 +33,8 @@
   "alternativeHeadline": "{{ season.name_jp }} · {{ season.name_romaji }}",
   "description": "{{ _desc | striptags }}",
   "datePublished": "{{ published_date }}",
-  "url": "https://ko-72.com/archive/{{ '%02d' | format(season.id) }}-{{ season.slug }}.html",
+  "inLanguage": "{{ t.html_lang }}",
+  "url": "{{ t.site_url }}/archive/{{ _slug }}.html",
   "isPartOf": { "@type": "WebSite", "name": "Kō", "url": "https://ko-72.com" },
   "publisher": { "@type": "Organization", "name": "Kō", "url": "https://ko-72.com" },
   "about": {
@@ -72,6 +78,12 @@
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--stone);
   }
+  .topbar .right { display: flex; align-items: center; gap: 14px; }
+  .topbar a.lang-switch {
+    font-size: 12px; letter-spacing: 0; text-transform: none;
+    color: var(--stone); border-left: 1px solid #333330; padding-left: 14px;
+  }
+  .topbar a.lang-switch:hover { color: var(--washi); }
   .topbar .brand {
     font-family: var(--serif); font-size: 18px;
     color: var(--washi); letter-spacing: 0.02em;
@@ -351,22 +363,25 @@
 </head>
 <body>
 
-{% set months_short = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] %}
+{% set months_short = t.months_short %}
 {% set season_accents = {
   'spring':'#6b8f71', 'summer':'#c9734a', 'autumn':'#d4a853', 'winter':'#4a7fa5'
 } %}
 
 <!-- ── Top bar ── -->
 <nav class="topbar">
-  <a class="back" href="/archive/">← All seasons</a>
-  <a class="brand" href="/">Kō<span class="kanji">候</span></a>
-  <span class="count">{{ '%02d' | format(season.id) }} / 72</span>
+  <a class="back" href="{{ t.site_url }}/archive/">{{ t.archive_back }}</a>
+  <a class="brand" href="{{ t.site_url }}/">Kō<span class="kanji">候</span></a>
+  <div class="right">
+    <span class="count">{{ '%02d' | format(season.id) }} {{ t.archive_brand_count_suffix }}</span>
+    <a class="lang-switch" href="{{ t.alt_site_url }}/archive/{{ '%02d' | format(season.id) }}-{{ season.slug }}.html" hreflang="{{ 'en' if lang == 'ja' else 'ja' }}" lang="{{ 'en' if lang == 'ja' else 'ja' }}">{{ t.alt_lang_label }}</a>
+  </div>
 </nav>
 
 <div class="wrap">
   <!-- ── LEFT RAIL ── -->
   <aside>
-    <p class="rail-season">{{ season.major_season }}</p>
+    <p class="rail-season">{{ t['index_seasons_' + season.major_season] }}</p>
     <div class="rail-kanji">{{ season.name_jp }}</div>
 
     <!-- Year ring (72 arcs). Arc paths are pre-computed Python-side as season.ring_d; see wheel.py. -->
@@ -385,26 +400,26 @@
       </svg>
       <div class="ring-center">
         <span class="ring-num">{{ '%02d' | format(season.id) }}</span>
-        <span class="ring-of">of 72</span>
+        <span class="ring-of">{{ t.archive_rail_of }}</span>
       </div>
     </div>
 
     <!-- TLDR -->
     <div class="tldr">
       <div class="tldr-row">
-        <span class="tldr-key">Sekki</span>
+        <span class="tldr-key">{{ t.archive_tldr_sekki }}</span>
         <span class="tldr-val">{{ season.sekki }} · {{ season.sekki_en }}</span>
       </div>
       <div class="tldr-row">
-        <span class="tldr-key">Dates</span>
+        <span class="tldr-key">{{ t.archive_tldr_dates }}</span>
         <span class="tldr-val">{{ date_range }}</span>
       </div>
       <div class="tldr-row">
-        <span class="tldr-key">Duration</span>
-        <span class="tldr-val">{{ duration_days }} days</span>
+        <span class="tldr-key">{{ t.archive_tldr_duration }}</span>
+        <span class="tldr-val">{{ duration_days }} {{ t.archive_tldr_days }}</span>
       </div>
       <div class="tldr-row">
-        <span class="tldr-key">Romaji</span>
+        <span class="tldr-key">{{ t.archive_tldr_romaji }}</span>
         <span class="tldr-val italic">{{ season.name_romaji }}</span>
       </div>
     </div>
@@ -412,19 +427,19 @@
     <!-- Prev / Next -->
     <div class="nav-adjacent">
       {% if prev %}
-        <a class="nav-link" href="{{ prev.url }}">
+        <a class="nav-link" href="{{ t.site_url }}/archive/{{ '%02d' | format(prev.id) }}-{{ prev.slug }}.html">
           <p class="nav-kicker" style="color: {{ season_accents[prev.major_season] }};">
-            Previous · № {{ '%02d' | format(prev.id) }}
+            {{ t.archive_nav_previous }} · № {{ '%02d' | format(prev.id) }}
           </p>
-          <p class="nav-title">{{ prev.name_en }}</p>
+          <p class="nav-title">{% if lang == 'ja' %}{{ prev.name_jp }}{% else %}{{ prev.name_en }}{% endif %}</p>
         </a>
       {% endif %}
       {% if next %}
-        <a class="nav-link" href="{{ next.url }}">
+        <a class="nav-link" href="{{ t.site_url }}/archive/{{ '%02d' | format(next.id) }}-{{ next.slug }}.html">
           <p class="nav-kicker" style="color: {{ season_accents[next.major_season] }};">
-            Next · № {{ '%02d' | format(next.id) }}
+            {{ t.archive_nav_next }} · № {{ '%02d' | format(next.id) }}
           </p>
-          <p class="nav-title">{{ next.name_en }}</p>
+          <p class="nav-title">{% if lang == 'ja' %}{{ next.name_jp }}{% else %}{{ next.name_en }}{% endif %}</p>
         </a>
       {% endif %}
     </div>
@@ -432,9 +447,9 @@
 
   <!-- ── ARTICLE ── -->
   <article>
-    <p class="article-eyebrow">Micro-season {{ '%02d' | format(season.id) }} of 72 · {{ date_range }}</p>
-    <h1 class="article-title">{{ season.name_en }}.</h1>
-    <p class="article-romaji">{{ season.name_romaji }}</p>
+    <p class="article-eyebrow">{% if lang == 'ja' %}七十二候 第{{ '%d' | format(season.id) }}番{% else %}Micro-season {{ '%02d' | format(season.id) }} of 72{% endif %} · {{ date_range }}</p>
+    <h1 class="article-title">{% if lang == 'ja' %}{{ season.name_jp }}{% else %}{{ season.name_en }}.{% endif %}</h1>
+    <p class="article-romaji">{{ season.name_romaji }}{% if lang == 'ja' %} · {{ season.name_en }}{% endif %}</p>
 
     <div class="accent-rule"></div>
 
@@ -451,15 +466,15 @@
 
     <!-- Nature notes -->
     <section class="sec">
-      <p class="section-head">Nature notes</p>
+      <p class="section-head">{{ t.archive_section_nature }}</p>
       <p>{{ content.nature_notes }}</p>
     </section>
 
     <!-- In season: fruits / vegetables / fish -->
     <section class="produce">
-      <p class="section-head">In season</p>
+      <p class="section-head">{{ t.archive_section_in_season }}</p>
       <div class="produce-grid">
-        {% for col_label, col_key in [('Fruits','fruits'), ('Vegetables','vegetables'), ('Fish','fish')] %}
+        {% for col_label, col_key in [(t.market_fruits,'fruits'), (t.market_vegetables,'vegetables'), (t.market_fish,'fish')] %}
           <div class="produce-col">
             <p class="h">{{ col_label }}</p>
             {% for it in produce[col_key] %}
@@ -476,7 +491,7 @@
 
     <!-- At the table -->
     <section class="dishes">
-      <p class="section-head">At the table</p>
+      <p class="section-head">{{ t.archive_section_at_table }}</p>
       {% for d in dishes %}
         <div class="dish">
           <span class="dish-num">{{ '%02d' | format(loop.index) }}</span>
@@ -494,7 +509,7 @@
 
     <!-- Cultural note -->
     <section class="cultural-wrap">
-      <p class="section-head">Cultural note</p>
+      <p class="section-head">{{ t.archive_section_cultural }}</p>
       <blockquote class="cultural">{{ content.cultural_note }}</blockquote>
     </section>
 
@@ -516,7 +531,7 @@
 </div>
 
 <footer class="page-foot">
-  © 2026 Kō · Japan's 72 micro-seasons, one at a time · No cookies, no tracking
+  {{ t.archive_page_footer }}
 </footer>
 
 {% if ingredient_lookup or dish_lookup %}
@@ -553,8 +568,8 @@
     if (!entry) return;
 
     kicker.textContent = kind === 'dish'
-      ? 'At the table'
-      : (entry.category || 'In season');
+      ? '{{ t.lookup_at_table }}'
+      : (entry.category || '{{ t.lookup_in_season }}');
     title.textContent  = entry.name_en || entry.source || '';
     jp.textContent     = entry.name_jp || '';
     romaji.textContent = entry.name_romaji || '';
