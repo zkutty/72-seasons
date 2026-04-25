@@ -80,5 +80,46 @@
       "english": "reed shoots rising— / morning clouds reflected / on the water's face"
     },
     "closing": "In the reed marsh, a single egret stands motionless among the new shoots, both waiting for what the warming water will bring."
+  },
+  "23": {
+    "summary": "The final frosts have retreated from the paddies, and the first tender rice seedlings emerge into warming spring air.",
+    "opening": "Dawn breaks without the bite of frost for the first time in months. In the flooded paddies, impossibly green shoots pierce the still water like brushstrokes on silk, each one catching the soft morning light. The earth exhales warmth now, and everywhere there is the quiet industry of growth beginning.",
+    "nature_notes": "Tree frogs have returned to the rice paddies in earnest, their evening chorus swelling as the water warms. Swallows swoop low over the flooded fields, drinking on the wing and hunting the first clouds of midges. The mountains have shed their last patches of snow, revealing slopes furred with the pale green of fresh bamboo grass.",
+    "seasonal_produce": {
+      "fruits": [
+        "Natsu mikan (summer citrus)",
+        "Strawberries",
+        "Biwa (loquat), early",
+        "Ume (green plums), just appearing"
+      ],
+      "vegetables": [
+        "Takenoko (bamboo shoots)",
+        "Fuki (butterbur)",
+        "Sanshō (young pepper leaves)",
+        "Soramame (fava beans)"
+      ],
+      "fish": [
+        "Sawara (Spanish mackerel)",
+        "Shirauo (icefish)",
+        "Hotaru ika (firefly squid)"
+      ]
+    },
+    "seasonal_dishes": [
+      {
+        "name": "Takenoko gohan",
+        "description": "Rice cooked with tender bamboo shoots and dashi, celebrating the last of the spring harvest before the shoots grow woody."
+      },
+      {
+        "name": "Shirauo no odorigui",
+        "description": "Tiny translucent icefish served alive and wriggling, a fleeting delicacy as their spring run comes to its end."
+      }
+    ],
+    "cultural_note": "This is the time for nae-doko, the careful preparation of rice seedling beds that will supply the paddies for June planting. Farmers tend these nurseries with the attention of a calligrapher preparing ink, knowing that the health of these first shoots determines the autumn harvest. In some regions, families still offer prayers to Ta-no-kami, the deity of the rice fields, welcoming the spirit back from the mountains.",
+    "haiku": {
+      "japanese": "霜消えて 苗の緑や 水鏡",
+      "romaji": "Shimo kiete / nae no midori ya / mizukagami",
+      "english": "Frost gone at last— / the seedlings' green reflected / in the flooded field"
+    },
+    "closing": "In the evening stillness, a single heron stands motionless at the paddy's edge, waiting for what the warming water will bring."
   }
 }
