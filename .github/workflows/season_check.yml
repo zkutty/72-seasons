@@ -1,14 +1,12 @@
-name: Kō — Season Mailer
+name: Kō — Season Mailer (manual)
 
+# Manual-only. The scheduled send lives in newsletter.yml — running both crons
+# caused subscribers to receive duplicate (and sometimes wrong-language) emails.
 on:
-  schedule:
-    # 7:00 AM Pacific Standard Time (UTC-8) = 15:00 UTC
-    # Adjust to 14:00 UTC during Daylight Saving Time if needed
-    - cron: '0 15 * * *'
   workflow_dispatch:
     inputs:
       force:
-        description: 'Run with --force flag (bypass date check)'
+        description: 'Run with --force flag (bypass date check and idempotency guard)'
         required: false
         default: 'false'
         type: boolean
@@ -38,6 +36,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           SUBSCRIBER_EMAILS: ${{ secrets.SUBSCRIBER_EMAILS }}
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
         run: |
           if [ "${{ github.event.inputs.force }}" = "true" ]; then
             python season_mailer.py --force

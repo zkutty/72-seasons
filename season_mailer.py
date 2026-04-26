@@ -177,11 +177,22 @@ def main() -> None:
             stats["ingredients_added"], stats["dishes_added"],
         )
 
+    today_iso = today.isoformat()
+    already_sent_on = cache.get(cache_key, {}).get("_sent_on")
     if args.build_only:
         log.info("Step 3/5 · Skipping email (--build-only).")
+    elif already_sent_on == today_iso and not args.force:
+        log.info(
+            "Step 3/5 · Email already sent today (%s) for season #%d — skipping. "
+            "Pass --force to resend.",
+            today_iso, season["id"],
+        )
     else:
         log.info("Step 3/5 · Sending email …")
         send_email(season, content, worker_url=worker_url)
+        # Record the send so a second cron run on the same day skips us.
+        cache.setdefault(cache_key, {})["_sent_on"] = today_iso
+        save_cache(cache)
 
     log.info("Step 4/5 · Building archive page …")
     build_archive(season, content, seasons)
