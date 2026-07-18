@@ -167,15 +167,28 @@ def count_new_dishes_per_lang(content: dict, used: dict) -> dict:
 
 
 def generate_with_dish_variety(season: dict, used: dict, min_new: int = 2, max_attempts: int = 2) -> dict:
-    """Call ``generate_content`` and retry once if fewer than ``min_new`` dishes
-    are new in either language block. On retry, the just-generated dish names
-    are added to the exclusion list so Claude is pushed away from them."""
+    """Generate valid content, retrying prompt misses and weak dish variety.
+
+    ``generate_content`` validates that English produce has readable English
+    labels. A validation/JSON failure consumes an attempt but is never cached
+    or sent. For valid content, the existing dish-variety retry behavior still
+    applies.
+    """
     from content_generator import generate_content, normalize_dish_name
 
     exclude = {lang: set(used.get(lang, set())) for lang in _LANG_KEYS}
     last_content: dict | None = None
+    last_error: ValueError | None = None
     for attempt in range(1, max_attempts + 1):
-        content = generate_content(season, exclude_dishes=exclude)
+        try:
+            content = generate_content(season, exclude_dishes=exclude)
+        except ValueError as exc:
+            last_error = exc
+            log.warning(
+                "Attempt %d returned invalid bilingual content — retrying: %s",
+                attempt, exc,
+            )
+            continue
         counts = count_new_dishes_per_lang(content, used)
         worst_lang = min(counts, key=lambda k: counts[k])
         if counts[worst_lang] >= min_new:
@@ -197,6 +210,11 @@ def generate_with_dish_variety(season: dict, used: dict, min_new: int = 2, max_a
                 if name:
                     exclude[lang].add(name)
         last_content = content
+
+    if last_content is None:
+        raise RuntimeError(
+            f"Could not generate valid bilingual content after {max_attempts} attempts."
+        ) from last_error
 
     log.warning(
         "Could not produce %d new dishes per language after %d attempts — using the last attempt anyway.",

@@ -13,6 +13,39 @@ import re
 import anthropic
 
 
+_ASCII_LETTER_RE = re.compile(r"[A-Za-z]")
+_PRODUCE_CATEGORIES = ("fruits", "vegetables", "fish")
+
+
+def validate_english_produce(payload: dict) -> None:
+    """Reject English produce entries that contain no readable Latin label.
+
+    Japanese names are welcome in the English block, but they must be paired
+    with an English common name such as ``茗荷 (myoga ginger)``. This guard runs
+    before newly generated content is cached or sent, preventing a prompt miss
+    from becoming a Japanese-only English newsletter.
+    """
+    en = payload.get("en") if isinstance(payload, dict) else None
+    produce = en.get("seasonal_produce") if isinstance(en, dict) else None
+    if not isinstance(produce, dict):
+        raise ValueError("English content is missing seasonal_produce.")
+
+    missing: list[str] = []
+    for category in _PRODUCE_CATEGORIES:
+        items = produce.get(category)
+        if not isinstance(items, list):
+            raise ValueError(f"English seasonal_produce.{category} must be a list.")
+        for index, item in enumerate(items):
+            if not isinstance(item, str) or not _ASCII_LETTER_RE.search(item):
+                missing.append(f"{category}[{index}]={item!r}")
+
+    if missing:
+        raise ValueError(
+            "English seasonal produce must include an English-readable name; "
+            "Japanese-only entries: " + ", ".join(missing)
+        )
+
+
 def normalize_dish_name(name: str) -> str:
     """Normalize a dish name for duplicate detection.
 
@@ -91,9 +124,9 @@ micro-season. Ground it in the senses — what one sees, hears, smells, or feels
   "nature_notes": "2-3 sentences describing what is happening in nature during this exact period: \
 which animals are behaving how, what plants are doing, what the sky and water look like.",
   "seasonal_produce": {{
-    "fruits": ["3-4 fruits at their peak right now in Japan"],
-    "vegetables": ["3-4 vegetables at their peak right now in Japan"],
-    "fish": ["2-3 fish that are most prized or abundant right now"]
+    "fruits": ["3-4 fruits at their peak right now in Japan; EN block entries must include the common English name"],
+    "vegetables": ["3-4 vegetables at their peak right now in Japan; EN block entries must include the common English name"],
+    "fish": ["2-3 fish that are most prized or abundant right now; EN block entries must include the common English name"]
   }},
   "seasonal_dishes": [
     {{"name": "Japanese dish name", "description": "One sentence: what it is and why it belongs to this exact moment"}},
@@ -110,6 +143,11 @@ tradition, or folk belief that is directly tied to this time of year.",
   "closing": "A single evocative closing sentence — not a summary, but an image or gesture that \
 creates a sense of quiet transition into what comes next."
 }}
+
+Notes for the EN block:
+- Every value in seasonal_produce.fruits, seasonal_produce.vegetables, and seasonal_produce.fish MUST contain a common English name written in Latin letters.
+- A Japanese market name may be retained only when immediately glossed as `Japanese (common English name)`, for example `茗荷 (myoga ginger)` or `鱧 (pike conger)`.
+- Never return a Japanese-only produce value in the EN block, including familiar katakana loanwords such as `ブルーベリー` or `マンゴー`.
 
 Notes for the JA block:
 - Produce names ("fruits", "vegetables", "fish") should be the natural Japanese forms used at \
@@ -170,6 +208,8 @@ appropriate dishes. Never let an entire dishes block be made up of repeats."""
             "Expected bilingual payload with top-level 'en' and 'ja' keys; got: "
             f"{list(payload.keys()) if isinstance(payload, dict) else type(payload).__name__}"
         )
+
+    validate_english_produce(payload)
 
     return payload
 

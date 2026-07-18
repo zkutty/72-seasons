@@ -1415,7 +1415,7 @@
         ],
         "vegetables": [
           "胡瓜 (cucumber)",
-          "トマト",
+          "トマト (tomato)",
           "ピーマン (green pepper)",
           "オクラ (okra)"
         ],
@@ -1611,20 +1611,20 @@
       "seasonal_produce": {
         "fruits": [
           "桃 (white peach)",
-          "プラム (Japanese plum)",
-          "ブルーベリー",
-          "マンゴー"
+          "プラム (plum)",
+          "ブルーベリー (blueberry)",
+          "マンゴー (mango)"
         ],
         "vegetables": [
-          "茗荷",
-          "空芯菜",
-          "モロヘイヤ",
-          "とうもろこし"
+          "茗荷 (myoga ginger)",
+          "空芯菜 (water spinach)",
+          "モロヘイヤ (molokhia)",
+          "とうもろこし (sweet corn)"
         ],
         "fish": [
-          "鱧 (hamo)",
-          "穴子",
-          "鮑"
+          "鱧 (pike conger)",
+          "穴子 (conger eel)",
+          "鮑 (abalone)"
         ]
       },
       "seasonal_dishes": [
