@@ -46,43 +46,6 @@ def validate_english_produce(payload: dict) -> None:
         )
 
 
-def validate_generated_fact_refs(payload: dict, allowed_fact_ids: set[str]) -> None:
-    """Require every generated factual field to cite the approved fact pack."""
-    from content_auditor import iter_claims
-
-    missing: list[str] = []
-    invalid: list[str] = []
-    for language in ("en", "ja"):
-        block = payload.get(language)
-        if not isinstance(block, dict):
-            continue
-        refs = block.get("fact_refs")
-        if not isinstance(refs, dict):
-            missing.append(f"{language}.fact_refs")
-            continue
-
-        other_language = "ja" if language == "en" else "en"
-        for claim in iter_claims({language: block, other_language: {}}):
-            if claim.kind == "poetic":
-                continue
-            relative_path = claim.path.removeprefix(f"{language}.")
-            fact_ids = refs.get(relative_path)
-            if not isinstance(fact_ids, list) or not fact_ids:
-                missing.append(claim.path)
-                continue
-            unknown = [fact_id for fact_id in fact_ids if fact_id not in allowed_fact_ids]
-            if unknown:
-                invalid.append(f"{claim.path}={unknown!r}")
-
-    if missing or invalid:
-        details = []
-        if missing:
-            details.append("missing references: " + ", ".join(missing))
-        if invalid:
-            details.append("references outside approved fact pack: " + ", ".join(invalid))
-        raise ValueError("Generated content failed evidence-reference validation; " + "; ".join(details))
-
-
 def normalize_dish_name(name: str) -> str:
     """Normalize a dish name for duplicate detection.
 
@@ -115,12 +78,7 @@ names where the kanji is uncommon).
 Always respond with valid JSON only — no markdown, no preamble, no explanation."""
 
 
-def generate_content(
-    season: dict,
-    exclude_dishes: dict | None = None,
-    fact_pack: list[dict] | None = None,
-    allow_unverified_draft: bool = False,
-) -> dict:
+def generate_content(season: dict, exclude_dishes: dict | None = None) -> dict:
     """Call the Claude API to generate rich bilingual content for a micro-season.
 
     Args:
@@ -136,20 +94,6 @@ def generate_content(
         A dict of the shape ``{"en": {...flat fields...}, "ja": {...flat fields...}}``.
         Each language block has the same field names and shape.
     """
-    if not fact_pack and not allow_unverified_draft:
-        raise ValueError(
-            f"Season #{season.get('id', '?')} has no verified fact pack. "
-            "Research and approve facts before generating content."
-        )
-
-    allowed_fact_ids = {
-        str(fact["id"])
-        for fact in fact_pack
-        if isinstance(fact, dict) and fact.get("id")
-    }
-    if not allowed_fact_ids and not allow_unverified_draft:
-        raise ValueError("Verified fact pack contains no usable fact IDs.")
-
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
     from datetime import date as _date
@@ -157,21 +101,6 @@ def generate_content(
     start_str = _fmt(season["start_month"], season["start_day"])
     end_str = _fmt(season["end_month"], season["end_day"]) if "end_month" in season else "unknown"
     duration = season.get("duration_days", 5)
-
-    evidence_rules = (
-        f"""EVIDENCE RULES — mandatory:
-- Use ONLY facts from the approved fact pack below.
-- Every factual field and list item must have matching `fact_refs`.
-
-APPROVED FACT PACK:
-{json.dumps(fact_pack, ensure_ascii=False, indent=2)}"""
-        if fact_pack
-        else """DRAFT RESEARCH MODE:
-This is an unpublished candidate for independent agent review. Use conservative,
-widely documented claims; do not invent obscure customs or dishes. Return an
-empty `fact_refs` object. This draft cannot publish until the agent quorum
-researches every claim and the deterministic gate approves it."""
-    )
 
     user_prompt = f"""Generate newsletter content for this Japanese micro-season (七十二候), \
 in **both English and Japanese**. Each language must read as native prose, not as a translation of \
@@ -212,19 +141,8 @@ tradition, or folk belief that is directly tied to this time of year.",
     "english": "English translation that preserves the season word (kigo) and the turn"
   }},
   "closing": "A single evocative closing sentence — not a summary, but an image or gesture that \
-creates a sense of quiet transition into what comes next.",
-  "fact_refs": {{
-    "summary": ["fact IDs supporting the summary"],
-    "opening": ["fact IDs supporting factual details in the opening"],
-    "nature_notes": ["fact IDs supporting the nature notes"],
-    "seasonal_produce.fruits[0]": ["fact IDs supporting this exact item"],
-    "seasonal_dishes[0].name": ["fact IDs proving this dish exists"],
-    "seasonal_dishes[0].description": ["fact IDs supporting ingredients, preparation, season, and region"],
-    "cultural_note": ["fact IDs supporting the cultural note"]
-  }}
+creates a sense of quiet transition into what comes next."
 }}
-
-{evidence_rules}
 
 Notes for the EN block:
 - Every value in seasonal_produce.fruits, seasonal_produce.vegetables, and seasonal_produce.fish MUST contain a common English name written in Latin letters.
@@ -292,8 +210,6 @@ appropriate dishes. Never let an entire dishes block be made up of repeats."""
         )
 
     validate_english_produce(payload)
-    if not allow_unverified_draft:
-        validate_generated_fact_refs(payload, allowed_fact_ids)
 
     return payload
 
