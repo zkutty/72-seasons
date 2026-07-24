@@ -353,9 +353,16 @@ def main() -> None:
         log.info("No valid approval found · running independent agent quorum …")
         result = review_and_save_season(cache_key)
         if not result["approved"]:
-            raise RuntimeError(
-                f"Agent quorum could not approve season #{season['id']}; publication remains blocked."
+            failures = "\n".join(
+                f"- {item['path']}: {item.get('reason') or 'agent disagreement'}"
+                for item in result.get("failed_claims", [])
             )
+            raise RuntimeError(
+                f"Agent quorum could not approve season #{season['id']} after "
+                f"automated correction; publication remains blocked.\n{failures}"
+            )
+        cache = load_cache()
+        content = cache[cache_key]
         assert_season_approved(cache_key, content)
     log.info("Editorial gate passed.")
 

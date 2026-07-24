@@ -34,6 +34,7 @@ load_dotenv()
 
 MODEL = os.environ.get("CONTENT_REVIEW_MODEL", "claude-opus-4-5")
 MAX_OUTPUT_TOKENS = int(os.environ.get("CONTENT_REVIEW_MAX_TOKENS", "24000"))
+MAX_REPAIR_ATTEMPTS = int(os.environ.get("CONTENT_REVIEW_REPAIR_ATTEMPTS", "1"))
 WEB_SEARCH_TOOL = {
     "type": "web_search_20250305",
     "name": "web_search",
@@ -130,6 +131,19 @@ RESEARCH_OUTPUT_SCHEMA = _strict_object(
 )
 VERIFIER_OUTPUT_SCHEMA = _strict_object(
     {"claims": {"type": "array", "items": VERIFIER_CLAIM_SCHEMA}}
+)
+REPAIR_OUTPUT_SCHEMA = _strict_object(
+    {
+        "replacements": {
+            "type": "array",
+            "items": _strict_object(
+                {
+                    "path": {"type": "string"},
+                    "value": {"type": "string"},
+                }
+            ),
+        }
+    }
 )
 
 
@@ -268,6 +282,74 @@ only when two independent publishers support the same fact. Equivalent EN/JA
 paths must reuse the same stable fact IDs."""
 
 
+def _repair_prompt(season: dict, content: dict, failed_claims: list[dict]) -> str:
+    return f"""Act as a corrective Japanese seasonal-content editor. Search
+authoritative Japanese sources and replace every failed claim with a concise,
+directly supportable alternative for this exact date and region. Preserve each
+path and its language. For paired EN/JA items, keep the underlying ingredient,
+dish, or fact equivalent. Avoid claims that merely describe year-round
+availability. Poetic fields may be rewritten to remove unsupported factual
+assertions.
+
+Season: {json.dumps(season, ensure_ascii=False)}
+Current content: {json.dumps(content, ensure_ascii=False)}
+Failed claims: {json.dumps(failed_claims, ensure_ascii=False)}
+
+Return exactly one non-empty string replacement for every failed path:
+{{"replacements": [{{"path": "<failed path>", "value": "<corrected text>"}}]}}
+
+Do not add paths and do not omit failed paths. These replacements will undergo
+a completely fresh two-researcher plus adversarial-verifier quorum."""
+
+
+def _set_claim_text(content: dict, path: str, value: str) -> None:
+    tokens = re.findall(r"[^.\[\]]+", path)
+    normalized = [int(token) if token.isdigit() else token for token in tokens]
+    target = content
+    for token in normalized[:-1]:
+        target = target[token]
+    final = normalized[-1]
+    if not isinstance(target[final], str):
+        raise ValueError(f"Repair path does not resolve to text: {path}")
+    target[final] = value
+
+
+def _repair_candidate(
+    client: anthropic.Anthropic,
+    season: dict,
+    content: dict,
+    failed_claims: list[dict],
+) -> int:
+    expected = {item["path"] for item in failed_claims}
+    response = _call_with_search(
+        client,
+        _repair_prompt(season, content, failed_claims),
+        REPAIR_OUTPUT_SCHEMA,
+    )
+    replacements = response.get("replacements")
+    if not isinstance(replacements, list):
+        raise ValueError("Correction agent did not return replacements")
+    indexed: dict[str, str] = {}
+    for item in replacements:
+        path = item.get("path") if isinstance(item, dict) else None
+        value = item.get("value") if isinstance(item, dict) else None
+        if path in indexed:
+            raise ValueError(f"Correction agent duplicated path: {path}")
+        if path not in expected:
+            raise ValueError(f"Correction agent returned an unexpected path: {path}")
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"Correction agent returned empty text for: {path}")
+        indexed[path] = value.strip()
+    missing = expected - set(indexed)
+    if missing:
+        raise ValueError(
+            "Correction agent omitted paths: " + ", ".join(sorted(missing))
+        )
+    for path, value in indexed.items():
+        _set_claim_text(content, path, value)
+    return len(indexed)
+
+
 def _safe_id(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
 
@@ -327,6 +409,7 @@ def review_season(
     )
 
     decisions: dict[str, dict] = {}
+    failed_claims: list[dict] = []
     all_approved = True
     for claim in claim_rows:
         path = claim["path"]
@@ -380,6 +463,42 @@ def review_season(
             "agent_reviews": reviews,
             "reason": verifier_claim.get("reason"),
         }
+        if final_status == "needs_review":
+            failed_claims.append(
+                {
+                    "path": path,
+                    "text": claim["text"],
+                    "reason": verifier_claim.get("reason"),
+                    "agent_verdicts": [
+                        {
+                            "role": review["role"],
+                            "verdict": review["verdict"],
+                            "confidence": review["confidence"],
+                        }
+                        for review in reviews
+                    ],
+                }
+            )
+
+    # A correction to one language must also refresh the equivalent field in
+    # the other language so the next verifier sees the same underlying fact.
+    claim_by_path = {claim["path"]: claim for claim in claim_rows}
+    failed_by_path = {claim["path"]: claim for claim in failed_claims}
+    for failed in list(failed_claims):
+        language, separator, relative = failed["path"].partition(".")
+        if not separator or language not in {"en", "ja"}:
+            continue
+        paired_path = f"{'ja' if language == 'en' else 'en'}.{relative}"
+        paired = claim_by_path.get(paired_path)
+        if paired and paired_path not in failed_by_path:
+            paired_failure = {
+                "path": paired_path,
+                "text": paired["text"],
+                "reason": "paired bilingual correction",
+                "agent_verdicts": [],
+            }
+            failed_claims.append(paired_failure)
+            failed_by_path[paired_path] = paired_failure
 
     manifest.setdefault("seasons", {})[season_id] = {
         "status": "verified" if all_approved else "needs_review",
@@ -387,7 +506,11 @@ def review_season(
         "review_method": "agent_quorum_v1",
         "claims": decisions,
     }
-    return {"approved": all_approved, "claim_count": len(claim_rows)}
+    return {
+        "approved": all_approved,
+        "claim_count": len(claim_rows),
+        "failed_claims": failed_claims,
+    }
 
 
 def _save_json(path: Path, payload: dict) -> None:
@@ -405,6 +528,20 @@ def review_and_save_season(season_id: str) -> dict:
     catalog = load_json(DEFAULT_CATALOG)
     manifest = load_json(DEFAULT_MANIFEST)
     result = review_season(season_id, cache, seasons, catalog, manifest)
+    season = next(
+        item for item in seasons["seasons"] if str(item["id"]) == season_id
+    )
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    for _ in range(MAX_REPAIR_ATTEMPTS):
+        if result["approved"]:
+            break
+        corrected = _repair_candidate(
+            client, season, cache[season_id], result["failed_claims"]
+        )
+        if not corrected:
+            break
+        result = review_season(season_id, cache, seasons, catalog, manifest)
+    _save_json(DEFAULT_CACHE, cache)
     _save_json(DEFAULT_CATALOG, catalog)
     _save_json(DEFAULT_MANIFEST, manifest)
     return result

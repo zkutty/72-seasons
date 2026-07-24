@@ -54,6 +54,39 @@ def test_claims_by_path_rejects_duplicates():
         reviewer._claims_by_path(result)
 
 
+def test_set_claim_text_updates_nested_list_value():
+    content = {
+        "en": {
+            "seasonal_produce": {
+                "fruits": ["old fruit"],
+            }
+        }
+    }
+
+    reviewer._set_claim_text(
+        content, "en.seasonal_produce.fruits[0]", "supported fruit"
+    )
+
+    assert content["en"]["seasonal_produce"]["fruits"][0] == "supported fruit"
+
+
+def test_repair_candidate_requires_exact_failed_path_set(monkeypatch):
+    content = {"en": {"summary": "unsupported"}}
+    failed = [{"path": "en.summary", "text": "unsupported"}]
+    monkeypatch.setattr(
+        reviewer,
+        "_call_with_search",
+        lambda *_: {
+            "replacements": [{"path": "en.summary", "value": "supported"}]
+        },
+    )
+
+    count = reviewer._repair_candidate(object(), {}, content, failed)
+
+    assert count == 1
+    assert content["en"]["summary"] == "supported"
+
+
 def test_call_with_search_streams_structured_output_with_larger_budget():
     messages = FakeMessages([response('{"claims": []}')])
     client = SimpleNamespace(messages=messages)
