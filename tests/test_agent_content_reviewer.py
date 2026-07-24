@@ -70,6 +70,8 @@ def test_call_with_search_streams_structured_output_with_larger_budget():
         call["output_config"]["format"]["schema"]
         is reviewer.RESEARCH_OUTPUT_SCHEMA
     )
+    confidence_schema = reviewer.RESEARCH_CLAIM_SCHEMA["properties"]["confidence"]
+    assert confidence_schema == {"type": "number"}
 
 
 @pytest.mark.parametrize("stop_reason", ["max_tokens", "refusal"])

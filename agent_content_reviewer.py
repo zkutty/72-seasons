@@ -63,7 +63,7 @@ RESEARCH_CLAIM_SCHEMA = _strict_object(
     {
         "path": {"type": "string"},
         "status": {"type": "string", "enum": CLAIM_STATUS},
-        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "confidence": {"type": "number"},
         "reason": {"type": "string"},
         "region_context": {"type": ["string", "null"]},
         "source_urls": {"type": "array", "items": {"type": "string"}},
@@ -119,7 +119,7 @@ VERIFIER_CLAIM_SCHEMA = _strict_object(
     {
         "path": {"type": "string"},
         "status": {"type": "string", "enum": CLAIM_STATUS},
-        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "confidence": {"type": "number"},
         "reason": {"type": "string"},
         "region_context": {"type": ["string", "null"]},
         "facts": {"type": "array", "items": FACT_SCHEMA},
@@ -338,7 +338,7 @@ def review_season(
         statuses = {review["verdict"] for review in reviews}
         confidence_ok = all(
             isinstance(review["confidence"], (int, float))
-            and review["confidence"] >= MIN_AGENT_CONFIDENCE
+            and MIN_AGENT_CONFIDENCE <= review["confidence"] <= 1
             for review in reviews
         )
         final_status = statuses.pop() if len(statuses) == 1 else "needs_review"
