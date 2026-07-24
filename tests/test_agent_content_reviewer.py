@@ -87,6 +87,42 @@ def test_repair_candidate_requires_exact_failed_path_set(monkeypatch):
     assert content["en"]["summary"] == "supported"
 
 
+def test_repair_candidate_batches_large_failed_sets(monkeypatch):
+    content = {
+        "en": {
+            "seasonal_produce": {
+                "fruits": [f"old-{index}" for index in range(9)]
+            }
+        }
+    }
+    failed = [
+        {
+            "path": f"en.seasonal_produce.fruits[{index}]",
+            "text": f"old-{index}",
+        }
+        for index in range(9)
+    ]
+    calls = []
+
+    def repair_batch(_client, prompt, _schema):
+        calls.append(prompt)
+        batch = failed[:8] if len(calls) == 1 else failed[8:]
+        return {
+            "replacements": [
+                {"path": item["path"], "value": f"supported-{index}"}
+                for index, item in enumerate(batch, start=(len(calls) - 1) * 8)
+            ]
+        }
+
+    monkeypatch.setattr(reviewer, "_call_with_search", repair_batch)
+
+    count = reviewer._repair_candidate(object(), {}, content, failed)
+
+    assert count == 9
+    assert len(calls) == 2
+    assert content["en"]["seasonal_produce"]["fruits"][-1] == "supported-8"
+
+
 def test_call_with_search_streams_structured_output_with_larger_budget():
     messages = FakeMessages([response('{"claims": []}')])
     client = SimpleNamespace(messages=messages)

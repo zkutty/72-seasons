@@ -35,6 +35,7 @@ load_dotenv()
 MODEL = os.environ.get("CONTENT_REVIEW_MODEL", "claude-opus-4-5")
 MAX_OUTPUT_TOKENS = int(os.environ.get("CONTENT_REVIEW_MAX_TOKENS", "24000"))
 MAX_REPAIR_ATTEMPTS = int(os.environ.get("CONTENT_REVIEW_REPAIR_ATTEMPTS", "1"))
+REPAIR_BATCH_SIZE = int(os.environ.get("CONTENT_REVIEW_REPAIR_BATCH_SIZE", "8"))
 WEB_SEARCH_TOOL = {
     "type": "web_search_20250305",
     "name": "web_search",
@@ -320,34 +321,49 @@ def _repair_candidate(
     content: dict,
     failed_claims: list[dict],
 ) -> int:
-    expected = {item["path"] for item in failed_claims}
-    response = _call_with_search(
-        client,
-        _repair_prompt(season, content, failed_claims),
-        REPAIR_OUTPUT_SCHEMA,
+    if REPAIR_BATCH_SIZE < 2:
+        raise ValueError("CONTENT_REVIEW_REPAIR_BATCH_SIZE must be at least 2")
+    ordered = sorted(
+        failed_claims,
+        key=lambda item: (
+            item["path"].partition(".")[2],
+            item["path"],
+        ),
     )
-    replacements = response.get("replacements")
-    if not isinstance(replacements, list):
-        raise ValueError("Correction agent did not return replacements")
-    indexed: dict[str, str] = {}
-    for item in replacements:
-        path = item.get("path") if isinstance(item, dict) else None
-        value = item.get("value") if isinstance(item, dict) else None
-        if path in indexed:
-            raise ValueError(f"Correction agent duplicated path: {path}")
-        if path not in expected:
-            raise ValueError(f"Correction agent returned an unexpected path: {path}")
-        if not isinstance(value, str) or not value.strip():
-            raise ValueError(f"Correction agent returned empty text for: {path}")
-        indexed[path] = value.strip()
-    missing = expected - set(indexed)
-    if missing:
-        raise ValueError(
-            "Correction agent omitted paths: " + ", ".join(sorted(missing))
+    corrected = 0
+    for start in range(0, len(ordered), REPAIR_BATCH_SIZE):
+        batch = ordered[start : start + REPAIR_BATCH_SIZE]
+        expected = {item["path"] for item in batch}
+        response = _call_with_search(
+            client,
+            _repair_prompt(season, content, batch),
+            REPAIR_OUTPUT_SCHEMA,
         )
-    for path, value in indexed.items():
-        _set_claim_text(content, path, value)
-    return len(indexed)
+        replacements = response.get("replacements")
+        if not isinstance(replacements, list):
+            raise ValueError("Correction agent did not return replacements")
+        indexed: dict[str, str] = {}
+        for item in replacements:
+            path = item.get("path") if isinstance(item, dict) else None
+            value = item.get("value") if isinstance(item, dict) else None
+            if path in indexed:
+                raise ValueError(f"Correction agent duplicated path: {path}")
+            if path not in expected:
+                raise ValueError(
+                    f"Correction agent returned an unexpected path: {path}"
+                )
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"Correction agent returned empty text for: {path}")
+            indexed[path] = value.strip()
+        missing = expected - set(indexed)
+        if missing:
+            raise ValueError(
+                "Correction agent omitted paths: " + ", ".join(sorted(missing))
+            )
+        for path, value in indexed.items():
+            _set_claim_text(content, path, value)
+        corrected += len(indexed)
+    return corrected
 
 
 def _safe_id(value: str) -> str:
