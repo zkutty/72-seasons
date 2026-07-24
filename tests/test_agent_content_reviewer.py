@@ -1,0 +1,69 @@
+from types import SimpleNamespace
+
+import pytest
+
+import agent_content_reviewer as reviewer
+
+
+class FakeMessages:
+    def __init__(self, responses):
+        self.responses = iter(responses)
+        self.calls = []
+
+    def create(self, **kwargs):
+        self.calls.append(kwargs)
+        return next(self.responses)
+
+
+def response(text, stop_reason="end_turn"):
+    return SimpleNamespace(
+        stop_reason=stop_reason,
+        content=[SimpleNamespace(type="text", text=text)],
+    )
+
+
+def test_claims_by_path_indexes_schema_output():
+    result = {
+        "claims": [
+            {"path": "en.summary", "status": "verified"},
+            {"path": "ja.summary", "status": "verified"},
+        ]
+    }
+
+    assert set(reviewer._claims_by_path(result)) == {"en.summary", "ja.summary"}
+
+
+def test_claims_by_path_rejects_duplicates():
+    result = {"claims": [{"path": "en.summary"}, {"path": "en.summary"}]}
+
+    with pytest.raises(ValueError, match="duplicate claim path"):
+        reviewer._claims_by_path(result)
+
+
+def test_call_with_search_uses_structured_output_and_larger_budget():
+    messages = FakeMessages([response('{"claims": []}')])
+    client = SimpleNamespace(messages=messages)
+
+    result = reviewer._call_with_search(
+        client, "review this", reviewer.RESEARCH_OUTPUT_SCHEMA
+    )
+
+    assert result == {"claims": []}
+    call = messages.calls[0]
+    assert call["max_tokens"] == reviewer.MAX_OUTPUT_TOKENS
+    assert call["output_config"]["format"]["type"] == "json_schema"
+    assert (
+        call["output_config"]["format"]["schema"]
+        is reviewer.RESEARCH_OUTPUT_SCHEMA
+    )
+
+
+@pytest.mark.parametrize("stop_reason", ["max_tokens", "refusal"])
+def test_call_with_search_fails_closed_on_incomplete_output(stop_reason):
+    messages = FakeMessages([response('{"claims": []}', stop_reason)])
+    client = SimpleNamespace(messages=messages)
+
+    with pytest.raises(RuntimeError, match=stop_reason):
+        reviewer._call_with_search(
+            client, "review this", reviewer.RESEARCH_OUTPUT_SCHEMA
+        )

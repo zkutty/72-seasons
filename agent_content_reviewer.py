@@ -33,6 +33,7 @@ from content_auditor import (
 load_dotenv()
 
 MODEL = os.environ.get("CONTENT_REVIEW_MODEL", "claude-opus-4-5")
+MAX_OUTPUT_TOKENS = int(os.environ.get("CONTENT_REVIEW_MAX_TOKENS", "24000"))
 WEB_SEARCH_TOOL = {
     "type": "web_search_20250305",
     "name": "web_search",
@@ -45,6 +46,91 @@ government, public market/agriculture/fisheries bodies, museums, universities,
 and official festival organizations. Never use another AI answer as evidence.
 Distinguish peak season from mere year-round availability and national claims
 from regional ones. Return JSON only."""
+
+CLAIM_STATUS = ["verified", "rejected", "non_factual", "needs_review"]
+
+
+def _strict_object(properties: dict) -> dict:
+    return {
+        "type": "object",
+        "properties": properties,
+        "required": list(properties),
+        "additionalProperties": False,
+    }
+
+
+RESEARCH_CLAIM_SCHEMA = _strict_object(
+    {
+        "path": {"type": "string"},
+        "status": {"type": "string", "enum": CLAIM_STATUS},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "reason": {"type": "string"},
+        "region_context": {"type": ["string", "null"]},
+        "source_urls": {"type": "array", "items": {"type": "string"}},
+    }
+)
+SOURCE_SCHEMA = _strict_object(
+    {
+        "title": {"type": "string"},
+        "publisher": {"type": "string"},
+        "url": {"type": "string"},
+        "tier": {
+            "type": "string",
+            "enum": ["government", "public_industry", "culinary_reference"],
+        },
+    }
+)
+SEASON_WINDOW_SCHEMA = _strict_object(
+    {
+        "start": {"type": "string"},
+        "end": {"type": "string"},
+        "regions": {"type": "array", "items": {"type": "string"}},
+    }
+)
+FACT_SCHEMA = _strict_object(
+    {
+        "fact_id": {"type": "string"},
+        "kind": {
+            "type": "string",
+            "enum": [
+                "ingredient",
+                "dish",
+                "dish_description",
+                "nature",
+                "culture",
+                "calendar",
+                "prose",
+                "poetic",
+            ],
+        },
+        "category": {"enum": [None, "fruit", "vegetable", "fish"]},
+        "claim": {"type": "string"},
+        "names": _strict_object(
+            {
+                "en": {"type": "array", "items": {"type": "string"}},
+                "ja": {"type": "array", "items": {"type": "string"}},
+            }
+        ),
+        "season_windows": {"type": "array", "items": SEASON_WINDOW_SCHEMA},
+        "sources": {"type": "array", "items": SOURCE_SCHEMA},
+    }
+)
+VERIFIER_CLAIM_SCHEMA = _strict_object(
+    {
+        "path": {"type": "string"},
+        "status": {"type": "string", "enum": CLAIM_STATUS},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "reason": {"type": "string"},
+        "region_context": {"type": ["string", "null"]},
+        "facts": {"type": "array", "items": FACT_SCHEMA},
+    }
+)
+RESEARCH_OUTPUT_SCHEMA = _strict_object(
+    {"claims": {"type": "array", "items": RESEARCH_CLAIM_SCHEMA}}
+)
+VERIFIER_OUTPUT_SCHEMA = _strict_object(
+    {"claims": {"type": "array", "items": VERIFIER_CLAIM_SCHEMA}}
+)
 
 
 def _extract_json(text: str) -> dict:
@@ -65,14 +151,34 @@ def _message_text(message) -> str:
     )
 
 
-def _call_with_search(client: anthropic.Anthropic, prompt: str) -> dict:
+def _claims_by_path(result: dict) -> dict[str, dict]:
+    claims = result.get("claims")
+    if not isinstance(claims, list):
+        raise ValueError("Reviewer response must contain a claims array")
+    indexed: dict[str, dict] = {}
+    for claim in claims:
+        path = claim.get("path") if isinstance(claim, dict) else None
+        if not isinstance(path, str) or not path:
+            raise ValueError("Every reviewer claim must have a non-empty path")
+        if path in indexed:
+            raise ValueError(f"Reviewer returned duplicate claim path: {path}")
+        indexed[path] = claim
+    return indexed
+
+
+def _call_with_search(
+    client: anthropic.Anthropic, prompt: str, output_schema: dict
+) -> dict:
     messages = [{"role": "user", "content": prompt}]
     response = client.messages.create(
         model=MODEL,
-        max_tokens=8000,
+        max_tokens=MAX_OUTPUT_TOKENS,
         system=REVIEW_SYSTEM,
         messages=messages,
         tools=[WEB_SEARCH_TOOL],
+        output_config={
+            "format": {"type": "json_schema", "schema": output_schema}
+        },
     )
     # Server tools can pause a long-running turn. Continue with the exact
     # assistant content so search state and citations are preserved.
@@ -82,10 +188,18 @@ def _call_with_search(client: anthropic.Anthropic, prompt: str) -> dict:
         messages.append({"role": "assistant", "content": response.content})
         response = client.messages.create(
             model=MODEL,
-            max_tokens=8000,
+            max_tokens=MAX_OUTPUT_TOKENS,
             system=REVIEW_SYSTEM,
             messages=messages,
             tools=[WEB_SEARCH_TOOL],
+            output_config={
+                "format": {"type": "json_schema", "schema": output_schema}
+            },
+        )
+    if response.stop_reason != "end_turn":
+        raise RuntimeError(
+            "Reviewer did not complete a schema-valid response "
+            f"(stop_reason={response.stop_reason!r})"
         )
     return _extract_json(_message_text(response))
 
@@ -98,15 +212,14 @@ Claims: {json.dumps(claims, ensure_ascii=False)}
 
 For every claim path, search for direct evidence and return:
 {{
-  "claims": {{
-    "<path>": {{
+  "claims": [{{
+      "path": "<path>",
       "status": "verified" | "rejected" | "non_factual" | "needs_review",
       "confidence": 0.0-1.0,
       "reason": "concise evidence analysis",
       "region_context": null | "region identifier",
       "source_urls": ["direct URLs actually consulted"]
-    }}
-  }}
+  }}]
 }}
 
 Use non_factual only for genuinely poetic summary/opening/closing text with no
@@ -131,8 +244,8 @@ Research B: {json.dumps(research_b, ensure_ascii=False)}
 
 Return JSON:
 {{
-  "claims": {{
-    "<path>": {{
+  "claims": [{{
+      "path": "<path>",
       "status": "verified" | "rejected" | "non_factual" | "needs_review",
       "confidence": 0.0-1.0,
       "reason": "why the evidence survives adversarial review",
@@ -151,8 +264,7 @@ Return JSON:
           "tier": "government|public_industry|culinary_reference"
         }}]
       }}]
-    }}
-  }}
+  }}]
 }}
 
 For verified claims, facts and sources are mandatory. Use culinary_reference
@@ -169,7 +281,7 @@ def _source_id(url: str) -> str:
 
 
 def _review_record(role: str, result: dict, path: str, run_id: str) -> dict:
-    claim = result.get("claims", {}).get(path, {})
+    claim = result.get(path, {})
     return {
         "run_id": run_id,
         "role": role,
@@ -200,10 +312,22 @@ def review_season(
     ]
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     run_a, run_b, run_v = (str(uuid4()) for _ in range(3))
-    research_a = _call_with_search(client, _review_prompt(season, claim_rows, "A"))
-    research_b = _call_with_search(client, _review_prompt(season, claim_rows, "B"))
-    verifier = _call_with_search(
-        client, _verifier_prompt(season, claim_rows, research_a, research_b)
+    research_a = _claims_by_path(
+        _call_with_search(
+            client, _review_prompt(season, claim_rows, "A"), RESEARCH_OUTPUT_SCHEMA
+        )
+    )
+    research_b = _claims_by_path(
+        _call_with_search(
+            client, _review_prompt(season, claim_rows, "B"), RESEARCH_OUTPUT_SCHEMA
+        )
+    )
+    verifier = _claims_by_path(
+        _call_with_search(
+            client,
+            _verifier_prompt(season, claim_rows, research_a, research_b),
+            VERIFIER_OUTPUT_SCHEMA,
+        )
     )
 
     decisions: dict[str, dict] = {}
@@ -226,7 +350,7 @@ def review_season(
             final_status = "needs_review"
             all_approved = False
 
-        verifier_claim = verifier.get("claims", {}).get(path, {})
+        verifier_claim = verifier.get(path, {})
         fact_ids: list[str] = []
         if final_status == "verified":
             for fact in verifier_claim.get("facts", []):
