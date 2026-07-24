@@ -41,6 +41,8 @@ scheduled mailers can send the same letter twice.
 │   ├── seasons.json            # All 72 seasons and calendar metadata
 │   ├── strings.json            # English and Japanese interface strings
 │   ├── content_cache.json      # Generated bilingual season content
+│   ├── fact_catalog.json       # Reviewed facts, date/region windows, and sources
+│   ├── content_audit.json      # Human approvals tied to exact content hashes
 │   ├── ingredients.json        # Generated ingredient reference data
 │   └── dishes.json             # Generated dish reference data
 ├── templates/                  # Jinja templates for email and static pages
@@ -48,6 +50,7 @@ scheduled mailers can send the same letter twice.
 ├── ja/                         # Generated Japanese homepage and archive
 ├── season_mailer.py            # Pipeline orchestrator
 ├── content_generator.py        # Claude content generation
+├── content_auditor.py          # Offline evidence and publication gate
 ├── email_sender.py             # Buttondown subscriber fetch + Resend delivery
 ├── ingredient_generator.py     # Ingredient and dish lookup generation
 ├── archive_builder.py          # Homepage, archive, sitemap, unsubscribe pages
@@ -165,6 +168,12 @@ committed.
   for the website surfaces.
 - Edit the prompts in `content_generator.py` and `ingredient_generator.py` to
   change generated content.
+- Before generating or publishing a season, complete the evidence review in
+  [`docs/content-audit.md`](docs/content-audit.md). Generated facts are drafts:
+  only a human-reviewed manifest entry whose hash matches the exact cache
+  payload can pass the mailer and static-publishing gate.
+- Run `python content_auditor.py audit` for a report or add `--strict` to use
+  the same blocking policy as CI.
 - Follow `BRAND.md` for colors, typography, and editorial voice.
 - Season dates and names are defined in `data/seasons.json`.
 

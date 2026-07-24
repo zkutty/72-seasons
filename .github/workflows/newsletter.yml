@@ -41,6 +41,9 @@ jobs:
             python season_mailer.py --force --build-only
           fi
 
+      - name: Verify complete content cache audit
+        run: python content_auditor.py audit --strict
+
       - name: Commit archive, cache, and homepage updates
         run: |
           git config user.name "github-actions[bot]"

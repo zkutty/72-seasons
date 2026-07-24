@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "baseline_region": "national",
+    "regional_exceptions_require_context": true,
+    "fallback_sources_required": 2,
+    "notes": "Facts are never approved automatically. Government and public-industry sources are preferred; otherwise two independent culinary references are required."
+  },
+  "sources": {
+    "maff-local-cuisine": {
+      "title": "Our Regional Cuisines — Beloved tastes and flavors we want to pass on to the next generation",
+      "publisher": "Ministry of Agriculture, Forestry and Fisheries of Japan",
+      "url": "https://www.maff.go.jp/j/keikaku/syokubunka/k_ryouri/index.html",
+      "tier": "government",
+      "accessed_at": "2026-07-23"
+    },
+    "alic-vegetable-calendars": {
+      "title": "Prefectural vegetable season calendars",
+      "publisher": "Agriculture & Livestock Industries Corporation",
+      "url": "https://www.alic.go.jp/consumer/vegetable/index.html",
+      "tier": "public_industry",
+      "accessed_at": "2026-07-23"
+    },
+    "fukuoka-fish-calendar": {
+      "title": "Fukuoka seasonal fish calendar",
+      "publisher": "Fukuoka Prefectural Federation of Fisheries Cooperative Associations",
+      "url": "https://www.fogyoren.jf-net.ne.jp/fish/",
+      "tier": "public_industry",
+      "accessed_at": "2026-07-23"
+    }
+  },
+  "facts": {}
+}

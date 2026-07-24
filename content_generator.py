@@ -46,6 +46,43 @@ def validate_english_produce(payload: dict) -> None:
         )
 
 
+def validate_generated_fact_refs(payload: dict, allowed_fact_ids: set[str]) -> None:
+    """Require every generated factual field to cite the approved fact pack."""
+    from content_auditor import iter_claims
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    for language in ("en", "ja"):
+        block = payload.get(language)
+        if not isinstance(block, dict):
+            continue
+        refs = block.get("fact_refs")
+        if not isinstance(refs, dict):
+            missing.append(f"{language}.fact_refs")
+            continue
+
+        other_language = "ja" if language == "en" else "en"
+        for claim in iter_claims({language: block, other_language: {}}):
+            if claim.kind == "poetic":
+                continue
+            relative_path = claim.path.removeprefix(f"{language}.")
+            fact_ids = refs.get(relative_path)
+            if not isinstance(fact_ids, list) or not fact_ids:
+                missing.append(claim.path)
+                continue
+            unknown = [fact_id for fact_id in fact_ids if fact_id not in allowed_fact_ids]
+            if unknown:
+                invalid.append(f"{claim.path}={unknown!r}")
+
+    if missing or invalid:
+        details = []
+        if missing:
+            details.append("missing references: " + ", ".join(missing))
+        if invalid:
+            details.append("references outside approved fact pack: " + ", ".join(invalid))
+        raise ValueError("Generated content failed evidence-reference validation; " + "; ".join(details))
+
+
 def normalize_dish_name(name: str) -> str:
     """Normalize a dish name for duplicate detection.
 
@@ -78,7 +115,11 @@ names where the kanji is uncommon).
 Always respond with valid JSON only — no markdown, no preamble, no explanation."""
 
 
-def generate_content(season: dict, exclude_dishes: dict | None = None) -> dict:
+def generate_content(
+    season: dict,
+    exclude_dishes: dict | None = None,
+    fact_pack: list[dict] | None = None,
+) -> dict:
     """Call the Claude API to generate rich bilingual content for a micro-season.
 
     Args:
@@ -94,6 +135,20 @@ def generate_content(season: dict, exclude_dishes: dict | None = None) -> dict:
         A dict of the shape ``{"en": {...flat fields...}, "ja": {...flat fields...}}``.
         Each language block has the same field names and shape.
     """
+    if not fact_pack:
+        raise ValueError(
+            f"Season #{season.get('id', '?')} has no verified fact pack. "
+            "Research and approve facts before generating content."
+        )
+
+    allowed_fact_ids = {
+        str(fact["id"])
+        for fact in fact_pack
+        if isinstance(fact, dict) and fact.get("id")
+    }
+    if not allowed_fact_ids:
+        raise ValueError("Verified fact pack contains no usable fact IDs.")
+
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
     from datetime import date as _date
@@ -141,8 +196,29 @@ tradition, or folk belief that is directly tied to this time of year.",
     "english": "English translation that preserves the season word (kigo) and the turn"
   }},
   "closing": "A single evocative closing sentence — not a summary, but an image or gesture that \
-creates a sense of quiet transition into what comes next."
+creates a sense of quiet transition into what comes next.",
+  "fact_refs": {{
+    "summary": ["fact IDs supporting the summary"],
+    "opening": ["fact IDs supporting factual details in the opening"],
+    "nature_notes": ["fact IDs supporting the nature notes"],
+    "seasonal_produce.fruits[0]": ["fact IDs supporting this exact item"],
+    "seasonal_dishes[0].name": ["fact IDs proving this dish exists"],
+    "seasonal_dishes[0].description": ["fact IDs supporting ingredients, preparation, season, and region"],
+    "cultural_note": ["fact IDs supporting the cultural note"]
+  }}
 }}
+
+EVIDENCE RULES — mandatory:
+- Use ONLY facts from the approved fact pack below. Do not add a plant, animal, food, dish, festival, \
+custom, date, region, behavior, ingredient, preparation method, or seasonal assertion that is not \
+explicitly supported there.
+- Every factual field and every produce/dish list item must have a matching `fact_refs` entry using \
+only IDs from the pack. Include indexed paths for every list item, following the examples above.
+- The closing and haiku are poetic fields and do not need fact references, but they must not introduce \
+new concrete factual assertions.
+
+APPROVED FACT PACK:
+{json.dumps(fact_pack, ensure_ascii=False, indent=2)}
 
 Notes for the EN block:
 - Every value in seasonal_produce.fruits, seasonal_produce.vegetables, and seasonal_produce.fish MUST contain a common English name written in Latin letters.
@@ -210,6 +286,7 @@ appropriate dishes. Never let an entire dishes block be made up of repeats."""
         )
 
     validate_english_produce(payload)
+    validate_generated_fact_refs(payload, allowed_fact_ids)
 
     return payload
 

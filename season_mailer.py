@@ -166,7 +166,13 @@ def count_new_dishes_per_lang(content: dict, used: dict) -> dict:
     return counts
 
 
-def generate_with_dish_variety(season: dict, used: dict, min_new: int = 2, max_attempts: int = 2) -> dict:
+def generate_with_dish_variety(
+    season: dict,
+    used: dict,
+    min_new: int = 2,
+    max_attempts: int = 2,
+    fact_pack: list[dict] | None = None,
+) -> dict:
     """Generate valid content, retrying prompt misses and weak dish variety.
 
     ``generate_content`` validates that English produce has readable English
@@ -181,7 +187,11 @@ def generate_with_dish_variety(season: dict, used: dict, min_new: int = 2, max_a
     last_error: ValueError | None = None
     for attempt in range(1, max_attempts + 1):
         try:
-            content = generate_content(season, exclude_dishes=exclude)
+            content = generate_content(
+                season,
+                exclude_dishes=exclude,
+                fact_pack=fact_pack,
+            )
         except ValueError as exc:
             last_error = exc
             log.warning(
@@ -241,6 +251,15 @@ def main() -> None:
         action="store_true",
         help="Rebuild static files (archive, sitemap, homepage) without sending email.",
     )
+    parser.add_argument(
+        "--prepare-season",
+        type=int,
+        metavar="ID",
+        help=(
+            "Generate and cache a future season from its approved fact pack, then "
+            "stop before audit, publishing, or sending."
+        ),
+    )
     args = parser.parse_args()
 
     seasons = load_seasons()
@@ -249,7 +268,20 @@ def main() -> None:
     seasons = augment_seasons(seasons)
     today = date.today()
 
-    if args.force:
+    if args.prepare_season is not None:
+        season = next(
+            (candidate for candidate in seasons if candidate["id"] == args.prepare_season),
+            None,
+        )
+        if season is None:
+            parser.error(f"unknown --prepare-season ID: {args.prepare_season}")
+        log.info(
+            "Preparing future season #%d: %s (%s)",
+            season["id"],
+            season["name_jp"],
+            season["name_en"],
+        )
+    elif args.force:
         season = find_active_season(seasons, today)
         log.info(
             "--force flag active · using season #%d: %s (%s)",
@@ -269,6 +301,12 @@ def main() -> None:
     from email_sender import send_email
     from archive_builder import build_archive, build_website
     from ingredient_generator import run as generate_lookups
+    from content_auditor import (
+        DEFAULT_CATALOG,
+        assert_season_approved,
+        load_json as load_audit_json,
+        verified_fact_pack,
+    )
 
     worker_url = os.environ.get("WORKER_URL", "https://subscribe.ko-72.com")
 
@@ -281,14 +319,37 @@ def main() -> None:
     else:
         log.info("Step 1/5 · Generating content with Claude …")
         used_dishes = collect_used_dishes(cache, exclude_id=cache_key)
+        fact_pack = verified_fact_pack(load_audit_json(DEFAULT_CATALOG), season)
+        if not fact_pack:
+            raise RuntimeError(
+                f"Season #{season['id']} has no approved generation fact pack. "
+                "Add sourced, verified facts to data/fact_catalog.json as described "
+                "in docs/content-audit.md, then prepare the season again."
+            )
         log.info(
             "Steering away from %d previously used English dish name(s) and %d Japanese.",
             len(used_dishes["en"]), len(used_dishes["ja"]),
         )
-        content = generate_with_dish_variety(season, used_dishes)
+        content = generate_with_dish_variety(
+            season,
+            used_dishes,
+            fact_pack=fact_pack,
+        )
         cache[cache_key] = content
         save_cache(cache)
         log.info("Content generated and cached.")
+
+    if args.prepare_season is not None:
+        log.info(
+            "Draft preparation complete. No content was audited, published, or sent. "
+            "Next: python content_auditor.py inventory --season %d",
+            season["id"],
+        )
+        return
+
+    log.info("Editorial gate · Verifying evidence and exact approved content hash …")
+    assert_season_approved(cache_key, content)
+    log.info("Editorial gate passed.")
 
     log.info("Step 2/5 · Generating any new ingredient / dish lookups …")
     stats = generate_lookups()
