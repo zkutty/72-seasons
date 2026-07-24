@@ -1,8 +1,8 @@
 # Evidence-backed content review
 
 Kō treats generated prose as a draft, never as evidence. A newsletter may be
-published only when its exact content hash has a completed human review in
-`data/content_audit.json`.
+published only when its exact content hash passes two independent research
+agents plus an adversarial verifier in `data/content_audit.json`.
 
 ## Evidence policy
 
@@ -21,8 +21,7 @@ micro-season. Search snippets and model output are not sources.
 
 ## Review workflow
 
-1. Add reviewed facts for the upcoming season to `data/fact_catalog.json`,
-   then prepare a candidate without publishing it:
+1. Prepare a candidate without publishing it:
 
    ```bash
    python season_mailer.py --prepare-season 41
@@ -34,24 +33,26 @@ micro-season. Search snippets and model output are not sources.
    python content_auditor.py inventory --season 41 > /tmp/season-41-review.json
    ```
 
-3. Research each factual field. Add canonical facts and their sources to
-   `data/fact_catalog.json`.
-4. Copy the season entry into `data/content_audit.json`. Set every claim to
-   `verified` with supporting `fact_ids`, or mark `summary`/`opening` as
-   `non_factual` only when it contains no concrete assertion. Closings require
-   the same explicit decision: purely poetic imagery may be non-factual, while
-   a concrete natural or seasonal assertion needs evidence. Record the human
-   reviewer and ISO review timestamp.
-5. Correct unsupported content in both languages, regenerate the inventory,
-   and repeat until the content hash is stable.
+3. Run the independent review quorum:
+
+   ```bash
+   python agent_content_reviewer.py --season 41
+   ```
+
+4. The command runs two independent web-search researchers and a separate
+   adversarial verifier. Every claim requires unanimous status, confidence of
+   at least 0.90 from all three runs, acceptable direct sources, and the
+   deterministic date/region/category checks.
+5. Rejected or uncertain claims remain blocked. Regenerate or correct them,
+   then rerun the quorum until the content hash is stable.
 6. Run the strict gate:
 
    ```bash
    python content_auditor.py audit --season 41 --strict
    ```
 
-7. Rebuild and review both language archives. Any later content edit invalidates
-   the approval hash and requires another review.
+7. Rebuild both language archives. Any later content edit invalidates the
+   approval hash and triggers a fresh agent review.
 
 ## Finding severity
 

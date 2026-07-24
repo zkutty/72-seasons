@@ -2,11 +2,10 @@
 
 The auditor deliberately separates research from publication:
 
-* ``data/fact_catalog.json`` stores human-reviewed facts and source metadata.
+* ``data/fact_catalog.json`` stores agent-reviewed facts and source metadata.
 * ``data/content_audit.json`` records a review decision for the exact hash of a
   cached season.
-* this module applies deterministic checks only. It never treats an LLM output
-  as evidence or approves content automatically.
+* this module applies deterministic checks to an independent agent quorum.
 
 Examples:
     python content_auditor.py audit
@@ -41,6 +40,8 @@ NON_FACTUAL_ALLOWED_FIELDS = {"summary", "opening"}
 APPROVED_SOURCE_TIERS = {"government", "public_industry"}
 FALLBACK_SOURCE_TIER = "culinary_reference"
 FINAL_STATUSES = {"verified", "non_factual"}
+AGENT_REVIEW_METHOD = "agent_quorum_v1"
+MIN_AGENT_CONFIDENCE = 0.90
 _ADJACENT_MIXED_SCRIPT_RE = re.compile(
     r"(?:[A-Za-z][\u3040-\u30ff\u3400-\u9fff]|[\u3040-\u30ff\u3400-\u9fff][A-Za-z])"
 )
@@ -263,6 +264,41 @@ def _catalog_maps(catalog: dict) -> tuple[dict, dict]:
     return sources, facts
 
 
+def _agent_quorum_ok(decision: dict, expected_status: str) -> tuple[bool, str]:
+    if decision.get("review_method") != AGENT_REVIEW_METHOD:
+        return False, f"review_method must be {AGENT_REVIEW_METHOD!r}"
+    reviews = decision.get("agent_reviews")
+    if not isinstance(reviews, list):
+        return False, "agent_reviews must be a list"
+    run_ids: set[str] = set()
+    researcher_count = 0
+    verifier_count = 0
+    for review in reviews:
+        if not isinstance(review, dict):
+            return False, "agent review must be an object"
+        run_id = review.get("run_id")
+        role = review.get("role")
+        if not run_id or run_id in run_ids:
+            return False, "agent reviews require distinct run IDs"
+        run_ids.add(run_id)
+        if role == "researcher":
+            researcher_count += 1
+        elif role == "verifier":
+            verifier_count += 1
+        else:
+            return False, f"unknown agent role {role!r}"
+        if review.get("verdict") != expected_status:
+            return False, "all agents must agree with the final claim status"
+        confidence = review.get("confidence")
+        if not isinstance(confidence, (int, float)) or confidence < MIN_AGENT_CONFIDENCE:
+            return False, f"all agent confidence scores must be >= {MIN_AGENT_CONFIDENCE:.2f}"
+        if not review.get("model") or not review.get("reviewed_at"):
+            return False, "each agent review requires model and reviewed_at"
+    if researcher_count < 2 or verifier_count < 1:
+        return False, "quorum requires two researchers and one verifier"
+    return True, ""
+
+
 def audit_season(
     season_id: str,
     content: dict,
@@ -376,14 +412,15 @@ def audit_season(
                         "This field type cannot be exempted as purely poetic.",
                     )
                 )
-            if not decision.get("reviewer") or not decision.get("reviewed_at"):
+            quorum_ok, quorum_message = _agent_quorum_ok(decision, status)
+            if not quorum_ok:
                 findings.append(
                     Finding(
                         "hard",
-                        "incomplete-review-attribution",
+                        "invalid-agent-quorum",
                         season_id,
                         claim.path,
-                        "A non-factual decision requires reviewer and reviewed_at.",
+                        quorum_message,
                     )
                 )
             continue
@@ -401,14 +438,15 @@ def audit_season(
             )
             continue
 
-        if not decision.get("reviewer") or not decision.get("reviewed_at"):
+        quorum_ok, quorum_message = _agent_quorum_ok(decision, status)
+        if not quorum_ok:
             findings.append(
                 Finding(
                     "hard",
-                    "incomplete-review-attribution",
+                    "invalid-agent-quorum",
                     season_id,
                     claim.path,
-                    "Verified claim requires reviewer and reviewed_at.",
+                    quorum_message,
                 )
             )
 

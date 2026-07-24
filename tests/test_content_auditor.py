@@ -1,7 +1,7 @@
 import copy
 import unittest
 
-from content_auditor import audit_season, content_hash, iter_claims
+from content_auditor import _agent_quorum_ok, audit_season, content_hash, iter_claims
 from content_generator import validate_generated_fact_refs
 
 
@@ -79,8 +79,33 @@ def manifest(content=CONTENT, *, region_context=None):
         decision = {
             "status": "verified",
             "fact_ids": [f"fact:{claim.path}"],
-            "reviewer": "Human reviewer",
-            "reviewed_at": "2026-07-23T12:00:00-04:00",
+            "review_method": "agent_quorum_v1",
+            "agent_reviews": [
+                {
+                    "run_id": "research-a",
+                    "role": "researcher",
+                    "model": "test-model",
+                    "verdict": "verified",
+                    "confidence": 0.95,
+                    "reviewed_at": "2026-07-23T12:00:00-04:00",
+                },
+                {
+                    "run_id": "research-b",
+                    "role": "researcher",
+                    "model": "test-model",
+                    "verdict": "verified",
+                    "confidence": 0.96,
+                    "reviewed_at": "2026-07-23T12:01:00-04:00",
+                },
+                {
+                    "run_id": "verify",
+                    "role": "verifier",
+                    "model": "test-model",
+                    "verdict": "verified",
+                    "confidence": 0.97,
+                    "reviewed_at": "2026-07-23T12:02:00-04:00",
+                },
+            ],
         }
         if region_context:
             decision["region_context"] = region_context
@@ -93,6 +118,13 @@ def manifest(content=CONTENT, *, region_context=None):
 
 
 class ContentAuditorTests(unittest.TestCase):
+    def test_agent_quorum_rejects_low_confidence(self):
+        decision = manifest()["claims"]["en.summary"]
+        decision["agent_reviews"][1]["confidence"] = 0.89
+        ok, message = _agent_quorum_ok(decision, "verified")
+        self.assertFalse(ok)
+        self.assertIn("0.90", message)
+
     def test_fully_evidenced_content_passes(self):
         findings = audit_season("40", CONTENT, SEASON, catalog(), manifest())
         self.assertEqual(findings, [])
@@ -205,8 +237,8 @@ class ContentAuditorTests(unittest.TestCase):
         review = manifest()
         review["claims"]["en.seasonal_produce.fruits[0]"] = {
             "status": "non_factual",
-            "reviewer": "Human reviewer",
-            "reviewed_at": "2026-07-23T12:00:00-04:00",
+            "review_method": "agent_quorum_v1",
+            "agent_reviews": [],
         }
 
         findings = audit_season("40", CONTENT, SEASON, catalog(), review)

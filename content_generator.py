@@ -119,6 +119,7 @@ def generate_content(
     season: dict,
     exclude_dishes: dict | None = None,
     fact_pack: list[dict] | None = None,
+    allow_unverified_draft: bool = False,
 ) -> dict:
     """Call the Claude API to generate rich bilingual content for a micro-season.
 
@@ -135,7 +136,7 @@ def generate_content(
         A dict of the shape ``{"en": {...flat fields...}, "ja": {...flat fields...}}``.
         Each language block has the same field names and shape.
     """
-    if not fact_pack:
+    if not fact_pack and not allow_unverified_draft:
         raise ValueError(
             f"Season #{season.get('id', '?')} has no verified fact pack. "
             "Research and approve facts before generating content."
@@ -146,7 +147,7 @@ def generate_content(
         for fact in fact_pack
         if isinstance(fact, dict) and fact.get("id")
     }
-    if not allowed_fact_ids:
+    if not allowed_fact_ids and not allow_unverified_draft:
         raise ValueError("Verified fact pack contains no usable fact IDs.")
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
@@ -156,6 +157,21 @@ def generate_content(
     start_str = _fmt(season["start_month"], season["start_day"])
     end_str = _fmt(season["end_month"], season["end_day"]) if "end_month" in season else "unknown"
     duration = season.get("duration_days", 5)
+
+    evidence_rules = (
+        f"""EVIDENCE RULES — mandatory:
+- Use ONLY facts from the approved fact pack below.
+- Every factual field and list item must have matching `fact_refs`.
+
+APPROVED FACT PACK:
+{json.dumps(fact_pack, ensure_ascii=False, indent=2)}"""
+        if fact_pack
+        else """DRAFT RESEARCH MODE:
+This is an unpublished candidate for independent agent review. Use conservative,
+widely documented claims; do not invent obscure customs or dishes. Return an
+empty `fact_refs` object. This draft cannot publish until the agent quorum
+researches every claim and the deterministic gate approves it."""
+    )
 
     user_prompt = f"""Generate newsletter content for this Japanese micro-season (七十二候), \
 in **both English and Japanese**. Each language must read as native prose, not as a translation of \
@@ -208,17 +224,7 @@ creates a sense of quiet transition into what comes next.",
   }}
 }}
 
-EVIDENCE RULES — mandatory:
-- Use ONLY facts from the approved fact pack below. Do not add a plant, animal, food, dish, festival, \
-custom, date, region, behavior, ingredient, preparation method, or seasonal assertion that is not \
-explicitly supported there.
-- Every factual field and every produce/dish list item must have a matching `fact_refs` entry using \
-only IDs from the pack. Include indexed paths for every list item, following the examples above.
-- The closing and haiku are poetic fields and do not need fact references, but they must not introduce \
-new concrete factual assertions.
-
-APPROVED FACT PACK:
-{json.dumps(fact_pack, ensure_ascii=False, indent=2)}
+{evidence_rules}
 
 Notes for the EN block:
 - Every value in seasonal_produce.fruits, seasonal_produce.vegetables, and seasonal_produce.fish MUST contain a common English name written in Latin letters.
@@ -286,7 +292,8 @@ appropriate dishes. Never let an entire dishes block be made up of repeats."""
         )
 
     validate_english_produce(payload)
-    validate_generated_fact_refs(payload, allowed_fact_ids)
+    if not allow_unverified_draft:
+        validate_generated_fact_refs(payload, allowed_fact_ids)
 
     return payload
 

@@ -42,7 +42,7 @@ scheduled mailers can send the same letter twice.
 │   ├── strings.json            # English and Japanese interface strings
 │   ├── content_cache.json      # Generated bilingual season content
 │   ├── fact_catalog.json       # Reviewed facts, date/region windows, and sources
-│   ├── content_audit.json      # Human approvals tied to exact content hashes
+│   ├── content_audit.json      # Agent-quorum approvals tied to exact content hashes
 │   ├── ingredients.json        # Generated ingredient reference data
 │   └── dishes.json             # Generated dish reference data
 ├── templates/                  # Jinja templates for email and static pages
@@ -170,7 +170,7 @@ committed.
   change generated content.
 - Before generating or publishing a season, complete the evidence review in
   [`docs/content-audit.md`](docs/content-audit.md). Generated facts are drafts:
-  only a human-reviewed manifest entry whose hash matches the exact cache
+  only an agent-quorum manifest entry whose hash matches the exact cache
   payload can pass the mailer and static-publishing gate.
 - Run `python content_auditor.py audit` for a report or add `--strict` to use
   the same blocking policy as CI.

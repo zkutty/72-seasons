@@ -4,7 +4,7 @@
     "baseline_region": "national",
     "regional_exceptions_require_context": true,
     "fallback_sources_required": 2,
-    "notes": "Facts are never approved automatically. Government and public-industry sources are preferred; otherwise two independent culinary references are required."
+    "notes": "Facts require an independent agent quorum. Government and public-industry sources are preferred; otherwise two independent culinary references are required."
   },
   "sources": {
     "maff-local-cuisine": {
