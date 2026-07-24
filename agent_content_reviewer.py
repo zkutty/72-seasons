@@ -166,11 +166,8 @@ def _claims_by_path(result: dict) -> dict[str, dict]:
     return indexed
 
 
-def _call_with_search(
-    client: anthropic.Anthropic, prompt: str, output_schema: dict
-) -> dict:
-    messages = [{"role": "user", "content": prompt}]
-    response = client.messages.create(
+def _stream_message(client: anthropic.Anthropic, messages: list, output_schema: dict):
+    with client.messages.stream(
         model=MODEL,
         max_tokens=MAX_OUTPUT_TOKENS,
         system=REVIEW_SYSTEM,
@@ -179,23 +176,22 @@ def _call_with_search(
         output_config={
             "format": {"type": "json_schema", "schema": output_schema}
         },
-    )
+    ) as stream:
+        return stream.get_final_message()
+
+
+def _call_with_search(
+    client: anthropic.Anthropic, prompt: str, output_schema: dict
+) -> dict:
+    messages = [{"role": "user", "content": prompt}]
+    response = _stream_message(client, messages, output_schema)
     # Server tools can pause a long-running turn. Continue with the exact
     # assistant content so search state and citations are preserved.
     for _ in range(3):
         if response.stop_reason != "pause_turn":
             break
         messages.append({"role": "assistant", "content": response.content})
-        response = client.messages.create(
-            model=MODEL,
-            max_tokens=MAX_OUTPUT_TOKENS,
-            system=REVIEW_SYSTEM,
-            messages=messages,
-            tools=[WEB_SEARCH_TOOL],
-            output_config={
-                "format": {"type": "json_schema", "schema": output_schema}
-            },
-        )
+        response = _stream_message(client, messages, output_schema)
     if response.stop_reason != "end_turn":
         raise RuntimeError(
             "Reviewer did not complete a schema-valid response "

@@ -5,14 +5,28 @@ import pytest
 import agent_content_reviewer as reviewer
 
 
+class FakeStream:
+    def __init__(self, response):
+        self.response = response
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_):
+        return None
+
+    def get_final_message(self):
+        return self.response
+
+
 class FakeMessages:
     def __init__(self, responses):
         self.responses = iter(responses)
         self.calls = []
 
-    def create(self, **kwargs):
+    def stream(self, **kwargs):
         self.calls.append(kwargs)
-        return next(self.responses)
+        return FakeStream(next(self.responses))
 
 
 def response(text, stop_reason="end_turn"):
@@ -40,7 +54,7 @@ def test_claims_by_path_rejects_duplicates():
         reviewer._claims_by_path(result)
 
 
-def test_call_with_search_uses_structured_output_and_larger_budget():
+def test_call_with_search_streams_structured_output_with_larger_budget():
     messages = FakeMessages([response('{"claims": []}')])
     client = SimpleNamespace(messages=messages)
 
