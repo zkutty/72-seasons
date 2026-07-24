@@ -51,7 +51,7 @@ function bdRequest(env, path, method = "GET", body = null) {
     },
   };
   if (body) opts.body = JSON.stringify(body);
-  return fetch(`https://api.buttondown.email/v1${path}`, opts);
+  return fetch(`https://api.buttondown.com/v1${path}`, opts);
 }
 
 function findActiveSeason(today) {
@@ -330,12 +330,17 @@ export default {
         return json({ error: "Invalid email" }, 400);
       }
       const lang = normalizeLang(language);
+      const ipAddress = request.headers.get("CF-Connecting-IP");
       let res, data;
       try {
         res = await bdRequest(env, "/subscribers", "POST", {
           email_address: email,
           type: "regular",
           tags: [`lang:${lang}`],
+          // Buttondown uses the visitor IP for spam checks. Without it, every
+          // signup appears to come from the Worker's shared egress IP and can
+          // be incorrectly blocked by its firewall.
+          ...(ipAddress ? { ip_address: ipAddress } : {}),
         });
         data = await res.json().catch(() => ({}));
       } catch (err) {
