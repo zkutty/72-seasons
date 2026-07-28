@@ -1804,5 +1804,106 @@
       "closing": "風の止んだ真昼、桐の実がひとつ、秋風を夢見るように静かに揺れている。"
     },
     "_sent_on": "2026-07-23"
+  },
+  "41": {
+    "en": {
+      "summary": "The earth itself seems to sweat, saturated with moisture under a sun that presses down like a weight.",
+      "opening": "The air has thickened into something you can almost hold. Morning light arrives filtered through haze, and by noon the humidity has climbed the skin, settling into every fold of cloth. Even the shadows feel damp, and the cicadas' drone seems to vibrate through waterlogged air.",
+      "nature_notes": "Higurashi cicadas begin their evening laments earlier each day, their plaintive calls piercing the heavy stillness. Lotus flowers open at dawn in temple ponds, their petals impossibly pristine above murky water. The soil in gardens remains dark even at midday, unable to dry between afternoon thunderstorms that arrive without warning and vanish just as quickly.",
+      "seasonal_produce": {
+        "fruits": [
+          "Suika (watermelon)",
+          "Nashi (Asian pear)",
+          "Budō (Japanese grapes)",
+          "Momo (white peach)"
+        ],
+        "vegetables": [
+          "Tōgan (winter melon)",
+          "Tsuru-murasaki (Malabar spinach)",
+          "Jūroku-sasage (yard-long beans)",
+          "Myōga (myoga ginger)"
+        ],
+        "fish": [
+          "Suzuki (Japanese sea bass)",
+          "Hamo (pike conger)",
+          "Shijimi (freshwater clams)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Shijimi no misoshiru",
+          "description": "Miso soup with tiny freshwater clams, believed to restore the liver and replenish what the muggy heat depletes."
+        },
+        {
+          "name": "Hiyashi-nasu",
+          "description": "Chilled eggplant slices dressed in dashi and ginger, their cool silkiness a balm against the oppressive humidity."
+        },
+        {
+          "name": "Tōgan to ebi no nimono",
+          "description": "Winter melon simmered with shrimp until translucent, its mild flesh absorbing the light broth like the earth absorbs this season's moisture."
+        },
+        {
+          "name": "Dojō-nabe",
+          "description": "Loach simmered in broth, a Tokyo summer tradition said to build stamina when the humid heat saps all energy."
+        }
+      ],
+      "cultural_note": "This is the heart of doyō, the eighteen days before autumn begins on the old calendar, when the soil itself is said to rest and one should not break ground. Many observe doyō no ushi no hi, eating unagi to fortify the body against the draining heat. The practice dates to the Edo period, when an herbalist allegedly advised an eel shop to market their wares as stamina food for the dog days.",
+      "haiku": {
+        "japanese": "土の息白き蓮の朝かな",
+        "romaji": "tsuchi no iki / shiroki hasu no / asa kana",
+        "english": "the earth exhales — / white lotus opens / into morning"
+      },
+      "closing": "Somewhere beyond the haze, the first cool front gathers itself, still days away, but the lotus already knows to bloom while it can."
+    },
+    "ja": {
+      "summary": "大地が汗をかくように湿り、空気さえ重く肌にまとわりつく五日間。",
+      "opening": "朝から空気に芯がない。靄のかかった陽射しが部屋に差し込み、午後には肌と衣のあいだに湿気が忍び込んでくる。蝉の声すら水を含んだように重く響き、夕立を待つ街は息を詰めている。",
+      "nature_notes": "蜩が夕刻を待たず鳴き始め、その声が暑気の底に沁みてゆく。寺の蓮池では、泥水の上に白い花弁が夜明けとともにひらき、昼には閉じる。畑の土は昼を過ぎても黒々と湿り、雷雨のあとも乾く間がない。",
+      "seasonal_produce": {
+        "fruits": [
+          "西瓜",
+          "梨",
+          "葡萄",
+          "白桃"
+        ],
+        "vegetables": [
+          "冬瓜",
+          "蔓紫（つるむらさき）",
+          "十六ささげ",
+          "茗荷"
+        ],
+        "fish": [
+          "鱸（すずき）",
+          "鱧",
+          "蜆（しじみ）"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "蜆の味噌汁",
+          "description": "蒸し暑さで疲れた肝を労る一椀、小さな貝から滋味が染み出す。"
+        },
+        {
+          "name": "冷やし茄子",
+          "description": "冷たい出汁に浸した茄子を生姜でいただく、この時季ならではの涼味。"
+        },
+        {
+          "name": "冬瓜と海老の煮物",
+          "description": "淡い冬瓜が出汁を吸って透き通り、暑気払いの一品となる。"
+        },
+        {
+          "name": "どじょう鍋",
+          "description": "東京の夏の滋養食、泥鰌を葱とともに煮て精をつける江戸の知恵。"
+        }
+      ],
+      "cultural_note": "立秋前十八日間は「土用」にあたり、土を犯すことを忌む。この時季の丑の日に鰻を食べる習慣は江戸時代に始まり、夏バテ防止の知恵として今に続く。暑さの底で身体を整え、来たる秋に備える養生の日々でもある。",
+      "haiku": {
+        "japanese": "土の息白き蓮の朝かな",
+        "romaji": "tsuchi no iki / shiroki hasu no / asa kana",
+        "english": "the earth exhales — / white lotus opens / into morning"
+      },
+      "closing": "蓮は泥中にあって泥に染まらず、盛夏の底でひとり涼しげに、秋の兆しを花びらに宿している。"
+    },
+    "_sent_on": "2026-07-28"
   }
 }
