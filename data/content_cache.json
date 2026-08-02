@@ -1905,5 +1905,106 @@
       "closing": "蓮は泥中にあって泥に染まらず、盛夏の底でひとり涼しげに、秋の兆しを花びらに宿している。"
     },
     "_sent_on": "2026-07-28"
+  },
+  "42": {
+    "en": {
+      "summary": "Sudden afternoon downpours drench the summer landscape, breaking the relentless heat with walls of warm rain that vanish as quickly as they arrive.",
+      "opening": "The sky bruises quickly now — one moment brilliant blue, the next a churning gray that releases sheets of rain so heavy the mountains disappear. The sound arrives first: a rushing hiss on the leaves, then the percussion of fat drops on tile roofs and hydrangea leaves. Within the hour, steam rises from the asphalt, and cicadas resume their chorus as if nothing happened.",
+      "nature_notes": "Frogs chorus with renewed vigor after each downpour, their calls echoing from flooded rice paddies. Dragonflies patrol the humid air between storms, hunting in the golden light that follows rain. The lotus ponds are at their peak now, great white and pink blooms opening at dawn, their waxy leaves beading with raindrops that roll like mercury.",
+      "seasonal_produce": {
+        "fruits": [
+          "白桃 (white peach)",
+          "梨 (Japanese pear)",
+          "ぶどう (grape)",
+          "すいか (watermelon)"
+        ],
+        "vegetables": [
+          "茗荷 (myoga ginger)",
+          "とうもろこし (sweet corn)",
+          "空芯菜 (water spinach)",
+          "モロヘイヤ (molokhia)"
+        ],
+        "fish": [
+          "鯵 (horse mackerel)",
+          "太刀魚 (beltfish)",
+          "スズキ (sea bass)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Moroheiya no ohitashi",
+          "description": "Blanched molokhia dressed with dashi and soy, its mucilaginous texture cooling and restorative in the oppressive humidity."
+        },
+        {
+          "name": "Tachiuo no shioyaki",
+          "description": "Salt-grilled beltfish, its silver skin crisped over charcoal, the clean white flesh a light meal suited to rain-dampened appetites."
+        },
+        {
+          "name": "Tomorokoshi no kakiage",
+          "description": "Sweet corn fritters fried until golden, capturing summer's sweetness in each crisp bite."
+        },
+        {
+          "name": "Hiyashi udon",
+          "description": "Cold udon noodles served on ice with dipping sauce, the perfect refuge from heat that builds between storms."
+        }
+      ],
+      "cultural_note": "Early August marks the beginning of Obon preparations in many regions, as families ready their homes and altars to welcome ancestral spirits. The sudden rains of this season are sometimes said to be the tears of the spirits arriving early, washing the paths between worlds. Families begin gathering cucumber horses and eggplant cattle — the spirit vehicles that will carry ancestors home.",
+      "haiku": {
+        "japanese": "夕立や蓮の葉に玉ころがる",
+        "romaji": "yūdachi ya / hasu no ha ni tama / korogaru",
+        "english": "evening cloudburst — / on the lotus leaf, a bead / rolls and trembles"
+      },
+      "closing": "The rain stops mid-sentence, leaving the garden dripping and strange, as if the world had briefly become somewhere else."
+    },
+    "ja": {
+      "summary": "突然の夕立が夏の大地を打ち、蒸し暑さを一瞬だけ洗い流しては、また蝉の声が戻ってくる。",
+      "opening": "空が急に暗くなり、山の稜線が雨の幕に消える。軒先に打ちつける雨音、庭石を叩く音、そして土の匂いが立ちのぼる。三十分もすれば陽が差し、濡れた紫陽花の葉が光を弾いている。",
+      "nature_notes": "田んぼでは蛙の合唱が雨あがりに一層高まり、水面を揺らす。蜻蛉が雨上がりの黄昏に舞い、蓮池では今が盛りの花が朝ごとに開く。葉に残る雨粒が、風に揺れて転がり落ちる。",
+      "seasonal_produce": {
+        "fruits": [
+          "白桃",
+          "梨",
+          "ぶどう",
+          "西瓜"
+        ],
+        "vegetables": [
+          "茗荷",
+          "とうもろこし",
+          "空芯菜",
+          "モロヘイヤ"
+        ],
+        "fish": [
+          "鯵",
+          "太刀魚",
+          "鱸"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "モロヘイヤのお浸し",
+          "description": "さっと茹でて出汁醤油で和えたモロヘイヤは、粘りが体に優しく、蒸し暑い日の滋養となる。"
+        },
+        {
+          "name": "太刀魚の塩焼き",
+          "description": "銀色の皮をぱりっと焼き上げた太刀魚は、雨で食欲の落ちる頃にもさっぱりといただける。"
+        },
+        {
+          "name": "とうもろこしのかき揚げ",
+          "description": "甘みの乗ったとうもろこしを揚げると、夏の陽射しを閉じ込めたような一品になる。"
+        },
+        {
+          "name": "冷やしうどん",
+          "description": "氷水で締めたうどんを、つゆにくぐらせて啜る。夕立の合間の涼を、喉で感じる。"
+        }
+      ],
+      "cultural_note": "八月に入ると、お盆の支度が始まる家も多い。精霊棚を整え、胡瓜の馬と茄子の牛を用意する。この時期の突然の雨は、ご先祖様が一足早く帰ってきた涙だとも、迎えの道を清める雨だともいわれる。",
+      "haiku": {
+        "japanese": "夕立や蓮の葉に玉ころがる",
+        "romaji": "yūdachi ya / hasu no ha ni tama / korogaru",
+        "english": "evening cloudburst — / on the lotus leaf, a bead / rolls and trembles"
+      },
+      "closing": "雨が止んだ庭に、どこか遠い世界の気配がしばらく残っている。"
+    },
+    "_sent_on": "2026-08-02"
   }
 }
