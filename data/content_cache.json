@@ -2006,5 +2006,106 @@
       "closing": "雨が止んだ庭に、どこか遠い世界の気配がしばらく残っている。"
     },
     "_sent_on": "2026-08-02"
+  },
+  "43": {
+    "en": {
+      "summary": "A breath of cooler air arrives in the morning, the first whisper that summer's grip is loosening.",
+      "opening": "Before dawn, something has shifted. The air that enters through an open window carries a different weight — still warm, but threaded now with a coolness that was absent yesterday. Cicadas continue their chorus, yet in the spaces between, you might catch the softer trill of autumn insects beginning their tentative song.",
+      "nature_notes": "Higurashi cicadas cry their melancholy evening song, their calls a harbinger of autumn even as summer blazes on. Morning glories unfurl at first light, their colors intensifying in response to the subtle temperature drop. In the mountains, susuki grass begins to show the faintest silver at its tips, and dragonflies — the akiakane — appear in greater numbers, their red bodies vivid against the hazy sky.",
+      "seasonal_produce": {
+        "fruits": [
+          "Pione grape",
+          "White peach (hakutō)",
+          "Sudachi citrus",
+          "Nashi (Asian pear)"
+        ],
+        "vegetables": [
+          "Myōga (myoga ginger)",
+          "Kabocha (winter squash)",
+          "Manganji pepper",
+          "Bitter melon (gōya)"
+        ],
+        "fish": [
+          "Sanma (Pacific saury)",
+          "Kawahagi (filefish)",
+          "Kuruma-ebi (Japanese tiger prawn)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Nasu no agebitashi",
+          "description": "Deep-fried eggplant steeped in chilled dashi, a dish that captures the threshold between summer's heat and autumn's first relief."
+        },
+        {
+          "name": "Kabocha no nimono",
+          "description": "Simmered winter squash in sweet soy broth, the first kabocha of the season offering dense sweetness as nights begin to cool."
+        },
+        {
+          "name": "Myōga gohan",
+          "description": "Rice folded with sliced myoga ginger, its sharp fragrance and pink edges bringing brightness to late summer tables."
+        },
+        {
+          "name": "Sudachi soba",
+          "description": "Chilled buckwheat noodles topped with paper-thin rounds of sudachi citrus, their green tartness cutting through the lingering humidity."
+        }
+      ],
+      "cultural_note": "Obon preparations begin in earnest as families ready to welcome ancestral spirits home. Lanterns are hung, altar offerings arranged, and the cucumber horses and eggplant cows — shōryō-uma — are crafted to carry spirits swiftly to and gently from the household. This liminal week, balanced between summer's peak and autumn's approach, is considered the time when the boundary between worlds grows thin.",
+      "haiku": {
+        "japanese": "涼風や障子に触るる夕明かり",
+        "romaji": "suzukaze ya / shōji ni fururu / yūakari",
+        "english": "Cool wind arrives — / evening light just touching / the paper screen"
+      },
+      "closing": "Somewhere, a wind chime rings once and falls silent, as if listening for an answer that the season has not yet given."
+    },
+    "ja": {
+      "summary": "朝夕にかすかな涼しさが混じり、夏の盛りの中に秋の気配がそっと差し込む五日間。",
+      "opening": "夜明け前、空気の手触りが変わっている。開け放った窓から入る風に、昨日までなかった軽やかさが宿る。蝉時雨は続くものの、その合間に秋の虫の声が、まだおぼつかなく、しかし確かに混じり始めている。",
+      "nature_notes": "ヒグラシが夕暮れに哀切な声を響かせ、炎暑の中にも秋の近さを告げる。朝顔は明け方に花を開き、わずかな気温の変化に色を深める。山ではススキの穂先がかすかに銀色を帯び始め、赤とんぼが数を増して、霞んだ空を縫うように飛び交う。",
+      "seasonal_produce": {
+        "fruits": [
+          "ピオーネ",
+          "白桃",
+          "酢橘",
+          "梨"
+        ],
+        "vegetables": [
+          "茗荷",
+          "南瓜",
+          "万願寺唐辛子",
+          "苦瓜"
+        ],
+        "fish": [
+          "秋刀魚（走り）",
+          "皮剥",
+          "車海老"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "茄子の揚げ浸し",
+          "description": "揚げた茄子を冷たい出汁に浸した一品、夏の余熱と秋の涼やかさが交差するこの時期にふさわしい。"
+        },
+        {
+          "name": "南瓜の煮物",
+          "description": "走りの南瓜を甘辛く炊き上げ、夜風が涼しくなり始めた頃に恋しくなる滋味。"
+        },
+        {
+          "name": "茗荷ご飯",
+          "description": "刻んだ茗荷を混ぜ込んだご飯、独特の香気と薄紅色が晩夏の食卓に清々しさを添える。"
+        },
+        {
+          "name": "酢橘蕎麦",
+          "description": "冷たい蕎麦に輪切りの酢橘を浮かべ、青い酸味がまだ残る暑さを爽やかに和らげる。"
+        }
+      ],
+      "cultural_note": "盆の支度が本格的に始まる頃。提灯を吊り、精霊棚を整え、胡瓜の馬と茄子の牛を作って先祖の霊を迎える準備をする。夏の極みと秋の入り口のあわいにあるこの時季は、あの世とこの世の境が薄くなる時とされ、家々に静かな祈りの気配が満ちる。",
+      "haiku": {
+        "japanese": "涼風や障子に触るる夕明かり",
+        "romaji": "suzukaze ya / shōji ni fururu / yūakari",
+        "english": "Cool wind arrives — / evening light just touching / the paper screen"
+      },
+      "closing": "風鈴が一度だけ鳴り、また静まる——季節はまだ、答えを探しているかのように。"
+    },
+    "_sent_on": "2026-08-07"
   }
 }
