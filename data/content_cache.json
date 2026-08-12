@@ -2107,5 +2107,106 @@
       "closing": "風鈴が一度だけ鳴り、また静まる——季節はまだ、答えを探しているかのように。"
     },
     "_sent_on": "2026-08-07"
+  },
+  "44": {
+    "en": {
+      "summary": "The higurashi cicada's melancholy evening song marks autumn's true arrival, even as summer heat persists.",
+      "opening": "In the amber light of late afternoon, a singular cry rises from the forest edge — the higurashi cicada, whose voice carries the particular loneliness of seasons turning. The air still holds summer's weight, but this song changes everything. It is the sound of release, of something letting go.",
+      "nature_notes": "The higurashi (Tanna japonensis) sings most intensely at dawn and dusk, its descending notes echoing through mountain valleys and temple groves. Dragonflies patrol the margins of rice paddies in greater numbers, their flight paths crisscrossing like calligraphy. Morning glory vines reach their peak bloom, unfurling new flowers each dawn that close by midday.",
+      "seasonal_produce": {
+        "fruits": [
+          "Pione grape",
+          "White peach (hakutō)",
+          "Japanese pear (nashi)",
+          "Muscat grape"
+        ],
+        "vegetables": [
+          "Myōga (myoga ginger)",
+          "Mōi cucumber (Okinawan cucumber)",
+          "Shishitō (shishito pepper)",
+          "Tsurumurasaki (Malabar spinach)"
+        ],
+        "fish": [
+          "Sanma (Pacific saury)",
+          "Aji (horse mackerel)",
+          "Suzuki (Japanese sea bass)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Nashi to nama-hamu no sarada",
+          "description": "Chilled salad of thinly sliced Japanese pear with prosciutto, dressed lightly in olive oil — the fruit's crystalline sweetness perfectly matched to the first cool evenings."
+        },
+        {
+          "name": "Tsurumurasaki no goma-ae",
+          "description": "Malabar spinach dressed in sesame paste, its slight mucilaginous texture providing cooling relief against lingering humidity."
+        },
+        {
+          "name": "Shishitō no yakibitashi",
+          "description": "Blistered shishito peppers steeped in chilled dashi and soy, capturing the interplay of summer's fire and autumn's approach."
+        },
+        {
+          "name": "Budō no shiratama",
+          "description": "Chilled mochi dumplings served with fresh grapes and kuromitsu syrup, celebrating the grape harvest's first offerings."
+        }
+      ],
+      "cultural_note": "Obon observances reach their height during this micro-season, as families welcome ancestral spirits home with cucumber horses and eggplant oxen placed on household altars. The mukaebi (welcome fire) lit at dusk guides spirits back, while the higurashi's twilight song seems to bridge the worlds of the living and the departed. Many regions hold bon odori dances, their circular movements traced under paper lanterns.",
+      "haiku": {
+        "japanese": "日暮し鳴く影深まりて盆の入り",
+        "romaji": "higurashi naku / kage fukumarite / bon no iri",
+        "english": "evening cicada calls — / shadows deepen into / the start of Obon"
+      },
+      "closing": "The higurashi falls silent as true darkness comes, leaving only the rustle of wind through dry grass and the distant glow of lanterns floating on still water."
+    },
+    "ja": {
+      "summary": "蜩の声が夕暮れの空に響き、暦の上では秋が始まる。",
+      "opening": "夕刻、山際から蜩の声が立ち上る。かなかなと哀切を帯びた音色は、暑さの中にあっても秋の訪れを告げる。陽が傾くにつれその声は深まり、空気の質がわずかに変わる瞬間がある。",
+      "nature_notes": "蜩は日の出と日没の頃に最も盛んに鳴き、渓谷や社寺の森に響きわたる。田の畔では赤蜻蛉が数を増し、朝顔は毎朝新たな花を開いては昼には萎む。夜になれば秋の虫の声がかすかに混じり始める。",
+      "seasonal_produce": {
+        "fruits": [
+          "ピオーネ",
+          "白桃",
+          "梨",
+          "マスカット"
+        ],
+        "vegetables": [
+          "茗荷",
+          "モーウイ",
+          "獅子唐",
+          "つるむらさき"
+        ],
+        "fish": [
+          "秋刀魚",
+          "鯵",
+          "鱸"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "梨と生ハムのサラダ",
+          "description": "薄く切った梨の涼やかな甘みに生ハムの塩気を合わせ、初秋の夕餉にふさわしい一皿。"
+        },
+        {
+          "name": "つるむらさきの胡麻和え",
+          "description": "独特のぬめりを持つつるむらさきを胡麻で和え、残暑の体を労る。"
+        },
+        {
+          "name": "獅子唐の焼き浸し",
+          "description": "香ばしく焼いた獅子唐を冷やした出汁に浸し、夏と秋の狭間の味わいを閉じ込める。"
+        },
+        {
+          "name": "葡萄の白玉",
+          "description": "もちもちとした白玉に旬の葡萄を添え、黒蜜をかけて初秋の果物を味わう。"
+        }
+      ],
+      "cultural_note": "この候はお盆の只中にあたり、各家では精霊棚にキュウリの馬とナスの牛を供え、先祖の霊を迎える。夕暮れに焚く迎え火の煙と蜩の声が重なり、此岸と彼岸の境目が曖昧になる時である。盆踊りの輪は提灯の灯りのもと、夜更けまで続く。",
+      "haiku": {
+        "japanese": "日暮し鳴く影深まりて盆の入り",
+        "romaji": "higurashi naku / kage fukumarite / bon no iri",
+        "english": "evening cicada calls — / shadows deepen into / the start of Obon"
+      },
+      "closing": "蜩の声が途絶え、闇が満ちる頃、川面に流れる灯籠の列がゆるやかに遠ざかってゆく。"
+    },
+    "_sent_on": "2026-08-12"
   }
 }
