@@ -1311,5 +1311,59 @@
     "note": "A small citrus no larger than a golf ball, prized not for its flesh but for its intensely aromatic rind and bracingly sour juice — a few drops transform grilled sanma or matsutake soup with bright, clean acidity. Native to Tokushima, it arrives precisely when the autumn appetite returns, cutting through the richness of the season's first fatty fish.",
     "peak": "Late summer through early autumn, when the green rind holds its sharpest perfume",
     "source": "Sudachi citrus"
+  },
+  "abalone": {
+    "category": "fish",
+    "name_en": "Abalone",
+    "name_jp": "鮑",
+    "name_romaji": "awabi",
+    "note": "The muscular foot, sliced thin against its grain, yields a clean brine and a crunch that softens to velvet — prized raw as sashimi or barely kissed by steam. In Ise and along the Sanriku coast, ama divers have harvested awabi for imperial offerings since ancient times, making it a food that carries the ocean's summer into shrine ceremonies and kaiseki alike.",
+    "peak": "Early summer, when currents warm and the sea lettuce blooms",
+    "source": "鮑 (abalone)"
+  },
+  "aoyuzu-green-yuzu": {
+    "category": "vegetable",
+    "name_en": "Green yuzu",
+    "name_jp": "青柚子",
+    "name_romaji": "aoyuzu",
+    "note": "Harvested unripe, green yuzu offers a sharper, more herbaceous bite than its mature form — the zest bright with volatile oils that sting the nose pleasantly when grated over warm dishes. It appears in kitchens just as summer's humidity begins to break, its astringent perfume cutting through rich grilled fish and lending an edge to ponzu made for the cooling months ahead.",
+    "peak": "Late summer through early autumn, before the fruit turns gold",
+    "source": "Aoyuzu (green yuzu)"
+  },
+  "horse-mackerel-aji": {
+    "category": "fish",
+    "name_en": "Horse mackerel",
+    "name_jp": "鯵",
+    "name_romaji": "aji",
+    "note": "A silver-sided fish with a distinctive row of bony scutes along its lateral line, aji at its peak carries a clean sweetness and firm flesh that needs nothing more than a squeeze of ginger and scallion as tataki or namero. It arrives as the hydrangeas bloom and the rainy season lifts, a bright counterpoint to the heaviness of tsuyu.",
+    "peak": "Early summer through midsummer, when coastal waters warm and schools run fat",
+    "source": "horse mackerel (aji)"
+  },
+  "my-ga-ginger-bud": {
+    "category": "vegetable",
+    "name_en": "Myoga ginger",
+    "name_jp": "茗荷",
+    "name_romaji": "myōga",
+    "note": "The pale pink bud of a wild ginger relative, sliced into threads that release a clean, resinous bite — bright against cold sōmen or scattered over chilled tofu. Its fleeting pungency belongs to the humid days when appetite falters and the body craves something sharp to cut through the weight of August.",
+    "peak": "High summer through early autumn, when the buds push through damp shade",
+    "source": "Myōga (ginger bud)"
+  },
+  "prune-plum": {
+    "category": "fruit",
+    "name_en": "Prune plum",
+    "name_jp": "西洋李",
+    "name_romaji": "seiyō sumomo",
+    "note": "These oval European plums arrive with flesh that yields to honey-sweetness, their skins carrying that particular dusty bloom that rubs away under the thumb. In Japan they appear briefly at fruit counters when summer tips toward autumn, eaten fresh or dried into the dense, wrinkled preserves that concentrate the season's last warmth.",
+    "peak": "Late summer through early autumn, as the cicadas quiet",
+    "source": "Prune plum"
+  },
+  "tomato": {
+    "category": "vegetable",
+    "name_en": "Tomato",
+    "name_jp": "蕃茄",
+    "name_romaji": "tomato",
+    "note": "At peak ripeness, the flesh gives way to a balance of sweetness and faint acidity, the skin still warm from the afternoon heat. Though a relatively recent arrival to Japanese tables, summer tomatoes now anchor the kitchen's brief window of raw abundance—sliced simply with salt, or crushed into chilled hiyashi chūka noodles.",
+    "peak": "High summer, when the sun draws sugars up through the vine",
+    "source": "トマト (tomato)"
   }
 }

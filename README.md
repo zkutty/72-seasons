@@ -145,6 +145,9 @@ call count and configured cap. `python ingredient_generator.py --dry-run`
 lists missing entries for free. To intentionally backfill a large historical
 store, use `python ingredient_generator.py --batch-size 12`; each invocation
 persists completed entries and is still bounded by `LOOKUP_API_CALL_CAP`.
+Lookup responses must match the declared ingredient or dish schema exactly;
+malformed responses are retried once within that same call budget and are
+never persisted.
 
 ## Cloudflare Worker
 

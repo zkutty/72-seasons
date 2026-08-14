@@ -84,6 +84,27 @@ class LookupGenerationLimitError(RuntimeError):
     """Raised before a lookup run could exceed its paid API-call budget."""
 
 
+class LookupSchemaError(ValueError):
+    """Raised when a lookup response does not match its declared schema."""
+
+
+INGREDIENT_RESPONSE_FIELDS = {
+    "name_en",
+    "name_jp",
+    "name_romaji",
+    "category",
+    "peak",
+    "note",
+}
+DISH_RESPONSE_FIELDS = {
+    "name_en",
+    "name_jp",
+    "name_romaji",
+    "season",
+    "note",
+}
+
+
 def lookup_api_call_cap(value: str | None = None) -> int:
     """Return the configured hard cap, rejecting unsafe configuration."""
     raw = value if value is not None else os.environ.get("LOOKUP_API_CALL_CAP")
@@ -153,6 +174,41 @@ def _extract_json(text: str) -> dict:
         lines = text.splitlines()
         text = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
     return json.loads(text)
+
+
+def _validate_lookup_entry(entry: object, expected_fields: set[str], kind: str) -> dict:
+    if not isinstance(entry, dict):
+        raise LookupSchemaError(f"{kind} response must be a JSON object")
+
+    actual_fields = set(entry)
+    missing = sorted(expected_fields - actual_fields)
+    unexpected = sorted(actual_fields - expected_fields)
+    if missing or unexpected:
+        details = []
+        if missing:
+            details.append(f"missing fields: {', '.join(missing)}")
+        if unexpected:
+            details.append(f"unexpected fields: {', '.join(unexpected)}")
+        raise LookupSchemaError(f"{kind} response has {'; '.join(details)}")
+
+    invalid = sorted(key for key, value in entry.items() if not isinstance(value, str) or not value.strip())
+    if invalid:
+        raise LookupSchemaError(f"{kind} response has non-string or empty fields: {', '.join(invalid)}")
+    return entry
+
+
+def validate_ingredient_entry(entry: object, expected_category: str) -> dict:
+    validated = _validate_lookup_entry(entry, INGREDIENT_RESPONSE_FIELDS, "ingredient")
+    if validated["category"] != expected_category:
+        raise LookupSchemaError(
+            "ingredient response category mismatch: "
+            f"expected {expected_category!r}, got {validated['category']!r}"
+        )
+    return validated
+
+
+def validate_dish_entry(entry: object) -> dict:
+    return _validate_lookup_entry(entry, DISH_RESPONSE_FIELDS, "dish")
 
 
 def generate_ingredient(client: anthropic.Anthropic, raw: str, category: str) -> dict:
@@ -289,13 +345,30 @@ def run(
     client = _client()
     added_ing = 0
     added_dish = 0
+    calls_made = 0
 
     for i, (key, meta) in enumerate(ing_todo.items(), 1):
+        if calls_made >= cap:
+            log.error("Lookup API call budget exhausted before ingredient %s; leaving it missing.", meta["source"])
+            break
         log.info("Ingredient %d/%d · %s (%s)", i, len(ing_todo), meta["source"], meta["category"])
-        try:
-            entry = generate_ingredient(client, meta["source"], meta["category"])
-        except Exception as e:
-            log.error("  failed: %s — skipping.", e)
+        entry = None
+        for attempt in (1, 2):
+            calls_made += 1
+            try:
+                candidate = generate_ingredient(client, meta["source"], meta["category"])
+                entry = validate_ingredient_entry(candidate, meta["category"])
+                break
+            except LookupSchemaError as error:
+                if attempt == 1 and calls_made < cap:
+                    log.warning("  invalid schema: %s — retrying once.", error)
+                    continue
+                log.error("  invalid schema: %s — leaving lookup missing.", error)
+                break
+            except Exception as error:
+                log.error("  failed: %s — skipping.", error)
+                break
+        if entry is None:
             continue
         entry["source"] = meta["source"]
         existing_ing[key] = entry
@@ -303,11 +376,27 @@ def run(
         added_ing += 1
 
     for i, (key, meta) in enumerate(dish_todo.items(), 1):
+        if calls_made >= cap:
+            log.error("Lookup API call budget exhausted before dish %s; leaving it missing.", meta["source"])
+            break
         log.info("Dish %d/%d · %s", i, len(dish_todo), meta["source"])
-        try:
-            entry = generate_dish(client, meta["source"])
-        except Exception as e:
-            log.error("  failed: %s — skipping.", e)
+        entry = None
+        for attempt in (1, 2):
+            calls_made += 1
+            try:
+                candidate = generate_dish(client, meta["source"])
+                entry = validate_dish_entry(candidate)
+                break
+            except LookupSchemaError as error:
+                if attempt == 1 and calls_made < cap:
+                    log.warning("  invalid schema: %s — retrying once.", error)
+                    continue
+                log.error("  invalid schema: %s — leaving lookup missing.", error)
+                break
+            except Exception as error:
+                log.error("  failed: %s — skipping.", error)
+                break
+        if entry is None:
             continue
         entry["source"] = meta["source"]
         existing_dish[key] = entry
@@ -315,8 +404,8 @@ def run(
         added_dish += 1
 
     log.info(
-        "Done. %d ingredients and %d dishes on disk.",
-        len(existing_ing), len(existing_dish),
+        "Done. %d ingredients and %d dishes on disk; %d Claude lookup call(s) made.",
+        len(existing_ing), len(existing_dish), calls_made,
     )
     return {"ingredients_added": added_ing, "dishes_added": added_dish}
 
