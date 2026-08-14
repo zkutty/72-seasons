@@ -3,80 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://subscribe.ko-72.com; img-src 'self' data:; base-uri 'none'; form-action 'self'">
 <title>Kō — 配信停止</title>
 <link rel="alternate" hreflang="en" href="https://ko-72.com/unsubscribe.html">
 <link rel="alternate" hreflang="ja" href="https://ko-72.com/ja/unsubscribe.html">
 <link rel="alternate" hreflang="x-default" href="https://ko-72.com/unsubscribe.html">
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: #e8e5de; font-family: 'Hiragino Sans','Yu Gothic',system-ui, -apple-system, sans-serif; color: #2c2c2a; }
-  .card { max-width: 480px; margin: 80px auto; background: #f5f3ee; padding: 48px 40px; text-align: center; }
-  .logo { font-family: Georgia, serif; font-size: 22px; color: #1a1a18; margin: 0 0 32px 0; }
-  .logo .kanji { font-family: system-ui, sans-serif; font-size: 14px; color: #888780; margin-left: 8px; }
-  h1 { font-family: 'Hiragino Mincho ProN','Yu Mincho',Georgia, serif; font-size: 20px; font-weight: 400; margin: 0 0 10px 0; }
-  p { font-size: 14px; color: #888780; line-height: 1.7; margin: 0 0 28px 0; }
-  input[type="email"] {
-    width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #d8d5ce;
-    background: #fff; outline: none; font-family: system-ui, sans-serif; margin-bottom: 12px;
-  }
-  input[type="email"]:focus { border-color: #888780; }
-  button {
-    width: 100%; padding: 12px; background: #2c2c2a; color: #f5f3ee; border: none;
-    font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
-    font-family: system-ui, sans-serif;
-  }
-  button:hover { background: #1a1a18; }
-  .msg { display: none; font-size: 14px; margin: 16px 0 0 0; }
-  .msg.success { color: #6b8f71; }
-  .msg.error { color: #c9734a; }
-  a { color: #888780; font-size: 13px; }
-  .lang-switch { display: block; margin-top: 18px; font-size: 12px; }
-</style>
+<link rel="stylesheet" href="/unsubscribe.css">
 </head>
-<body>
+<body data-language="ja">
 <div class="card">
   <p class="logo">Kō<span class="kanji">候</span></p>
-  <h1>配信停止</h1>
-  <p>メールアドレスをご入力ください。配信リストから削除いたします。</p>
-  <form id="form">
-    <input type="email" id="email" placeholder="your@email.com" required>
-    <button type="submit">配信停止</button>
-  </form>
-  <p class="msg success" id="success">完了しました — リストから削除されました。</p>
-  <p class="msg error" id="error">問題が発生しました。もう一度お試しください。</p>
+  <section class="view" id="request-view">
+    <h1>配信停止</h1>
+    <p>メールアドレスを入力すると確認リンクをお送りします。メール内で確認するまで配信設定は変更されません。</p>
+    <form id="request-form">
+      <input type="email" id="email" autocomplete="email" placeholder="your@email.com" required>
+      <button type="submit" data-label="確認リンクを送信">確認リンクを送信</button>
+    </form>
+    <p class="msg success" id="request-success" role="status" aria-live="polite" hidden>登録済みのアドレスの場合、確認リンクを送信しました。リンクは30分間有効です。</p>
+    <p class="msg error" id="request-error" role="alert" hidden>問題が発生しました。もう一度お試しください。</p>
+  </section>
+  <section class="view" id="confirm-view" hidden>
+    <h1>配信停止の確認</h1>
+    <p>Kō の配信停止を確定します。購読履歴は保持されます。</p>
+    <form id="confirm-form">
+      <button type="submit" data-label="配信停止を確定">配信停止を確定</button>
+    </form>
+    <p class="msg success" id="confirm-success" role="status" aria-live="polite" hidden>配信停止が完了しました。今後 Kō の便りは届きません。</p>
+    <p class="msg error" id="confirm-error" role="alert" hidden>確認リンクが無効か、有効期限が切れています。下から新しいリンクをリクエストしてください。</p>
+  </section>
   <br>
   <a href="https://ko-72.com/ja/">← ko-72.com へ戻る</a>
   <a class="lang-switch" href="https://ko-72.com/unsubscribe.html" hreflang="en" lang="en">English</a>
 </div>
 
-<script>
-  const params = new URLSearchParams(location.search);
-  if (params.get('email')) document.getElementById('email').value = params.get('email');
-
-  document.getElementById('form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const btn = this.querySelector('button');
-    btn.disabled = true;
-    btn.textContent = '…';
-    try {
-      const res = await fetch('https://subscribe.ko-72.com/unsubscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      if (res.ok) {
-        this.style.display = 'none';
-        document.getElementById('success').style.display = 'block';
-      } else {
-        throw new Error();
-      }
-    } catch {
-      btn.disabled = false;
-      btn.textContent = '配信停止';
-      document.getElementById('error').style.display = 'block';
-    }
-  });
-</script>
+<script src="/unsubscribe.js" defer></script>
 </body>
 </html>

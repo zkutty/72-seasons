@@ -1,0 +1,8 @@
+{
+  "name": "ko-72-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test index.test.js"
+  }
+}

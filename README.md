@@ -22,9 +22,12 @@ The production system has four parts:
    `SUBSCRIBER_EMAILS` value is a bootstrap fallback, not a second subscriber
    list; normalized duplicates and addresses unsubscribed in Buttondown are
    skipped.
-4. The Cloudflare Worker in `worker/` handles website subscribe and
-   unsubscribe requests, updates Buttondown, and sends the bilingual welcome
-   email through Resend.
+4. The Cloudflare Worker in `worker/` handles website subscribe requests and
+   sends the bilingual welcome email through Resend. Unsubscribe requests use
+   a two-step flow: Resend delivers a 30-minute signed confirmation link, and
+   only a valid confirmation token can change the Buttondown subscriber to
+   `unsubscribed`. The record is patched rather than deleted so its history is
+   retained.
 
 `.github/workflows/season_check.yml` is retained as a manual-only recovery
 workflow. It must not be scheduled alongside `newsletter.yml`, because two
@@ -152,7 +155,17 @@ Wrangler; they are separate from GitHub Actions secrets:
 cd worker
 npx wrangler secret put BUTTONDOWN_API_KEY
 npx wrangler secret put RESEND_API_KEY
+npx wrangler secret put UNSUBSCRIBE_TOKEN_SECRET
 ```
+
+`UNSUBSCRIBE_TOKEN_SECRET` must be a cryptographically random value of at least
+32 characters. Do not put it in `wrangler.toml` or source control. The Worker
+also uses Cloudflare Rate Limiting bindings for per-address and
+`CF-Connecting-IP` quotas on subscription and confirmation-link issuance.
+Callers behind the same NAT share the IP quota and may need to retry after the
+60-second window. Cloudflare's counters are edge-local and eventually
+consistent, so they are an abuse-reduction control only; the signed,
+short-lived confirmation token is the unsubscribe authorization boundary.
 
 Run it locally:
 
