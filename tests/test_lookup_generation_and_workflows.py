@@ -20,6 +20,27 @@ def cache_with_items(*, ingredients=None, dishes=None):
     }
 
 
+def valid_ingredient(name="One", category="fruit"):
+    return {
+        "name_en": name,
+        "name_jp": "一",
+        "name_romaji": "ichi",
+        "category": category,
+        "peak": "Spring",
+        "note": "Specific sensory detail. A place in the Japanese year.",
+    }
+
+
+def valid_dish(name="One dish"):
+    return {
+        "name_en": name,
+        "name_jp": "一品",
+        "name_romaji": "ippin",
+        "season": "Spring",
+        "note": "Specific cooking detail. A place in the Japanese year.",
+    }
+
+
 class LookupGenerationBudgetTests(unittest.TestCase):
     def setUp(self):
         self.tempdir = tempfile.TemporaryDirectory()
@@ -68,7 +89,11 @@ class LookupGenerationBudgetTests(unittest.TestCase):
         self.write(self.cache_path, cache_with_items(ingredients=["One", "Two", "Three"]))
         with (
             patch.object(ingredient_generator, "_client", return_value=object()) as client,
-            patch.object(ingredient_generator, "generate_ingredient", side_effect=lambda _c, raw, _kind: {"name_en": raw}) as generate,
+            patch.object(
+                ingredient_generator,
+                "generate_ingredient",
+                side_effect=lambda _c, raw, kind: valid_ingredient(raw, kind),
+            ) as generate,
         ):
             first = run(max_api_calls=2, batch_size=2)
             self.assertEqual(first, {"ingredients_added": 2, "dishes_added": 0})
@@ -78,6 +103,65 @@ class LookupGenerationBudgetTests(unittest.TestCase):
         self.assertEqual(second, {"ingredients_added": 1, "dishes_added": 0})
         self.assertEqual(generate.call_count, 3)
         client.assert_called()
+
+    def test_schema_validation_rejects_missing_extra_wrong_type_and_wrong_category(self):
+        invalid_ingredients = (
+            {key: value for key, value in valid_ingredient().items() if key != "peak"},
+            {**valid_ingredient(), "unexpected": "value"},
+            {**valid_ingredient(), "note": ["not", "a", "string"]},
+            {**valid_ingredient(), "category": "fish"},
+        )
+        for entry in invalid_ingredients:
+            with self.subTest(entry=entry):
+                with self.assertRaises(ingredient_generator.LookupSchemaError):
+                    ingredient_generator.validate_ingredient_entry(entry, "fruit")
+
+        for entry in (
+            {key: value for key, value in valid_dish().items() if key != "season"},
+            {**valid_dish(), "unexpected": "value"},
+            {**valid_dish(), "note": None},
+            [valid_dish()],
+        ):
+            with self.subTest(entry=entry):
+                with self.assertRaises(ingredient_generator.LookupSchemaError):
+                    ingredient_generator.validate_dish_entry(entry)
+
+    def test_malformed_schema_retries_once_then_persists_valid_response(self):
+        self.write(self.cache_path, cache_with_items(ingredients=["One"]))
+        malformed = {**valid_ingredient(), "unexpected": "value"}
+        with (
+            patch.object(ingredient_generator, "_client", return_value=object()),
+            patch.object(
+                ingredient_generator,
+                "generate_ingredient",
+                side_effect=[malformed, valid_ingredient()],
+            ) as generate,
+        ):
+            result = run(max_api_calls=2, batch_size=1)
+
+        self.assertEqual(result, {"ingredients_added": 1, "dishes_added": 0})
+        self.assertEqual(generate.call_count, 2)
+        saved = json.loads(self.ingredients_path.read_text(encoding="utf-8"))["one"]
+        self.assertEqual(set(saved), ingredient_generator.INGREDIENT_RESPONSE_FIELDS | {"source"})
+
+    def test_retry_exhaustion_never_persists_invalid_response(self):
+        self.write(self.cache_path, cache_with_items(ingredients=["One"]))
+        malformed = {key: value for key, value in valid_ingredient().items() if key != "name_romaji"}
+        with (
+            patch.object(ingredient_generator, "_client", return_value=object()),
+            patch.object(
+                ingredient_generator,
+                "generate_ingredient",
+                side_effect=[malformed, malformed],
+            ) as generate,
+            self.assertLogs("ingredient_generator", level="WARNING") as logs,
+        ):
+            result = run(max_api_calls=2, batch_size=1)
+
+        self.assertEqual(result, {"ingredients_added": 0, "dishes_added": 0})
+        self.assertEqual(generate.call_count, 2)
+        self.assertFalse(self.ingredients_path.exists())
+        self.assertIn("leaving lookup missing", "\n".join(logs.output))
 
 
 class SeasonMailerLookupCapTests(unittest.TestCase):

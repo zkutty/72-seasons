@@ -618,5 +618,37 @@
     "season": "Late summer to early autumn, when sudachi ripen in Tokushima",
     "serving": null,
     "source": "Sudachi soba"
+  },
+  "edamame-no-nibitashi": {
+    "name_en": "Simmered edamame in seasoned broth",
+    "name_jp": "枝豆の煮浸し",
+    "name_romaji": "edamame no nibitashi",
+    "note": "Shelled edamame are gently simmered in a light dashi broth with soy and mirin, then left to cool and absorb the seasoning — a technique that coaxes out their grassy sweetness. The dish appears when the beans are harvested still attached to their branches, their brief season coinciding with the humid weeks before the summer solstice.",
+    "season": "Early summer, when young soybeans swell in their pods",
+    "source": "Edamame no nibitashi"
+  },
+  "hamo-no-kabayaki": {
+    "name_en": "Grilled pike eel in sweet soy glaze",
+    "name_jp": "鱧の蒲焼",
+    "name_romaji": "hamo no kabayaki",
+    "note": "Pike eel fillets are scored with hundreds of fine knife cuts to sever the hair-thin bones, then brushed with tare and grilled until the glaze caramelizes and the flesh turns silken. Hamo reaches its peak fat content as Kyoto swelters in July heat, and the fish has sustained the landlocked capital since medieval times when it alone could survive the journey from the coast.",
+    "season": "High summer, from the Gion Festival through Obon",
+    "source": "Hamo no kabayaki"
+  },
+  "my-ga-to-ky-ri-no-sunomono": {
+    "name_en": "Myōga and cucumber in sweet vinegar",
+    "name_jp": "茗荷と胡瓜の酢の物",
+    "name_romaji": "myōga to kyūri no sunomono",
+    "note": "Thinly sliced myōga ginger buds and cucumber are briefly salted, then dressed in a light mixture of rice vinegar and sugar, served cold. The dish appears when summer heat makes appetite falter — myōga's clean, resinous bite cuts through humidity the way a sudden breeze parts still air.",
+    "season": "High summer, when myōga shoots push through shade-damp soil",
+    "source": "Myōga to kyūri no sunomono"
+  },
+  "utsubo-gusa-cha": {
+    "name_en": "Self-heal flower tea",
+    "name_jp": "靫草茶",
+    "name_romaji": "utsubogusa cha",
+    "note": "A medicinal infusion made by steeping the dried flower spikes of utsubogusa (Prunella vulgaris) in hot water, yielding a faintly bitter, amber-colored drink. The plant's Japanese name means 'quiver grass' for its resemblance to an archer's arrow case, and it is traditionally gathered just as the summer solstice heat causes the purple blossoms to wither and brown — a moment the old calendars called kashō, 'self-heal withers.'",
+    "season": "Late June through early July, when the flower spikes begin to dry on the stem",
+    "source": "Utsubo-gusa cha"
   }
 }
