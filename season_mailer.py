@@ -1,8 +1,8 @@
 """
 Kō — orchestrator.
 
-Checks whether today is the first day of a new Japanese micro-season and,
-if so, generates content, sends the newsletter, and builds the archive page.
+Finds the active Japanese micro-season and sends it once per occurrence,
+including a catch-up run when the scheduled transition run was missed.
 
 Usage:
     python season_mailer.py            # runs only on a season-start date
@@ -14,9 +14,11 @@ import json
 import logging
 import os
 import sys
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
+import anthropic
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -29,17 +31,22 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 CACHE_PATH = Path(__file__).parent / "data" / "content_cache.json"
+JST = ZoneInfo("Asia/Tokyo")
+
+
+def today_jst() -> date:
+    return datetime.now(JST).date()
 
 
 # ── data helpers ───────────────────────────────────────────────────────────────
 
 def enrich_seasons_with_end_dates(seasons: list, year: int = None) -> list:
-    year = year or date.today().year
+    year = year or today_jst().year
     enriched = []
     for i, season in enumerate(seasons):
         s = season.copy()
         next_s = seasons[i + 1] if i < len(seasons) - 1 else seasons[0]
-        next_year = year if i < len(seasons) - 1 else year + 1
+        next_year = year + (1 if (next_s["start_month"], next_s["start_day"]) <= (s["start_month"], s["start_day"]) else 0)
         next_start = date(next_year, next_s["start_month"], next_s["start_day"])
         end = next_start - timedelta(days=1)
         s["end_month"] = end.month
@@ -90,6 +97,16 @@ def find_active_season(seasons: list, today: date) -> dict:
         raise RuntimeError("Could not determine active season — seasons.json may be empty.")
 
     return best
+
+
+def occurrence_start(season: dict, today: date) -> date:
+    start = date(today.year, season["start_month"], season["start_day"])
+    return start if start <= today else date(today.year - 1, season["start_month"], season["start_day"])
+
+
+def should_send_occurrence(sent_marker: str | None, season: dict, today: date) -> bool:
+    """Whether this active occurrence has not yet been delivered."""
+    return sent_marker != occurrence_start(season, today).isoformat()
 
 
 # ── content cache ──────────────────────────────────────────────────────────────
@@ -178,14 +195,16 @@ def generate_with_dish_variety(season: dict, used: dict, min_new: int = 2, max_a
 
     exclude = {lang: set(used.get(lang, set())) for lang in _LANG_KEYS}
     last_content: dict | None = None
-    last_error: ValueError | None = None
+    last_error: Exception | None = None
     for attempt in range(1, max_attempts + 1):
         try:
             content = generate_content(season, exclude_dishes=exclude)
-        except ValueError as exc:
+        # Only malformed generated payloads and transient transport failures
+        # are retried; authentication/client request errors propagate immediately.
+        except (ValueError, anthropic.APIConnectionError, anthropic.APITimeoutError, anthropic.RateLimitError, anthropic.InternalServerError) as exc:
             last_error = exc
             log.warning(
-                "Attempt %d returned invalid bilingual content — retrying: %s",
+                "Generation attempt %d failed transiently — retrying: %s",
                 attempt, exc,
             )
             continue
@@ -247,7 +266,7 @@ def main() -> None:
     seasons = enrich_seasons_with_end_dates(seasons)
     from wheel import augment_seasons
     seasons = augment_seasons(seasons)
-    today = date.today()
+    today = today_jst()
 
     if args.force:
         season = find_active_season(seasons, today)
@@ -256,29 +275,33 @@ def main() -> None:
             season["id"], season["name_jp"], season["name_en"],
         )
     else:
-        season = find_todays_season(seasons, today)
-        if season is None:
-            log.info("Today (%s) is not the start of a new micro-season — nothing to do.", today)
-            sys.exit(0)
+        season = find_active_season(seasons, today)
         log.info(
-            "New micro-season begins today · #%d: %s (%s)",
+            "Current micro-season · #%d: %s (%s)",
             season["id"], season["name_jp"], season["name_en"],
         )
 
     # ── pipeline ──────────────────────────────────────────────────────────────
     from email_sender import send_email
     from archive_builder import build_archive, build_website
-    from ingredient_generator import run as generate_lookups
+    from ingredient_generator import LookupGenerationLimitError, run as generate_lookups
 
     worker_url = os.environ.get("WORKER_URL", "https://subscribe.ko-72.com")
 
-    # Step 1: content (from cache if available)
+    # Step 1: content (from cache if available). Build-only is used by the
+    # push verification path, so it is deliberately cache-only: a cache miss
+    # must be fixed in a bounded generation run, never by a push loop.
     cache = load_cache()
     cache_key = str(season["id"])
     if cache_key in cache:
         log.info("Step 1/5 · Using cached content for season #%d.", season["id"])
         content = cache[cache_key]
     else:
+        if args.build_only:
+            raise RuntimeError(
+                "--build-only will not generate paid content. "
+                f"Cache season #{season['id']} first, then rerun the static build."
+            )
         log.info("Step 1/5 · Generating content with Claude …")
         used_dishes = collect_used_dishes(cache, exclude_id=cache_key)
         log.info(
@@ -290,29 +313,44 @@ def main() -> None:
         save_cache(cache)
         log.info("Content generated and cached.")
 
-    log.info("Step 2/5 · Generating any new ingredient / dish lookups …")
-    stats = generate_lookups()
+    if args.build_only:
+        log.info("Step 2/5 · Skipping paid ingredient / dish lookup generation (--build-only).")
+        stats = {"ingredients_added": 0, "dishes_added": 0}
+    else:
+        log.info("Step 2/5 · Generating bounded ingredient / dish lookups …")
+        try:
+            stats = generate_lookups()
+        except LookupGenerationLimitError as exc:
+            # A historical backlog must not suppress a season already safely
+            # cached for delivery. The standalone generator remains fail-fast;
+            # this pipeline publishes with the committed lookup data instead.
+            log.warning(
+                "LOOKUP API CALL CAP REACHED — skipping lookup generation and "
+                "continuing with cached lookup data. %s",
+                exc,
+            )
+            stats = {"ingredients_added": 0, "dishes_added": 0}
     if stats["ingredients_added"] or stats["dishes_added"]:
         log.info(
             "Added %d ingredient(s) and %d dish(es) to lookup store.",
             stats["ingredients_added"], stats["dishes_added"],
         )
 
-    today_iso = today.isoformat()
+    occurrence_iso = occurrence_start(season, today).isoformat()
     already_sent_on = cache.get(cache_key, {}).get("_sent_on")
     if args.build_only:
         log.info("Step 3/5 · Skipping email (--build-only).")
-    elif already_sent_on == today_iso and not args.force:
+    elif not should_send_occurrence(already_sent_on, season, today) and not args.force:
         log.info(
-            "Step 3/5 · Email already sent today (%s) for season #%d — skipping. "
+            "Step 3/5 · Email already sent for this occurrence (%s) for season #%d — skipping. "
             "Pass --force to resend.",
-            today_iso, season["id"],
+            occurrence_iso, season["id"],
         )
     else:
         log.info("Step 3/5 · Sending email …")
         send_email(season, content, worker_url=worker_url)
         # Record the send so a second cron run on the same day skips us.
-        cache.setdefault(cache_key, {})["_sent_on"] = today_iso
+        cache.setdefault(cache_key, {})["_sent_on"] = occurrence_iso
         save_cache(cache)
 
     log.info("Step 4/5 · Building archive page …")

@@ -1,10 +1,227 @@
-import seasonsData from "../data/seasons.json";
+import seasonsData from "../data/seasons.json" with { type: "json" };
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "https://ko-72.com",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
+const ALLOWED_ORIGINS = new Set(["https://ko-72.com"]);
+const BUTTONDOWN_API_VERSION = "2026-04-01";
+const MAX_JSON_BYTES = 4096;
+const TOKEN_TTL_SECONDS = 30 * 60;
+const MAX_CLOCK_SKEW_SECONDS = 60;
+const encoder = new TextEncoder();
+
+function corsHeaders(request) {
+  const origin = request.headers.get("Origin");
+  return {
+    ...(origin === null || ALLOWED_ORIGINS.has(origin)
+      ? { "Access-Control-Allow-Origin": origin ?? "https://ko-72.com" }
+      : {}),
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400",
+    Vary: "Origin",
+  };
+}
+
+function json(request, body, status = 200, extraHeaders = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      ...corsHeaders(request),
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Content-Type-Options": "nosniff",
+      ...extraHeaders,
+    },
+  });
+}
+
+function structuredLog(level, event, details = {}) {
+  const payload = JSON.stringify({ event, ...details });
+  if (level === "error") console.error(payload);
+  else if (level === "warn") console.warn(payload);
+  else console.log(payload);
+}
+
+function errorType(error) {
+  return error instanceof Error ? error.name : typeof error;
+}
+
+function normalizeEmail(value) {
+  return typeof value === "string" ? value.trim().toLowerCase() : "";
+}
+
+function isValidEmail(email) {
+  if (!email || email.length > 254) return false;
+  const separator = email.lastIndexOf("@");
+  if (separator <= 0 || separator !== email.indexOf("@")) return false;
+  const local = email.slice(0, separator);
+  const domain = email.slice(separator + 1);
+  if (local.length > 64 || domain.length > 253) return false;
+  if (local.startsWith(".") || local.endsWith(".") || local.includes("..")) return false;
+  if (!/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+$/i.test(local)) return false;
+  const labels = domain.split(".");
+  if (labels.length < 2) return false;
+  return labels.every(
+    (label) =>
+      label.length > 0 &&
+      label.length <= 63 &&
+      /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(label),
+  );
+}
+
+async function readJsonObject(request) {
+  const contentType = request.headers.get("Content-Type")?.split(";", 1)[0].trim().toLowerCase();
+  if (contentType !== "application/json") {
+    return { ok: false, status: 415, code: "unsupported_media_type", error: "Content-Type must be application/json" };
+  }
+
+  const declaredLength = Number(request.headers.get("Content-Length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_JSON_BYTES) {
+    return { ok: false, status: 413, code: "payload_too_large", error: "Request body is too large" };
+  }
+  if (!request.body) {
+    return { ok: false, status: 400, code: "invalid_json", error: "Invalid JSON" };
+  }
+
+  const reader = request.body.getReader();
+  const chunks = [];
+  let total = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > MAX_JSON_BYTES) {
+      await reader.cancel();
+      return { ok: false, status: 413, code: "payload_too_large", error: "Request body is too large" };
+    }
+    chunks.push(value);
+  }
+
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+
+  try {
+    const value = JSON.parse(new TextDecoder().decode(bytes));
+    if (!value || typeof value !== "object" || Array.isArray(value)) throw new TypeError("Expected object");
+    return { ok: true, value };
+  } catch {
+    return { ok: false, status: 400, code: "invalid_json", error: "Invalid JSON" };
+  }
+}
+
+function configurationReady(env, required) {
+  return required.every((name) => {
+    const value = env?.[name];
+    if (name.endsWith("_RATE_LIMITER")) return value && typeof value.limit === "function";
+    if (name === "UNSUBSCRIBE_TOKEN_SECRET") return typeof value === "string" && value.length >= 32;
+    return typeof value === "string" && value.trim().length > 0;
+  });
+}
+
+async function rateLimitKey(scope, email) {
+  const digest = await crypto.subtle.digest("SHA-256", encoder.encode(`${scope}\0${email}`));
+  return bytesToBase64Url(new Uint8Array(digest));
+}
+
+async function enforceRateLimit(request, limiter, scope, email) {
+  try {
+    const outcome = await limiter.limit({ key: await rateLimitKey(scope, email) });
+    if (!outcome?.success) {
+      return json(request, { error: "Too many requests", code: "rate_limited" }, 429, { "Retry-After": "60" });
+    }
+    return null;
+  } catch (error) {
+    structuredLog("error", "rate_limit_failed", { scope, errorType: errorType(error) });
+    return json(request, { error: "Service temporarily unavailable", code: "rate_limit_unavailable" }, 503);
+  }
+}
+
+async function enforceAbuseLimits(request, limiter, scope, email) {
+  const clientIp = request.headers.get("CF-Connecting-IP");
+  if (!clientIp) {
+    // Cloudflare supplies this header at the edge. Failing closed prevents a
+    // caller from bypassing the aggregate limiter if that invariant changes.
+    return json(request, { error: "Client identity is unavailable", code: "client_identity_unavailable" }, 503);
+  }
+  const emailLimited = await enforceRateLimit(request, limiter, `${scope}:email`, email);
+  if (emailLimited) return emailLimited;
+  // This aggregate check bounds address rotation. The quota is deliberately
+  // small, so users behind a shared NAT may share it and receive a 429.
+  return enforceRateLimit(request, limiter, `${scope}:client`, clientIp);
+}
+
+function bytesToBase64Url(bytes) {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/u, "");
+}
+
+function base64UrlToBytes(value) {
+  if (!/^[A-Za-z0-9_-]+$/u.test(value)) throw new TypeError("Invalid base64url");
+  const padded = value.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(value.length / 4) * 4, "=");
+  const binary = atob(padded);
+  return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+}
+
+async function importTokenKey(secret) {
+  return crypto.subtle.importKey("raw", encoder.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign", "verify"]);
+}
+
+async function createUnsubscribeToken(secret, email, nowSeconds = Math.floor(Date.now() / 1000)) {
+  const payload = {
+    v: 1,
+    purpose: "unsubscribe",
+    email,
+    iat: nowSeconds,
+    exp: nowSeconds + TOKEN_TTL_SECONDS,
+    nonce: crypto.randomUUID(),
+  };
+  const encodedPayload = bytesToBase64Url(encoder.encode(JSON.stringify(payload)));
+  const signature = await crypto.subtle.sign("HMAC", await importTokenKey(secret), encoder.encode(encodedPayload));
+  return `${encodedPayload}.${bytesToBase64Url(new Uint8Array(signature))}`;
+}
+
+async function verifyUnsubscribeToken(secret, token, nowSeconds = Math.floor(Date.now() / 1000)) {
+  if (typeof token !== "string" || token.length > 2048) return { ok: false };
+  const parts = token.split(".");
+  if (parts.length !== 2) return { ok: false };
+
+  try {
+    const [encodedPayload, encodedSignature] = parts;
+    const signature = base64UrlToBytes(encodedSignature);
+    const verified = await crypto.subtle.verify(
+      "HMAC",
+      await importTokenKey(secret),
+      signature,
+      encoder.encode(encodedPayload),
+    );
+    if (!verified) return { ok: false };
+
+    const payloadBytes = base64UrlToBytes(encodedPayload);
+    if (bytesToBase64Url(payloadBytes) !== encodedPayload) return { ok: false };
+    const payload = JSON.parse(new TextDecoder().decode(payloadBytes));
+    const email = normalizeEmail(payload.email);
+    const claimsValid =
+      payload.v === 1 &&
+      payload.purpose === "unsubscribe" &&
+      payload.email === email &&
+      isValidEmail(email) &&
+      Number.isInteger(payload.iat) &&
+      Number.isInteger(payload.exp) &&
+      payload.iat <= nowSeconds + MAX_CLOCK_SKEW_SECONDS &&
+      payload.exp > nowSeconds &&
+      payload.exp > payload.iat &&
+      payload.exp - payload.iat <= TOKEN_TTL_SECONDS &&
+      typeof payload.nonce === "string" &&
+      payload.nonce.length >= 16 &&
+      payload.nonce.length <= 64;
+    return claimsValid ? { ok: true, email } : { ok: false };
+  } catch {
+    return { ok: false };
+  }
+}
 
 const ACCENT_COLORS = {
   spring: "#6b8f71",
@@ -35,12 +252,6 @@ function archiveUrl(season, lang) {
 function unsubscribeUrl(lang) {
   return `${siteUrl(lang)}/unsubscribe.html`;
 }
-function json(body, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
-  });
-}
 
 function bdRequest(env, path, method = "GET", body = null) {
   const opts = {
@@ -48,10 +259,31 @@ function bdRequest(env, path, method = "GET", body = null) {
     headers: {
       Authorization: `Token ${env.BUTTONDOWN_API_KEY}`,
       "Content-Type": "application/json",
+      "X-API-Version": BUTTONDOWN_API_VERSION,
     },
   };
-  if (body) opts.body = JSON.stringify(body);
+  if (body !== null) opts.body = JSON.stringify(body);
   return fetch(`https://api.buttondown.com/v1${path}`, opts);
+}
+
+async function parseUpstreamJson(response) {
+  try {
+    const value = await response.json();
+    return value && typeof value === "object" ? value : {};
+  } catch {
+    return {};
+  }
+}
+
+async function getSubscriber(env, email) {
+  const response = await bdRequest(env, `/subscribers/${encodeURIComponent(email)}`);
+  if (response.status === 404) return { ok: true, subscriber: null };
+  if (!response.ok) return { ok: false, status: response.status };
+  const subscriber = await parseUpstreamJson(response);
+  if (normalizeEmail(subscriber.email_address) !== email || typeof subscriber.type !== "string") {
+    return { ok: false, status: 502 };
+  }
+  return { ok: true, subscriber };
 }
 
 function findActiveSeason(today) {
@@ -80,17 +312,29 @@ function findActiveSeason(today) {
   return best;
 }
 
-function getSeasonDateRange(season) {
+function getSeasonEndMetadata(season, year = new Date().getUTCFullYear()) {
   const seasons = seasonsData.seasons;
-  const idx = seasons.findIndex((s) => s.id === season.id);
+  const idx = seasons.findIndex((candidate) => candidate.id === season.id);
+  if (idx === -1) throw new RangeError(`Unknown season id: ${season.id}`);
+
   const next = idx < seasons.length - 1 ? seasons[idx + 1] : seasons[0];
-  const year = new Date().getUTCFullYear();
-  const nextYear = idx < seasons.length - 1 ? year : year + 1;
+  const rollsIntoNextYear =
+    next.start_month < season.start_month ||
+    (next.start_month === season.start_month && next.start_day <= season.start_day);
+  const nextYear = year + (rollsIntoNextYear ? 1 : 0);
+  const start = new Date(Date.UTC(year, season.start_month - 1, season.start_day));
   const nextStart = new Date(Date.UTC(nextYear, next.start_month - 1, next.start_day));
-  const end = new Date(nextStart - 86400000); // day before next season
-  const endMonth = end.getUTCMonth() + 1;
-  const endDay = end.getUTCDate();
-  const duration = Math.round((end - new Date(Date.UTC(year, season.start_month - 1, season.start_day))) / 86400000) + 1;
+  const end = new Date(nextStart.getTime() - 86400000);
+
+  return {
+    endMonth: end.getUTCMonth() + 1,
+    endDay: end.getUTCDate(),
+    duration: Math.round((end.getTime() - start.getTime()) / 86400000) + 1,
+  };
+}
+
+function getSeasonDateRange(season) {
+  const { endMonth, endDay, duration } = getSeasonEndMetadata(season);
   return {
     dateRange: `${MONTHS_SHORT[season.start_month]} ${season.start_day} – ${MONTHS_SHORT[endMonth]} ${endDay}`,
     duration,
@@ -136,16 +380,7 @@ const MAJOR_SEASON_JA = { spring: "春", summer: "夏", autumn: "秋", winter: "
 function majorSeasonJa(name) { return MAJOR_SEASON_JA[name] || name; }
 
 function getSeasonDateRangeForLang(season, lang) {
-  const seasons = seasonsData.seasons;
-  const idx = seasons.findIndex((s) => s.id === season.id);
-  const next = idx < seasons.length - 1 ? seasons[idx + 1] : seasons[0];
-  const year = new Date().getUTCFullYear();
-  const nextYear = idx < seasons.length - 1 ? year : year + 1;
-  const nextStart = new Date(Date.UTC(nextYear, next.start_month - 1, next.start_day));
-  const end = new Date(nextStart - 86400000);
-  const endMonth = end.getUTCMonth() + 1;
-  const endDay = end.getUTCDate();
-  const duration = Math.round((end - new Date(Date.UTC(year, season.start_month - 1, season.start_day))) / 86400000) + 1;
+  const { endMonth, endDay, duration } = getSeasonEndMetadata(season);
   const dateRange = lang === "ja"
     ? `${season.start_month}月${season.start_day}日 – ${endMonth}月${endDay}日`
     : `${MONTHS_SHORT[season.start_month]} ${season.start_day} – ${MONTHS_SHORT[endMonth]} ${endDay}`;
@@ -257,127 +492,229 @@ function escapeHtml(s) {
 }
 
 async function sendWelcomeEmail(env, email, lang = DEFAULT_LANG) {
-  if (!env.RESEND_API_KEY) {
-    console.warn("RESEND_API_KEY not set — skipping welcome email");
-    return;
-  }
   const season = findActiveSeason(new Date());
-  if (!season) return;
+  if (!season) return { ok: false, status: 500 };
 
   const copy = WELCOME_COPY[lang] || WELCOME_COPY[DEFAULT_LANG];
-  const res = await fetch("https://api.resend.com/emails", {
+  return sendResendEmail(env, {
+    from: "Kō <seasons@ko-72.com>",
+    to: [email],
+    subject: copy.subject(season),
+    html: renderWelcomeEmail(season, lang),
+  }, "welcome_email_failed");
+}
+
+async function sendResendEmail(env, payload, failureEvent) {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      from: "Kō <seasons@ko-72.com>",
-      to: [email],
-      subject: copy.subject(season),
-      html: renderWelcomeEmail(season, lang),
-    }),
+    body: JSON.stringify(payload),
   });
-  if (!res.ok) {
-    const body = await res.text();
-    console.error(`Welcome email failed (${res.status}): ${body}`);
+  if (!response.ok) {
+    structuredLog("error", failureEvent, { upstreamStatus: response.status });
+    return { ok: false, status: response.status };
   }
+  return { ok: true };
+}
+
+async function sendUnsubscribeConfirmation(env, email, lang, token) {
+  // Keep the bearer token in the URL fragment so it is not sent to the static
+  // site host in the HTTP request or leaked in referrer headers.
+  const confirmationUrl = `${unsubscribeUrl(lang)}#token=${encodeURIComponent(token)}`;
+  const content = lang === "ja"
+    ? {
+        subject: "Kō（候）· 配信停止の確認",
+        heading: "配信停止の確認",
+        body: "Kō の配信停止リクエストを受け付けました。下のリンクを開き、配信停止を確定してください。このリンクは30分間有効です。",
+        action: "配信停止を確認",
+        ignore: "このリクエストに心当たりがない場合は、このメールを無視してください。",
+      }
+    : {
+        subject: "Kō · Confirm your unsubscribe request",
+        heading: "Confirm your unsubscribe request",
+        body: "We received a request to unsubscribe this address from Kō. Open the link below and confirm within 30 minutes.",
+        action: "Review unsubscribe request",
+        ignore: "If you did not request this, you can safely ignore this email.",
+      };
+  const html = `<!doctype html><html lang="${lang}"><body style="margin:0;padding:32px;background:#e8e5de;color:#2c2c2a;font-family:system-ui,-apple-system,sans-serif"><div style="max-width:560px;margin:auto;background:#f5f3ee;padding:36px"><p style="font-family:Georgia,serif;font-size:22px">Kō <span style="font-size:14px;color:#888780">候</span></p><h1 style="font-family:Georgia,serif;font-size:22px;font-weight:400">${content.heading}</h1><p style="line-height:1.7">${content.body}</p><p style="margin:28px 0"><a href="${confirmationUrl}" style="display:inline-block;background:#2c2c2a;color:#f5f3ee;text-decoration:none;padding:12px 20px">${content.action}</a></p><p style="color:#888780;font-size:13px;line-height:1.7">${content.ignore}</p></div></body></html>`;
+  return sendResendEmail(env, {
+    from: "Kō <seasons@ko-72.com>",
+    to: [email],
+    subject: content.subject,
+    html,
+  }, "unsubscribe_confirmation_email_failed");
 }
 
 async function reactivateSubscriber(env, email, lang = DEFAULT_LANG) {
+  const subscriberResult = await getSubscriber(env, email);
+  if (!subscriberResult.ok || !subscriberResult.subscriber) {
+    return { ok: false, status: subscriberResult.status ?? 404 };
+  }
+  const patchResponse = await bdRequest(env, `/subscribers/${encodeURIComponent(email)}`, "PATCH", {
+    type: "regular",
+    tags: [`lang:${lang}`],
+  });
+  if (!patchResponse.ok) return { ok: false, status: patchResponse.status };
+  return sendWelcomeEmail(env, email, lang);
+}
+
+async function handleSubscribe(request, env) {
+  const parsed = await readJsonObject(request);
+  if (!parsed.ok) return json(request, { error: parsed.error, code: parsed.code }, parsed.status);
+
+  const email = normalizeEmail(parsed.value.email);
+  if (!isValidEmail(email)) {
+    return json(request, { error: "Invalid email", code: "invalid_email" }, 400);
+  }
+  if (!configurationReady(env, ["BUTTONDOWN_API_KEY", "RESEND_API_KEY", "SUBSCRIBE_RATE_LIMITER"])) {
+    return json(request, { error: "Service is not configured", code: "configuration_error" }, 503);
+  }
+
+  const limited = await enforceAbuseLimits(request, env.SUBSCRIBE_RATE_LIMITER, "subscribe", email);
+  if (limited) return limited;
+  const lang = normalizeLang(parsed.value.language);
+  const ipAddress = request.headers.get("CF-Connecting-IP");
+
   try {
-    const listRes = await bdRequest(env, `/subscribers?email=${encodeURIComponent(email)}`);
-    if (!listRes.ok) {
-      console.error(`Reactivate lookup failed (${listRes.status}) for ${email}`);
-      return;
+    const response = await bdRequest(env, "/subscribers", "POST", {
+      email_address: email,
+      type: "regular",
+      tags: [`lang:${lang}`],
+      ...(ipAddress ? { ip_address: ipAddress } : {}),
+    });
+    const data = await parseUpstreamJson(response);
+    let result;
+    if (response.ok) {
+      result = await sendWelcomeEmail(env, email, lang);
+    } else if (data.code === "email_already_exists") {
+      result = await reactivateSubscriber(env, email, lang);
+    } else {
+      structuredLog("error", "buttondown_subscribe_failed", { upstreamStatus: response.status });
+      const status = response.status >= 500 || response.status === 401 || response.status === 403 || response.status === 429 ? 502 : 400;
+      return json(request, { error: "Subscription failed", code: "subscription_failed" }, status);
     }
-    const listData = await listRes.json();
-    const subscriber = listData.results?.[0];
-    if (!subscriber) return;
-    const patchBody = { type: "regular", tags: [`lang:${lang}`] };
-    const patchRes = await bdRequest(env, `/subscribers/${subscriber.id}`, "PATCH", patchBody);
-    if (!patchRes.ok) {
-      const body = await patchRes.text();
-      console.error(`Reactivate PATCH failed (${patchRes.status}) for ${email}: ${body}`);
-      return;
+
+    if (!result.ok) {
+      structuredLog("error", "welcome_delivery_failed", { upstreamStatus: result.status });
+      return json(request, { error: "Subscription saved, but the welcome email could not be sent", code: "welcome_email_failed" }, 502);
     }
-    await sendWelcomeEmail(env, email, lang);
-  } catch (err) {
-    console.error(`Reactivation failed for ${email}: ${err.message}`);
+    return json(request, { ok: true });
+  } catch (error) {
+    structuredLog("error", "subscribe_upstream_unreachable", { errorType: errorType(error) });
+    return json(request, { error: "Subscription service unreachable", code: "upstream_unreachable" }, 502);
+  }
+}
+
+async function handleUnsubscribeRequest(request, env) {
+  const parsed = await readJsonObject(request);
+  if (!parsed.ok) return json(request, { error: parsed.error, code: parsed.code }, parsed.status);
+
+  const email = normalizeEmail(parsed.value.email);
+  if (!isValidEmail(email)) {
+    return json(request, { error: "Invalid email", code: "invalid_email" }, 400);
+  }
+  const required = ["BUTTONDOWN_API_KEY", "RESEND_API_KEY", "UNSUBSCRIBE_TOKEN_SECRET", "UNSUBSCRIBE_RATE_LIMITER"];
+  if (!configurationReady(env, required)) {
+    return json(request, { error: "Service is not configured", code: "configuration_error" }, 503);
+  }
+
+  const limited = await enforceAbuseLimits(request, env.UNSUBSCRIBE_RATE_LIMITER, "unsubscribe_request", email);
+  if (limited) return limited;
+  const genericAccepted = () => json(request, { ok: true, status: "confirmation_sent" }, 202);
+
+  try {
+    const subscriberResult = await getSubscriber(env, email);
+    if (!subscriberResult.ok) {
+      structuredLog("error", "buttondown_unsubscribe_lookup_failed", { upstreamStatus: subscriberResult.status });
+      return json(request, { error: "Unsubscribe service unavailable", code: "upstream_error" }, 502);
+    }
+    if (!subscriberResult.subscriber || subscriberResult.subscriber.type === "unsubscribed") {
+      return genericAccepted();
+    }
+
+    const lang = normalizeLang(parsed.value.language);
+    const token = await createUnsubscribeToken(env.UNSUBSCRIBE_TOKEN_SECRET, email);
+    const delivery = await sendUnsubscribeConfirmation(env, email, lang, token);
+    if (!delivery.ok) {
+      return json(request, { error: "Confirmation email could not be sent", code: "confirmation_email_failed" }, 502);
+    }
+    return genericAccepted();
+  } catch (error) {
+    structuredLog("error", "unsubscribe_request_upstream_unreachable", { errorType: errorType(error) });
+    return json(request, { error: "Unsubscribe service unavailable", code: "upstream_unreachable" }, 502);
+  }
+}
+
+async function handleUnsubscribeConfirm(request, env) {
+  const parsed = await readJsonObject(request);
+  if (!parsed.ok) return json(request, { error: parsed.error, code: parsed.code }, parsed.status);
+  if (!configurationReady(env, ["BUTTONDOWN_API_KEY", "UNSUBSCRIBE_TOKEN_SECRET"])) {
+    return json(request, { error: "Service is not configured", code: "configuration_error" }, 503);
+  }
+
+  const verification = await verifyUnsubscribeToken(env.UNSUBSCRIBE_TOKEN_SECRET, parsed.value.token);
+  if (!verification.ok) {
+    return json(request, { error: "Confirmation link is invalid or expired", code: "invalid_token" }, 401);
+  }
+
+  try {
+    const response = await bdRequest(env, `/subscribers/${encodeURIComponent(verification.email)}`, "PATCH", {
+      type: "unsubscribed",
+    });
+    if (response.status === 404) return json(request, { ok: true });
+    if (!response.ok) {
+      structuredLog("error", "buttondown_unsubscribe_patch_failed", { upstreamStatus: response.status });
+      return json(request, { error: "Unsubscribe service unavailable", code: "upstream_error" }, 502);
+    }
+    return json(request, { ok: true });
+  } catch (error) {
+    structuredLog("error", "unsubscribe_confirm_upstream_unreachable", { errorType: errorType(error) });
+    return json(request, { error: "Unsubscribe service unavailable", code: "upstream_unreachable" }, 502);
   }
 }
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
+    const origin = request.headers.get("Origin");
+    if (origin && !ALLOWED_ORIGINS.has(origin)) {
+      return json(request, { error: "Origin is not allowed", code: "cors_forbidden" }, 403);
+    }
+
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: CORS_HEADERS });
+      const requestedMethod = request.headers.get("Access-Control-Request-Method");
+      if (!origin || requestedMethod !== "POST") {
+        return json(request, { error: "Invalid preflight request", code: "invalid_preflight" }, 403);
+      }
+      return new Response(null, { status: 204, headers: corsHeaders(request) });
     }
 
-    const url = new URL(request.url);
-
-    // POST /subscribe
-    if (url.pathname === "/subscribe" && request.method === "POST") {
-      let email, language;
-      try {
-        ({ email, language } = await request.json());
-      } catch {
-        return json({ error: "Invalid JSON" }, 400);
-      }
-      // Normalize so the same inbox can't create case/whitespace-variant
-      // Buttondown records (which caused duplicate newsletter sends).
-      email = (email || "").toString().trim().toLowerCase();
-      if (!email || !email.includes("@")) {
-        return json({ error: "Invalid email" }, 400);
-      }
-      const lang = normalizeLang(language);
-      const ipAddress = request.headers.get("CF-Connecting-IP");
-      let res, data;
-      try {
-        res = await bdRequest(env, "/subscribers", "POST", {
-          email_address: email,
-          type: "regular",
-          tags: [`lang:${lang}`],
-          // Buttondown uses the visitor IP for spam checks. Without it, every
-          // signup appears to come from the Worker's shared egress IP and can
-          // be incorrectly blocked by its firewall.
-          ...(ipAddress ? { ip_address: ipAddress } : {}),
-        });
-        data = await res.json().catch(() => ({}));
-      } catch (err) {
-        console.error(`Subscribe request failed for ${email}: ${err.message}`);
-        return json({ error: "Subscription service unreachable" }, 502);
-      }
-      if (res.ok) {
-        ctx.waitUntil(sendWelcomeEmail(env, email, lang));
-        return json({ ok: true });
-      }
-      if (data.code === "email_already_exists") {
-        ctx.waitUntil(reactivateSubscriber(env, email, lang));
-        return json({ ok: true });
-      }
-      console.error(`Buttondown subscribe failed (${res.status}) for ${email}:`, JSON.stringify(data));
-      const status = res.status >= 500 ? 502 : 400;
-      return json({ error: data.detail ?? "Subscription failed" }, status);
+    const path = new URL(request.url).pathname;
+    const knownPaths = new Set(["/subscribe", "/unsubscribe", "/unsubscribe/confirm"]);
+    if (knownPaths.has(path) && request.method !== "POST") {
+      return json(request, { error: "Method not allowed", code: "method_not_allowed" }, 405, { Allow: "POST, OPTIONS" });
     }
 
-    // POST /unsubscribe
-    if (url.pathname === "/unsubscribe" && request.method === "POST") {
-      let email;
-      try {
-        ({ email } = await request.json());
-      } catch {
-        return json({ error: "Invalid JSON" }, 400);
-      }
-      email = (email || "").toString().trim().toLowerCase();
-      const listRes = await bdRequest(env, `/subscribers?email=${encodeURIComponent(email)}`);
-      const data = await listRes.json();
-      const subscriber = data.results?.[0];
-      if (subscriber) {
-        await bdRequest(env, `/subscribers/${subscriber.id}`, "DELETE");
-      }
-      return json({ ok: true });
+    try {
+      if (path === "/subscribe") return await handleSubscribe(request, env);
+      if (path === "/unsubscribe") return await handleUnsubscribeRequest(request, env);
+      if (path === "/unsubscribe/confirm") return await handleUnsubscribeConfirm(request, env);
+      return json(request, { error: "Not found", code: "not_found" }, 404);
+    } catch (error) {
+      structuredLog("error", "unhandled_request_error", { path, errorType: errorType(error) });
+      return json(request, { error: "Internal server error", code: "internal_error" }, 500);
     }
-
-    return json({ error: "Not found" }, 404);
   },
+};
+
+export const __test = {
+  createUnsubscribeToken,
+  verifyUnsubscribeToken,
+  getSeasonDateRange,
+  getSeasonDateRangeForLang,
+  isValidEmail,
+  normalizeEmail,
+  TOKEN_TTL_SECONDS,
 };

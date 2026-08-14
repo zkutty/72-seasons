@@ -1,6 +1,8 @@
 name: Kō Newsletter
 
 on:
+  pull_request:
+    branches: [main]
   schedule:
     - cron: '0 1 * * *'  # 1am UTC daily — season transitions happen at midnight Japan time
   push:
@@ -12,7 +14,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  verify:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -v
+      - run: npm test --prefix worker
+      - name: Cache-only static validation (no delivery secrets)
+        run: env -u ANTHROPIC_API_KEY -u RESEND_API_KEY -u BUTTONDOWN_API_KEY python season_mailer.py --force --build-only
+
   send:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,8 +44,18 @@ jobs:
         with:
           python-version: '3.12'
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Run Python tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Run Worker tests
+        run: npm test --prefix worker
 
       - name: Run mailer
         env:
@@ -34,6 +64,7 @@ jobs:
           SUBSCRIBER_EMAILS: ${{ secrets.SUBSCRIBER_EMAILS }}
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
           WORKER_URL: ${{ secrets.WORKER_URL }}
+          LOOKUP_API_CALL_CAP: "24"
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
             python season_mailer.py
@@ -41,14 +72,14 @@ jobs:
             python season_mailer.py --force --build-only
           fi
 
-      - name: Commit archive, cache, and homepage updates
+      - name: Commit generated static outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add archive/ || true
-          test -f index.html && git add index.html || true
-          test -f sitemap.xml && git add sitemap.xml || true
-          test -f data/content_cache.json && git add data/content_cache.json || true
+          git add -- archive/ ja/archive/ \
+            index.html ja/index.html sitemap.xml \
+            unsubscribe.html ja/unsubscribe.html \
+            data/content_cache.json data/ingredients.json data/dishes.json
           git diff --staged --quiet || git commit -m "Build $(date +%Y-%m-%d): static rebuild"
           git pull --rebase --autostash origin main
           git push

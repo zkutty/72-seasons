@@ -9,6 +9,7 @@ bilingual content payload via ``templates/email.html``.
 import json
 import os
 import time
+import logging
 import urllib.request
 import urllib.error
 from collections import deque
@@ -37,6 +38,11 @@ STRINGS_PATH = DATA_DIR / "strings.json"
 # for clock drift and retries.
 RESEND_MAX_PER_SEC = 4
 RESEND_RETRY_ATTEMPTS = 5
+log = logging.getLogger(__name__)
+
+
+class AllSendsFailedError(RuntimeError):
+    """Raised when no recipient could be delivered to."""
 
 
 def _fmt(month: int, day: int) -> str:
@@ -258,6 +264,7 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
     sent = {lang: 0 for lang in rendered}
     skipped: list[str] = []
     send_window: deque = deque()
+    failed: list[tuple[str, str]] = []
     for recipient, lang in recipients:
         if lang not in rendered:
             # JA subscriber but no JA content yet (legacy cache before backfill) — fall back to EN.
@@ -272,10 +279,19 @@ def send_email(season: dict, content: dict, worker_url: str = "https://subscribe
             "html": html,
         }
         _throttle(send_window)
-        _send_with_retry(params)
+        try:
+            _send_with_retry(params)
+        except Exception as exc:
+            log.warning("Failed to send to %s: %s", recipient, exc)
+            failed.append((recipient, f"{type(exc).__name__}: {exc}"))
+            continue
         sent[lang] += 1
 
     summary = ", ".join(f"{lang}: {n}" for lang, n in sent.items() if n)
-    print(f"Email sent — {summary}.")
     for note in skipped:
         print(f"  fallback: {note}")
+    if failed:
+        log.warning("%d recipient(s) failed while other deliveries continued.", len(failed))
+    if not sum(sent.values()):
+        raise AllSendsFailedError(f"All {len(failed)} recipient(s) failed — no emails were sent for season #{season['id']}.")
+    print(f"Email sent — {summary}.")

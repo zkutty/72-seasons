@@ -1,7 +1,34 @@
 name = "ko-72-subscribe"
 main = "index.js"
-compatibility_date = "2024-09-23"
+compatibility_date = "2026-08-14"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+# Cloudflare Rate Limiting API namespaces are account-wide. Keep these IDs
+# unique if another Worker in the account already uses them. Each route checks
+# both an email-derived key and a CF-Connecting-IP-derived key. The latter
+# bounds address rotation, but callers behind one NAT share its quota.
+[[ratelimits]]
+name = "SUBSCRIBE_RATE_LIMITER"
+namespace_id = "72001"
+
+[ratelimits.simple]
+limit = 5
+period = 60
+
+[[ratelimits]]
+name = "UNSUBSCRIBE_RATE_LIMITER"
+namespace_id = "72002"
+
+[ratelimits.simple]
+limit = 3
+period = 60
 
 # Set secrets via wrangler (never commit them to this file):
 #   npx wrangler secret put BUTTONDOWN_API_KEY
 #   npx wrangler secret put RESEND_API_KEY   # used for welcome emails on /subscribe
+#   npx wrangler secret put UNSUBSCRIBE_TOKEN_SECRET
+# Use at least 32 random characters for UNSUBSCRIBE_TOKEN_SECRET.

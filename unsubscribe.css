@@ -1,0 +1,31 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e8e5de; font-family: system-ui, -apple-system, sans-serif; color: #2c2c2a; }
+html[lang="ja"], html[lang="ja"] body { font-family: 'Hiragino Sans', 'Yu Gothic', system-ui, -apple-system, sans-serif; }
+.card { max-width: 480px; margin: 80px auto; background: #f5f3ee; padding: 48px 40px; text-align: center; }
+.logo { font-family: Georgia, serif; font-size: 22px; color: #1a1a18; margin: 0 0 32px 0; }
+.logo .kanji { font-family: system-ui, sans-serif; font-size: 14px; color: #888780; margin-left: 8px; }
+h1 { font-family: Georgia, serif; font-size: 20px; font-weight: 400; margin: 0 0 10px 0; }
+html[lang="ja"] h1 { font-family: 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif; }
+p { font-size: 14px; color: #888780; line-height: 1.7; margin: 0 0 28px 0; }
+input[type="email"] {
+  width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid #d8d5ce;
+  background: #fff; outline: none; font-family: system-ui, sans-serif; margin-bottom: 12px;
+}
+input[type="email"]:focus { border-color: #888780; }
+button {
+  width: 100%; padding: 12px; background: #2c2c2a; color: #f5f3ee; border: none;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+  font-family: system-ui, sans-serif;
+}
+button:hover { background: #1a1a18; }
+button:disabled { cursor: wait; opacity: 0.65; }
+[hidden] { display: none !important; }
+.msg { font-size: 14px; margin: 16px 0 0 0; }
+.msg.success { color: #6b8f71; }
+.msg.error { color: #c9734a; }
+a { color: #888780; font-size: 13px; }
+.lang-switch { display: block; margin-top: 18px; font-size: 12px; }
+
+@media (max-width: 560px) {
+  .card { margin: 24px 16px; padding: 36px 24px; }
+}
