@@ -1,6 +1,8 @@
 name: Kō Newsletter
 
 on:
+  pull_request:
+    branches: [main]
   schedule:
     - cron: '0 1 * * *'  # 1am UTC daily — season transitions happen at midnight Japan time
   push:
@@ -12,7 +14,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  verify:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -v
+      - name: Cache-only static validation (no delivery secrets)
+        run: env -u ANTHROPIC_API_KEY -u RESEND_API_KEY -u BUTTONDOWN_API_KEY python season_mailer.py --force --build-only
+
   send:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: write
