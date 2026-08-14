@@ -312,17 +312,29 @@ function findActiveSeason(today) {
   return best;
 }
 
-function getSeasonDateRange(season) {
+function getSeasonEndMetadata(season, year = new Date().getUTCFullYear()) {
   const seasons = seasonsData.seasons;
-  const idx = seasons.findIndex((s) => s.id === season.id);
+  const idx = seasons.findIndex((candidate) => candidate.id === season.id);
+  if (idx === -1) throw new RangeError(`Unknown season id: ${season.id}`);
+
   const next = idx < seasons.length - 1 ? seasons[idx + 1] : seasons[0];
-  const year = new Date().getUTCFullYear();
-  const nextYear = idx < seasons.length - 1 ? year : year + 1;
+  const rollsIntoNextYear =
+    next.start_month < season.start_month ||
+    (next.start_month === season.start_month && next.start_day <= season.start_day);
+  const nextYear = year + (rollsIntoNextYear ? 1 : 0);
+  const start = new Date(Date.UTC(year, season.start_month - 1, season.start_day));
   const nextStart = new Date(Date.UTC(nextYear, next.start_month - 1, next.start_day));
-  const end = new Date(nextStart - 86400000); // day before next season
-  const endMonth = end.getUTCMonth() + 1;
-  const endDay = end.getUTCDate();
-  const duration = Math.round((end - new Date(Date.UTC(year, season.start_month - 1, season.start_day))) / 86400000) + 1;
+  const end = new Date(nextStart.getTime() - 86400000);
+
+  return {
+    endMonth: end.getUTCMonth() + 1,
+    endDay: end.getUTCDate(),
+    duration: Math.round((end.getTime() - start.getTime()) / 86400000) + 1,
+  };
+}
+
+function getSeasonDateRange(season) {
+  const { endMonth, endDay, duration } = getSeasonEndMetadata(season);
   return {
     dateRange: `${MONTHS_SHORT[season.start_month]} ${season.start_day} – ${MONTHS_SHORT[endMonth]} ${endDay}`,
     duration,
@@ -368,16 +380,7 @@ const MAJOR_SEASON_JA = { spring: "春", summer: "夏", autumn: "秋", winter: "
 function majorSeasonJa(name) { return MAJOR_SEASON_JA[name] || name; }
 
 function getSeasonDateRangeForLang(season, lang) {
-  const seasons = seasonsData.seasons;
-  const idx = seasons.findIndex((s) => s.id === season.id);
-  const next = idx < seasons.length - 1 ? seasons[idx + 1] : seasons[0];
-  const year = new Date().getUTCFullYear();
-  const nextYear = idx < seasons.length - 1 ? year : year + 1;
-  const nextStart = new Date(Date.UTC(nextYear, next.start_month - 1, next.start_day));
-  const end = new Date(nextStart - 86400000);
-  const endMonth = end.getUTCMonth() + 1;
-  const endDay = end.getUTCDate();
-  const duration = Math.round((end - new Date(Date.UTC(year, season.start_month - 1, season.start_day))) / 86400000) + 1;
+  const { endMonth, endDay, duration } = getSeasonEndMetadata(season);
   const dateRange = lang === "ja"
     ? `${season.start_month}月${season.start_day}日 – ${endMonth}月${endDay}日`
     : `${MONTHS_SHORT[season.start_month]} ${season.start_day} – ${MONTHS_SHORT[endMonth]} ${endDay}`;
@@ -709,6 +712,8 @@ export default {
 export const __test = {
   createUnsubscribeToken,
   verifyUnsubscribeToken,
+  getSeasonDateRange,
+  getSeasonDateRangeForLang,
   isValidEmail,
   normalizeEmail,
   TOKEN_TTL_SECONDS,

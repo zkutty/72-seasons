@@ -57,6 +57,23 @@ async function responseJson(response) {
   return response.json();
 }
 
+test("season 71 date range crosses into January without a negative duration", () => {
+  const season71 = {
+    id: 71,
+    start_month: 12,
+    start_day: 27,
+  };
+
+  assert.deepEqual(__test.getSeasonDateRange(season71), {
+    dateRange: "Dec 27 – Dec 31",
+    duration: 5,
+  });
+  assert.deepEqual(__test.getSeasonDateRangeForLang(season71, "ja"), {
+    dateRange: "12月27日 – 12月31日",
+    duration: 5,
+  });
+});
+
 test("invalid JSON and invalid email fail before any upstream mutation", async () => {
   let upstreamCalls = 0;
   await withMockFetch(async () => {
