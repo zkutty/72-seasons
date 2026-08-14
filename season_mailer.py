@@ -268,17 +268,24 @@ def main() -> None:
     # ── pipeline ──────────────────────────────────────────────────────────────
     from email_sender import send_email
     from archive_builder import build_archive, build_website
-    from ingredient_generator import run as generate_lookups
+    from ingredient_generator import LookupGenerationLimitError, run as generate_lookups
 
     worker_url = os.environ.get("WORKER_URL", "https://subscribe.ko-72.com")
 
-    # Step 1: content (from cache if available)
+    # Step 1: content (from cache if available). Build-only is used by the
+    # push verification path, so it is deliberately cache-only: a cache miss
+    # must be fixed in a bounded generation run, never by a push loop.
     cache = load_cache()
     cache_key = str(season["id"])
     if cache_key in cache:
         log.info("Step 1/5 · Using cached content for season #%d.", season["id"])
         content = cache[cache_key]
     else:
+        if args.build_only:
+            raise RuntimeError(
+                "--build-only will not generate paid content. "
+                f"Cache season #{season['id']} first, then rerun the static build."
+            )
         log.info("Step 1/5 · Generating content with Claude …")
         used_dishes = collect_used_dishes(cache, exclude_id=cache_key)
         log.info(
@@ -290,8 +297,23 @@ def main() -> None:
         save_cache(cache)
         log.info("Content generated and cached.")
 
-    log.info("Step 2/5 · Generating any new ingredient / dish lookups …")
-    stats = generate_lookups()
+    if args.build_only:
+        log.info("Step 2/5 · Skipping paid ingredient / dish lookup generation (--build-only).")
+        stats = {"ingredients_added": 0, "dishes_added": 0}
+    else:
+        log.info("Step 2/5 · Generating bounded ingredient / dish lookups …")
+        try:
+            stats = generate_lookups()
+        except LookupGenerationLimitError as exc:
+            # A historical backlog must not suppress a season already safely
+            # cached for delivery. The standalone generator remains fail-fast;
+            # this pipeline publishes with the committed lookup data instead.
+            log.warning(
+                "LOOKUP API CALL CAP REACHED — skipping lookup generation and "
+                "continuing with cached lookup data. %s",
+                exc,
+            )
+            stats = {"ingredients_added": 0, "dishes_added": 0}
     if stats["ingredients_added"] or stats["dishes_added"]:
         log.info(
             "Added %d ingredient(s) and %d dish(es) to lookup store.",

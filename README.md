@@ -129,9 +129,19 @@ only when a new season begins. A push to `main` or a manual dispatch runs
 does not email subscribers.
 
 The workflow stages the English archive, homepage, sitemap, and content cache
-and commits them back to `main` when they change. The build also renders the
-Japanese tree, unsubscribe pages, and ingredient/dish lookup files locally;
-review and stage those outputs explicitly when they change.
+and commits them back to `main` when they change. Its explicit generated-output
+manifest includes both English and Japanese archives/homepages, sitemap, both
+unsubscribe pages, the content cache, and ingredient/dish lookup JSON.
+
+Push and manual static builds are cache-only: they never call Claude for
+content or lookup data. A scheduled or manual sending run may generate missing
+lookups, but it is stopped before any request if it would exceed
+`LOOKUP_API_CALL_CAP` (24 in Actions by default). Set that value deliberately
+for a bounded maintenance batch; the failure message reports the requested
+call count and configured cap. `python ingredient_generator.py --dry-run`
+lists missing entries for free. To intentionally backfill a large historical
+store, use `python ingredient_generator.py --batch-size 12`; each invocation
+persists completed entries and is still bounded by `LOOKUP_API_CALL_CAP`.
 
 ## Cloudflare Worker
 

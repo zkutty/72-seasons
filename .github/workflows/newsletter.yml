@@ -34,6 +34,7 @@ jobs:
           SUBSCRIBER_EMAILS: ${{ secrets.SUBSCRIBER_EMAILS }}
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
           WORKER_URL: ${{ secrets.WORKER_URL }}
+          LOOKUP_API_CALL_CAP: "24"
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
             python season_mailer.py
@@ -41,14 +42,14 @@ jobs:
             python season_mailer.py --force --build-only
           fi
 
-      - name: Commit archive, cache, and homepage updates
+      - name: Commit generated static outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add archive/ || true
-          test -f index.html && git add index.html || true
-          test -f sitemap.xml && git add sitemap.xml || true
-          test -f data/content_cache.json && git add data/content_cache.json || true
+          git add -- archive/ ja/archive/ \
+            index.html ja/index.html sitemap.xml \
+            unsubscribe.html ja/unsubscribe.html \
+            data/content_cache.json data/ingredients.json data/dishes.json
           git diff --staged --quiet || git commit -m "Build $(date +%Y-%m-%d): static rebuild"
           git pull --rebase --autostash origin main
           git push

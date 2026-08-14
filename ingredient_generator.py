@@ -11,6 +11,10 @@ Usage:
     python ingredient_generator.py            # generate for any new items
     python ingredient_generator.py --force    # regenerate even if already present
     python ingredient_generator.py --dry-run  # print what would be generated
+    python ingredient_generator.py --batch-size 12  # explicit bounded maintenance batch
+
+``LOOKUP_API_CALL_CAP`` is a hard per-run budget (default: 24). Generation
+stops before contacting Claude when the requested lookup work exceeds it.
 """
 
 import argparse
@@ -39,6 +43,7 @@ INGREDIENTS_P  = DATA_DIR / "ingredients.json"
 DISHES_P       = DATA_DIR / "dishes.json"
 
 MODEL = "claude-opus-4-5"
+DEFAULT_API_CALL_CAP = 24
 
 SYSTEM_PROMPT = """You are a poetic writer with deep knowledge of Japanese food \
 culture, traditional seasonal produce, and the shichijūni-kō calendar. Your \
@@ -73,6 +78,24 @@ def _save_json(path: Path, data: dict) -> None:
     path.parent.mkdir(exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2, sort_keys=True)
+
+
+class LookupGenerationLimitError(RuntimeError):
+    """Raised before a lookup run could exceed its paid API-call budget."""
+
+
+def lookup_api_call_cap(value: str | None = None) -> int:
+    """Return the configured hard cap, rejecting unsafe configuration."""
+    raw = value if value is not None else os.environ.get("LOOKUP_API_CALL_CAP")
+    if raw is None:
+        return DEFAULT_API_CALL_CAP
+    try:
+        cap = int(raw)
+    except ValueError as exc:
+        raise ValueError("LOOKUP_API_CALL_CAP must be a non-negative integer.") from exc
+    if cap < 0:
+        raise ValueError("LOOKUP_API_CALL_CAP must be a non-negative integer.")
+    return cap
 
 
 def collect_items(cache: dict) -> tuple[dict, dict]:
@@ -194,7 +217,12 @@ year, grounded in a concrete detail."
 
 # ── main ──────────────────────────────────────────────────────────────────────
 
-def run(force: bool = False, dry_run: bool = False) -> dict:
+def run(
+    force: bool = False,
+    dry_run: bool = False,
+    max_api_calls: int | None = None,
+    batch_size: int | None = None,
+) -> dict:
     """Generate any missing ingredient / dish entries. Safe to call repeatedly.
 
     Returns a small stats dict so callers (e.g. season_mailer) can log.
@@ -219,6 +247,13 @@ def run(force: bool = False, dry_run: bool = False) -> dict:
         len(cache),
     )
 
+    requested_calls = len(ing_todo) + len(dish_todo)
+    cap = lookup_api_call_cap() if max_api_calls is None else max_api_calls
+    if cap < 0:
+        raise ValueError("max_api_calls must be a non-negative integer.")
+    if batch_size is not None and batch_size <= 0:
+        raise ValueError("batch_size must be a positive integer.")
+
     if dry_run:
         for k, v in ing_todo.items():
             log.info("  [ingredient] %s  ←  %s", k, v["source"])
@@ -229,6 +264,27 @@ def run(force: bool = False, dry_run: bool = False) -> dict:
     if not ing_todo and not dish_todo:
         log.info("Everything already generated. Nothing to do.")
         return {"ingredients_added": 0, "dishes_added": 0}
+
+    if batch_size is None and requested_calls > cap:
+        raise LookupGenerationLimitError(
+            "Lookup generation blocked before making paid API calls: "
+            f"{requested_calls} call(s) requested, but the per-run cap is {cap}. "
+            "Commit/cache the missing lookup data in bounded batches or raise "
+            "LOOKUP_API_CALL_CAP intentionally."
+        )
+
+    if batch_size is not None:
+        # This is deliberately opt-in: normal/scheduled runs remain atomic and
+        # fail before spending anything. Preserve discovery order so repeated
+        # invocations make deterministic persisted progress.
+        limit = min(batch_size, cap)
+        selected = list(ing_todo.items()) + list(dish_todo.items())
+        selected = selected[:limit]
+        ing_keys = {key for key, _ in selected if key in ing_todo}
+        dish_keys = {key for key, _ in selected if key in dish_todo}
+        ing_todo = {key: ing_todo[key] for key in ing_todo if key in ing_keys}
+        dish_todo = {key: dish_todo[key] for key in dish_todo if key in dish_keys}
+        log.info("Explicit bounded batch selected %d of %d missing lookup(s).", len(selected), requested_calls)
 
     client = _client()
     added_ing = 0
@@ -269,8 +325,18 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Kō ingredient / dish lookup generator")
     parser.add_argument("--force", action="store_true", help="Regenerate entries that already exist")
     parser.add_argument("--dry-run", action="store_true", help="List work without calling Claude")
+    parser.add_argument(
+        "--max-api-calls",
+        type=int,
+        help="Hard per-run Claude lookup-call cap (defaults to LOOKUP_API_CALL_CAP or 24).",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        help="Explicit maintenance mode: generate at most this many missing lookups (also bounded by the cap).",
+    )
     args = parser.parse_args()
-    run(force=args.force, dry_run=args.dry_run)
+    run(force=args.force, dry_run=args.dry_run, max_api_calls=args.max_api_calls, batch_size=args.batch_size)
 
 
 if __name__ == "__main__":

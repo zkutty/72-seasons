@@ -1,0 +1,26 @@
+{
+  "sawara-no-saikyo-yaki": {
+    "name_en": "Miso-marinated Spanish mackerel, grilled",
+    "name_jp": "鰆の西京焼き",
+    "name_romaji": "sawara no saikyo-yaki",
+    "note": "Thick fillets of Spanish mackerel are cured for days in sweet white Kyoto-style miso, then grilled until the sugars caramelize into a lacquered char. The fish's name itself contains the character for spring — 鰆 — and this preparation marks the brief weeks when its flesh is fattest, before the warming currents carry it northward.",
+    "season": "Late spring, when sawara run close to shore",
+    "source": "Sawara no saikyo-yaki"
+  },
+  "soramame-no-shioyude": {
+    "name_en": "Salt-boiled fava beans",
+    "name_jp": "空豆の塩茹で",
+    "name_romaji": "soramame no shioyude",
+    "note": "Young fava beans are boiled briefly in well-salted water, then served warm in their jade-green skins, often with nothing more than a small dish of coarse salt. The name itself contains the season — soramame means 'sky bean,' named for the way the pods point upward toward heaven before bowing earthward as they ripen, a gesture that marks the weeks between late April and early June.",
+    "season": "Late spring, when the pods fatten and the sky clears",
+    "source": "Soramame no shioyude"
+  },
+  "takenoko-gohan": {
+    "name_en": "Bamboo-shoot rice",
+    "name_jp": "筍ご飯",
+    "name_romaji": "takenoko gohan",
+    "note": "Short-grain rice simmered with sliced young bamboo shoots in dashi and light soy, the cooking liquid absorbed until each grain carries the shoot's faint sweetness. The dish appears when moso bamboo is dug at dawn and cooked the same morning—before its sugars turn to woody fiber—marking the brief window when the earth offers its most tender growth.",
+    "season": "Mid-spring, when fresh shoots push through warming soil",
+    "source": "Takenoko gohan"
+  }
+}

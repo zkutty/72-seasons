@@ -42,6 +42,7 @@ jobs:
           SUBSCRIBER_EMAILS: ${{ secrets.SUBSCRIBER_EMAILS }}
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
           WORKER_URL: ${{ secrets.WORKER_URL }}
+          LOOKUP_API_CALL_CAP: "24"
         run: |
           if [ "${{ github.event.inputs.force }}" = "true" ]; then
             python season_mailer.py --force
@@ -49,12 +50,14 @@ jobs:
             python season_mailer.py
           fi
 
-      - name: Commit and push archive changes
+      - name: Commit generated static outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add archive/ || true
-          test -f data/content_cache.json && git add data/content_cache.json || true
+          git add -- archive/ ja/archive/ \
+            index.html ja/index.html sitemap.xml \
+            unsubscribe.html ja/unsubscribe.html \
+            data/content_cache.json data/ingredients.json data/dishes.json
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else

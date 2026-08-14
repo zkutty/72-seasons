@@ -1,0 +1,182 @@
+{
+  "amanatsu-citrus": {
+    "category": "fruit",
+    "name_en": "Amanatsu citrus",
+    "name_jp": "甘夏",
+    "name_romaji": "amanatsu",
+    "note": "A hybrid citrus with thick, spongy pith and segments that burst with a bright, tempered bitterness — less sharp than natsumikan, its parent, yet still bracing enough to wake the palate. Harvested in winter but eaten in spring after months of storage soften its acids, amanatsu arrives just as one tires of the cloying sweetness of late strawberries.",
+    "peak": "Late spring into early summer, when the fruit has mellowed on the branch through winter",
+    "source": "Amanatsu citrus"
+  },
+  "amanatsu-sweet-citrus": {
+    "category": "fruit",
+    "name_en": "Amanatsu",
+    "name_jp": "甘夏",
+    "name_romaji": "amanatsu",
+    "note": "A thick-skinned citrus whose flesh offers a bracing balance of sweetness and mild bitterness, the juice less cloying than a regular natsumikan, with a fragrance that cuts through the warming air. Harvested in winter but left to mellow until spring, amanatsu arrives just as heavier citrus fades, bridging the seasons on the breakfast table and in marmalades that preserve this fleeting brightness.",
+    "peak": "Late spring, as cherry blossoms give way to fresh green leaves",
+    "source": "Amanatsu (sweet citrus)"
+  },
+  "bamboo-shoots-takenoko": {
+    "category": "vegetable",
+    "name_en": "Bamboo shoot",
+    "name_jp": "筍",
+    "name_romaji": "takenoko",
+    "note": "Freshly dug takenoko must reach the pot within hours, before its sugars turn to woody bitterness; the flesh should taste faintly sweet, with a clean vegetal snap unlike anything that has traveled far. Its arrival marks the threshold when winter's preserved foods give way to the brief, urgent harvests of spring.",
+    "peak": "Late spring, during kokuu — the grain rains that coax pale tips through dark soil",
+    "source": "Bamboo shoots (takenoko)"
+  },
+  "biwa-loquat-early": {
+    "category": "fruit",
+    "name_en": "Loquat",
+    "name_jp": "枇杷",
+    "name_romaji": "biwa",
+    "note": "These early specimens arrive with skin still blushed pale tangerine, their flesh yielding a honeyed sweetness cut by faint astringency — best eaten cold, the juice running down your wrist. In the old calendar, biwa ripens as the plum rains approach, a fruit of thresholds, marking the hinge between spring's end and summer's humid beginning.",
+    "peak": "Late spring to early summer, as the first heat settles into the groves of Nagasaki and Chiba",
+    "source": "Biwa (loquat, early)"
+  },
+  "fava-beans-soramame": {
+    "category": "vegetable",
+    "name_en": "Fava bean",
+    "name_jp": "空豆",
+    "name_romaji": "soramame",
+    "note": "Named 'sky beans' for the way their pods point upward before harvest, soramame offer a fleeting sweetness best captured within three days of picking — grilled in their pods until charred, the beans inside turn creamy with a faint grassy brightness. Their arrival marks the threshold between spring's gentle cool and early summer's humidity, a moment when Japanese cooks race against time to preserve this brief, verdant window.",
+    "peak": "Late spring, when pods swell skyward in the warming sun",
+    "source": "Fava beans (soramame)"
+  },
+  "fuki-butterbur": {
+    "category": "vegetable",
+    "name_en": "Butterbur",
+    "name_jp": "蕗",
+    "name_romaji": "fuki",
+    "note": "These pale green stalks, fibrous yet tender when properly prepared, carry a clean bitterness that lingers like mountain air after rain. Peeled and simmered in light dashi, fuki becomes the quiet accompaniment to rice that signals the kitchen has turned fully toward spring.",
+    "peak": "Late spring, when hollow stems reach toward the warming sun",
+    "source": "Fuki (butterbur)"
+  },
+  "ichigo-strawberries": {
+    "category": "fruit",
+    "name_en": "Strawberry",
+    "name_jp": "苺",
+    "name_romaji": "ichigo",
+    "note": "Japanese strawberries are bred for sweetness over tartness, their flesh yielding and fragrant, often eaten whole as a simple luxury or nestled into layers of cream. Though available year-round now, they remain a marker of early spring celebrations, appearing in seasonal wagashi and atop the shortcakes that herald the turning year.",
+    "peak": "Late winter through spring, when greenhouse cultivation meets rising warmth",
+    "source": "Ichigo (strawberries)"
+  },
+  "loquats-biwa": {
+    "category": "fruit",
+    "name_en": "Loquat",
+    "name_jp": "枇杷",
+    "name_romaji": "biwa",
+    "note": "Beneath thin, suede-like skin lies flesh the color of apricot sunset — faintly tart, honeyed, with a floral finish that dissolves on the tongue. The loquat arrives just as spring exhausts itself, a brief sweetness before the plum rains settle in.",
+    "peak": "Early summer, when hydrangeas begin to blur with color",
+    "source": "Loquats (biwa)"
+  },
+  "mikan-late-variety": {
+    "category": "fruit",
+    "name_en": "Mikan",
+    "name_jp": "晩生みかん",
+    "name_romaji": "bansei mikan",
+    "note": "These late-ripening satsuma mandarins have thicker skins and denser flesh than their autumn cousins, their sweetness deepened by months of winter chill into something almost honeyed. They appear in kotatsu-warmed rooms as the year turns, the last bright notes of citrus before spring's first strawberries arrive.",
+    "peak": "Late winter through early spring, when cold has concentrated the sugars",
+    "source": "Mikan (late variety)"
+  },
+  "natsu-mikan-summer-citrus": {
+    "category": "fruit",
+    "name_en": "Summer orange",
+    "name_jp": "夏蜜柑",
+    "name_romaji": "natsu mikan",
+    "note": "A thick-skinned citrus with pale flesh that balances sharp acidity against a faint honeyed sweetness, often eaten segment by segment with the bitter pith still clinging. Once a winter fruit left to mellow on the branch until warmth arrived, it marks the turning point when the year's first humid heat settles over the groves of the Seto Inland Sea.",
+    "peak": "Late spring through early summer, as the plum rains approach",
+    "source": "Natsu mikan (summer citrus)"
+  },
+  "sansai-mountain-vegetables": {
+    "category": "vegetable",
+    "name_en": "Mountain vegetables",
+    "name_jp": "山菜",
+    "name_romaji": "sansai",
+    "note": "Sansai is the collective name for wild edibles foraged from Japan's mountains — fiddlehead ferns unfurling like green fists, bitter butterbur shoots, the resinous snap of fatsia sprouts. Their fleeting appearance marks the moment when foragers venture into still-cold woods, and their astringent, slightly wild flavors are prized precisely because they cannot be cultivated or hurried.",
+    "peak": "Early spring through late spring, as snowmelt reveals the forest floor",
+    "source": "Sansai (mountain vegetables)"
+  },
+  "sawara-spanish-mackerel": {
+    "category": "fish",
+    "name_en": "Spanish mackerel",
+    "name_jp": "鰆",
+    "name_romaji": "sawara",
+    "note": "A long, slender fish whose kanji contains the character for spring — the flesh now carries a clean sweetness and melts against the tongue when served as sashimi or lightly seared with miso. Sawara marks the transition from cold-water austerity to the abundance of warming seas, its arrival on the plate a quiet announcement that the season has turned.",
+    "peak": "Late spring through early summer, when waters warm and the flesh turns silken",
+    "source": "Sawara (Spanish mackerel)"
+  },
+  "sayori-halfbeak": {
+    "category": "fish",
+    "name_en": "Halfbeak",
+    "name_jp": "細魚",
+    "name_romaji": "sayori",
+    "note": "A slender, silver-blue fish with translucent flesh so delicate it reveals the knife's work in every slice of sashimi. Its arrival signals the sea's first softening after winter, prized for that clean, almost sweet taste before richer fish return.",
+    "peak": "Early spring, when plum blossoms scatter on cold tides",
+    "source": "Sayori (halfbeak)"
+  },
+  "shirauo-icefish": {
+    "category": "fish",
+    "name_en": "Icefish",
+    "name_jp": "白魚",
+    "name_romaji": "shirauo",
+    "note": "These slender, nearly transparent fish arrive with the last cold—their flesh so delicate it dissolves on the tongue like spring snow, often served alive in odorigui or barely touched by heat in tempura. Shirauo signal the turning season, caught as they swim upstream to spawn, their fleeting presence a reminder that the harshest months are finally loosening their grip.",
+    "peak": "Late winter through early spring, when rivers begin their slow thaw",
+    "source": "Shirauo (icefish)"
+  },
+  "spring-cabbage-haru-kyabetsu": {
+    "category": "vegetable",
+    "name_en": "Spring cabbage",
+    "name_jp": "春キャベツ",
+    "name_romaji": "haru kyabetsu",
+    "note": "Looser-headed than winter varieties, with pale yellow-green leaves so tender they're eaten raw in ribbons alongside tonkatsu, their sweetness bright and almost grassy. The arrival of spring cabbage signals the kitchen's turn toward lighter preparations—quick salt-pickles, fresh salads—as heavy braises give way to the gentler appetite of warming days.",
+    "peak": "Early to mid-spring, when warming soil loosens the leaves' tight grip",
+    "source": "Spring cabbage (haru kyabetsu)"
+  },
+  "strawberries-ichigo": {
+    "category": "fruit",
+    "name_en": "Strawberry",
+    "name_jp": "苺",
+    "name_romaji": "ichigo",
+    "note": "Japanese strawberries are bred for sweetness over tartness, their flesh so tender it bruises at a careless touch — varieties like Amaou and Tochiotome yield berries with a perfumed intensity that fills the room when sliced. Though available nearly year-round now, their presence on winter tables and in spring wagashi marks the slow turn toward lighter days.",
+    "peak": "Late winter through spring, when greenhouse cultivation meets rising warmth",
+    "source": "Strawberries (ichigo)"
+  },
+  "tai-sea-bream": {
+    "category": "fish",
+    "name_en": "Sea bream",
+    "name_jp": "鯛",
+    "name_romaji": "tai",
+    "note": "The firm, translucent flesh carries a clean sweetness that intensifies as spawning season approaches, the skin crisping to a burnished rose when salt-grilled. Called 'king of fish' and essential to celebrations from New Year to weddings, its very name echoes 'medetai' — auspicious — making it inseparable from moments of joy in the Japanese calendar.",
+    "peak": "Late spring through early summer, when cherry blossoms scatter and waters warm",
+    "source": "Tai (sea bream)"
+  },
+  "takenoko-bamboo-shoots": {
+    "category": "vegetable",
+    "name_en": "Bamboo shoot",
+    "name_jp": "筍",
+    "name_romaji": "takenoko",
+    "note": "Dug at dawn before sunlight turns their flesh bitter, the youngest shoots offer a faint sweetness and a texture that yields like young celery heart. Their arrival marks the season when mountain villages smell of rice-bran broth, and cooks race against the clock to boil away the astringency before it sets.",
+    "peak": "Mid-spring, during kokuu — the grain rains that soften the earth",
+    "source": "Takenoko (bamboo shoots)"
+  },
+  "udo-mountain-asparagus": {
+    "category": "vegetable",
+    "name_en": "Udo",
+    "name_jp": "独活",
+    "name_romaji": "udo",
+    "note": "A tall, celery-pale stalk with a flavor caught between asparagus and fennel, prized for its crisp bite and faint bitterness that speaks of wild places. Blanched and dressed in vinegared miso or sliced raw into salads, udo marks the brief window when foragers climb still-cold hillsides to harvest what cannot be rushed or cultivated into mildness.",
+    "peak": "Early spring, as snow recedes from mountain slopes",
+    "source": "Udo (mountain asparagus)"
+  },
+  "wakame-young-seaweed": {
+    "category": "vegetable",
+    "name_en": "Wakame",
+    "name_jp": "若布",
+    "name_romaji": "wakame",
+    "note": "Freshly harvested wakame arrives with a slippery resilience, its fronds a deep forest green that brightens to emerald in hot water, releasing the clean mineral scent of the sea. In miso soup or sunomono, it marks the transition from winter's preserved foods to the first tender harvests of the warming months.",
+    "peak": "Early spring, when cold currents still grip the coast",
+    "source": "Wakame (young seaweed)"
+  }
+}
