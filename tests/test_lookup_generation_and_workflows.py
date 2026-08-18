@@ -1,6 +1,8 @@
 import json
+import os
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 from unittest.mock import patch
 
@@ -171,6 +173,8 @@ class SeasonMailerLookupCapTests(unittest.TestCase):
 
         with (
             patch("sys.argv", ["season_mailer.py", "--force"]),
+            patch.dict(os.environ, {}, clear=True),
+            patch.object(season_mailer, "today_jst", return_value=date(2026, 8, 12)),
             patch.object(season_mailer, "load_cache", return_value={"44": content}),
             patch.object(season_mailer, "save_cache"),
             patch.object(
