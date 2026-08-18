@@ -29,7 +29,15 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: npm test --prefix worker
       - name: Cache-only static validation (no delivery secrets)
-        run: env -u ANTHROPIC_API_KEY -u RESEND_API_KEY -u BUTTONDOWN_API_KEY python season_mailer.py --force --build-only
+        run: |
+          env -u ANTHROPIC_API_KEY -u RESEND_API_KEY -u BUTTONDOWN_API_KEY python -c '
+          import sys
+          from datetime import date
+          import season_mailer
+          season_mailer.today_jst = lambda: date(2026, 8, 12)
+          sys.argv = ["season_mailer.py", "--force", "--build-only"]
+          season_mailer.main()
+          '
 
   send:
     if: github.event_name != 'pull_request'
