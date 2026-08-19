@@ -2208,5 +2208,106 @@
       "closing": "蜩の声が途絶え、闇が満ちる頃、川面に流れる灯籠の列がゆるやかに遠ざかってゆく。"
     },
     "_sent_on": "2026-08-12"
+  },
+  "45": {
+    "en": {
+      "summary": "Dense morning fog blankets valleys and coastlines, softening the late-summer landscape as autumn's first breath mingles with lingering heat.",
+      "opening": "Dawn arrives veiled in white. The fog rolls in from the sea and rises from rice paddies, erasing the hard edges of mountains and dissolving distant villages into memory. The air holds both the coolness of what is coming and the humid weight of what remains — this is the hinge between seasons, felt most keenly in the hour before the sun burns through.",
+      "nature_notes": "Cicadas still cry but their chorus thins, punctuated now by the first tentative calls of autumn insects at dusk. Dragonflies — red akatombo among them — patrol the edges of fields in greater numbers. The fog traps dew on spider webs, revealing their geometry in silver threads, while persimmon trees hold fruit that has only just begun to hint at orange.",
+      "seasonal_produce": {
+        "fruits": [
+          "Pione grape",
+          "Shine Muscat grape",
+          "Nijisseiki pear (20th century pear)",
+          "White peach"
+        ],
+        "vegetables": [
+          "Maitake (hen of the woods mushroom)",
+          "Kabocha (winter squash)",
+          "Shishito pepper",
+          "Lotus root"
+        ],
+        "fish": [
+          "Sanma (Pacific saury)",
+          "Aji (horse mackerel)",
+          "Kuruma ebi (Japanese tiger prawn)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Sanma no shioyaki",
+          "description": "Salt-grilled Pacific saury with grated daikon and sudachi — the first catch of autumn, its rich oils perfect against the lingering heat."
+        },
+        {
+          "name": "Nashi no shirazuae",
+          "description": "Crisp Asian pear dressed with silken tofu and white sesame, a cooling dish that bridges summer's end and autumn's arrival."
+        },
+        {
+          "name": "Maitake no tempura",
+          "description": "Feathery wild maitake mushrooms fried until impossibly light, capturing the forest's first autumn offerings."
+        },
+        {
+          "name": "Budō to mozzarella no sarada",
+          "description": "Peak-season grapes paired with fresh mozzarella and basil — a modern preparation that honors the grape harvest beginning in earnest."
+        }
+      ],
+      "cultural_note": "This is the season of Obon's quiet aftermath. Families have sent their ancestors' spirits back to the other world with mukaebi fires, and a particular stillness settles over communities. In many regions, the fog itself is said to carry the departing souls, its veils a liminal curtain between worlds. Temple bells sound muffled in the thick air, and offerings of late-summer fruit remain on household altars a few days longer.",
+      "haiku": {
+        "japanese": "霧深く祖母の声する畦の道",
+        "romaji": "kiri fukaku / sobo no koe suru / aze no michi",
+        "english": "deep in the fog / grandmother's voice drifts / along the paddy path"
+      },
+      "closing": "The fog lifts by mid-morning, but something of its softness lingers in the way light falls — gentler now, preparing us for what the maples already know."
+    },
+    "ja": {
+      "summary": "朝霧が谷や海岸を包み、夏の終わりと秋の始まりが静かに交差する頃。",
+      "opening": "夜明けは白い帳の向こうからやってくる。霧は海から立ち上り、田んぼから湧き、山の稜線を曖昧にし、遠くの集落を記憶の中へと溶かしてゆく。空気には来たるべき涼しさと、まだ残る夏の湿り気が同居している。陽が霧を焼き払う前のひととき、季節の境目をもっとも肌に感じる。",
+      "nature_notes": "蝉の声はまだ聞こえるが、その合唱は薄れ、夕暮れには秋の虫が遠慮がちに鳴き始める。赤とんぼが田の畔を行き交い、その数は日ごとに増す。霧は蜘蛛の巣に露を纏わせ、銀の糸細工を浮かび上がらせる。柿の実はまだ青いが、ほんのりと色づき始めている。",
+      "seasonal_produce": {
+        "fruits": [
+          "ピオーネ",
+          "シャインマスカット",
+          "二十世紀梨",
+          "白桃"
+        ],
+        "vegetables": [
+          "舞茸",
+          "南瓜",
+          "獅子唐",
+          "蓮根"
+        ],
+        "fish": [
+          "秋刀魚",
+          "鯵",
+          "車海老"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "秋刀魚の塩焼き",
+          "description": "初秋刀魚を塩焼きにし、大根おろしと酢橘を添えて——脂の乗った秋の使者を迎える一皿。"
+        },
+        {
+          "name": "梨の白和え",
+          "description": "みずみずしい梨を絹ごし豆腐と白胡麻で和えた、夏と秋の狭間にふさわしい涼やかな味わい。"
+        },
+        {
+          "name": "舞茸の天ぷら",
+          "description": "山から届いたばかりの舞茸を軽やかに揚げ、秋の森の香りを衣に閉じ込める。"
+        },
+        {
+          "name": "葡萄とモッツァレラのサラダ",
+          "description": "収穫が始まった葡萄をモッツァレラと合わせた、この時季ならではの取り合わせ。"
+        }
+      ],
+      "cultural_note": "お盆の送り火を終え、先祖の霊を見送った後の静けさが漂う頃。霧は彼岸と此岸を繋ぐ帳とも言われ、その白い靄の中に去りゆく魂が溶けてゆくと伝えられる。寺の鐘の音も霧に吸われて柔らかく響き、仏壇には名残の桃や葡萄がもう少しだけ供えられている。",
+      "haiku": {
+        "japanese": "霧深く祖母の声する畦の道",
+        "romaji": "kiri fukaku / sobo no koe suru / aze no michi",
+        "english": "deep in the fog / grandmother's voice drifts / along the paddy path"
+      },
+      "closing": "霧は午前のうちに晴れるが、その名残は光の柔らかさに宿り、紅葉がすでに知っていることを、私たちにもそっと教えている。"
+    },
+    "_sent_on": "2026-08-17"
   }
 }

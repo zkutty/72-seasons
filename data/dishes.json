@@ -1,76 +1,4 @@
 {
-  "sawara-no-saikyo-yaki": {
-    "name_en": "Saikyo miso-marinated Spanish mackerel",
-    "name_jp": "鰆の西京焼き",
-    "name_romaji": "sawara no saikyo-yaki",
-    "note": "Fillets of sawara are buried in sweet white Saikyo miso for two or three days, then grilled until the sugars in the paste caramelize into a burnished crust. The fish's name itself contains the character for spring (鰆), and its arrival off the Sanyo coast has long signaled the softening of winter's grip.",
-    "season": "Late winter through early spring, when sawara swim into the Inland Sea",
-    "source": "Sawara no saikyo-yaki"
-  },
-  "soramame-no-shioyude": {
-    "name_en": "Salt-boiled fava beans",
-    "name_jp": "空豆の塩茹で",
-    "name_romaji": "soramame no shioyude",
-    "note": "Young fava beans are boiled briefly in well-salted water, then served warm in their jade-green skins, often with nothing more than a small dish of coarse salt. The name itself contains the season — soramame means 'sky bean,' named for the way the pods point upward toward heaven before bowing earthward as they ripen, a gesture that marks the weeks between late April and early June.",
-    "season": "Late spring, when the pods fatten and the sky clears",
-    "source": "Soramame no shioyude"
-  },
-  "takenoko-gohan": {
-    "name_en": "Bamboo shoot rice",
-    "name_jp": "筍ご飯",
-    "name_romaji": "takenoko gohan",
-    "note": "Rice simmered with freshly dug bamboo shoots, seasoned only with dashi, soy, and sake so the shoot's faint sweetness comes through. The dish marks the narrow window when takenoko can be cooked the same morning they are unearthed, before their sugars turn to woody fiber.",
-    "season": "Mid-spring, when the first shoots break through warming soil",
-    "source": "Takenoko gohan"
-  },
-  "bud-no-shiratama": {
-    "name_en": "Grape shiratama dumplings",
-    "name_jp": "葡萄の白玉",
-    "name_romaji": "budō no shiratama",
-    "note": "Soft rice-flour dumplings tinted with fresh grape juice or pulp, served chilled in light syrup or alongside whole grapes. The dish captures the brief window when Japanese table grapes reach their peak sweetness, their dusky purple skins still taut with late-summer warmth before the air turns cool.",
-    "season": "Early autumn, when Kyoho and Delaware grapes hang heavy on the vine",
-    "source": "Budō no shiratama"
-  },
-  "nashi-to-nama-hamu-no-sarada": {
-    "name_en": "Pear and prosciutto salad",
-    "name_jp": "梨と生ハムのサラダ",
-    "name_romaji": "nashi to nama-hamu no sarada",
-    "note": "Thin-sliced nashi pear is draped with cured ham, often dressed with olive oil and a whisper of black pepper, the fruit's crisp water-laden flesh playing against the salt-rich fat. This salad arrives when the air carries the first cool edge of autumn and the orchards of Tottori and Chiba yield their prized nijisseiki pears, their pale gold skin signaling summer's quiet retreat.",
-    "season": "Early autumn, when the first nashi pears reach their peak sweetness",
-    "source": "Nashi to nama-hamu no sarada"
-  },
-  "shishit-no-yakibitashi": {
-    "name_en": "Grilled shishito peppers in seasoned broth",
-    "name_jp": "獅子唐の焼き浸し",
-    "name_romaji": "shishitō no yakibitashi",
-    "note": "Small green peppers are blistered over high heat until the skins char and blister, then steeped in a cold dashi-soy mixture that they drink up as they cool. The dish arrives at tables when summer humidity settles in and the body craves something both smoky and refreshing — the occasional fierce pepper among the mild ones a small gamble that sharpens the appetite.",
-    "season": "Early to midsummer, when shishito peppers are tender and prolific",
-    "source": "Shishitō no yakibitashi"
-  },
-  "tsurumurasaki-no-goma-ae": {
-    "name_en": "Malabar spinach with sesame dressing",
-    "name_jp": "つるむらさきの胡麻和え",
-    "name_romaji": "tsurumurasaki no goma-ae",
-    "note": "Thick, mucilaginous leaves of malabar spinach are blanched briefly and dressed in a paste of ground sesame, soy, and a touch of sugar. The plant thrives in the very humidity that wilts other greens, offering its cooling, slightly viscous texture precisely when the body craves relief from the oppressive August air.",
-    "season": "High summer, when the humid heat reaches its peak",
-    "source": "Tsurumurasaki no goma-ae"
-  },
-  "shirauo-no-odorigui": {
-    "name_en": "Dancing icefish eaten alive",
-    "name_jp": "白魚の踊り食い",
-    "name_romaji": "shirauo no odorigui",
-    "note": "Tiny, translucent icefish are swallowed live, their delicate bodies still flickering against the tongue — sometimes dipped briefly in vinegar or ponzu to heighten the briny sweetness. The dish belongs to the fleeting weeks when shirauo swim upstream to spawn, their glass-clear flesh a reminder that spring arrives first in cold water, not yet in the air.",
-    "season": "Late winter to early spring, when rivers run cold and clear",
-    "source": "Shirauo no odorigui"
-  },
-  "katsuo-no-tataki": {
-    "name_en": "Seared bonito, lightly tataki-style",
-    "name_jp": "鰹のたたき",
-    "name_romaji": "katsuo no tataki",
-    "note": "Thick slices of bonito are seared over high flame until the outer flesh turns pale while the center remains raw, then sliced and dressed with ponzu, ginger, and heaps of fresh garlic and myoga. This is hatsu-gatsuo — the 'first bonito' of the season — leaner and cleaner than the fatty autumn catch, its arrival in Tosa province once marked by fishermen racing to bring the year's earliest fish to Edo.",
-    "season": "Late spring through early summer, when the first bonito run north along the Pacific coast",
-    "source": "Katsuo no tataki"
-  },
   "aji-no-tataki": {
     "name_en": "Seared horse mackerel tataki",
     "name_jp": "鯵のたたき",
@@ -78,6 +6,22 @@
     "note": "Fresh horse mackerel is lightly pounded with ginger, scallions, and sometimes shiso, then served raw or briefly seared, the flesh releasing its clean, mineral sweetness against the sharp bite of aromatics. The dish arrives in June when aji schools move inshore to feed, their flesh at peak oil content just as the tsuyu rains make one crave something bright and immediate.",
     "season": "Early summer, when horse mackerel fatten in warming coastal waters",
     "source": "aji no tataki"
+  },
+  "anago-no-shiroyaki": {
+    "name_en": "Salt-grilled conger eel, unsauced",
+    "name_jp": "穴子の白焼き",
+    "name_romaji": "anago no shiroyaki",
+    "note": "The eel is grilled without any tare, brushed only with salt or a whisper of sake, letting the delicate sweetness of the flesh speak plainly. Wild anago reaches its peak between June and August, when the warming Kuroshio Current brings plump specimens into Tokyo Bay and the Seto Inland Sea—a time when cooks trust the ingredient enough to leave it unmasked.",
+    "season": "Early summer through midsummer, when conger eel fattens in coastal waters",
+    "source": "anago no shiroyaki"
+  },
+  "anago-no-yanagawa": {
+    "name_en": "Conger eel simmered in soy broth with egg and burdock",
+    "name_jp": "穴子の柳川",
+    "name_romaji": "anago no yanagawa",
+    "note": "Sliced anago and slivered burdock root are simmered in a sweet soy broth, then bound with beaten egg in a shallow earthenware pot. The dish arrives as Tokyo's rainy season begins, when the soft-boned eel — pulled from Edo-mae waters — reaches its peak richness, and the peppery bite of fresh gobō cuts through the humid air.",
+    "season": "Early summer, when conger eel fattens in warming coastal waters",
+    "source": "anago no yanagawa"
   },
   "ao-mame-gohan": {
     "name_en": "Green soybean rice",
@@ -87,6 +31,38 @@
     "season": "Late spring to early summer, when young soybeans are still tender in their pods",
     "source": "ao-mame gohan"
   },
+  "ayu-no-kanroni": {
+    "name_en": "Sweet-simmered ayu",
+    "name_jp": "鮎の甘露煮",
+    "name_romaji": "ayu no kanroni",
+    "note": "Whole ayu are simmered slowly in a mixture of soy sauce, mirin, and sugar until the flesh turns mahogany and the bones soften enough to eat. The dish appears when summer's fleeting ayu season nears its end, transforming the delicate sweetfish into a preserve that holds the memory of clear mountain rivers through the cooling months.",
+    "season": "Late summer through autumn, when river ayu reach full maturity",
+    "source": "ayu no kanroni"
+  },
+  "ayu-no-nanbanzuke": {
+    "name_en": "Sweetfish escabeche",
+    "name_jp": "鮎の南蛮漬け",
+    "name_romaji": "ayu no nanbanzuke",
+    "note": "Small river sweetfish are fried whole until the bones turn crisp, then steeped in a sharp vinegar marinade with julienned onion and dried chili. The dish arrives as the June rains swell mountain streams and ayu begin their ascent — the vinegar's brightness a counter to humid days, the whole fish eaten head to tail in celebration of the season's first catch.",
+    "season": "Early summer, when the first ayu run upstream",
+    "source": "ayu no nanbanzuke"
+  },
+  "ayu-no-shioyaki": {
+    "name_en": "Salt-grilled sweetfish",
+    "name_jp": "鮎の塩焼き",
+    "name_romaji": "ayu no shioyaki",
+    "note": "Whole sweetfish skewered in an undulating wave, crusted with coarse salt, and grilled over charcoal until the skin blisters and the belly fat renders. The young ayu of June carries the faint fragrance of watermelon and river stones — a taste that fades as summer deepens, making these first weeks the only true window.",
+    "season": "Early summer, when rivers warm and the first catch appears",
+    "source": "ayu no shioyaki"
+  },
+  "ayu-no-urusuka": {
+    "name_en": "Sweetfish in vinegar-salted fermentation",
+    "name_jp": "鮎の熟れ鮓",
+    "name_romaji": "ayu no urezushi",
+    "note": "Whole ayu are layered with salt and rice, then pressed under weight for weeks or months until they develop the sharp, complex tang of controlled fermentation—a precursor to modern sushi. The dish captures the fleeting prime of river sweetfish in August and September, preserving their clean, melon-rind fragrance just as the water begins to cool and the fish turn downstream.",
+    "season": "Late summer into autumn, when sweetfish reach full flavor before the spawning run",
+    "source": "ayu no urusuka"
+  },
   "biwa-no-compote": {
     "name_en": "Loquat compote",
     "name_jp": "枇杷のコンポート",
@@ -94,6 +70,382 @@
     "note": "Pale orange loquats are peeled and gently poached in light syrup, sometimes touched with white wine or lemon, until they turn translucent and yield to the spoon. The fruit ripens in fleeting weeks around June, its honey-sweet flesh bruising at a glance — to preserve it in syrup is to hold the taste of those brief humid days before high summer's heat.",
     "season": "Early summer, as the rainy season begins",
     "source": "biwa no compote"
+  },
+  "biwa-no-shiroppu-ni": {
+    "name_en": "Loquat simmered in syrup",
+    "name_jp": "枇杷のシロップ煮",
+    "name_romaji": "biwa no shiroppu-ni",
+    "note": "Whole peeled loquats are gently poached in a light sugar syrup until tender, their flesh turning translucent amber while holding its shape. The fruit bruises within days of picking, so this preserve captures the narrow window of ripeness when clusters hang heavy on backyard trees throughout western Japan.",
+    "season": "Late spring to early summer, when loquats ripen in quick succession",
+    "source": "Biwa no shiroppu-ni"
+  },
+  "bud-no-shiratama": {
+    "name_en": "Grape shiratama dumplings",
+    "name_jp": "葡萄の白玉",
+    "name_romaji": "budō no shiratama",
+    "note": "Soft rice-flour dumplings tinted with fresh grape juice or pulp, served chilled in light syrup or alongside whole grapes. The dish captures the brief window when Japanese table grapes reach their peak sweetness, their dusky purple skins still taut with late-summer warmth before the air turns cool.",
+    "season": "Early autumn, when Kyoho and Delaware grapes hang heavy on the vine",
+    "source": "Budō no shiratama"
+  },
+  "bud-to-mozzarella-no-sarada": {
+    "name_en": "Grape and mozzarella salad",
+    "name_jp": "葡萄とモッツァレラのサラダ",
+    "name_romaji": "budō to mozzarella no sarada",
+    "note": "Chilled grape halves are scattered with torn mozzarella, dressed perhaps with olive oil and a whisper of white balsamic, the fruit's sweetness playing against the milk-soft cheese. This salad arrives when September heat still lingers but the grapes have already deepened to purple-black — a dish that acknowledges summer's end while celebrating the harvest that marks its passing.",
+    "season": "Early autumn, when Delaware and Kyoho grapes hang heavy on the vine",
+    "source": "Budō to mozzarella no sarada"
+  },
+  "doj-nabe": {
+    "name_en": "Loach hot pot",
+    "name_jp": "泥鰌鍋",
+    "name_romaji": "dojō-nabe",
+    "note": "Small freshwater loach are simmered whole in a shallow iron pot with burdock shavings, sweetened soy broth, and a scattering of chopped negi. The dish belongs to the humid Tokyo summer, when workers at Edo-period markets sought out the rich, restorative fat of these bottom-dwelling fish to fortify themselves against the draining heat.",
+    "season": "Summer, when loach are plump from feeding in warm, muddy waters",
+    "source": "Dojō-nabe"
+  },
+  "edamame-no-nibitashi": {
+    "name_en": "Simmered edamame in seasoned broth",
+    "name_jp": "枝豆の煮浸し",
+    "name_romaji": "edamame no nibitashi",
+    "note": "Shelled edamame are gently simmered in a light dashi broth with soy and mirin, then left to cool and absorb the seasoning — a technique that coaxes out their grassy sweetness. The dish appears when the beans are harvested still attached to their branches, their brief season coinciding with the humid weeks before the summer solstice.",
+    "season": "Early summer, when young soybeans swell in their pods",
+    "source": "Edamame no nibitashi"
+  },
+  "edamame-no-shio-yude": {
+    "name_en": "Salt-boiled edamame",
+    "name_jp": "枝豆の塩茹で",
+    "name_romaji": "edamame no shio-yude",
+    "note": "Young soybeans are boiled briefly in well-salted water, then drained and served in the pod, still warm or at room temperature. The dish arrives with the first humid evenings of summer, when cold beer appears on tables and the pods — picked that morning, ideally — hold the concentrated sweetness that fades within hours of harvest.",
+    "season": "Early summer through mid-August, when pods are plump but still bright green",
+    "source": "edamame no shio-yude"
+  },
+  "g-ya-champur": {
+    "name_en": "Bitter melon stir-fry",
+    "name_jp": "ゴーヤーチャンプルー",
+    "name_romaji": "gōya champurū",
+    "note": "A sizzling Okinawan stir-fry that tumbles sliced bitter melon with crumbled island tofu, egg ribbons, and thin pork belly in a hot wok, the bitterness tempered by the richness around it. The dish belongs to the brutal heat of July and August, when gōya grows fastest and its sharp vegetal bite is believed to cool the blood and restore appetite lost to humidity.",
+    "season": "High summer, when the vines hang heavy with knobbled green fruit",
+    "source": "gōya champurū"
+  },
+  "goya-no-shiraae": {
+    "name_en": "Bitter melon with tofu dressing",
+    "name_jp": "ゴーヤの白和え",
+    "name_romaji": "goya no shiraae",
+    "note": "Sliced bitter melon is blanched briefly to temper its bite, then dressed in a silken paste of mashed tofu seasoned with white sesame, mirin, and a whisper of sugar. The dish arrives when goya vines heavy with warted green fruit climb Okinawan trellises and mainland gardens alike — its cooling bitterness a folk remedy against summer fatigue, the pale tofu a balm against the glare of August.",
+    "season": "High summer, when the heat is most oppressive",
+    "source": "goya no shiraae"
+  },
+  "hamo-no-kabayaki": {
+    "name_en": "Grilled pike eel in sweet soy glaze",
+    "name_jp": "鱧の蒲焼",
+    "name_romaji": "hamo no kabayaki",
+    "note": "Pike eel fillets are scored with hundreds of fine knife cuts to sever the hair-thin bones, then brushed with tare and grilled until the glaze caramelizes and the flesh turns silken. Hamo reaches its peak fat content as Kyoto swelters in July heat, and the fish has sustained the landlocked capital since medieval times when it alone could survive the journey from the coast.",
+    "season": "High summer, from the Gion Festival through Obon",
+    "source": "Hamo no kabayaki"
+  },
+  "hamo-no-otoshi": {
+    "name_en": "Blanched pike eel",
+    "name_jp": "鱧の落とし",
+    "name_romaji": "hamo no otoshi",
+    "note": "Pike eel fillets, scored with hundreds of knife cuts to sever the fine bones, are briefly poached and served chilled with tart umeboshi paste or vinegared miso. The dish belongs to Kyoto's sweltering July, when hamo — one of few fish that survive the journey inland without ice — arrives at its fattest just as the city prepares for the Gion Matsuri.",
+    "season": "High summer, from the Gion Festival through the peak of the heat",
+    "source": "hamo no otoshi"
+  },
+  "hamo-no-shabu-shabu": {
+    "name_en": "Pike conger hot pot",
+    "name_jp": "鱧のしゃぶしゃぶ",
+    "name_romaji": "hamo no shabu-shabu",
+    "note": "Bone-cut pike conger slices are swished briefly through simmering kombu broth until the flesh blooms open like white chrysanthemum petals. The fish reaches peak flavor just as Kyoto swelters through its humid July nights, when hamo becomes essential to festival cuisine — its resilience during transport from the sea made it the only fresh saltwater fish that could survive the journey to the landlocked capital.",
+    "season": "High summer, especially during the Gion Festival in Kyoto",
+    "source": "Hamo no shabu-shabu"
+  },
+  "hamo-no-suimono": {
+    "name_en": "Pike eel clear soup",
+    "name_jp": "鱧の吸い物",
+    "name_romaji": "hamo no suimono",
+    "note": "Delicate slices of pike eel, their countless fine bones cut through with hundreds of precise knife strokes, float in a crystalline dashi broth with perhaps a single sprig of junsai or a whisper of yuzu. The dish belongs to Kyoto's sweltering midsummer, when hamo—one of the few fish that survived the journey inland before refrigeration—became the essential protein of the ancient capital's festival season.",
+    "season": "High summer, especially during the Gion Festival in July",
+    "source": "hamo no suimono"
+  },
+  "hange-mochi": {
+    "name_en": "Half-summer mochi",
+    "name_jp": "半夏餅",
+    "name_romaji": "hange mochi",
+    "note": "Glutinous rice dumplings wrapped in wheat dough, sometimes filled with sweet azuki or savory miso, marking the brief window when both grains are freshly harvested. The name comes from hangesho, the seventy-two seasons microseason when crow-dipper blooms in wet paddies — farmers pause their planting to eat these humble cakes before the summer heat truly settles in.",
+    "season": "Early July, around the eleventh day after summer solstice",
+    "source": "hange-mochi"
+  },
+  "hasu-no-kinpira": {
+    "name_en": "Sautéed lotus root in sweet soy",
+    "name_jp": "蓮のきんぴら",
+    "name_romaji": "hasu no kinpira",
+    "note": "Thin half-moons of lotus root are sautéed briskly with sesame oil, then glazed in soy, mirin, and a whisper of chili until the edges caramelize and each piece snaps cleanly between the teeth. The renkon harvested from muddy pond beds after the first cold nights possesses a starchy sweetness absent in summer, and this kinpira honors the moment when the root's lace-like chambers hold the season's last warmth.",
+    "season": "Autumn through early winter, when lotus roots reach peak sweetness",
+    "source": "hasu no kinpira"
+  },
+  "hiyashi-ch-ka": {
+    "name_en": "Chilled Chinese-style noodles",
+    "name_jp": "冷やし中華",
+    "name_romaji": "hiyashi chūka",
+    "note": "Cold ramen-style wheat noodles fanned out on a plate, topped with ribbons of thin omelet, ham, cucumber, and tomato, then doused in a soy-vinegar or sesame dressing. The dish appears on menus the moment restaurants hang out their hand-lettered 冷やし中華はじめました signs — an unofficial announcement that true summer has arrived.",
+    "season": "Early summer through late August, when humidity settles over the archipelago",
+    "source": "Hiyashi chūka"
+  },
+  "hiyashi-jiru": {
+    "name_en": "Chilled miso soup",
+    "name_jp": "冷や汁",
+    "name_romaji": "hiyashi-jiru",
+    "note": "Chilled miso broth pounded with roasted sesame and grilled fish, thinned with ice water and ladled over cold rice, finished with torn shiso, sliced cucumber, and crumbled tofu. This Miyazaki farmhouse dish revives field workers when the cicadas drone loudest and appetite falters—the cold broth slides down easily when nothing warm will do.",
+    "season": "High summer, when the heat sits heaviest on the land",
+    "source": "hiyashi-jiru"
+  },
+  "hiyashi-nasu": {
+    "name_en": "Chilled eggplant",
+    "name_jp": "冷やし茄子",
+    "name_romaji": "hiyashi-nasu",
+    "note": "Whole Japanese eggplant is grilled or deep-fried until the flesh collapses, then shocked in ice water and served cold with ginger and dashi. The dish arrives at the height of summer's humidity, when the body craves something cool and yielding — the silken flesh releasing its trapped smoky sweetness against the tongue.",
+    "season": "High summer, when eggplant skin turns glossy black in the heat",
+    "source": "Hiyashi-nasu"
+  },
+  "hiyashi-s-men": {
+    "name_en": "Chilled sōmen noodles",
+    "name_jp": "冷やし素麺",
+    "name_romaji": "hiyashi sōmen",
+    "note": "Wheat noodles thin as silk thread, boiled briefly and plunged into ice water, served in a glass bowl with cold tsuyu dipping sauce and wisps of shiso, ginger, and scallion. The dish belongs to the dog days of July and August, when appetite falters in the wet heat and the eye craves the sight of something pale and cold sliding through clear water.",
+    "season": "High summer, when the cicadas drone loudest",
+    "source": "hiyashi sōmen"
+  },
+  "hiyashi-udon": {
+    "name_en": "Chilled udon noodles",
+    "name_jp": "冷やしうどん",
+    "name_romaji": "hiyashi udon",
+    "note": "Thick wheat noodles are boiled, shocked in ice water until they tighten, then served cold with a dipping sauce of dashi, soy, and mirin, often with grated ginger and sliced scallions. The dish appears when summer humidity makes hot food feel like a burden—the cold, chewy strands and bright tsuyu offer a small mercy against the August swelter.",
+    "season": "High summer, when the heat settles into everything",
+    "source": "Hiyashi udon"
+  },
+  "isaki-no-shioyaki": {
+    "name_en": "Salt-grilled chicken grunt",
+    "name_jp": "伊佐木の塩焼き",
+    "name_romaji": "isaki no shioyaki",
+    "note": "A whole chicken grunt, scored and rubbed with coarse salt, grilled over charcoal until the skin blisters and the oils pool in the cuts. The fish reaches peak flavor just as hydrangeas begin to bloom, its flesh still firm from cold spring waters yet layered with the first sweetness of warming seas.",
+    "season": "Early summer, when isaki run fat before the rains",
+    "source": "Isaki no shioyaki"
+  },
+  "iwashi-no-umeni": {
+    "name_en": "Sardines simmered with pickled plum",
+    "name_jp": "鰯の梅煮",
+    "name_romaji": "iwashi no umeni",
+    "note": "Small sardines are braised slowly with umeboshi until the bones soften and the flesh takes on a gentle tartness that cuts through the fish's natural oil. The dish arrives as the rainy season begins, when appetites flag in the humidity and the sharp brightness of plum serves as both preservative and tonic against the damp.",
+    "season": "Early summer, when sardines run fat and the previous year's umeboshi have mellowed",
+    "source": "Iwashi no umeni"
+  },
+  "k-shinai-no-itame": {
+    "name_en": "Stir-fried water spinach",
+    "name_jp": "空芯菜の炒め",
+    "name_romaji": "kūshinai no itame",
+    "note": "Hollow-stemmed water spinach cut into lengths and flash-fried with garlic in smoking-hot oil, the stalks retaining their crunch while the leaves just wilt. The vegetable thrives in the humid heat that settles over Japan after the rainy season lifts, its cooling, slightly mucilaginous texture offering relief when the air itself feels thick enough to drink.",
+    "season": "High summer, from late June through August",
+    "source": "Kūshinai no itame"
+  },
+  "kabocha-no-nimono": {
+    "name_en": "Simmered kabocha squash",
+    "name_jp": "南瓜の煮物",
+    "name_romaji": "kabocha no nimono",
+    "note": "Wedges of dense-fleshed winter squash braised slowly in dashi sweetened with soy and mirin until the flesh yields to chopsticks while the dark green rind holds its shape. The dish appears on tables at the winter solstice, when eating kabocha is said to ward off colds — its deep orange flesh a small sun stored against the year's longest dark.",
+    "season": "Early autumn through winter, when kabocha reaches its sweetest after the first cold nights",
+    "source": "Kabocha no nimono"
+  },
+  "katsuo-no-tataki": {
+    "name_en": "Seared bonito, lightly tataki-style",
+    "name_jp": "鰹のたたき",
+    "name_romaji": "katsuo no tataki",
+    "note": "Thick slices of bonito are seared over high flame until the outer flesh turns pale while the center remains raw, then sliced and dressed with ponzu, ginger, and heaps of fresh garlic and myoga. This is hatsu-gatsuo — the 'first bonito' of the season — leaner and cleaner than the fatty autumn catch, its arrival in Tosa province once marked by fishermen racing to bring the year's earliest fish to Edo.",
+    "season": "Late spring through early summer, when the first bonito run north along the Pacific coast",
+    "source": "Katsuo no tataki"
+  },
+  "kinusaya-to-ebi-no-itame": {
+    "name_en": "Stir-fried snow peas and shrimp",
+    "name_jp": "絹さやと海老の炒め",
+    "name_romaji": "kinusaya to ebi no itame",
+    "note": "A quick wok dish where snow peas and pink shrimp are flash-fried with a whisper of sake and salt, preserving the pea's crisp bite against the shrimp's yielding sweetness. The dish appears when kinusaya hang translucent and flat on the vine, their pods so young the peas inside are barely suggestions — a fleeting window before they swell and toughen in early summer's heat.",
+    "season": "Late spring, when snow pea pods are at their most tender",
+    "source": "Kinusaya to ebi no itame"
+  },
+  "kisu-no-tempura": {
+    "name_en": "Tempura of Japanese whiting",
+    "name_jp": "鱚の天ぷら",
+    "name_romaji": "kisu no tempura",
+    "note": "Delicate fillets of kisu, a slender white-fleshed fish prized for its clean sweetness, are dipped in cold batter and fried until the coating crisps to pale gold while the flesh stays almost translucent. The fish appears in coastal markets just as the rainy season lifts, its lightness a welcome counterpoint to the humidity — eaten with a pinch of salt rather than heavy sauce, it tastes of the bright days finally arriving.",
+    "season": "Early summer, when the shallows warm and the fish run silver",
+    "source": "Kisu no tempura"
+  },
+  "ky-ri-no-ichiyazuke": {
+    "name_en": "Overnight pickled cucumber",
+    "name_jp": "胡瓜の一夜漬け",
+    "name_romaji": "kyūri no ichiyazuke",
+    "note": "Crisp cucumber spears pressed overnight with salt, sometimes with a whisper of kelp or dried chili, until they yield just enough brine to glisten. The dish belongs to the humid nights of summer — a cool, snapping bite that cuts through the heaviness of the season when even the evenings refuse to cool.",
+    "season": "Early summer through late summer, when cucumbers hang heavy on the vine",
+    "source": "Kyūri no ichiyazuke"
+  },
+  "maitake-no-tempura": {
+    "name_en": "Hen-of-the-woods tempura",
+    "name_jp": "舞茸の天ぷら",
+    "name_romaji": "maitake no tempura",
+    "note": "Clusters of maitake are separated into fronds, dipped in cold batter, and fried until the edges turn lacework-crisp while the flesh stays faintly chewy. The mushroom's name means 'dancing mushroom' — legend says foragers who found one in the wild would dance with joy — and its arrival after the first autumn rains signals the forest's quiet shift toward dormancy.",
+    "season": "Early to mid-autumn, when wild maitake emerge at the base of old oaks",
+    "source": "Maitake no tempura"
+  },
+  "momo-no-shiratama": {
+    "name_en": "Peach shiratama dumplings",
+    "name_jp": "桃の白玉",
+    "name_romaji": "momo no shiratama",
+    "note": "Soft rice-flour dumplings served alongside slices of ripe peach, often in a light syrup or alongside shaved ice. The dish arrives when peaches grown in Okayama and Yamanashi flood the markets in August, their flesh so tender it bruises at a glance — a sweetness meant to be caught before it vanishes.",
+    "season": "Late summer, when white peaches reach their fragrant peak",
+    "source": "Momo no shiratama"
+  },
+  "moroheiya-no-ohitashi": {
+    "name_en": "Chilled moroheiya greens in dashi",
+    "name_jp": "モロヘイヤのお浸し",
+    "name_romaji": "moroheiya no ohitashi",
+    "note": "The serrated leaves of Egyptian spinach are blanched briefly, then steeped in chilled dashi and soy, releasing their characteristic viscous quality that clings to the tongue. This mucilaginous green thrives in the brutal humidity of late July and August, its slippery texture offering relief when the body craves something cool and easily swallowed.",
+    "season": "High summer, when the leaves are tender and heat demands cooling dishes",
+    "source": "Moroheiya no ohitashi"
+  },
+  "mugi-toro-gohan": {
+    "name_en": "Barley rice with grated mountain yam",
+    "name_jp": "麦とろご飯",
+    "name_romaji": "mugi-toro gohan",
+    "note": "Chewy pressed barley rice topped with a cascade of grated yamaimo, the raw tuber whipped until it falls in glossy ribbons, seasoned simply with dashi and soy. The dish appears when humidity saps the appetite — the cool, slippery yam sliding over nutty grain offers sustenance that asks nothing of a weary body.",
+    "season": "Early summer, as the muggy heat begins to settle",
+    "source": "Mugi-toro gohan"
+  },
+  "my-ga-gohan": {
+    "name_en": "Myōga ginger rice",
+    "name_jp": "茗荷ご飯",
+    "name_romaji": "myōga gohan",
+    "note": "Thinly sliced myōga buds are folded into freshly steamed rice, sometimes with a whisper of salt or a few drops of light soy, letting the ginger's sharp, almost camphorous perfume cut through the grain's sweetness. The pale pink crescents appear in shaded garden corners just as the humid heat becomes oppressive — their crisp bite and cooling astringency offer a reprieve when appetite falters.",
+    "season": "High summer, when myōga shoots push through damp shade",
+    "source": "Myōga gohan"
+  },
+  "my-ga-no-amazuzuke": {
+    "name_en": "Sweet-vinegar pickled myōga",
+    "name_jp": "茗荷の甘酢漬け",
+    "name_romaji": "myōga no amazuzuke",
+    "note": "Whole myōga buds are briefly blanched, then steeped in a sweetened rice vinegar until they blush a deeper rose. The pickle appears alongside grilled fish or tucked into bento when the humidity peaks and the appetite craves something bright to cut through the heaviness of August.",
+    "season": "High summer through early autumn, when myōga buds emerge plump and pink",
+    "source": "myōga no amazuzuke"
+  },
+  "my-ga-no-misoshiru": {
+    "name_en": "Myōga miso soup",
+    "name_jp": "茗荷の味噌汁",
+    "name_romaji": "myōga no misoshiru",
+    "note": "A clear miso broth finished with thinly sliced myōga ginger, its pale pink crescents added at the last moment to preserve their sharp, piney bite. The aromatic bud appears briefly between July and September, pushing up through damp soil near bamboo groves — a fleeting coolness in the bowl before autumn arrives.",
+    "season": "Late summer, when myōga emerges from shaded ground",
+    "source": "myōga no misoshiru"
+  },
+  "my-ga-to-ky-ri-no-sunomono": {
+    "name_en": "Myōga and cucumber in sweet vinegar",
+    "name_jp": "茗荷と胡瓜の酢の物",
+    "name_romaji": "myōga to kyūri no sunomono",
+    "note": "Thinly sliced myōga ginger buds and cucumber are briefly salted, then dressed in a light mixture of rice vinegar and sugar, served cold. The dish appears when summer heat makes appetite falter — myōga's clean, resinous bite cuts through humidity the way a sudden breeze parts still air.",
+    "season": "High summer, when myōga shoots push through shade-damp soil",
+    "source": "Myōga to kyūri no sunomono"
+  },
+  "nashi-no-shirazuae": {
+    "name_en": "Pear in white tofu dressing",
+    "name_jp": "梨の白和え",
+    "name_romaji": "nashi no shiraae",
+    "note": "Crisp Asian pear is cut into matchsticks and folded into a silken dressing of mashed tofu, white sesame, and a whisper of mirin. The dish arrives as summer's humidity finally breaks — the cool, granular snap of the fruit against the creamy dressing feels like the first breath of autumn air.",
+    "season": "Early autumn, when nashi pears reach their peak sweetness",
+    "source": "Nashi no shirazuae"
+  },
+  "nashi-to-nama-hamu-no-sarada": {
+    "name_en": "Pear and prosciutto salad",
+    "name_jp": "梨と生ハムのサラダ",
+    "name_romaji": "nashi to nama-hamu no sarada",
+    "note": "Thin-sliced nashi pear is draped with cured ham, often dressed with olive oil and a whisper of black pepper, the fruit's crisp water-laden flesh playing against the salt-rich fat. This salad arrives when the air carries the first cool edge of autumn and the orchards of Tottori and Chiba yield their prized nijisseiki pears, their pale gold skin signaling summer's quiet retreat.",
+    "season": "Early autumn, when the first nashi pears reach their peak sweetness",
+    "source": "Nashi to nama-hamu no sarada"
+  },
+  "nasu-dengaku": {
+    "name_en": "Grilled eggplant with sweet miso glaze",
+    "name_jp": "茄子田楽",
+    "name_romaji": "nasu dengaku",
+    "note": "Halved eggplant is scored, grilled until the flesh turns silken, then lacquered with a burnished coat of sweet miso that blisters under the flame. The dish arrives when summer heat demands food that is soft and yielding, the caramelized miso offering a richness that stands up to the season's most assertive vegetable.",
+    "season": "High summer, when eggplants swell heavy on the vine",
+    "source": "nasu dengaku"
+  },
+  "nasu-no-agebitashi": {
+    "name_en": "Deep-fried eggplant in seasoned broth",
+    "name_jp": "茄子の揚げ浸し",
+    "name_romaji": "nasu no agebitashi",
+    "note": "Eggplant is fried until its flesh turns silken, then steeped in a cold dashi broth seasoned with soy and mirin, often finished with grated ginger. The dish arrives chilled on the hottest days of July and August, when the body craves something cooling yet substantial, and glossy purple nasu are so abundant they spill from every market stall.",
+    "season": "High summer, when eggplants hang heavy on the vine",
+    "source": "Nasu no agebitashi"
+  },
+  "nasu-no-nibitashi": {
+    "name_en": "Simmered eggplant in seasoned broth",
+    "name_jp": "茄子の煮浸し",
+    "name_romaji": "nasu no nibitashi",
+    "note": "Small eggplants are scored and fried briefly, then steeped in cold dashi enriched with soy and mirin until the flesh turns silken and deeply savory. Served chilled with a thread of grated ginger, the dish answers the humid weight of late July, when even the act of cooking should leave the kitchen cool.",
+    "season": "High summer, when eggplants grow heavy on the vine",
+    "source": "nasu no nibitashi"
+  },
+  "okra-no-ohitashi": {
+    "name_en": "Chilled okra in seasoned broth",
+    "name_jp": "オクラのおひたし",
+    "name_romaji": "okra no ohitashi",
+    "note": "Whole okra pods are blanched briefly to preserve their snap, then steeped in dashi-based broth and served cold, their cut surfaces revealing the pale seeds within their star-shaped chambers. The dish arrives when summer heat peaks and appetites falter — the cool, mucilaginous texture and clean broth offering a gentle path back to eating.",
+    "season": "High summer, when okra pods are tender and prolific",
+    "source": "Okra no ohitashi"
+  },
+  "rakkyo-no-amazuzuke": {
+    "name_en": "Sweet vinegar-pickled scallions",
+    "name_jp": "辣韮の甘酢漬け",
+    "name_romaji": "rakkyo no amazuzuke",
+    "note": "Small torpedo-shaped scallion bulbs are trimmed, salted briefly, then steeped in a sweetened rice vinegar brine until they turn translucent and develop a sharp, sweet crunch. Rakkyo arrive in markets for just a few weeks around late May, and the ritual of pickling them at home marks the threshold between spring's end and the humid weight of tsuyu, the rainy season.",
+    "season": "Late spring to early summer, when rakkyo bulbs emerge from sandy soil",
+    "source": "rakkyo no amazuzuke"
+  },
+  "sanma-no-shioyaki": {
+    "name_en": "Salt-grilled Pacific saury",
+    "name_jp": "秋刀魚の塩焼き",
+    "name_romaji": "sanma no shioyaki",
+    "note": "Whole saury rubbed with coarse salt and grilled over high flame until the skin blisters and the belly fat drips hissing onto the coals. The fish appears in markets just as the harvest moon rises and sudachi citrus ripens on the branch — the two arrive together, one to cut the richness of the other.",
+    "season": "Early autumn, when saury run fat with oils from northern waters",
+    "source": "Sanma no shioyaki"
+  },
+  "sansai-soba": {
+    "name_en": "Mountain vegetable buckwheat noodles",
+    "name_jp": "山菜蕎麦",
+    "name_romaji": "sansai soba",
+    "note": "Chilled or hot buckwheat noodles served with a tangle of foraged mountain vegetables — bracken fern, ostrich fiddleheads, butterbur stems — blanched and dressed simply. The dish marks the brief window when villagers climb thawing hillsides to gather the first bitter shoots pushing through last autumn's leaves.",
+    "season": "Late spring, when snow recedes from mountain slopes",
+    "source": "sansai soba"
+  },
+  "sawara-no-saikyo-yaki": {
+    "name_en": "Saikyo miso-marinated Spanish mackerel",
+    "name_jp": "鰆の西京焼き",
+    "name_romaji": "sawara no saikyo-yaki",
+    "note": "Fillets of sawara are buried in sweet white Saikyo miso for two or three days, then grilled until the sugars in the paste caramelize into a burnished crust. The fish's name itself contains the character for spring (鰆), and its arrival off the Sanyo coast has long signaled the softening of winter's grip.",
+    "season": "Late winter through early spring, when sawara swim into the Inland Sea",
+    "source": "Sawara no saikyo-yaki"
+  },
+  "shijimi-no-misoshiru": {
+    "name_en": "Freshwater clam miso soup",
+    "name_jp": "蜆の味噌汁",
+    "name_romaji": "shijimi no misoshiru",
+    "note": "Tiny brackish clams simmered just until they open, their briny liquor mingling with white miso into a broth both murky and clean. The dish appears when the body most craves gentle restoration — after winter's heaviest drinking, the shijimi's liver-soothing properties have made this soup the quiet morning remedy of sake country for generations.",
+    "season": "Late winter through early spring, when rivers run cold and clear",
+    "source": "Shijimi no misoshiru"
+  },
+  "shin-ninniku-no": {
+    "name_en": "New garlic pickled in soy sauce",
+    "name_jp": "新にんにくの醤油漬け",
+    "name_romaji": "shin-ninniku no shōyuzuke",
+    "note": "Whole cloves of freshly harvested garlic are submerged in soy sauce and left to cure, their fierce bite softening into something sweet and almost fruity over weeks. This preserve captures shin-ninniku — garlic dug before its papery skin fully forms — at the brief window in June when the bulbs are still juicy and mild, their green stems not yet withered.",
+    "season": "Early summer, when the first garlic is pulled",
+    "source": "Shin-ninniku no醤油漬け"
   },
   "shin-sh-ga-no-amazu-zuke": {
     "name_en": "New ginger pickled in sweet vinegar",
@@ -103,13 +455,129 @@
     "season": "Early summer, when the first tender ginger appears",
     "source": "shin-shōga no amazu-zuke"
   },
-  "sansai-soba": {
-    "name_en": "Mountain vegetable buckwheat noodles",
-    "name_jp": "山菜蕎麦",
-    "name_romaji": "sansai soba",
-    "note": "Chilled or hot buckwheat noodles served with a tangle of foraged mountain vegetables — bracken fern, ostrich fiddleheads, butterbur stems — blanched and dressed simply. The dish marks the brief window when villagers climb thawing hillsides to gather the first bitter shoots pushing through last autumn's leaves.",
-    "season": "Late spring, when snow recedes from mountain slopes",
-    "source": "sansai soba"
+  "shirauo-no-kakiage": {
+    "name_en": "Whitebait tempura fritters",
+    "name_jp": "白魚のかき揚げ",
+    "name_romaji": "shirauo no kakiage",
+    "note": "Tiny translucent whitebait are gathered loosely with slivers of mitsuba or scallion, bound in light batter, and fried into lacy, shattering fritters. The fish appear in estuaries just as the final cold retreats—their brief season a fleeting threshold between winter's stillness and spring's first stirring, the fritters' delicacy honoring flesh so tender it would vanish under heavier treatment.",
+    "season": "Late winter to early spring, when ice melts from river mouths",
+    "source": "shirauo no kakiage"
+  },
+  "shirauo-no-odorigui": {
+    "name_en": "Dancing icefish eaten alive",
+    "name_jp": "白魚の踊り食い",
+    "name_romaji": "shirauo no odorigui",
+    "note": "Tiny, translucent icefish are swallowed live, their delicate bodies still flickering against the tongue — sometimes dipped briefly in vinegar or ponzu to heighten the briny sweetness. The dish belongs to the fleeting weeks when shirauo swim upstream to spawn, their glass-clear flesh a reminder that spring arrives first in cold water, not yet in the air.",
+    "season": "Late winter to early spring, when rivers run cold and clear",
+    "source": "Shirauo no odorigui"
+  },
+  "shishit-no-yakibitashi": {
+    "name_en": "Grilled shishito peppers in seasoned broth",
+    "name_jp": "獅子唐の焼き浸し",
+    "name_romaji": "shishitō no yakibitashi",
+    "note": "Small green peppers are blistered over high heat until the skins char and blister, then steeped in a cold dashi-soy mixture that they drink up as they cool. The dish arrives at tables when summer humidity settles in and the body craves something both smoky and refreshing — the occasional fierce pepper among the mild ones a small gamble that sharpens the appetite.",
+    "season": "Early to midsummer, when shishito peppers are tender and prolific",
+    "source": "Shishitō no yakibitashi"
+  },
+  "shiso-maki": {
+    "name_en": "Shiso leaf rolls",
+    "name_jp": "紫蘇巻き",
+    "name_romaji": "shiso maki",
+    "note": "Fresh shiso leaves wrapped around a core of seasoned miso, sometimes with walnut or sesame, then pan-fried until the edges crisp and the filling turns glossy. The dish belongs to the humid weeks of early summer when shiso pushes up thick and aromatic in kitchen gardens, its sharp green scent cutting through the heaviness before the rains fully arrive.",
+    "season": "Early to mid-summer, when shiso leaves are most fragrant",
+    "source": "shiso maki"
+  },
+  "shiso-no-mi-no-tsukudani": {
+    "name_en": "Perilla seed simmered in soy",
+    "name_jp": "紫蘇の実の佃煮",
+    "name_romaji": "shiso no mi no tsukudani",
+    "note": "Tiny green seeds stripped from shiso flower spikes, simmered slowly in soy sauce, mirin, and sake until glossy and intensely savory. The harvest comes in a narrow window after the fragrant leaves have thinned but before the first frost blackens the stalks — a way to hold summer's last green breath through the cold months ahead.",
+    "season": "Early autumn, when perilla plants go to seed",
+    "source": "Shiso no mi no tsukudani"
+  },
+  "shiso-to-my-ga-no-hiyayakko": {
+    "name_en": "Chilled tofu with shiso and myōga",
+    "name_jp": "紫蘇と茗荷の冷奴",
+    "name_romaji": "shiso to myōga no hiyayakko",
+    "note": "Cold silken tofu served unadorned save for ribbons of shiso leaf and paper-thin slices of myōga ginger, dressed with a thread of soy. Myōga pushes up its pale buds in the shade of July gardens, and shiso reaches its most aromatic just as the body craves something to cut through the thickness of summer air.",
+    "season": "High summer, when the humidity settles in and the appetite turns away from heat",
+    "source": "shiso to myōga no hiyayakko"
+  },
+  "soramame-no-shioyude": {
+    "name_en": "Salt-boiled fava beans",
+    "name_jp": "空豆の塩茹で",
+    "name_romaji": "soramame no shioyude",
+    "note": "Young fava beans are boiled briefly in well-salted water, then served warm in their jade-green skins, often with nothing more than a small dish of coarse salt. The name itself contains the season — soramame means 'sky bean,' named for the way the pods point upward toward heaven before bowing earthward as they ripen, a gesture that marks the weeks between late April and early June.",
+    "season": "Late spring, when the pods fatten and the sky clears",
+    "source": "Soramame no shioyude"
+  },
+  "sudachi-soba": {
+    "appearance": null,
+    "etymology": null,
+    "name_en": "Chilled buckwheat noodles with sudachi citrus",
+    "name_jp": "すだち蕎麦",
+    "name_romaji": "sudachi soba",
+    "note": "Cold soba noodles served in a shallow pool of chilled dashi, covered with paper-thin rounds of whole sudachi — rind, pith, and flesh together. The citrus appears just as summer's heat begins its slow retreat, its sharp, green fragrance cutting through the last humid days before the air turns clear.",
+    "origin": null,
+    "season": "Late summer to early autumn, when sudachi ripen in Tokushima",
+    "serving": null,
+    "source": "Sudachi soba"
+  },
+  "suika-no-shiokake": {
+    "name_en": "Salt-sprinkled watermelon",
+    "name_jp": "西瓜の塩かけ",
+    "name_romaji": "suika no shiokake",
+    "note": "Chilled wedges of ripe watermelon are served with a light dusting of coarse salt, the mineral edge amplifying the fruit's natural sugars. This simple preparation belongs to the dog days of late July and August, when field-ripened suika from places like Kumamoto arrive at their most crimson and the salt replenishes what the body loses to summer heat.",
+    "season": "High summer, when watermelons reach their peak sweetness",
+    "source": "Suika no shiokake"
+  },
+  "suzuki-no-usuzukuri": {
+    "name_en": "Thinly sliced sea bass sashimi",
+    "name_jp": "鱸の薄造り",
+    "name_romaji": "suzuki no usuzukuri",
+    "note": "Paper-thin slices of raw sea bass are arranged in translucent layers on a chilled plate, often served with ponzu and fine-cut scallion or momiji oroshi. Suzuki enters its prime as waters warm in June and July, its clean, almost mineral flavor offering a cooling counterpoint to the humidity of tsuyu rainy season.",
+    "season": "Early to midsummer, when suzuki flesh is leanest and sweetest",
+    "source": "suzuki no usuzukuri"
+  },
+  "t-gan-no-soboroni": {
+    "name_en": "Winter melon simmered in minced chicken sauce",
+    "name_jp": "冬瓜のそぼろ煮",
+    "name_romaji": "tōgan no soboroni",
+    "note": "Jade-green wedges of winter melon are simmered until barely yielding, then cloaked in a light dashi broth thickened with crumbled chicken and a whisper of ginger. Despite its name suggesting winter, tōgan ripens under the July sun — its cool, almost gelatinous flesh offering relief precisely when the body craves something gentle against the humid heat.",
+    "season": "High summer, when tōgan flesh is at its most translucent",
+    "source": "tōgan no soboroni"
+  },
+  "t-gan-to-ebi-no-nimono": {
+    "name_en": "Simmered winter melon with shrimp",
+    "name_jp": "冬瓜と海老の煮物",
+    "name_romaji": "tōgan to ebi no nimono",
+    "note": "Translucent wedges of winter melon are simmered in light dashi until they turn almost glassy, finished with pink shrimp that cook in moments from the residual heat. Despite its name suggesting winter storage, tōgan is harvested in the humid weeks of late July and August — its cool, watery flesh and pale jade color offer visual and physical respite from the season's oppressive heat.",
+    "season": "High summer, when winter melon reaches its peak sweetness",
+    "source": "Tōgan to ebi no nimono"
+  },
+  "t-morokoshi-gohan": {
+    "name_en": "Corn rice",
+    "name_jp": "とうもろこしご飯",
+    "name_romaji": "tōmorokoshi gohan",
+    "note": "Fresh corn kernels are shaved from the cob and cooked directly with rice, the bare cobs sometimes added to the pot to deepen the broth with their milky sweetness. In the brief window before summer heat converts sugars to starch, this dish captures the corn at its most tender — a fleeting abundance before the Obon ancestors return and the fields begin their slow turn toward autumn.",
+    "season": "High summer, when corn silk turns bronze and kernels swell with sugar",
+    "source": "Tōmorokoshi gohan"
+  },
+  "tachiuo-no-shioyaki": {
+    "name_en": "Salt-grilled cutlassfish",
+    "name_jp": "太刀魚の塩焼き",
+    "name_romaji": "tachiuo no shioyaki",
+    "note": "The long, silver-skinned cutlassfish is scored lightly, salted, and grilled until the skin blisters and the flesh turns translucent-white and faintly sweet. Tachiuo fatten as summer heat breaks, their flesh at its most delicate when fishermen work between September storms off the Inland Sea.",
+    "season": "Early autumn, when typhoon winds churn coastal waters",
+    "source": "Tachiuo no shioyaki"
+  },
+  "takenoko-gohan": {
+    "name_en": "Bamboo shoot rice",
+    "name_jp": "筍ご飯",
+    "name_romaji": "takenoko gohan",
+    "note": "Rice simmered with freshly dug bamboo shoots, seasoned only with dashi, soy, and sake so the shoot's faint sweetness comes through. The dish marks the narrow window when takenoko can be cooked the same morning they are unearthed, before their sugars turn to woody fiber.",
+    "season": "Mid-spring, when the first shoots break through warming soil",
+    "source": "Takenoko gohan"
   },
   "takenoko-no-tosani": {
     "name_en": "Bamboo shoots simmered with bonito",
@@ -127,165 +595,37 @@
     "season": "Early to mid-spring, when bamboo shoots first break through the soil",
     "source": "takenoko tempura"
   },
-  "wakatake-ni": {
-    "name_en": "Simmered bamboo shoots with wakame",
-    "name_jp": "若竹煮",
-    "name_romaji": "wakatake-ni",
-    "note": "Fresh bamboo shoots are simmered in dashi with tender wakame seaweed, the two ingredients melding into a delicate broth seasoned simply with soy and mirin. The dish celebrates a brief window when young takenoko are dug at dawn and new-growth wakame arrives from cold spring waters — two fleeting harvests meeting in the same bowl.",
-    "season": "Late March through April, when bamboo shoots break ground",
-    "source": "wakatake-ni"
+  "tako-no-yawarakai-ni": {
+    "name_en": "Tender-simmered octopus",
+    "name_jp": "蛸の柔らか煮",
+    "name_romaji": "tako no yawarakai-ni",
+    "note": "Octopus braised low and slow in soy, sake, and mirin until the flesh yields to chopsticks without resistance. The dish marks the height of tako season around the summer solstice, when fishermen in Akashi haul in their prized catch and cooks transform the firm muscle into something approaching tenderness itself.",
+    "season": "Mid-summer, when octopus fishing peaks along the Inland Sea",
+    "source": "tako no yawarakai-ni"
   },
-  "biwa-no-shiroppu-ni": {
-    "name_en": "Loquat simmered in syrup",
-    "name_jp": "枇杷のシロップ煮",
-    "name_romaji": "biwa no shiroppu-ni",
-    "note": "Whole peeled loquats are gently poached in a light sugar syrup until tender, their flesh turning translucent amber while holding its shape. The fruit bruises within days of picking, so this preserve captures the narrow window of ripeness when clusters hang heavy on backyard trees throughout western Japan.",
-    "season": "Late spring to early summer, when loquats ripen in quick succession",
-    "source": "Biwa no shiroppu-ni"
+  "tako-to-ky-ri-no-sunomono": {
+    "name_en": "Octopus and cucumber in sweet vinegar",
+    "name_jp": "蛸と胡瓜の酢の物",
+    "name_romaji": "tako to kyūri no sunomono",
+    "note": "Thin-sliced boiled octopus and salted cucumber dressed in a light sanbaizu — rice vinegar softened with sugar and a breath of soy. The dish arrives when humidity settles over Japan and the body craves something cool and acidic; the cucumber's snap and the octopus's faint brininess recall the season's first swim in still-cold water.",
+    "season": "Early summer, when cucumbers are crisp and madako octopus is tender",
+    "source": "tako to kyūri no sunomono"
   },
-  "isaki-no-shioyaki": {
-    "name_en": "Salt-grilled chicken grunt",
-    "name_jp": "伊佐木の塩焼き",
-    "name_romaji": "isaki no shioyaki",
-    "note": "A whole chicken grunt, scored and rubbed with coarse salt, grilled over charcoal until the skin blisters and the oils pool in the cuts. The fish reaches peak flavor just as hydrangeas begin to bloom, its flesh still firm from cold spring waters yet layered with the first sweetness of warming seas.",
-    "season": "Early summer, when isaki run fat before the rains",
-    "source": "Isaki no shioyaki"
+  "tomorokoshi-no-kakiage": {
+    "name_en": "Corn fritter tempura",
+    "name_jp": "とうもろこしのかき揚げ",
+    "name_romaji": "tomorokoshi no kakiage",
+    "note": "Fresh corn kernels are bound loosely with a light tempura batter and deep-fried into a lacy, shattered disc — the edges golden and crisp, the center bursting with milky sweetness. This kakiage arrives when summer corn is so tender it can be eaten raw, its sugars not yet converted to starch, each kernel a small reservoir of the season's accumulated heat.",
+    "season": "High summer, when corn reaches peak sweetness in late July through August",
+    "source": "Tomorokoshi no kakiage"
   },
-  "kinusaya-to-ebi-no-itame": {
-    "name_en": "Stir-fried snow peas and shrimp",
-    "name_jp": "絹さやと海老の炒め",
-    "name_romaji": "kinusaya to ebi no itame",
-    "note": "A quick wok dish where snow peas and pink shrimp are flash-fried with a whisper of sake and salt, preserving the pea's crisp bite against the shrimp's yielding sweetness. The dish appears when kinusaya hang translucent and flat on the vine, their pods so young the peas inside are barely suggestions — a fleeting window before they swell and toughen in early summer's heat.",
-    "season": "Late spring, when snow pea pods are at their most tender",
-    "source": "Kinusaya to ebi no itame"
-  },
-  "shin-ninniku-no": {
-    "name_en": "New garlic pickled in soy sauce",
-    "name_jp": "新にんにくの醤油漬け",
-    "name_romaji": "shin-ninniku no shōyuzuke",
-    "note": "Whole cloves of freshly harvested garlic are submerged in soy sauce and left to cure, their fierce bite softening into something sweet and almost fruity over weeks. This preserve captures shin-ninniku — garlic dug before its papery skin fully forms — at the brief window in June when the bulbs are still juicy and mild, their green stems not yet withered.",
-    "season": "Early summer, when the first garlic is pulled",
-    "source": "Shin-ninniku no醤油漬け"
-  },
-  "ayu-no-shioyaki": {
-    "name_en": "Salt-grilled sweetfish",
-    "name_jp": "鮎の塩焼き",
-    "name_romaji": "ayu no shioyaki",
-    "note": "Whole sweetfish skewered in an undulating wave, crusted with coarse salt, and grilled over charcoal until the skin blisters and the belly fat renders. The young ayu of June carries the faint fragrance of watermelon and river stones — a taste that fades as summer deepens, making these first weeks the only true window.",
-    "season": "Early summer, when rivers warm and the first catch appears",
-    "source": "ayu no shioyaki"
-  },
-  "rakkyo-no-amazuzuke": {
-    "name_en": "Sweet vinegar-pickled scallions",
-    "name_jp": "辣韮の甘酢漬け",
-    "name_romaji": "rakkyo no amazuzuke",
-    "note": "Small torpedo-shaped scallion bulbs are trimmed, salted briefly, then steeped in a sweetened rice vinegar brine until they turn translucent and develop a sharp, sweet crunch. Rakkyo arrive in markets for just a few weeks around late May, and the ritual of pickling them at home marks the threshold between spring's end and the humid weight of tsuyu, the rainy season.",
-    "season": "Late spring to early summer, when rakkyo bulbs emerge from sandy soil",
-    "source": "rakkyo no amazuzuke"
-  },
-  "shiso-to-my-ga-no-hiyayakko": {
-    "name_en": "Chilled tofu with shiso and myōga",
-    "name_jp": "紫蘇と茗荷の冷奴",
-    "name_romaji": "shiso to myōga no hiyayakko",
-    "note": "Cold silken tofu served unadorned save for ribbons of shiso leaf and paper-thin slices of myōga ginger, dressed with a thread of soy. Myōga pushes up its pale buds in the shade of July gardens, and shiso reaches its most aromatic just as the body craves something to cut through the thickness of summer air.",
-    "season": "High summer, when the humidity settles in and the appetite turns away from heat",
-    "source": "shiso to myōga no hiyayakko"
-  },
-  "suzuki-no-usuzukuri": {
-    "name_en": "Thinly sliced sea bass sashimi",
-    "name_jp": "鱸の薄造り",
-    "name_romaji": "suzuki no usuzukuri",
-    "note": "Paper-thin slices of raw sea bass are arranged in translucent layers on a chilled plate, often served with ponzu and fine-cut scallion or momiji oroshi. Suzuki enters its prime as waters warm in June and July, its clean, almost mineral flavor offering a cooling counterpoint to the humidity of tsuyu rainy season.",
-    "season": "Early to midsummer, when suzuki flesh is leanest and sweetest",
-    "source": "suzuki no usuzukuri"
-  },
-  "iwashi-no-umeni": {
-    "name_en": "Sardines simmered with pickled plum",
-    "name_jp": "鰯の梅煮",
-    "name_romaji": "iwashi no umeni",
-    "note": "Small sardines are braised slowly with umeboshi until the bones soften and the flesh takes on a gentle tartness that cuts through the fish's natural oil. The dish arrives as the rainy season begins, when appetites flag in the humidity and the sharp brightness of plum serves as both preservative and tonic against the damp.",
-    "season": "Early summer, when sardines run fat and the previous year's umeboshi have mellowed",
-    "source": "Iwashi no umeni"
-  },
-  "kisu-no-tempura": {
-    "name_en": "Tempura of Japanese whiting",
-    "name_jp": "鱚の天ぷら",
-    "name_romaji": "kisu no tempura",
-    "note": "Delicate fillets of kisu, a slender white-fleshed fish prized for its clean sweetness, are dipped in cold batter and fried until the coating crisps to pale gold while the flesh stays almost translucent. The fish appears in coastal markets just as the rainy season lifts, its lightness a welcome counterpoint to the humidity — eaten with a pinch of salt rather than heavy sauce, it tastes of the bright days finally arriving.",
-    "season": "Early summer, when the shallows warm and the fish run silver",
-    "source": "Kisu no tempura"
-  },
-  "mugi-toro-gohan": {
-    "name_en": "Barley rice with grated mountain yam",
-    "name_jp": "麦とろご飯",
-    "name_romaji": "mugi-toro gohan",
-    "note": "Chewy pressed barley rice topped with a cascade of grated yamaimo, the raw tuber whipped until it falls in glossy ribbons, seasoned simply with dashi and soy. The dish appears when humidity saps the appetite — the cool, slippery yam sliding over nutty grain offers sustenance that asks nothing of a weary body.",
-    "season": "Early summer, as the muggy heat begins to settle",
-    "source": "Mugi-toro gohan"
-  },
-  "shiso-no-mi-no-tsukudani": {
-    "name_en": "Perilla seed simmered in soy",
-    "name_jp": "紫蘇の実の佃煮",
-    "name_romaji": "shiso no mi no tsukudani",
-    "note": "Tiny green seeds stripped from shiso flower spikes, simmered slowly in soy sauce, mirin, and sake until glossy and intensely savory. The harvest comes in a narrow window after the fragrant leaves have thinned but before the first frost blackens the stalks — a way to hold summer's last green breath through the cold months ahead.",
-    "season": "Early autumn, when perilla plants go to seed",
-    "source": "Shiso no mi no tsukudani"
-  },
-  "anago-no-shiroyaki": {
-    "name_en": "Salt-grilled conger eel, unsauced",
-    "name_jp": "穴子の白焼き",
-    "name_romaji": "anago no shiroyaki",
-    "note": "The eel is grilled without any tare, brushed only with salt or a whisper of sake, letting the delicate sweetness of the flesh speak plainly. Wild anago reaches its peak between June and August, when the warming Kuroshio Current brings plump specimens into Tokyo Bay and the Seto Inland Sea—a time when cooks trust the ingredient enough to leave it unmasked.",
-    "season": "Early summer through midsummer, when conger eel fattens in coastal waters",
-    "source": "anago no shiroyaki"
-  },
-  "hiyashi-jiru": {
-    "name_en": "Chilled miso soup",
-    "name_jp": "冷や汁",
-    "name_romaji": "hiyashi-jiru",
-    "note": "Chilled miso broth pounded with roasted sesame and grilled fish, thinned with ice water and ladled over cold rice, finished with torn shiso, sliced cucumber, and crumbled tofu. This Miyazaki farmhouse dish revives field workers when the cicadas drone loudest and appetite falters—the cold broth slides down easily when nothing warm will do.",
-    "season": "High summer, when the heat sits heaviest on the land",
-    "source": "hiyashi-jiru"
-  },
-  "my-ga-no-amazuzuke": {
-    "name_en": "Sweet-vinegar pickled myōga",
-    "name_jp": "茗荷の甘酢漬け",
-    "name_romaji": "myōga no amazuzuke",
-    "note": "Whole myōga buds are briefly blanched, then steeped in a sweetened rice vinegar until they blush a deeper rose. The pickle appears alongside grilled fish or tucked into bento when the humidity peaks and the appetite craves something bright to cut through the heaviness of August.",
-    "season": "High summer through early autumn, when myōga buds emerge plump and pink",
-    "source": "myōga no amazuzuke"
-  },
-  "ume-shigoto-plum-preparations": {
-    "name_en": "Plum preparations",
-    "name_jp": "梅仕事",
-    "name_romaji": "ume-shigoto",
-    "note": "A collective term for the annual rituals of preserving unripe ume — salt-pickling them into umeboshi, steeping them in rock sugar and shochu for umeshu, or layering them with honey for syrup. The work must begin when the plums are still hard and green with their stone barely formed, a task measured in days rather than weeks before the fruit softens and the season escapes.",
-    "season": "Early summer, during the brief window when green plums ripen on the branch",
-    "source": "ume-shigoto (plum preparations)"
-  },
-  "ayu-no-urusuka": {
-    "name_en": "Sweetfish in vinegar-salted fermentation",
-    "name_jp": "鮎の熟れ鮓",
-    "name_romaji": "ayu no urezushi",
-    "note": "Whole ayu are layered with salt and rice, then pressed under weight for weeks or months until they develop the sharp, complex tang of controlled fermentation—a precursor to modern sushi. The dish captures the fleeting prime of river sweetfish in August and September, preserving their clean, melon-rind fragrance just as the water begins to cool and the fish turn downstream.",
-    "season": "Late summer into autumn, when sweetfish reach full flavor before the spawning run",
-    "source": "ayu no urusuka"
-  },
-  "hamo-no-otoshi": {
-    "name_en": "Blanched pike eel",
-    "name_jp": "鱧の落とし",
-    "name_romaji": "hamo no otoshi",
-    "note": "Pike eel fillets, scored with hundreds of knife cuts to sever the fine bones, are briefly poached and served chilled with tart umeboshi paste or vinegared miso. The dish belongs to Kyoto's sweltering July, when hamo — one of few fish that survive the journey inland without ice — arrives at its fattest just as the city prepares for the Gion Matsuri.",
-    "season": "High summer, from the Gion Festival through the peak of the heat",
-    "source": "hamo no otoshi"
-  },
-  "nasu-dengaku": {
-    "name_en": "Grilled eggplant with sweet miso glaze",
-    "name_jp": "茄子田楽",
-    "name_romaji": "nasu dengaku",
-    "note": "Halved eggplant is scored, grilled until the flesh turns silken, then lacquered with a burnished coat of sweet miso that blisters under the flame. The dish arrives when summer heat demands food that is soft and yielding, the caramelized miso offering a richness that stands up to the season's most assertive vegetable.",
-    "season": "High summer, when eggplants swell heavy on the vine",
-    "source": "nasu dengaku"
+  "tsurumurasaki-no-goma-ae": {
+    "name_en": "Malabar spinach with sesame dressing",
+    "name_jp": "つるむらさきの胡麻和え",
+    "name_romaji": "tsurumurasaki no goma-ae",
+    "note": "Thick, mucilaginous leaves of malabar spinach are blanched briefly and dressed in a paste of ground sesame, soy, and a touch of sugar. The plant thrives in the very humidity that wilts other greens, offering its cooling, slightly viscous texture precisely when the body craves relief from the oppressive August air.",
+    "season": "High summer, when the humid heat reaches its peak",
+    "source": "Tsurumurasaki no goma-ae"
   },
   "ume-no-kanroni": {
     "name_en": "Simmered plums in sweet syrup",
@@ -295,21 +635,13 @@
     "season": "Late spring to early summer, when green plums reach fullness",
     "source": "ume no kanroni"
   },
-  "anago-no-yanagawa": {
-    "name_en": "Conger eel simmered in soy broth with egg and burdock",
-    "name_jp": "穴子の柳川",
-    "name_romaji": "anago no yanagawa",
-    "note": "Sliced anago and slivered burdock root are simmered in a sweet soy broth, then bound with beaten egg in a shallow earthenware pot. The dish arrives as Tokyo's rainy season begins, when the soft-boned eel — pulled from Edo-mae waters — reaches its peak richness, and the peppery bite of fresh gobō cuts through the humid air.",
-    "season": "Early summer, when conger eel fattens in warming coastal waters",
-    "source": "anago no yanagawa"
-  },
-  "ayu-no-nanbanzuke": {
-    "name_en": "Sweetfish escabeche",
-    "name_jp": "鮎の南蛮漬け",
-    "name_romaji": "ayu no nanbanzuke",
-    "note": "Small river sweetfish are fried whole until the bones turn crisp, then steeped in a sharp vinegar marinade with julienned onion and dried chili. The dish arrives as the June rains swell mountain streams and ayu begin their ascent — the vinegar's brightness a counter to humid days, the whole fish eaten head to tail in celebration of the season's first catch.",
-    "season": "Early summer, when the first ayu run upstream",
-    "source": "ayu no nanbanzuke"
+  "ume-shigoto-plum-preparations": {
+    "name_en": "Plum preparations",
+    "name_jp": "梅仕事",
+    "name_romaji": "ume-shigoto",
+    "note": "A collective term for the annual rituals of preserving unripe ume — salt-pickling them into umeboshi, steeping them in rock sugar and shochu for umeshu, or layering them with honey for syrup. The work must begin when the plums are still hard and green with their stone barely formed, a task measured in days rather than weeks before the fruit softens and the season escapes.",
+    "season": "Early summer, during the brief window when green plums ripen on the branch",
+    "source": "ume-shigoto (plum preparations)"
   },
   "ume-shu-shikomi": {
     "name_en": "Plum wine preparation",
@@ -327,190 +659,6 @@
     "season": "Early summer, when green ume ripen to blush on the branch",
     "source": "umeboshi-zuke (梅干し漬け)"
   },
-  "ayu-no-kanroni": {
-    "name_en": "Sweet-simmered ayu",
-    "name_jp": "鮎の甘露煮",
-    "name_romaji": "ayu no kanroni",
-    "note": "Whole ayu are simmered slowly in a mixture of soy sauce, mirin, and sugar until the flesh turns mahogany and the bones soften enough to eat. The dish appears when summer's fleeting ayu season nears its end, transforming the delicate sweetfish into a preserve that holds the memory of clear mountain rivers through the cooling months.",
-    "season": "Late summer through autumn, when river ayu reach full maturity",
-    "source": "ayu no kanroni"
-  },
-  "edamame-no-shio-yude": {
-    "name_en": "Salt-boiled edamame",
-    "name_jp": "枝豆の塩茹で",
-    "name_romaji": "edamame no shio-yude",
-    "note": "Young soybeans are boiled briefly in well-salted water, then drained and served in the pod, still warm or at room temperature. The dish arrives with the first humid evenings of summer, when cold beer appears on tables and the pods — picked that morning, ideally — hold the concentrated sweetness that fades within hours of harvest.",
-    "season": "Early summer through mid-August, when pods are plump but still bright green",
-    "source": "edamame no shio-yude"
-  },
-  "hamo-no-suimono": {
-    "name_en": "Pike eel clear soup",
-    "name_jp": "鱧の吸い物",
-    "name_romaji": "hamo no suimono",
-    "note": "Delicate slices of pike eel, their countless fine bones cut through with hundreds of precise knife strokes, float in a crystalline dashi broth with perhaps a single sprig of junsai or a whisper of yuzu. The dish belongs to Kyoto's sweltering midsummer, when hamo—one of the few fish that survived the journey inland before refrigeration—became the essential protein of the ancient capital's festival season.",
-    "season": "High summer, especially during the Gion Festival in July",
-    "source": "hamo no suimono"
-  },
-  "shiso-maki": {
-    "name_en": "Shiso leaf rolls",
-    "name_jp": "紫蘇巻き",
-    "name_romaji": "shiso maki",
-    "note": "Fresh shiso leaves wrapped around a core of seasoned miso, sometimes with walnut or sesame, then pan-fried until the edges crisp and the filling turns glossy. The dish belongs to the humid weeks of early summer when shiso pushes up thick and aromatic in kitchen gardens, its sharp green scent cutting through the heaviness before the rains fully arrive.",
-    "season": "Early to mid-summer, when shiso leaves are most fragrant",
-    "source": "shiso maki"
-  },
-  "hange-mochi": {
-    "name_en": "Half-summer mochi",
-    "name_jp": "半夏餅",
-    "name_romaji": "hange mochi",
-    "note": "Glutinous rice dumplings wrapped in wheat dough, sometimes filled with sweet azuki or savory miso, marking the brief window when both grains are freshly harvested. The name comes from hangesho, the seventy-two seasons microseason when crow-dipper blooms in wet paddies — farmers pause their planting to eat these humble cakes before the summer heat truly settles in.",
-    "season": "Early July, around the eleventh day after summer solstice",
-    "source": "hange-mochi"
-  },
-  "my-ga-no-misoshiru": {
-    "name_en": "Myōga miso soup",
-    "name_jp": "茗荷の味噌汁",
-    "name_romaji": "myōga no misoshiru",
-    "note": "A clear miso broth finished with thinly sliced myōga ginger, its pale pink crescents added at the last moment to preserve their sharp, piney bite. The aromatic bud appears briefly between July and September, pushing up through damp soil near bamboo groves — a fleeting coolness in the bowl before autumn arrives.",
-    "season": "Late summer, when myōga emerges from shaded ground",
-    "source": "myōga no misoshiru"
-  },
-  "nasu-no-nibitashi": {
-    "name_en": "Simmered eggplant in seasoned broth",
-    "name_jp": "茄子の煮浸し",
-    "name_romaji": "nasu no nibitashi",
-    "note": "Small eggplants are scored and fried briefly, then steeped in cold dashi enriched with soy and mirin until the flesh turns silken and deeply savory. Served chilled with a thread of grated ginger, the dish answers the humid weight of late July, when even the act of cooking should leave the kitchen cool.",
-    "season": "High summer, when eggplants grow heavy on the vine",
-    "source": "nasu no nibitashi"
-  },
-  "tako-no-yawarakai-ni": {
-    "name_en": "Tender-simmered octopus",
-    "name_jp": "蛸の柔らか煮",
-    "name_romaji": "tako no yawarakai-ni",
-    "note": "Octopus braised low and slow in soy, sake, and mirin until the flesh yields to chopsticks without resistance. The dish marks the height of tako season around the summer solstice, when fishermen in Akashi haul in their prized catch and cooks transform the firm muscle into something approaching tenderness itself.",
-    "season": "Mid-summer, when octopus fishing peaks along the Inland Sea",
-    "source": "tako no yawarakai-ni"
-  },
-  "hiyashi-ch-ka": {
-    "name_en": "Chilled Chinese-style noodles",
-    "name_jp": "冷やし中華",
-    "name_romaji": "hiyashi chūka",
-    "note": "Cold ramen-style wheat noodles fanned out on a plate, topped with ribbons of thin omelet, ham, cucumber, and tomato, then doused in a soy-vinegar or sesame dressing. The dish appears on menus the moment restaurants hang out their hand-lettered 冷やし中華はじめました signs — an unofficial announcement that true summer has arrived.",
-    "season": "Early summer through late August, when humidity settles over the archipelago",
-    "source": "Hiyashi chūka"
-  },
-  "ky-ri-no-ichiyazuke": {
-    "name_en": "Overnight pickled cucumber",
-    "name_jp": "胡瓜の一夜漬け",
-    "name_romaji": "kyūri no ichiyazuke",
-    "note": "Crisp cucumber spears pressed overnight with salt, sometimes with a whisper of kelp or dried chili, until they yield just enough brine to glisten. The dish belongs to the humid nights of summer — a cool, snapping bite that cuts through the heaviness of the season when even the evenings refuse to cool.",
-    "season": "Early summer through late summer, when cucumbers hang heavy on the vine",
-    "source": "Kyūri no ichiyazuke"
-  },
-  "okra-no-ohitashi": {
-    "name_en": "Chilled okra in seasoned broth",
-    "name_jp": "オクラのおひたし",
-    "name_romaji": "okra no ohitashi",
-    "note": "Whole okra pods are blanched briefly to preserve their snap, then steeped in dashi-based broth and served cold, their cut surfaces revealing the pale seeds within their star-shaped chambers. The dish arrives when summer heat peaks and appetites falter — the cool, mucilaginous texture and clean broth offering a gentle path back to eating.",
-    "season": "High summer, when okra pods are tender and prolific",
-    "source": "Okra no ohitashi"
-  },
-  "suika-no-shiokake": {
-    "name_en": "Salt-sprinkled watermelon",
-    "name_jp": "西瓜の塩かけ",
-    "name_romaji": "suika no shiokake",
-    "note": "Chilled wedges of ripe watermelon are served with a light dusting of coarse salt, the mineral edge amplifying the fruit's natural sugars. This simple preparation belongs to the dog days of late July and August, when field-ripened suika from places like Kumamoto arrive at their most crimson and the salt replenishes what the body loses to summer heat.",
-    "season": "High summer, when watermelons reach their peak sweetness",
-    "source": "Suika no shiokake"
-  },
-  "g-ya-champur": {
-    "name_en": "Bitter melon stir-fry",
-    "name_jp": "ゴーヤーチャンプルー",
-    "name_romaji": "gōya champurū",
-    "note": "A sizzling Okinawan stir-fry that tumbles sliced bitter melon with crumbled island tofu, egg ribbons, and thin pork belly in a hot wok, the bitterness tempered by the richness around it. The dish belongs to the brutal heat of July and August, when gōya grows fastest and its sharp vegetal bite is believed to cool the blood and restore appetite lost to humidity.",
-    "season": "High summer, when the vines hang heavy with knobbled green fruit",
-    "source": "gōya champurū"
-  },
-  "hasu-no-kinpira": {
-    "name_en": "Sautéed lotus root in sweet soy",
-    "name_jp": "蓮のきんぴら",
-    "name_romaji": "hasu no kinpira",
-    "note": "Thin half-moons of lotus root are sautéed briskly with sesame oil, then glazed in soy, mirin, and a whisper of chili until the edges caramelize and each piece snaps cleanly between the teeth. The renkon harvested from muddy pond beds after the first cold nights possesses a starchy sweetness absent in summer, and this kinpira honors the moment when the root's lace-like chambers hold the season's last warmth.",
-    "season": "Autumn through early winter, when lotus roots reach peak sweetness",
-    "source": "hasu no kinpira"
-  },
-  "shirauo-no-kakiage": {
-    "name_en": "Whitebait tempura fritters",
-    "name_jp": "白魚のかき揚げ",
-    "name_romaji": "shirauo no kakiage",
-    "note": "Tiny translucent whitebait are gathered loosely with slivers of mitsuba or scallion, bound in light batter, and fried into lacy, shattering fritters. The fish appear in estuaries just as the final cold retreats—their brief season a fleeting threshold between winter's stillness and spring's first stirring, the fritters' delicacy honoring flesh so tender it would vanish under heavier treatment.",
-    "season": "Late winter to early spring, when ice melts from river mouths",
-    "source": "shirauo no kakiage"
-  },
-  "t-gan-no-soboroni": {
-    "name_en": "Winter melon simmered in minced chicken sauce",
-    "name_jp": "冬瓜のそぼろ煮",
-    "name_romaji": "tōgan no soboroni",
-    "note": "Jade-green wedges of winter melon are simmered until barely yielding, then cloaked in a light dashi broth thickened with crumbled chicken and a whisper of ginger. Despite its name suggesting winter, tōgan ripens under the July sun — its cool, almost gelatinous flesh offering relief precisely when the body craves something gentle against the humid heat.",
-    "season": "High summer, when tōgan flesh is at its most translucent",
-    "source": "tōgan no soboroni"
-  },
-  "hamo-no-shabu-shabu": {
-    "name_en": "Pike conger hot pot",
-    "name_jp": "鱧のしゃぶしゃぶ",
-    "name_romaji": "hamo no shabu-shabu",
-    "note": "Bone-cut pike conger slices are swished briefly through simmering kombu broth until the flesh blooms open like white chrysanthemum petals. The fish reaches peak flavor just as Kyoto swelters through its humid July nights, when hamo becomes essential to festival cuisine — its resilience during transport from the sea made it the only fresh saltwater fish that could survive the journey to the landlocked capital.",
-    "season": "High summer, especially during the Gion Festival in Kyoto",
-    "source": "Hamo no shabu-shabu"
-  },
-  "k-shinai-no-itame": {
-    "name_en": "Stir-fried water spinach",
-    "name_jp": "空芯菜の炒め",
-    "name_romaji": "kūshinai no itame",
-    "note": "Hollow-stemmed water spinach cut into lengths and flash-fried with garlic in smoking-hot oil, the stalks retaining their crunch while the leaves just wilt. The vegetable thrives in the humid heat that settles over Japan after the rainy season lifts, its cooling, slightly mucilaginous texture offering relief when the air itself feels thick enough to drink.",
-    "season": "High summer, from late June through August",
-    "source": "Kūshinai no itame"
-  },
-  "momo-no-shiratama": {
-    "name_en": "Peach shiratama dumplings",
-    "name_jp": "桃の白玉",
-    "name_romaji": "momo no shiratama",
-    "note": "Soft rice-flour dumplings served alongside slices of ripe peach, often in a light syrup or alongside shaved ice. The dish arrives when peaches grown in Okayama and Yamanashi flood the markets in August, their flesh so tender it bruises at a glance — a sweetness meant to be caught before it vanishes.",
-    "season": "Late summer, when white peaches reach their fragrant peak",
-    "source": "Momo no shiratama"
-  },
-  "t-morokoshi-gohan": {
-    "name_en": "Corn rice",
-    "name_jp": "とうもろこしご飯",
-    "name_romaji": "tōmorokoshi gohan",
-    "note": "Fresh corn kernels are shaved from the cob and cooked directly with rice, the bare cobs sometimes added to the pot to deepen the broth with their milky sweetness. In the brief window before summer heat converts sugars to starch, this dish captures the corn at its most tender — a fleeting abundance before the Obon ancestors return and the fields begin their slow turn toward autumn.",
-    "season": "High summer, when corn silk turns bronze and kernels swell with sugar",
-    "source": "Tōmorokoshi gohan"
-  },
-  "goya-no-shiraae": {
-    "name_en": "Bitter melon with tofu dressing",
-    "name_jp": "ゴーヤの白和え",
-    "name_romaji": "goya no shiraae",
-    "note": "Sliced bitter melon is blanched briefly to temper its bite, then dressed in a silken paste of mashed tofu seasoned with white sesame, mirin, and a whisper of sugar. The dish arrives when goya vines heavy with warted green fruit climb Okinawan trellises and mainland gardens alike — its cooling bitterness a folk remedy against summer fatigue, the pale tofu a balm against the glare of August.",
-    "season": "High summer, when the heat is most oppressive",
-    "source": "goya no shiraae"
-  },
-  "hiyashi-s-men": {
-    "name_en": "Chilled sōmen noodles",
-    "name_jp": "冷やし素麺",
-    "name_romaji": "hiyashi sōmen",
-    "note": "Wheat noodles thin as silk thread, boiled briefly and plunged into ice water, served in a glass bowl with cold tsuyu dipping sauce and wisps of shiso, ginger, and scallion. The dish belongs to the dog days of July and August, when appetite falters in the wet heat and the eye craves the sight of something pale and cold sliding through clear water.",
-    "season": "High summer, when the cicadas drone loudest",
-    "source": "hiyashi sōmen"
-  },
-  "tako-to-ky-ri-no-sunomono": {
-    "name_en": "Octopus and cucumber in sweet vinegar",
-    "name_jp": "蛸と胡瓜の酢の物",
-    "name_romaji": "tako to kyūri no sunomono",
-    "note": "Thin-sliced boiled octopus and salted cucumber dressed in a light sanbaizu — rice vinegar softened with sugar and a breath of soy. The dish arrives when humidity settles over Japan and the body craves something cool and acidic; the cucumber's snap and the octopus's faint brininess recall the season's first swim in still-cold water.",
-    "season": "Early summer, when cucumbers are crisp and madako octopus is tender",
-    "source": "tako to kyūri no sunomono"
-  },
   "unagi-no-kabayaki": {
     "name_en": "Grilled eel glazed with sweet soy",
     "name_jp": "鰻の蒲焼",
@@ -519,130 +667,6 @@
     "season": "Midsummer, especially the Day of the Ox in late July",
     "source": "unagi no kabayaki"
   },
-  "doj-nabe": {
-    "name_en": "Loach hot pot",
-    "name_jp": "泥鰌鍋",
-    "name_romaji": "dojō-nabe",
-    "note": "Small freshwater loach are simmered whole in a shallow iron pot with burdock shavings, sweetened soy broth, and a scattering of chopped negi. The dish belongs to the humid Tokyo summer, when workers at Edo-period markets sought out the rich, restorative fat of these bottom-dwelling fish to fortify themselves against the draining heat.",
-    "season": "Summer, when loach are plump from feeding in warm, muddy waters",
-    "source": "Dojō-nabe"
-  },
-  "hiyashi-nasu": {
-    "name_en": "Chilled eggplant",
-    "name_jp": "冷やし茄子",
-    "name_romaji": "hiyashi-nasu",
-    "note": "Whole Japanese eggplant is grilled or deep-fried until the flesh collapses, then shocked in ice water and served cold with ginger and dashi. The dish arrives at the height of summer's humidity, when the body craves something cool and yielding — the silken flesh releasing its trapped smoky sweetness against the tongue.",
-    "season": "High summer, when eggplant skin turns glossy black in the heat",
-    "source": "Hiyashi-nasu"
-  },
-  "shijimi-no-misoshiru": {
-    "name_en": "Freshwater clam miso soup",
-    "name_jp": "蜆の味噌汁",
-    "name_romaji": "shijimi no misoshiru",
-    "note": "Tiny brackish clams simmered just until they open, their briny liquor mingling with white miso into a broth both murky and clean. The dish appears when the body most craves gentle restoration — after winter's heaviest drinking, the shijimi's liver-soothing properties have made this soup the quiet morning remedy of sake country for generations.",
-    "season": "Late winter through early spring, when rivers run cold and clear",
-    "source": "Shijimi no misoshiru"
-  },
-  "t-gan-to-ebi-no-nimono": {
-    "name_en": "Simmered winter melon with shrimp",
-    "name_jp": "冬瓜と海老の煮物",
-    "name_romaji": "tōgan to ebi no nimono",
-    "note": "Translucent wedges of winter melon are simmered in light dashi until they turn almost glassy, finished with pink shrimp that cook in moments from the residual heat. Despite its name suggesting winter storage, tōgan is harvested in the humid weeks of late July and August — its cool, watery flesh and pale jade color offer visual and physical respite from the season's oppressive heat.",
-    "season": "High summer, when winter melon reaches its peak sweetness",
-    "source": "Tōgan to ebi no nimono"
-  },
-  "hiyashi-udon": {
-    "name_en": "Chilled udon noodles",
-    "name_jp": "冷やしうどん",
-    "name_romaji": "hiyashi udon",
-    "note": "Thick wheat noodles are boiled, shocked in ice water until they tighten, then served cold with a dipping sauce of dashi, soy, and mirin, often with grated ginger and sliced scallions. The dish appears when summer humidity makes hot food feel like a burden—the cold, chewy strands and bright tsuyu offer a small mercy against the August swelter.",
-    "season": "High summer, when the heat settles into everything",
-    "source": "Hiyashi udon"
-  },
-  "moroheiya-no-ohitashi": {
-    "name_en": "Chilled moroheiya greens in dashi",
-    "name_jp": "モロヘイヤのお浸し",
-    "name_romaji": "moroheiya no ohitashi",
-    "note": "The serrated leaves of Egyptian spinach are blanched briefly, then steeped in chilled dashi and soy, releasing their characteristic viscous quality that clings to the tongue. This mucilaginous green thrives in the brutal humidity of late July and August, its slippery texture offering relief when the body craves something cool and easily swallowed.",
-    "season": "High summer, when the leaves are tender and heat demands cooling dishes",
-    "source": "Moroheiya no ohitashi"
-  },
-  "tachiuo-no-shioyaki": {
-    "name_en": "Salt-grilled cutlassfish",
-    "name_jp": "太刀魚の塩焼き",
-    "name_romaji": "tachiuo no shioyaki",
-    "note": "The long, silver-skinned cutlassfish is scored lightly, salted, and grilled until the skin blisters and the flesh turns translucent-white and faintly sweet. Tachiuo fatten as summer heat breaks, their flesh at its most delicate when fishermen work between September storms off the Inland Sea.",
-    "season": "Early autumn, when typhoon winds churn coastal waters",
-    "source": "Tachiuo no shioyaki"
-  },
-  "tomorokoshi-no-kakiage": {
-    "name_en": "Corn fritter tempura",
-    "name_jp": "とうもろこしのかき揚げ",
-    "name_romaji": "tomorokoshi no kakiage",
-    "note": "Fresh corn kernels are bound loosely with a light tempura batter and deep-fried into a lacy, shattered disc — the edges golden and crisp, the center bursting with milky sweetness. This kakiage arrives when summer corn is so tender it can be eaten raw, its sugars not yet converted to starch, each kernel a small reservoir of the season's accumulated heat.",
-    "season": "High summer, when corn reaches peak sweetness in late July through August",
-    "source": "Tomorokoshi no kakiage"
-  },
-  "kabocha-no-nimono": {
-    "name_en": "Simmered kabocha squash",
-    "name_jp": "南瓜の煮物",
-    "name_romaji": "kabocha no nimono",
-    "note": "Wedges of dense-fleshed winter squash braised slowly in dashi sweetened with soy and mirin until the flesh yields to chopsticks while the dark green rind holds its shape. The dish appears on tables at the winter solstice, when eating kabocha is said to ward off colds — its deep orange flesh a small sun stored against the year's longest dark.",
-    "season": "Early autumn through winter, when kabocha reaches its sweetest after the first cold nights",
-    "source": "Kabocha no nimono"
-  },
-  "my-ga-gohan": {
-    "name_en": "Myōga ginger rice",
-    "name_jp": "茗荷ご飯",
-    "name_romaji": "myōga gohan",
-    "note": "Thinly sliced myōga buds are folded into freshly steamed rice, sometimes with a whisper of salt or a few drops of light soy, letting the ginger's sharp, almost camphorous perfume cut through the grain's sweetness. The pale pink crescents appear in shaded garden corners just as the humid heat becomes oppressive — their crisp bite and cooling astringency offer a reprieve when appetite falters.",
-    "season": "High summer, when myōga shoots push through damp shade",
-    "source": "Myōga gohan"
-  },
-  "nasu-no-agebitashi": {
-    "name_en": "Deep-fried eggplant in seasoned broth",
-    "name_jp": "茄子の揚げ浸し",
-    "name_romaji": "nasu no agebitashi",
-    "note": "Eggplant is fried until its flesh turns silken, then steeped in a cold dashi broth seasoned with soy and mirin, often finished with grated ginger. The dish arrives chilled on the hottest days of July and August, when the body craves something cooling yet substantial, and glossy purple nasu are so abundant they spill from every market stall.",
-    "season": "High summer, when eggplants hang heavy on the vine",
-    "source": "Nasu no agebitashi"
-  },
-  "sudachi-soba": {
-    "appearance": null,
-    "etymology": null,
-    "name_en": "Chilled buckwheat noodles with sudachi citrus",
-    "name_jp": "すだち蕎麦",
-    "name_romaji": "sudachi soba",
-    "note": "Cold soba noodles served in a shallow pool of chilled dashi, covered with paper-thin rounds of whole sudachi — rind, pith, and flesh together. The citrus appears just as summer's heat begins its slow retreat, its sharp, green fragrance cutting through the last humid days before the air turns clear.",
-    "origin": null,
-    "season": "Late summer to early autumn, when sudachi ripen in Tokushima",
-    "serving": null,
-    "source": "Sudachi soba"
-  },
-  "edamame-no-nibitashi": {
-    "name_en": "Simmered edamame in seasoned broth",
-    "name_jp": "枝豆の煮浸し",
-    "name_romaji": "edamame no nibitashi",
-    "note": "Shelled edamame are gently simmered in a light dashi broth with soy and mirin, then left to cool and absorb the seasoning — a technique that coaxes out their grassy sweetness. The dish appears when the beans are harvested still attached to their branches, their brief season coinciding with the humid weeks before the summer solstice.",
-    "season": "Early summer, when young soybeans swell in their pods",
-    "source": "Edamame no nibitashi"
-  },
-  "hamo-no-kabayaki": {
-    "name_en": "Grilled pike eel in sweet soy glaze",
-    "name_jp": "鱧の蒲焼",
-    "name_romaji": "hamo no kabayaki",
-    "note": "Pike eel fillets are scored with hundreds of fine knife cuts to sever the hair-thin bones, then brushed with tare and grilled until the glaze caramelizes and the flesh turns silken. Hamo reaches its peak fat content as Kyoto swelters in July heat, and the fish has sustained the landlocked capital since medieval times when it alone could survive the journey from the coast.",
-    "season": "High summer, from the Gion Festival through Obon",
-    "source": "Hamo no kabayaki"
-  },
-  "my-ga-to-ky-ri-no-sunomono": {
-    "name_en": "Myōga and cucumber in sweet vinegar",
-    "name_jp": "茗荷と胡瓜の酢の物",
-    "name_romaji": "myōga to kyūri no sunomono",
-    "note": "Thinly sliced myōga ginger buds and cucumber are briefly salted, then dressed in a light mixture of rice vinegar and sugar, served cold. The dish appears when summer heat makes appetite falter — myōga's clean, resinous bite cuts through humidity the way a sudden breeze parts still air.",
-    "season": "High summer, when myōga shoots push through shade-damp soil",
-    "source": "Myōga to kyūri no sunomono"
-  },
   "utsubo-gusa-cha": {
     "name_en": "Self-heal flower tea",
     "name_jp": "靫草茶",
@@ -650,5 +674,13 @@
     "note": "A medicinal infusion made by steeping the dried flower spikes of utsubogusa (Prunella vulgaris) in hot water, yielding a faintly bitter, amber-colored drink. The plant's Japanese name means 'quiver grass' for its resemblance to an archer's arrow case, and it is traditionally gathered just as the summer solstice heat causes the purple blossoms to wither and brown — a moment the old calendars called kashō, 'self-heal withers.'",
     "season": "Late June through early July, when the flower spikes begin to dry on the stem",
     "source": "Utsubo-gusa cha"
+  },
+  "wakatake-ni": {
+    "name_en": "Simmered bamboo shoots with wakame",
+    "name_jp": "若竹煮",
+    "name_romaji": "wakatake-ni",
+    "note": "Fresh bamboo shoots are simmered in dashi with tender wakame seaweed, the two ingredients melding into a delicate broth seasoned simply with soy and mirin. The dish celebrates a brief window when young takenoko are dug at dawn and new-growth wakame arrives from cold spring waters — two fleeting harvests meeting in the same bowl.",
+    "season": "Late March through April, when bamboo shoots break ground",
+    "source": "wakatake-ni"
   }
 }
