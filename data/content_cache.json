@@ -2309,5 +2309,106 @@
       "closing": "霧は午前のうちに晴れるが、その名残は光の柔らかさに宿り、紅葉がすでに知っていることを、私たちにもそっと教えている。"
     },
     "_sent_on": "2026-08-17"
+  },
+  "46": {
+    "en": {
+      "summary": "Cotton bolls split open to reveal white tufts, a small miracle of late summer when the heat begins its slow retreat.",
+      "opening": "The morning air carries a different weight now — still warm, but with an undercurrent that whispers of change. Cotton fields across western Japan unfurl their bolls, each capsule cracking open to release clouds of white fiber that catch the slanting August light. In the garden, the tireless drone of cicadas has thinned, replaced by moments of startling quiet.",
+      "nature_notes": "Dragonflies patrol the edges of rice paddies in greater numbers, their wings flashing copper and blue. The first susuki (pampas grass) plumes begin to emerge, still pale green but promising silver. Evening brings the tentative chirping of bell crickets testing their voices, while swallows gather on power lines, rehearsing the geometry of migration.",
+      "seasonal_produce": {
+        "fruits": [
+          "Kyoho grape",
+          "Pione grape",
+          "White peach (hakutō)",
+          "Japanese pear (nashi)"
+        ],
+        "vegetables": [
+          "Kabocha squash",
+          "Myōga (myoga ginger)",
+          "Edamame",
+          "Shishito pepper"
+        ],
+        "fish": [
+          "Sanma (Pacific saury)",
+          "Kohada (gizzard shad)",
+          "Shiira (mahi-mahi)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Kabocha no soboro-an",
+          "description": "Tender kabocha squash simmered until soft and cloaked in a savory chicken mince sauce, perfect for the transitional appetite between summer's light fare and autumn's heartier cravings."
+        },
+        {
+          "name": "Nashi no mizore-ae",
+          "description": "Grated Japanese pear dressed with daikon oroshi, its cool sweetness and gentle texture offering refreshment as the season turns."
+        },
+        {
+          "name": "Sanma no tsumire-jiru",
+          "description": "Pacific saury formed into delicate fish balls and floated in a light dashi broth with ginger — the first taste of autumn's arrival in a bowl."
+        },
+        {
+          "name": "Budō no shira-ae",
+          "description": "Kyoho grapes folded into silken tofu dressed with sesame, a dish that bridges summer fruit with the subtle richness autumn begins to ask of us."
+        }
+      ],
+      "cultural_note": "In the old cotton-growing regions of Nara and Osaka, this micro-season once marked the beginning of harvest preparations, with farmers watching for the precise moment when morning dew would not dampen the opening fibers. Cotton cultivation, introduced to Japan centuries ago, shaped entire village economies and textile traditions. Even now, small ceremonial cotton fields are maintained at certain shrines, where the opening of the first bolls is noted as a marker of seasonal passage.",
+      "haiku": {
+        "japanese": "綿吹いて風の行方を知る朝",
+        "romaji": "wata fuite / kaze no yukue wo / shiru asa",
+        "english": "Cotton tufts fly — / this morning I learn / where the wind goes"
+      },
+      "closing": "The white tufts drift across the footpath, small emissaries of a summer preparing to fold itself away."
+    },
+    "ja": {
+      "summary": "綿の実が弾け、白い綿毛が夏の終わりを告げる頃、暑さもようやく和らぎ始める。",
+      "opening": "朝の空気に、どこか秋の気配が混じり始めた。綿畑では蒴果がひとつ、またひとつと開き、白い繊維が朝日を受けて淡く輝く。蝉の声は日ごとにまばらになり、ふと訪れる静寂に、季節の変わり目を感じる。",
+      "nature_notes": "赤蜻蛉が田の畦を低く飛び交い、薄の穂がまだ青いまま空へ伸び始める。夕暮れになると鈴虫が控えめに鳴き始め、燕たちは電線に並んで南への旅支度を整えている。空の色も心なしか澄み、入道雲の勢いが穏やかになった。",
+      "seasonal_produce": {
+        "fruits": [
+          "巨峰",
+          "ピオーネ",
+          "白桃",
+          "梨"
+        ],
+        "vegetables": [
+          "南瓜",
+          "茗荷",
+          "枝豆",
+          "獅子唐"
+        ],
+        "fish": [
+          "秋刀魚",
+          "小鰭",
+          "鱪（しいら）"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "南瓜のそぼろ餡",
+          "description": "柔らかく炊いた南瓜に鶏そぼろの餡をかけた一品、夏の軽やかさから秋の滋味へと移ろう食卓にふさわしい。"
+        },
+        {
+          "name": "梨のみぞれ和え",
+          "description": "すりおろした梨を大根おろしと合わせ、残暑に涼を呼ぶさっぱりとした和え物。"
+        },
+        {
+          "name": "秋刀魚のつみれ汁",
+          "description": "新物の秋刀魚をつみれにして生姜を効かせた澄まし汁に仕立てる、秋の走りを告げる椀物。"
+        },
+        {
+          "name": "葡萄の白和え",
+          "description": "巨峰を絹ごし豆腐と胡麻で和えた、夏の果実に秋のまろやかさを重ねた一皿。"
+        }
+      ],
+      "cultural_note": "かつて綿作が盛んだった大和や河内の地では、この候が収穫の始まりを告げる大切な節目であった。朝露が乾く前に摘めば繊維が湿るため、農家は空模様と相談しながら一日の作業を決めたという。今も奈良の一部の神社では、古式ゆかしい綿畑が守られ、最初の蒴果が開くと神前に報告する習わしが残る。",
+      "haiku": {
+        "japanese": "綿吹いて風の行方を知る朝",
+        "romaji": "wata fuite / kaze no yukue wo / shiru asa",
+        "english": "Cotton tufts fly — / this morning I learn / where the wind goes"
+      },
+      "closing": "畦道に舞い落ちた白い綿毛が、夏のしまい支度をそっと知らせている。"
+    },
+    "_sent_on": "2026-08-23"
   }
 }

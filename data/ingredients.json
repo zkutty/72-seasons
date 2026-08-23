@@ -469,6 +469,15 @@
     "peak": "Early summer through mid-summer, when cicadas first test their voices",
     "source": "プラム (Japanese plum)"
   },
+  "kabocha-squash": {
+    "category": "vegetable",
+    "name_en": "Kabocha squash",
+    "name_jp": "南瓜",
+    "name_romaji": "kabocha",
+    "note": "A dense-fleshed winter squash with deep green rind and flesh the color of persimmon, prized for its chestnut-like sweetness that intensifies in storage. Eaten on the winter solstice to ward off colds, its golden flesh brings the memory of autumn sun to the darkest tables of the year.",
+    "peak": "Late autumn through winter solstice, when the flesh sweetens after the first frost",
+    "source": "Kabocha squash"
+  },
   "kabocha-winter-squash": {
     "category": "vegetable",
     "name_en": "Kabocha",
@@ -514,6 +523,15 @@
     "peak": "Early summer, when coastal waters warm and fishing boats return with the first light",
     "source": "Kisu (whiting)"
   },
+  "kohada-gizzard-shad": {
+    "category": "fish",
+    "name_en": "Gizzard shad",
+    "name_jp": "小鰭",
+    "name_romaji": "kohada",
+    "note": "A slender silver fish whose skin shimmers with an iridescent blue-green sheen, kohada is prized for its delicate balance of rich oils and clean brine — the vinegar cure of edomae sushi tradition draws out its brightness without masking the sea. As winter deepens, the fish grows from shinko to kohada to konoshiro, each stage a fleeting window the sushi shokunin watches for with the patience of reading tides.",
+    "peak": "Late autumn through winter, when cold waters tighten the flesh",
+    "source": "Kohada (gizzard shad)"
+  },
   "kuruma-ebi-japanese-tiger-prawn": {
     "category": "fish",
     "name_en": "Japanese tiger prawn",
@@ -531,6 +549,15 @@
     "note": "Japanese cucumbers arrive slender and thin-skinned, their flesh dense with a grassy sweetness that shatters cleanly between the teeth — nothing like their waterlogged Western cousins. Salted and pressed into asazuke, or simply split and dipped in miso, they offer the kitchen its first true relief from summer's gathering heat.",
     "peak": "Early summer through the humid height of tsuyu, when morning harvests carry the cool of night",
     "source": "kyūri (cucumber)"
+  },
+  "kyoho-grape": {
+    "category": "fruit",
+    "name_en": "Kyoho grape",
+    "name_jp": "巨峰",
+    "name_romaji": "kyohō",
+    "note": "These dark purple grapes slip from their skins with a gentle squeeze, revealing translucent flesh so sweet and musky it perfumes the fingers. Their arrival signals the threshold between summer's end and autumn's gathering, when fruit bowls shift from bright citrus to the deeper, wine-dark tones of the cooling season.",
+    "peak": "Late summer through early autumn, when cicada songs begin to fade",
+    "source": "Kyoho grape"
   },
   "late-strawberries": {
     "category": "fruit",
@@ -969,6 +996,15 @@
     "note": "A sleek predator with firm, translucent flesh that carries a clean sweetness, prized now for arai — ice-chilled sashimi slices that tighten into a texture both yielding and crisp. The fish grows through summer alongside the intensifying heat, its name changing as it matures, marking time like the cicadas that sing when it reaches peak flavor.",
     "peak": "High summer, when the fish chase baitfish into river mouths",
     "source": "スズキ (sea bass)"
+  },
+  "shiira-mahi-mahi": {
+    "category": "fish",
+    "name_en": "Mahi-mahi",
+    "name_jp": "鱪",
+    "name_romaji": "shiira",
+    "note": "A muscular, iridescent fish whose firm white flesh takes well to the grill, yielding a clean sweetness with none of the heaviness of fattier catches. In fishing towns along the Sea of Japan, its arrival signals the waning of summer heat, and it appears in home kitchens simply salt-grilled or simmered in soy and ginger before the autumn festivals begin.",
+    "peak": "Late summer into early autumn, when the fish follow warm currents close to shore",
+    "source": "Shiira (mahi-mahi)"
   },
   "shijimi-freshwater-clams": {
     "category": "fish",

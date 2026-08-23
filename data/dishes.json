@@ -79,6 +79,14 @@
     "season": "Late spring to early summer, when loquats ripen in quick succession",
     "source": "Biwa no shiroppu-ni"
   },
+  "bud-no-shira-ae": {
+    "name_en": "Grapes with white tofu dressing",
+    "name_jp": "葡萄の白和え",
+    "name_romaji": "budō no shira-ae",
+    "note": "Kyoho or Delaware grapes are peeled and folded into a dressing of silken tofu mashed with white sesame, a whisper of sugar, and a touch of light soy. The dish arrives as the September heat finally breaks, the grapes' cool sweetness and the tofu's mild richness offering a moment of quiet transition before the deeper chill sets in.",
+    "season": "Early autumn, when grapes hang heavy on the vine",
+    "source": "Budō no shira-ae"
+  },
   "bud-no-shiratama": {
     "name_en": "Grape shiratama dumplings",
     "name_jp": "葡萄の白玉",
@@ -255,6 +263,14 @@
     "season": "Early autumn through winter, when kabocha reaches its sweetest after the first cold nights",
     "source": "Kabocha no nimono"
   },
+  "kabocha-no-soboro-an": {
+    "name_en": "Simmered kabocha with minced chicken sauce",
+    "name_jp": "南瓜のそぼろ餡",
+    "name_romaji": "kabocha no soboro-an",
+    "note": "Wedges of kabocha are simmered in dashi until tender, then blanketed in a glossy sauce thickened with minced chicken and a whisper of ginger. The dish arrives as the equinox passes and nights lengthen — a moment when cooks turn to foods that warm from within, and the squash, having sat in storage just long enough, reaches its fullest sweetness.",
+    "season": "Early autumn, when winter squash sweetens after the first cool nights",
+    "source": "Kabocha no soboro-an"
+  },
   "katsuo-no-tataki": {
     "name_en": "Seared bonito, lightly tataki-style",
     "name_jp": "鰹のたたき",
@@ -351,6 +367,14 @@
     "season": "High summer, when myōga shoots push through shade-damp soil",
     "source": "Myōga to kyūri no sunomono"
   },
+  "nashi-no-mizore-ae": {
+    "name_en": "Pear dressed in grated daikon",
+    "name_jp": "梨のみぞれ和え",
+    "name_romaji": "nashi no mizore-ae",
+    "note": "Crisp wedges of Japanese pear are dressed in finely grated daikon, the white shreds resembling sleet — mizore — with a whisper of rice vinegar and light soy. The dish arrives when nashi hang heavy on the branch and summer's humidity finally breaks, the cool radish tempering the pear's sweetness like the first hint of autumn chill.",
+    "season": "Early autumn, when the first pears ripen and the air turns dry",
+    "source": "Nashi no mizore-ae"
+  },
   "nashi-no-shirazuae": {
     "name_en": "Pear in white tofu dressing",
     "name_jp": "梨の白和え",
@@ -414,6 +438,14 @@
     "note": "Whole saury rubbed with coarse salt and grilled over high flame until the skin blisters and the belly fat drips hissing onto the coals. The fish appears in markets just as the harvest moon rises and sudachi citrus ripens on the branch — the two arrive together, one to cut the richness of the other.",
     "season": "Early autumn, when saury run fat with oils from northern waters",
     "source": "Sanma no shioyaki"
+  },
+  "sanma-no-tsumire-jiru": {
+    "name_en": "Pacific saury fish-ball soup",
+    "name_jp": "秋刀魚のつみれ汁",
+    "name_romaji": "sanma no tsumire-jiru",
+    "note": "Sanma flesh is scraped from the bone, worked with miso and ginger into rough dumplings, then simmered in a clear dashi with root vegetables until the broth turns faintly opalescent. The dish belongs to the weeks when the fish run so plentiful that fishermen's wives use even the smaller catch this way, filling kitchens with a smell that announces the cooling nights have come.",
+    "season": "Early autumn, when Pacific saury arrive fat and silver along the Sanriku coast",
+    "source": "Sanma no tsumire-jiru"
   },
   "sansai-soba": {
     "name_en": "Mountain vegetable buckwheat noodles",
