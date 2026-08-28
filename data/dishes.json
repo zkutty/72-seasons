@@ -231,6 +231,14 @@
     "season": "High summer, when the heat settles into everything",
     "source": "Hiyashi udon"
   },
+  "ichijiku-no-goma-ae": {
+    "name_en": "Figs dressed in sesame",
+    "name_jp": "無花果の胡麻和え",
+    "name_romaji": "ichijiku no goma-ae",
+    "note": "Ripe figs are quartered and folded into a dressing of ground white sesame, a touch of sugar, and soy sauce — the paste clings to the fruit's soft flesh without masking its honey sweetness. The dish appears when figs hang heavy on the branch in the lingering heat of shosho, their skins splitting slightly, signaling the brief window before autumn cool sets in.",
+    "season": "Late summer through early autumn, as the second fig harvest ripens",
+    "source": "Ichijiku no goma-ae"
+  },
   "isaki-no-shioyaki": {
     "name_en": "Salt-grilled chicken grunt",
     "name_jp": "伊佐木の塩焼き",
@@ -270,6 +278,14 @@
     "note": "Wedges of kabocha are simmered in dashi until tender, then blanketed in a glossy sauce thickened with minced chicken and a whisper of ginger. The dish arrives as the equinox passes and nights lengthen — a moment when cooks turn to foods that warm from within, and the squash, having sat in storage just long enough, reaches its fullest sweetness.",
     "season": "Early autumn, when winter squash sweetens after the first cool nights",
     "source": "Kabocha no soboro-an"
+  },
+  "kanpachi-no-sashimi": {
+    "name_en": "Greater amberjack sashimi",
+    "name_jp": "間八の刺身",
+    "name_romaji": "kanpachi no sashimi",
+    "note": "Thick slices of raw kanpachi, cut against the grain to release its clean sweetness, served with nothing more than soy and fresh wasabi. The fish reaches peak condition as summer heat begins to soften into autumn — its flesh firm yet yielding, tasting faintly of the warm currents where it fed.",
+    "season": "Late summer through early autumn, when the fish carries its finest fat",
+    "source": "Kanpachi no sashimi"
   },
   "katsuo-no-tataki": {
     "name_en": "Seared bonito, lightly tataki-style",
@@ -431,6 +447,14 @@
     "season": "Late spring to early summer, when rakkyo bulbs emerge from sandy soil",
     "source": "rakkyo no amazuzuke"
   },
+  "sanma-no-kabayaki": {
+    "name_en": "Grilled pacific saury in sweet soy glaze",
+    "name_jp": "秋刀魚の蒲焼",
+    "name_romaji": "sanma no kabayaki",
+    "note": "The pike-shaped fish is filleted, pan-grilled until the skin crisps, then lacquered with a reduction of soy, mirin, and sugar until it gleams like old lacquerware. Sanma arrive with the first cool winds of September — their name itself contains the character for autumn — and this preparation lets their rich, oily flesh stand up to the sweet-savory char before the fish grow lean in colder waters.",
+    "season": "Early autumn, when sanma run fat along the Sanriku coast",
+    "source": "Sanma no kabayaki"
+  },
   "sanma-no-shioyaki": {
     "name_en": "Salt-grilled Pacific saury",
     "name_jp": "秋刀魚の塩焼き",
@@ -454,6 +478,14 @@
     "note": "Chilled or hot buckwheat noodles served with a tangle of foraged mountain vegetables — bracken fern, ostrich fiddleheads, butterbur stems — blanched and dressed simply. The dish marks the brief window when villagers climb thawing hillsides to gather the first bitter shoots pushing through last autumn's leaves.",
     "season": "Late spring, when snow recedes from mountain slopes",
     "source": "sansai soba"
+  },
+  "satsumaimo-gohan": {
+    "name_en": "Sweet potato rice",
+    "name_jp": "薩摩芋ご飯",
+    "name_romaji": "satsumaimo gohan",
+    "note": "Rice steamed with cubes of Japanese sweet potato, their golden flesh turning creamy and faintly caramelized where it meets the pot. The dish arrives as farmers dig satsumaimo from sandy soil still warm with October sun, the starches having converted to sugars through weeks of curing in earthen storehouses.",
+    "season": "Mid-autumn, when the first frost sweetens the tubers",
+    "source": "Satsumaimo gohan"
   },
   "sawara-no-saikyo-yaki": {
     "name_en": "Saikyo miso-marinated Spanish mackerel",

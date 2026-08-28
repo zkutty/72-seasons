@@ -233,6 +233,15 @@
     "peak": "Late spring through early summer, as the first warm rains give way to longer days",
     "source": "Early cherries"
   },
+  "early-harvest-persimmon-kaki": {
+    "category": "fruit",
+    "name_en": "Persimmon",
+    "name_jp": "柿",
+    "name_romaji": "kaki",
+    "note": "These early-harvest persimmons arrive while still carrying a faint astringency, their flesh firm enough to slice cleanly, revealing that particular orange that seems to hold the last warmth of summer. In the Japanese kitchen, they mark the pivot from summer's watery fruits to autumn's denser sweetness — eaten fresh with a sprinkle of salt, or dried on farmhouse eaves as the days shorten.",
+    "peak": "Early autumn, when the first cool nights deepen the fruit's color",
+    "source": "Early-harvest persimmon (kaki)"
+  },
   "early-peach": {
     "category": "fruit",
     "name_en": "Early peach",
@@ -277,6 +286,15 @@
     "note": "Named 'sky beans' for the way their pods point upward before harvest, soramame offer a fleeting sweetness best captured within three days of picking — grilled in their pods until charred, the beans inside turn creamy with a faint grassy brightness. Their arrival marks the threshold between spring's gentle cool and early summer's humidity, a moment when Japanese cooks race against time to preserve this brief, verdant window.",
     "peak": "Late spring, when pods swell skyward in the warming sun",
     "source": "Fava beans (soramame)"
+  },
+  "fig-ichijiku": {
+    "category": "fruit",
+    "name_en": "Fig",
+    "name_jp": "無花果",
+    "name_romaji": "ichijiku",
+    "note": "The flesh yields to the teeth in a way that feels almost liquid — honey-sweet with a faint graininess from the countless tiny seeds within. Eaten fresh at breakfast or simmered into preserves, the fig marks the season's turn, arriving just as summer's intensity starts to soften.",
+    "peak": "Late summer through early autumn, when the air begins to cool",
+    "source": "Fig (ichijiku)"
   },
   "flounder": {
     "category": "fish",
@@ -331,6 +349,15 @@
     "note": "The jagged leaves release their unmistakable fragrance only when torn or bruised — a sharp, almost mentholated freshness that cuts through the heaviness of raw fish and summer heat. In the old kitchen calendar, shiso marks the season when food spoils quickly; its natural antimicrobial oils made it the cook's quiet ally against decay.",
     "peak": "Early summer through the humid months, when leaves grow lush before flowering",
     "source": "green shiso"
+  },
+  "green-shiso-ba": {
+    "category": "vegetable",
+    "name_en": "Green shiso",
+    "name_jp": "大葉",
+    "name_romaji": "ōba",
+    "note": "These broad, serrated leaves release a bright, almost electric fragrance when torn — part mint, part basil, part something wilder that belongs only to itself. In the sweltering kitchen of high summer, a single leaf laid beneath sashimi or floated in cold sōmen broth cuts through the heat with its clean, camphoraceous edge.",
+    "peak": "Early summer through the humid months, when its oils are most fragrant",
+    "source": "Green shiso (ōba)"
   },
   "green-ume-plums": {
     "category": "fruit",
@@ -859,6 +886,15 @@
     "peak": "High summer, when cicadas reach their deafening chorus",
     "source": "okra"
   },
+  "pacific-saury-sanma": {
+    "category": "fish",
+    "name_en": "Pacific saury",
+    "name_jp": "秋刀魚",
+    "name_romaji": "sanma",
+    "note": "A slender, steel-blue fish whose rich flesh turns sweet and oily in September, best eaten simply salted and grilled until the skin blisters and the fat sizzles onto the coals below. The name itself — 'autumn sword fish' — marks it as the blade that cuts the season open, its smoke drifting through neighborhood streets as surely as the first cool evenings.",
+    "peak": "Early to mid-autumn, when the fish fatten before their southward migration",
+    "source": "Pacific saury (sanma)"
+  },
   "passion-fruit": {
     "category": "fruit",
     "name_en": "Passion fruit",
@@ -970,6 +1006,15 @@
     "peak": "Late spring, when the first tender leaves unfurl before the tree flowers",
     "source": "Sanshō (young pepper leaves)"
   },
+  "sardine-iwashi": {
+    "category": "fish",
+    "name_en": "Sardine",
+    "name_jp": "鰯",
+    "name_romaji": "iwashi",
+    "note": "The flesh turns richly oiled as waters warm, each small silver body firm enough to eat as sashimi yet soft enough to dissolve into tsumire fish cakes. Fishermen's wives once grilled them simply over charcoal at dawn — now that same sweet, mineral taste marks the shift from cherry blossoms to the drowsy heat of rainy season.",
+    "peak": "Late spring through early summer, when schools run thick along Pacific currents",
+    "source": "Sardine (iwashi)"
+  },
   "sawara-spanish-mackerel": {
     "category": "fish",
     "name_en": "Spanish mackerel",
@@ -1014,6 +1059,15 @@
     "note": "These small, dark-shelled clams yield a broth of surprising depth — faintly sweet, touched with iron, the color of weak tea. A bowl of shijimi miso soup after a night of drinking is less remedy than ritual, the liver's quiet ally as humidity settles over the archipelago.",
     "peak": "Late spring through summer, when warm waters draw them toward the shallows",
     "source": "Shijimi (freshwater clams)"
+  },
+  "shimeji-mushroom": {
+    "category": "vegetable",
+    "name_en": "Shimeji mushroom",
+    "name_jp": "占地",
+    "name_romaji": "shimeji",
+    "note": "These tight clusters of slender stems and small brown caps carry a faint bitterness that sweetens only with heat, releasing an umami depth prized in nabemono and takikomi gohan. In the old calendar, their emergence marks the shift toward warming dishes, a quiet signal that the kitchen turns inward.",
+    "peak": "Early autumn, as the first cool nights draw moisture through forest litter",
+    "source": "Shimeji mushroom"
   },
   "shine-muscat-grape": {
     "category": "fruit",
@@ -1240,6 +1294,15 @@
     "peak": "High summer, when cicadas reach their full chorus",
     "source": "とうもろこし (sweet corn)"
   },
+  "sweet-potato-satsumaimo": {
+    "category": "vegetable",
+    "name_en": "Sweet potato",
+    "name_jp": "薩摩芋",
+    "name_romaji": "satsumaimo",
+    "note": "Freshly dug sweet potatoes need weeks of curing before their dense, chestnut-like flesh develops the honeyed sweetness that caramelizes at the edges of a stone-roasted imo. The yaki-imo vendor's whistle through cold evening streets marks the true arrival of winter's comfort.",
+    "peak": "Late autumn through early winter, when starches have slowly converted to sugars in storage",
+    "source": "Sweet potato (satsumaimo)"
+  },
   "sweetfish": {
     "category": "fish",
     "name_en": "Sweetfish",
@@ -1437,5 +1500,14 @@
     "note": "The winter buri, called kan-buri, carries ribbons of rich fat between its rosy flesh — each slice gleaming with an almost sweet unctuousness that coats the tongue. This is the fish of year-end celebrations, simmered in sweetened soy for osechi boxes or grilled with teriyaki glaze as families gather to close one year and welcome the next.",
     "peak": "Deep winter, when cold currents fatten the flesh beneath silvery skin",
     "source": "yellowtail amberjack"
+  },
+  "yellowtail-amberjack-kanpachi": {
+    "category": "fish",
+    "name_en": "Greater amberjack",
+    "name_jp": "間八",
+    "name_romaji": "kanpachi",
+    "note": "Named for the dark band between its eyes that forms the kanji for 'eight' (八), kanpachi yields flesh that is leaner and more delicate than its buri cousins — pale pink, with a clean sweetness and subtle crunch when sliced for sashimi. It arrives at the height of summer when heavier fish feel wrong, offering a lightness that suits the season's humid weight.",
+    "peak": "High summer through early autumn, when the fish fatten in warm currents",
+    "source": "Yellowtail amberjack (kanpachi)"
   }
 }

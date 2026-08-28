@@ -2410,5 +2410,106 @@
       "closing": "畦道に舞い落ちた白い綿毛が、夏のしまい支度をそっと知らせている。"
     },
     "_sent_on": "2026-08-23"
+  },
+  "47": {
+    "en": {
+      "summary": "The oppressive summer heat finally relents, and mornings carry the first unmistakable coolness of autumn's approach.",
+      "opening": "Before dawn, a new quality enters the air — not quite cold, but emptied of summer's thickness. The cicadas still cry, but their chorus has thinned, and in the pauses between their calls, you can hear the wind moving through bamboo with a cleaner, higher note. Step outside at first light and feel it: the earth itself seems to exhale after months of holding its breath.",
+      "nature_notes": "Dragonflies patrol the rice paddies in greater numbers, their red and amber bodies catching the lower-angled sunlight. The susuki grass is beginning to send up its silver plumes at field edges and along riverbanks. Night-calling insects — suzumushi and matsumushi — grow louder as temperatures drop, their songs carrying farther in the denser evening air.",
+      "seasonal_produce": {
+        "fruits": [
+          "Japanese pear (nashi)",
+          "Kyoho grape",
+          "Early-harvest persimmon (kaki)",
+          "Fig (ichijiku)"
+        ],
+        "vegetables": [
+          "Kabocha squash",
+          "Sweet potato (satsumaimo)",
+          "Shimeji mushroom",
+          "Green shiso (ōba)"
+        ],
+        "fish": [
+          "Pacific saury (sanma)",
+          "Yellowtail amberjack (kanpachi)",
+          "Sardine (iwashi)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Ichijiku no goma-ae",
+          "description": "Fresh figs dressed in sesame sauce, their honeyed sweetness balanced by the nutty, slightly bitter paste — a dish that speaks to the moment when summer fruits meet autumn flavors."
+        },
+        {
+          "name": "Sanma no kabayaki",
+          "description": "Pacific saury split and grilled with a sweet soy glaze, the fish's rich oils perfectly suited to the glaze as autumn's first saury arrive at peak fatness."
+        },
+        {
+          "name": "Satsumaimo gohan",
+          "description": "Rice cooked with chunks of golden sweet potato, its starchy sweetness infusing each grain — a humble dish marking the harvest's first offerings."
+        },
+        {
+          "name": "Kanpachi no sashimi",
+          "description": "Thin slices of amberjack served simply, the fish's clean fat content reaching its seasonal peak as waters begin to cool."
+        }
+      ],
+      "cultural_note": "This period marks the traditional time for 虫聴き (mushi-kiki), the practice of listening to singing insects. Historically, people would capture suzumushi (bell crickets) in small bamboo cages to enjoy their clear, bell-like calls indoors. The custom reflects a particularly Japanese aesthetic sensibility — finding in the voices of insects not mere noise but a kind of natural music that announces autumn's melancholy beauty.",
+      "haiku": {
+        "japanese": "朝風に　蝉の声止む　間の青さ",
+        "romaji": "asakaze ni / semi no koe yamu / ma no aosa",
+        "english": "In the morning wind / the cicadas fall silent — / blueness in the pause"
+      },
+      "closing": "Somewhere in the garden, a single cricket begins its evening song before the sun has fully set — rehearsing, perhaps, for the longer nights to come."
+    },
+    "ja": {
+      "summary": "厳しかった残暑がようやく和らぎ、朝夕の空気に確かな涼しさが宿り始める。",
+      "opening": "夜明け前、空気の質が変わっていることに気づく。冷たいというほどではないが、夏の重さが抜けている。蝉はまだ鳴いているが、その声はまばらになり、途切れた合間に竹林を渡る風が、澄んだ高い音を立てるのが聞こえる。明け方に外へ出れば、大地が長い息を吐いたような気配を感じる。",
+      "nature_notes": "赤とんぼが数を増し、低くなった陽光を受けて田んぼの上を行き交う。畦道や川沿いではススキが銀色の穂を伸ばし始めた。気温が下がるにつれ、鈴虫や松虫の声が夜ごとに冴えわたり、涼やかな空気の中をどこまでも響いてゆく。",
+      "seasonal_produce": {
+        "fruits": [
+          "梨",
+          "巨峰",
+          "早生柿",
+          "無花果（いちじく）"
+        ],
+        "vegetables": [
+          "南瓜",
+          "薩摩芋",
+          "しめじ",
+          "大葉"
+        ],
+        "fish": [
+          "秋刀魚",
+          "間八（かんぱち）",
+          "鰯"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "無花果の胡麻和え",
+          "description": "熟した無花果を練り胡麻で和えた一品。果実の蜜のような甘さと胡麻のほろ苦さが交わり、夏と秋の境目を味わう。"
+        },
+        {
+          "name": "秋刀魚の蒲焼",
+          "description": "初秋の脂の乗った秋刀魚を開いて甘辛いたれで焼き上げる。この時季ならではの濃厚な旨みが口に広がる。"
+        },
+        {
+          "name": "薩摩芋ご飯",
+          "description": "掘りたての薩摩芋を炊き込んだご飯。芋のほくほくとした甘みが米に移り、素朴ながら秋の到来を告げる。"
+        },
+        {
+          "name": "間八の刺身",
+          "description": "水温が下がり始め脂の乗りが増した間八を薄造りに。清々しい旨みが涼風のような後味を残す。"
+        }
+      ],
+      "cultural_note": "この頃は古くから「虫聴き」の季節とされる。鈴虫や松虫を小さな竹籠に入れて、その澄んだ音色を愛でる風習は平安の昔から続いてきた。虫の声を騒音ではなく、秋の訪れを告げる音楽として聴き入る感性は、移ろいゆくものへの慈しみを大切にする日本人の美意識を映している。",
+      "haiku": {
+        "japanese": "朝風に　蝉の声止む　間の青さ",
+        "romaji": "asakaze ni / semi no koe yamu / ma no aosa",
+        "english": "In the morning wind / the cicadas fall silent — / blueness in the pause"
+      },
+      "closing": "まだ日の残る庭の隅で、一匹の蟋蟀がひとり鳴き始めている——長くなる夜に向けて、声を確かめるように。"
+    },
+    "_sent_on": "2026-08-28"
   }
 }
