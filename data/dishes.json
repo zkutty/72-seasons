@@ -327,6 +327,14 @@
     "season": "Early to mid-autumn, when wild maitake emerge at the base of old oaks",
     "source": "Maitake no tempura"
   },
+  "matsutake-dobin-mushi": {
+    "name_en": "Pine mushroom broth steamed in a teapot",
+    "name_jp": "松茸土瓶蒸し",
+    "name_romaji": "matsutake dobin-mushi",
+    "note": "A clear dashi broth with sliced matsutake, shrimp, and ginkgo nut, steamed in a handled clay teapot and sipped from a small cup with a squeeze of sudachi citrus. The dish arrives when September rains have coaxed the first mushrooms from the forest floor, their fleeting fragrance so prized that the broth exists mainly as a vessel to carry it to the nose.",
+    "season": "Early autumn, when the first matsutake emerge from red pine forests",
+    "source": "Matsutake dobin-mushi"
+  },
   "momo-no-shiratama": {
     "name_en": "Peach shiratama dumplings",
     "name_jp": "桃の白玉",
@@ -447,6 +455,14 @@
     "season": "Late spring to early summer, when rakkyo bulbs emerge from sandy soil",
     "source": "rakkyo no amazuzuke"
   },
+  "sake-no-chanchan-yaki": {
+    "name_en": "Salmon grilled with miso and vegetables",
+    "name_jp": "鮭のちゃんちゃん焼き",
+    "name_romaji": "sake no chanchan-yaki",
+    "note": "Thick salmon fillets are placed on a hot griddle with cabbage, onions, and sweet white miso, then covered to steam until the fish flakes and the vegetables caramelize at the edges. This fisherman's dish from Hokkaido marks the aki-aji season when chum salmon return fat and silver from the sea, their flesh deepening to coral as the birch forests turn gold.",
+    "season": "Autumn, when Hokkaido salmon run upstream",
+    "source": "Sake no chanchan-yaki"
+  },
   "sanma-no-kabayaki": {
     "name_en": "Grilled pacific saury in sweet soy glaze",
     "name_jp": "秋刀魚の蒲焼",
@@ -478,6 +494,14 @@
     "note": "Chilled or hot buckwheat noodles served with a tangle of foraged mountain vegetables — bracken fern, ostrich fiddleheads, butterbur stems — blanched and dressed simply. The dish marks the brief window when villagers climb thawing hillsides to gather the first bitter shoots pushing through last autumn's leaves.",
     "season": "Late spring, when snow recedes from mountain slopes",
     "source": "sansai soba"
+  },
+  "satoimo-no-nimono": {
+    "name_en": "Simmered taro root",
+    "name_jp": "里芋の煮物",
+    "name_romaji": "satoimo no nimono",
+    "note": "Small taro roots are simmered in dashi seasoned with soy sauce and mirin until they turn glossy and yield to chopsticks with a distinctive starchy slip. The dish appears as nights lengthen and fields drain — the earthy sweetness of fresh-dug satoimo marking the transition from harvest abundance to the quieter meals of coming cold.",
+    "season": "Early autumn through winter, as the first taro bulbs are dug from cooled soil",
+    "source": "Satoimo no nimono"
   },
   "satsumaimo-gohan": {
     "name_en": "Sweet potato rice",
@@ -518,6 +542,14 @@
     "note": "Young ginger, harvested before its fibers toughen, is sliced thin and steeped in a bath of rice vinegar sweetened with sugar — the pale flesh blushing pink at the edges where the skin was. The fleeting window for shin-shōga arrives with the rainy season, and these crisp, faintly spicy pickles preserve that brief softness through the humid months ahead.",
     "season": "Early summer, when the first tender ginger appears",
     "source": "shin-shōga no amazu-zuke"
+  },
+  "shinmai-no-gohan": {
+    "name_en": "New rice, simply steamed",
+    "name_jp": "新米のご飯",
+    "name_romaji": "shinmai no gohan",
+    "note": "Freshly harvested rice, polished and steamed without embellishment, served in a way that honors its milky sweetness and faint vegetal fragrance. The first shinmai appears when cosmos flowers line the paddies and the air turns crisp — a bowl eaten plain, perhaps with nothing more than a slick of salted plum, marks the farmer's year coming full circle.",
+    "season": "Early autumn, when the year's first rice harvest arrives",
+    "source": "Shinmai no gohan"
   },
   "shirauo-no-kakiage": {
     "name_en": "Whitebait tempura fritters",

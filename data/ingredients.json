@@ -314,6 +314,15 @@
     "peak": "Late spring, when the stalks reach full height before summer's weight",
     "source": "Fuki (butterbur)"
   },
+  "ginkgo-nuts": {
+    "category": "vegetable",
+    "name_en": "Ginkgo nut",
+    "name_jp": "銀杏",
+    "name_romaji": "ginnan",
+    "note": "Beneath their notoriously pungent flesh, these jade-green kernels offer a texture between chestnut and edamame, with a faint bitterness that deepens when skewered and salt-grilled over charcoal. Threaded onto pine needles in kaiseki courses or scattered through chawanmushi, they mark the turning toward winter with their almost resinous warmth.",
+    "peak": "Late autumn, when the first hard frosts sweeten the fallen seeds",
+    "source": "Ginkgo nuts"
+  },
   "grape": {
     "category": "fruit",
     "name_en": "Grape",
@@ -514,6 +523,15 @@
     "peak": "Late autumn through winter solstice, when frost has concentrated the sugars",
     "source": "Kabocha (winter squash)"
   },
+  "kabosu-citrus": {
+    "category": "fruit",
+    "name_en": "Kabosu",
+    "name_jp": "香母酢",
+    "name_romaji": "kabosu",
+    "note": "A golf ball-sized citrus from Ōita Prefecture, kabosu yields a juice more rounded than sudachi, less bitter than lemon — its pale green flesh releasing an aroma somewhere between bergamot and fresh-cut grass when squeezed over grilled sanma. As the first mackerel pike of autumn arrives, so too does kabosu reach the table, the two inseparable in the September kitchen.",
+    "peak": "Late summer through early autumn, when the green rind holds its sharpest fragrance",
+    "source": "Kabosu citrus"
+  },
   "kawahagi-filefish": {
     "category": "fish",
     "name_en": "Thread-sail filefish",
@@ -675,6 +693,15 @@
     "note": "Okinawan mangoes, predominantly the Irwin variety, are harvested only after they drop naturally into nets suspended beneath the trees — their flesh a deep saffron, almost custardy, with a fragrance that fills a room before the knife touches skin. They arrive as mainland Japan enters its most oppressive heat, a gift from the southern islands that transforms the season's discomfort into fleeting sweetness.",
     "peak": "High summer, when Okinawa's subtropical sun reaches its zenith",
     "source": "Mango (Okinawan)"
+  },
+  "matsutake-mushrooms": {
+    "category": "vegetable",
+    "name_en": "Matsutake mushroom",
+    "name_jp": "松茸",
+    "name_romaji": "matsutake",
+    "note": "Emerging from the duff beneath aged red pines, matsutake releases a scent both spicy and resinous — somewhere between cinnamon bark and wet stone — that no other mushroom possesses. Its arrival marks the threshold of autumn's deepest turn, celebrated in dobinmushi, where the fragrance rises with the steam from a lidded teapot, carrying the forest to the table.",
+    "peak": "Early to mid-autumn, when the first cold rains settle into red pine forests",
+    "source": "Matsutake mushrooms"
   },
   "mikan-late-variety": {
     "category": "fruit",
@@ -922,6 +949,15 @@
     "peak": "Late summer through early autumn, when cicada cries give way to cricket song",
     "source": "Pione grape"
   },
+  "pione-grapes": {
+    "category": "fruit",
+    "name_en": "Pione grape",
+    "name_jp": "ピオーネ",
+    "name_romaji": "piōne",
+    "note": "A cross between Kyoho and Cannon Hall Muscat, Pione grapes carry the deep purple-black bloom of their parent with flesh that slips cleanly from the skin, each orb bursting with concentrated sweetness balanced by faint acidity. They arrive as Obon fades and autumn approaches, their substantial clusters wrapped in paper and nested in wooden boxes — gifts that speak of late-summer abundance before the persimmons take their turn.",
+    "peak": "Late summer through early autumn, when the heat begins to relent",
+    "source": "Pione grapes"
+  },
   "plum": {
     "category": "fruit",
     "name_en": "Plum",
@@ -957,6 +993,15 @@
     "note": "Small, ivory bulbs with a sharp bite somewhere between shallot and garlic, harvested before the humidity settles in. Pickled in sweet vinegar, they become the bright, crunchy counterpoint to rich summer curries — a preserve that carries the edge of June through the sweltering months ahead.",
     "peak": "Early summer, when the tsuyu rains draw near",
     "source": "Rakkyo (scallion bulbs)"
+  },
+  "sake-salmon": {
+    "category": "fish",
+    "name_en": "Salmon",
+    "name_jp": "鮭",
+    "name_romaji": "sake",
+    "note": "Wild salmon arriving in autumn carry the deep coral flesh and clean fat of fish that have journeyed thousands of miles to spawn. Their return marks the start of preservation season — salted, dried, or cured as shiozake to sustain households through winter.",
+    "peak": "Autumn, when rivers run cold and fish return from the sea",
+    "source": "Sake (salmon)"
   },
   "sakuranbo-cherries": {
     "category": "fruit",
@@ -1015,6 +1060,15 @@
     "peak": "Late spring through early summer, when schools run thick along Pacific currents",
     "source": "Sardine (iwashi)"
   },
+  "satoimo-taro-root": {
+    "category": "vegetable",
+    "name_en": "Taro root",
+    "name_jp": "里芋",
+    "name_romaji": "satoimo",
+    "note": "These small, hairy corms yield flesh so slippery it seems to refuse the chopsticks — a quality called nameraka, prized in simmered dishes where the silken texture absorbs dashi to its core. Satoimo appears on the autumn moon-viewing altar beside susuki grass, marking the harvest moon when families once gave thanks for the tuber that sustained villages through lean winters.",
+    "peak": "Mid-autumn through early winter, when the first frosts sweeten the flesh",
+    "source": "Satoimo (taro root)"
+  },
   "sawara-spanish-mackerel": {
     "category": "fish",
     "name_en": "Spanish mackerel",
@@ -1069,6 +1123,15 @@
     "peak": "Early autumn, as the first cool nights draw moisture through forest litter",
     "source": "Shimeji mushroom"
   },
+  "shimeji-mushrooms": {
+    "category": "vegetable",
+    "name_en": "Shimeji mushroom",
+    "name_jp": "占地",
+    "name_romaji": "shimeji",
+    "note": "These clustered mushrooms grow in tight bundles, their small buff-colored caps firm and slightly bitter when raw, turning silken and faintly nutty once heat unlocks their umami. The Japanese saying 'smell matsutake, taste shimeji' speaks to their quiet supremacy in the autumn kitchen, where they slip into nabemono and takikomi gohan as the nights lengthen.",
+    "peak": "Mid-autumn, when cool rains settle into the forest floor",
+    "source": "Shimeji mushrooms"
+  },
   "shine-muscat-grape": {
     "category": "fruit",
     "name_en": "Shine Muscat grape",
@@ -1077,6 +1140,15 @@
     "note": "A seedless grape with skin so thin it yields without resistance, releasing flesh that tastes of muscat perfume and white honey. Developed in Japan and now the most coveted gift fruit of early autumn, each translucent green orb arrives when the harvest moon approaches and the season turns toward giving thanks.",
     "peak": "Late summer through early autumn, when the nights begin to cool",
     "source": "Shine Muscat grape"
+  },
+  "shine-muscat-grapes": {
+    "category": "fruit",
+    "name_en": "Shine Muscat grape",
+    "name_jp": "シャインマスカット",
+    "name_romaji": "shain masukatto",
+    "note": "A seedless grape with skin so thin you eat it whole, each orb bursting with a honeyed sweetness that carries faint notes of muscat and citrus blossom. Arriving as summer's heat loosens its grip, these grapes have become the new jewel of autumn gift-giving, their pale jade clusters wrapped in tissue like small treasures.",
+    "peak": "Late summer through early autumn, when the nights begin to cool",
+    "source": "Shine Muscat grapes"
   },
   "shirauo-icefish": {
     "category": "fish",

@@ -2511,5 +2511,106 @@
       "closing": "まだ日の残る庭の隅で、一匹の蟋蟀がひとり鳴き始めている——長くなる夜に向けて、声を確かめるように。"
     },
     "_sent_on": "2026-08-28"
+  },
+  "48": {
+    "en": {
+      "summary": "The rice paddies turn from green to gold as the grain bends heavy on the stalk, signaling the harvest to come.",
+      "opening": "A hush settles over the countryside as the rice heads bow under their own weight, the fields shifting from vivid green to pale gold in the softening September light. The air carries a faint sweetness — the scent of ripening grain mingling with late-summer grasses. Mornings arrive cooler now, mist pooling in the valleys before the sun burns it away.",
+      "nature_notes": "Dragonflies patrol the paddy margins in great numbers, their wings catching the angled light. The chorus of cicadas has thinned, replaced by the first evening crickets testing their autumn songs. Herons stand motionless at field edges, hunting the small creatures displaced as water levels drop in preparation for harvest.",
+      "seasonal_produce": {
+        "fruits": [
+          "Pione grapes",
+          "Shine Muscat grapes",
+          "Nijisseiki pear (20th Century pear)",
+          "Kabosu citrus"
+        ],
+        "vegetables": [
+          "Shimeji mushrooms",
+          "Satoimo (taro root)",
+          "Matsutake mushrooms",
+          "Ginkgo nuts"
+        ],
+        "fish": [
+          "Sanma (Pacific saury)",
+          "Tai (sea bream)",
+          "Sake (salmon)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Shinmai no gohan",
+          "description": "The year's first new rice, simply steamed and served unadorned to honor its sweetness and tender texture."
+        },
+        {
+          "name": "Satoimo no nimono",
+          "description": "Simmered taro in a delicate dashi broth, its creamy flesh embodying the earthy comfort of early autumn."
+        },
+        {
+          "name": "Matsutake dobin-mushi",
+          "description": "Clear soup steamed in a teapot with matsutake mushroom, its pine-forest fragrance capturing the essence of the season's turning."
+        },
+        {
+          "name": "Sake no chanchan-yaki",
+          "description": "Salmon grilled on a griddle with miso and autumn vegetables, a hearty dish as the returning salmon fill northern rivers."
+        }
+      ],
+      "cultural_note": "This period marks the anxious final days before rice harvest, when farmers watch the sky with particular attention. The tradition of kadomatsu no mizu — draining the paddies at precisely the right moment — requires reading subtle signs in the grain's color and the weather's mood. Many farming communities hold small pre-harvest prayers at local shrines, asking for continued fair weather and protection from the typhoons that threaten at this season.",
+      "haiku": {
+        "japanese": "稲穂垂れ風の重さを知る夕べ",
+        "romaji": "inaho tare / kaze no omosa wo / shiru yūbe",
+        "english": "Rice heads bowing — / this evening I feel / the weight of wind"
+      },
+      "closing": "In the fields, a single scarecrow watches over the golden sea, its sleeves stirring in a breeze that carries the first true breath of autumn."
+    },
+    "ja": {
+      "summary": "稲穂が黄金色に染まり、穂先が重みで頭を垂れる——収穫を目前に控えた田園の風景。",
+      "opening": "田んぼを渡る風が、実りの重さで頭を垂れた稲穂を揺らす。九月の陽射しは柔らかく、青々としていた田が淡い金色に移ろうのを見届けている。朝夕の空気は涼しさを帯び、夜明け前の谷間には薄い霧がたなびく。",
+      "nature_notes": "赤とんぼが畦道を群れ飛び、夕暮れの光にその翅を透かせる。蝉の声は遠のき、代わりに草むらから鈴虫やコオロギの音色が聞こえ始めた。水を落とし始めた田の縁では、鷺が身じろぎもせず小さな獲物を待つ。",
+      "seasonal_produce": {
+        "fruits": [
+          "ピオーネ",
+          "シャインマスカット",
+          "二十世紀梨",
+          "かぼす"
+        ],
+        "vegetables": [
+          "しめじ",
+          "里芋",
+          "松茸",
+          "銀杏"
+        ],
+        "fish": [
+          "秋刀魚",
+          "鯛",
+          "鮭"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "新米のご飯",
+          "description": "今年初めての新米を、何も足さずに炊き上げ、その甘みと艶を味わう一膳。"
+        },
+        {
+          "name": "里芋の煮物",
+          "description": "出汁でじっくり炊いた里芋、ねっとりとした食感が秋の到来を告げる。"
+        },
+        {
+          "name": "松茸の土瓶蒸し",
+          "description": "松茸の馥郁たる香りを閉じ込めた澄まし汁、蓋を開けた瞬間に山の気配が立ちのぼる。"
+        },
+        {
+          "name": "鮭のちゃんちゃん焼き",
+          "description": "味噌とともに秋野菜と焼き上げる鮭、北の川を遡上し始めたこの時季ならではの味。"
+        }
+      ],
+      "cultural_note": "「禾乃登」の頃、農家は空模様を読みながら稲刈りの日取りを見極める。早すぎれば味が乗らず、遅すぎれば台風に打たれる。各地の鎮守では豊作を祈る「風鎮祭」が営まれ、風の神に稲穂を守ってくださいと願いを捧げる。黄金色に波打つ田を見守る案山子もまた、この季節の象徴である。",
+      "haiku": {
+        "japanese": "稲穂垂れ風の重さを知る夕べ",
+        "romaji": "inaho tare / kaze no omosa wo / shiru yūbe",
+        "english": "Rice heads bowing — / this evening I feel / the weight of wind"
+      },
+      "closing": "夕風に揺れる稲穂の波の向こうに、秋の深まりがひそやかに近づいている。"
+    },
+    "_sent_on": "2026-09-02"
   }
 }
