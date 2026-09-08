@@ -296,6 +296,15 @@
     "peak": "Late summer through early autumn, when the air begins to cool",
     "source": "Fig (ichijiku)"
   },
+  "figs": {
+    "category": "fruit",
+    "name_en": "Fig",
+    "name_jp": "無花果",
+    "name_romaji": "ichijiku",
+    "note": "The flesh yields to the teeth with almost no resistance — a soft collapse into honeyed sweetness, the tiny seeds adding just enough texture to remind you this is fruit, not confection. In Japan, figs appear when summer's intensity finally relents, eaten chilled from the refrigerator or simmered into compotes that bridge the season toward persimmon and pear.",
+    "peak": "Late summer into early autumn, as cicada cries begin to fade",
+    "source": "Figs"
+  },
   "flounder": {
     "category": "fish",
     "name_en": "Flounder",
@@ -532,6 +541,15 @@
     "peak": "Late summer through early autumn, when the green rind holds its sharpest fragrance",
     "source": "Kabosu citrus"
   },
+  "katsuo-skipjack-tuna-returning-run": {
+    "category": "fish",
+    "name_en": "Skipjack tuna",
+    "name_jp": "戻り鰹",
+    "name_romaji": "modori-gatsuo",
+    "note": "The returning run yields flesh rich with fat from months of feeding in northern seas — deep crimson, almost burgundy, with a sweetness that needs only a whisper of ginger and ponzu. These autumn katsuo carry the weight of their journey, prized far above their leaner spring selves.",
+    "peak": "Early autumn, as the fish return south through cooling waters",
+    "source": "Katsuo (skipjack tuna, returning run)"
+  },
   "kawahagi-filefish": {
     "category": "fish",
     "name_en": "Thread-sail filefish",
@@ -576,6 +594,15 @@
     "note": "A slender silver fish whose skin shimmers with an iridescent blue-green sheen, kohada is prized for its delicate balance of rich oils and clean brine — the vinegar cure of edomae sushi tradition draws out its brightness without masking the sea. As winter deepens, the fish grows from shinko to kohada to konoshiro, each stage a fleeting window the sushi shokunin watches for with the patience of reading tides.",
     "peak": "Late autumn through winter, when cold waters tighten the flesh",
     "source": "Kohada (gizzard shad)"
+  },
+  "kosui-pear-asian-pear": {
+    "category": "fruit",
+    "name_en": "Kosui pear",
+    "name_jp": "幸水",
+    "name_romaji": "kōsui",
+    "note": "The first major nashi of the season, Kōsui arrives with flesh so crisp it shatters against the teeth, releasing juice that tastes of honey touched with the faintest citrus acidity. Its name means 'abundant water' — a gift of refreshment that marks the pivot from high summer toward the gentler days of early autumn.",
+    "peak": "Late summer, when cicada songs reach their peak and the heat begins its slow retreat",
+    "source": "Kosui pear (Asian pear)"
   },
   "kuruma-ebi-japanese-tiger-prawn": {
     "category": "fish",
@@ -694,6 +721,15 @@
     "peak": "High summer, when Okinawa's subtropical sun reaches its zenith",
     "source": "Mango (Okinawan)"
   },
+  "matsutake-mushroom": {
+    "category": "vegetable",
+    "name_en": "Matsutake mushroom",
+    "name_jp": "松茸",
+    "name_romaji": "matsutake",
+    "note": "Found beneath fallen needles in ancient pine groves, this dense-fleshed mushroom releases a scent like cinnamon and cypress that no other fungus possesses — sliced thin and grilled over charcoal, it needs only a whisper of sudachi citrus. Its fleeting appearance marks the pivot from summer's abundance to autumn's restraint, a gift so tied to wild forests that it cannot be cultivated.",
+    "peak": "Early autumn, when the first cool rains penetrate red pine forests",
+    "source": "Matsutake mushroom"
+  },
   "matsutake-mushrooms": {
     "category": "vegetable",
     "name_en": "Matsutake mushroom",
@@ -720,6 +756,15 @@
     "note": "Three-lobed leaves on hollow stems carry a fragrance somewhere between celery and angelica, bright and faintly peppery, releasing their scent the moment they meet hot broth. A finishing herb rather than a cooked one, mitsuba floats atop chawanmushi and clear soups at the threshold of the new year, its pale green a quiet signal that warmth is returning.",
     "peak": "Early spring, when snow-melt still lingers in mountain valleys",
     "source": "Mitsuba"
+  },
+  "mitsuba-japanese-wild-parsley": {
+    "category": "vegetable",
+    "name_en": "Japanese wild parsley",
+    "name_jp": "三つ葉",
+    "name_romaji": "mitsuba",
+    "note": "Three-leaved stems with a celery-bright bite and faint anise whisper, prized for their snap when floated raw atop clear soups or scattered over chawanmushi at the final moment. Mitsuba arrives as winter's heavier greens fade, announcing the shift toward lighter preparations and the approaching humidity of tsuyu.",
+    "peak": "Late spring, when warmth draws the herb to its most fragrant",
+    "source": "Mitsuba (Japanese wild parsley)"
   },
   "molokhia": {
     "category": "vegetable",
@@ -1428,6 +1473,15 @@
     "note": "Summer tako yields firm, resilient flesh with a clean sweetness that snaps between the teeth — boiled just until the skin turns that distinctive burgundy, sliced thin for sunomono or simmered tender in oden. The fishermen of Akashi have prized these waters for centuries, timing their catch to the strong Seto Inland Sea currents that give the octopus its prized texture.",
     "peak": "Summer through early autumn, when the creature fattens in warm coastal waters",
     "source": "tako (octopus)"
+  },
+  "taro": {
+    "category": "vegetable",
+    "name_en": "Taro",
+    "name_jp": "里芋",
+    "name_romaji": "satoimo",
+    "note": "Beneath its rough, hairy skin lies flesh so dense with starch it becomes almost custard-like when simmered, releasing a faint earthiness that clings to the teeth. These 'village potatoes' anchor the autumn table in nimono and ozoni, their sticky texture believed to bind families together through moon-viewing nights and the coming New Year.",
+    "peak": "Early autumn through winter, when the first frost sweetens the flesh",
+    "source": "Taro"
   },
   "tomato": {
     "category": "vegetable",

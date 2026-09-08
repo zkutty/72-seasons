@@ -2612,5 +2612,106 @@
       "closing": "夕風に揺れる稲穂の波の向こうに、秋の深まりがひそやかに近づいている。"
     },
     "_sent_on": "2026-09-02"
+  },
+  "49": {
+    "en": {
+      "summary": "Morning dew thickens on grass blades, catching early light and turning meadows white before the sun burns it away.",
+      "opening": "Step outside before six and the world is lacquered in moisture. Each blade of grass carries its own cold bead, and where the sun strikes at an angle, whole fields seem dusted with frost. The air holds that first mineral chill of autumn, though afternoons still warm the skin.",
+      "nature_notes": "Dragonflies rest motionless on fence posts, wings heavy with dew. Bush crickets have replaced cicadas as the dominant chorus, their calls threading through the darkness until dawn. In the paddies, rice stalks bow under ripening grain, their green fading to pale gold at the tips.",
+      "seasonal_produce": {
+        "fruits": [
+          "Pione grapes",
+          "Kosui pear (Asian pear)",
+          "Figs",
+          "Muscat grapes"
+        ],
+        "vegetables": [
+          "Matsutake mushroom",
+          "Lotus root",
+          "Taro",
+          "Mitsuba (Japanese wild parsley)"
+        ],
+        "fish": [
+          "Sanma (Pacific saury)",
+          "Katsuo (skipjack tuna, returning run)",
+          "Tai (sea bream)"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "Matsutake gohan",
+          "description": "Fragrant rice cooked with sliced matsutake and light dashi, capturing the forest-floor aroma that defines early autumn luxury."
+        },
+        {
+          "name": "Modori-gatsuo no tataki",
+          "description": "Seared returning skipjack, fattier than spring's catch, served with grated ginger and ponzu to honor the season's shift."
+        },
+        {
+          "name": "Kuri kinton",
+          "description": "Sweetened chestnut paste, its golden color echoing the autumn fields as chestnuts reach their first harvest."
+        },
+        {
+          "name": "Satoimo no miso-ni",
+          "description": "Taro simmered in white miso, the tuber's sticky sweetness balanced by the fermented depth of aged paste."
+        }
+      ],
+      "cultural_note": "This period often overlaps with Chōyō no Sekku, the Chrysanthemum Festival on the ninth day of the ninth month. In old practice, cloths were laid over chrysanthemum blossoms overnight to absorb their dew; by morning, people wiped their skin with these 'kikuzukin' to pray for longevity. Even today, chrysanthemum-shaped wagashi appear in shop windows, carrying forward the belief that autumn dew holds purifying power.",
+      "haiku": {
+        "japanese": "草の露踏めば崩るる朝の道",
+        "romaji": "kusa no tsuyu / fumeba kuzururu / asa no michi",
+        "english": "stepping on grass dew — the morning path crumbles underfoot"
+      },
+      "closing": "By noon the dew has vanished, leaving only a faint coolness where the blades press against your ankles."
+    },
+    "ja": {
+      "summary": "朝ごとに草の上の露が白く光り、日の出前の野原はまるで初霜が降りたかのよう。",
+      "opening": "夜明け前に外へ出れば、草むらは露に濡れて銀色に光っている。陽が低く差し込むと、その一粒一粒が小さな灯火のように瞬く。空気には秋の鉱物的な冷たさが混じり、夏の名残と秋の気配が肌の上で入れ替わる。",
+      "nature_notes": "蜻蛉が朝露を翅に宿したまま、竹垣の上で微動だにしない。蝉の声は遠くなり、代わりに松虫や鈴虫の声が夜通し響く。田んぼでは稲穂が頭を垂れ始め、緑から黄金色へと移ろう姿が日ごとに濃くなる。",
+      "seasonal_produce": {
+        "fruits": [
+          "ピオーネ",
+          "幸水梨",
+          "無花果",
+          "シャインマスカット"
+        ],
+        "vegetables": [
+          "松茸",
+          "蓮根",
+          "里芋",
+          "三つ葉"
+        ],
+        "fish": [
+          "秋刀魚",
+          "戻り鰹",
+          "真鯛"
+        ]
+      },
+      "seasonal_dishes": [
+        {
+          "name": "松茸ご飯",
+          "description": "薄切りの松茸を炊き込んだご飯は、山の香りをそのまま食卓へ運ぶ秋の贅沢。"
+        },
+        {
+          "name": "戻り鰹のたたき",
+          "description": "脂ののった戻り鰹を藁で炙り、薬味とともにいただく——初鰹とは違う深い旨みが秋を告げる。"
+        },
+        {
+          "name": "栗きんとん",
+          "description": "蒸した栗を裏漉しして茶巾に絞った素朴な和菓子、この時季だけの山里の味わい。"
+        },
+        {
+          "name": "里芋の味噌煮",
+          "description": "ねっとりとした里芋を白味噌でじっくり煮含め、秋の土の恵みを優しくいただく。"
+        }
+      ],
+      "cultural_note": "この頃は旧暦九月九日の「重陽の節句」と重なることが多い。前夜に菊の花へ真綿を被せ、翌朝その露を含んだ綿で肌を拭う「菊の被綿（きせわた）」という風習があり、無病息災を祈った。現代でも和菓子店には菊を象った上生菓子が並び、露に宿る清めの力を想う心が受け継がれている。",
+      "haiku": {
+        "japanese": "草の露踏めば崩るる朝の道",
+        "romaji": "kusa no tsuyu / fumeba kuzururu / asa no michi",
+        "english": "stepping on grass dew — the morning path crumbles underfoot"
+      },
+      "closing": "陽が高くなる頃には露は消え、草の冷たさだけが足首にかすかに残っている。"
+    },
+    "_sent_on": "2026-09-08"
   }
 }

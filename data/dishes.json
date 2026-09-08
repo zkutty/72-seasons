@@ -311,6 +311,14 @@
     "season": "Early summer, when the shallows warm and the fish run silver",
     "source": "Kisu no tempura"
   },
+  "kuri-kinton": {
+    "name_en": "Sweet chestnut paste",
+    "name_jp": "栗きんとん",
+    "name_romaji": "kuri kinton",
+    "note": "Whole chestnuts simmered until tender, then mashed with their cooking liquid and a restrained amount of sugar into a dense, grainy-sweet confection. The golden color promises prosperity for the coming year, making this a cornerstone of osechi ryōri — though in chestnut country like Nakatsugawa, locals press the warm paste through cloth into delicate tea sweets as soon as the harvest comes in.",
+    "season": "Late autumn through New Year, when chestnuts have fully ripened",
+    "source": "Kuri kinton"
+  },
   "ky-ri-no-ichiyazuke": {
     "name_en": "Overnight pickled cucumber",
     "name_jp": "胡瓜の一夜漬け",
@@ -334,6 +342,22 @@
     "note": "A clear dashi broth with sliced matsutake, shrimp, and ginkgo nut, steamed in a handled clay teapot and sipped from a small cup with a squeeze of sudachi citrus. The dish arrives when September rains have coaxed the first mushrooms from the forest floor, their fleeting fragrance so prized that the broth exists mainly as a vessel to carry it to the nose.",
     "season": "Early autumn, when the first matsutake emerge from red pine forests",
     "source": "Matsutake dobin-mushi"
+  },
+  "matsutake-gohan": {
+    "name_en": "Matsutake mushroom rice",
+    "name_jp": "松茸ご飯",
+    "name_romaji": "matsutake gohan",
+    "note": "Rice steamed with sliced matsutake mushrooms, seasoned only with sake, light soy, and a whisper of dashi to let the fungus speak. The matsutake's arrival coincides with the autumn equinox, when morning mists settle in mountain forests and the air carries that unmistakable scent — somewhere between cinnamon and pine, the smell of a Japanese autumn made edible.",
+    "season": "Early to mid-autumn, when the first matsutake emerge from red pine forests",
+    "source": "Matsutake gohan"
+  },
+  "modori-gatsuo-no-tataki": {
+    "name_en": "Seared returning bonito",
+    "name_jp": "戻り鰹のたたき",
+    "name_romaji": "modori-gatsuo no tataki",
+    "note": "Thick slices of bonito are seared over high flame until the edges char while the core stays ruby-raw, then dressed with ponzu and heaped with ginger, garlic, and myoga. The autumn 'returning bonito' have fattened on their northern feeding grounds and carry twice the oil of their lean spring counterparts — their richness signals the pivot from summer's light eating toward heartier fare.",
+    "season": "Early autumn, when bonito return south through Japanese waters",
+    "source": "Modori-gatsuo no tataki"
   },
   "momo-no-shiratama": {
     "name_en": "Peach shiratama dumplings",
@@ -494,6 +518,14 @@
     "note": "Chilled or hot buckwheat noodles served with a tangle of foraged mountain vegetables — bracken fern, ostrich fiddleheads, butterbur stems — blanched and dressed simply. The dish marks the brief window when villagers climb thawing hillsides to gather the first bitter shoots pushing through last autumn's leaves.",
     "season": "Late spring, when snow recedes from mountain slopes",
     "source": "sansai soba"
+  },
+  "satoimo-no-miso-ni": {
+    "name_en": "Taro simmered in miso",
+    "name_jp": "里芋の味噌煮",
+    "name_romaji": "satoimo no miso-ni",
+    "note": "Small taro corms are simmered until yielding in a broth sweetened and thickened with white or red miso, the earthy tubers absorbing the fermented depth until they turn almost custard-soft. The dish appears as autumn deepens toward the frost—satoimo, a crop of the ancestral paddy margins, has always signaled the harvest moon season, and its sticky flesh warming from a clay pot marks the body's turn inward against the coming cold.",
+    "season": "Late autumn through early winter, when taro roots reach their starchiest peak",
+    "source": "Satoimo no miso-ni"
   },
   "satoimo-no-nimono": {
     "name_en": "Simmered taro root",
